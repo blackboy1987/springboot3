@@ -1,0 +1,118 @@
+.response {
+    width: 100%;
+}
+
+.swiperView {
+    height: 30rpx;
+}
+
+.swiper {
+    height: 530rpx;
+}
+
+.swiper .le-img {
+    width: 90%;
+    height: 85%;
+    display: block;
+    transform: scale(.9);
+    transition: transform .3s ease-in-out 0s;
+    transition: transform .3s ease-in-out 0s,-webkit-transform .3s ease-in-out 0s;
+    border-radius: 4px;
+}
+
+.swiper .le-img.le-active {
+    transform: scale(1);
+}
+
+.swiper .le-name {
+    width: 90%;
+    font-size: 28rpx;
+    text-align: center;
+    height: 10%;
+}
+
+.swiper .le-name.le-names {
+    margin-top: 20rpx;
+}
+
+.shareButton {
+    width: 100%;
+    background-color: hsla(0,0%,71.4%,0);
+}
+
+.shareButton::after {
+    border: none;
+}
+
+.shareImage {
+    width: 100%;
+    height: 160rpx;
+}
+
+.box-shadow {
+    width: 750rpx;
+    height: 20rpx;
+}
+
+.movieH {
+    height: 100rpx;
+    line-height: 100rpx;
+    font-weight: 900;
+    font-size: 36rpx;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.movieBox,.movieH {
+    width: 94%;
+    margin: 0 auto;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.movieBox {
+    flex-wrap: wrap;
+}
+
+.movieList {
+    width: 30%;
+}
+
+.jieshuoList {
+    width: 50%;
+}
+
+.tanchuang {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.tanchuang-guanbi {
+    font-size: 40rpx;
+    width: 550rpx;
+}
+
+.tanchuang-img {
+    width: 550rpx;
+    height: 650rpx;
+}
+
+.tanchuang-button {
+    width: 150rpx;
+    color: #fff;
+    background-color: #c8c7cc;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: center;
+    font-size: 24rpx;
+}

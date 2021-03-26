@@ -1,0 +1,26 @@
+<view class="{{['data-v-8c502362',theme+'-page']}}">
+    <uni-bar Max="{{barMax}}" bind:__l="__l" class="data-v-8c502362" theme="{{theme}}" vueId="7335a0d6-1" vueSlots="{{['default']}}">
+        <nar-bar bind:__l="__l" class="data-v-8c502362" fixed="true" type="home" vueId="{{'7335a0d6-2'+','+'7335a0d6-1'}}"></nar-bar>
+        <view class="{{['carousel-by data-v-8c502362',theme+'-bg2']}}">
+            <view class="barButtonBox ellipsis data-v-8c502362">
+                <view catchtap="__e" class="{{['tab-data data-v-8c502362',index===tabindex?'tab-click':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'tabclick',[index] ] ] ] ]}}" wx:for="{{tab}}" wx:for-item="data" wx:key="index">
+                    <text class="cuIcon tab-text data-v-8c502362">{{data.icon}}</text>
+                    <text class="tab-text data-v-8c502362">{{data.text}}</text>
+                </view>
+            </view>
+        </view>
+    </uni-bar>
+    <custom-ad bind:__l="__l" class="data-v-8c502362" vueId="7335a0d6-3" ysId="{{wxAdId.ysId}}" wx:if="{{wxAdId.ysId}}"></custom-ad>
+    <view class="{{['vodlist data-v-8c502362',theme+'-title-color']}}" wx:if="{{tabindex===0}}">
+        <view class="listdata data-v-8c502362" wx:if="{{lishilistdata}}">空空如也,快去添加吧</view>
+        <side-slip bind:__l="__l" bind:remove="__e" class="data-v-8c502362" data-event-opts="{{[ [ '^remove',[ [ 'onRemove',[index] ] ] ] ]}}" vueId="{{'7335a0d6-4-'+index}}" vueSlots="{{['default']}}" wx:for="{{lishilist}}" wx:key="index">
+            <shuvodlist bind:__l="__l" class="data-v-8c502362" item="{{item}}" lishi="{{lishi}}" theme="{{theme}}" vueId="{{'7335a0d6-5-'+index+','+'7335a0d6-4-'+index}}"></shuvodlist>
+        </side-slip>
+    </view>
+    <view class="{{['vodlist data-v-8c502362',theme+'-title-color']}}" wx:if="{{tabindex===1}}">
+        <view class="listdata data-v-8c502362" wx:if="{{shoucanglistdata}}">空空如也,快去添加吧！</view>
+        <side-slip bind:__l="__l" bind:remove="__e" class="data-v-8c502362" data-event-opts="{{[ [ '^remove',[ [ 'onRemove',[index] ] ] ] ]}}" vueId="{{'7335a0d6-6-'+index}}" vueSlots="{{['default']}}" wx:for="{{shoucanglist}}" wx:key="index">
+            <shuvodlist bind:__l="__l" class="data-v-8c502362" item="{{item}}" lishi="{{lishi}}" theme="{{theme}}" vueId="{{'7335a0d6-7-'+index+','+'7335a0d6-6-'+index}}"></shuvodlist>
+        </side-slip>
+    </view>
+</view>

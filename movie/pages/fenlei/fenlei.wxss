@@ -1,0 +1,210 @@
+.content {
+    -webkit-box-flex: 1;
+    flex: 1;
+}
+
+.statusBarHeight {
+    height: 40rpx;
+}
+
+.carousel-by {
+    width: 750rpx;
+    margin-top: 20rpx;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.carousel-by,.paixun {
+    height: 100rpx;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.paixun {
+    width: 350rpx;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}
+
+.paixunlist {
+    width: 107rpx;
+    height: 100rpx;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.paixunlist-text {
+    color: #f4d13a;
+    font-size: 45rpx;
+}
+
+.switch {
+    width: 150rpx;
+    height: 100rpx;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.switch-text {
+    font-size: 28rpx;
+}
+
+.Maxtab {
+    width: 750rpx;
+    height: 90rpx;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.Maxtab-Item {
+    width: 600rpx;
+}
+
+.Maxtab-Item,.Maxtab-Item-Item {
+    height: 90rpx;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.Maxtab-Item-Item {
+    width: 150rpx;
+}
+
+.Maxtab-Item-text {
+    font-size: 34rpx;
+    color: #fff;
+}
+
+.MaxClick {
+    color: #f49c36;
+    font-size: 36rpx;
+}
+
+.shaixuan {
+    width: 150rpx;
+    height: 80rpx;
+}
+
+.shaixuan,.shaixuan-button {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.shaixuan-button {
+    width: 110rpx;
+    height: 50rpx;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+    background-color: hsla(0,0%,100%,.4);
+}
+
+.shaixuan-text {
+    font-size: 28rpx;
+    color: #5f5f5f;
+}
+
+.shaixuan-icon {
+    font-size: 34rpx;
+    color: #5f5f5f;
+}
+
+.MinTablist {
+    width: 750rpx;
+    height: 210rpx;
+    white-space: nowrap;
+}
+
+.MinTab {
+    height: 250rpx;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    position: absolute;
+}
+
+.MinTabItem {
+    width: 750rpx;
+    height: 70rpx;
+}
+
+.MinTabItem-item {
+    width: 107rpx;
+    height: 70rpx;
+    display: inline-block;
+    text-align: center;
+}
+
+.MinTabItem-text {
+    color: #fff;
+    font-size: 24rpx;
+}
+
+.MinClick-text {
+    color: #f49c36;
+    border-bottom: 1px solid #f49c36;
+    padding-bottom: 10rpx;
+}
+
+.loading {
+    height: 60rpx;
+    font-size: 28rpx;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.loading,.movlist {
+    width: 750rpx;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.movlist {
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+}
+
+.movieList {
+    width: 33.3%;
+}

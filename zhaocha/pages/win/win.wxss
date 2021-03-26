@@ -1,0 +1,594 @@
+.top {
+    position: relative;
+    width: calc(100vw - 60rpx);
+    margin-left: 30rpx;
+    height: 120rpx;
+}
+
+.duanwei {
+    -webkit-text-stroke: 1px #5c5662;
+    line-height: 1;
+    font-size: 70rpx;
+    color: #e7c6bf;
+    font-weight: bold;
+}
+
+.power,.coin {
+    position: relative;
+    width: 213rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    box-sizing: border-box;
+    display: inline-block;
+    margin-right: 15rpx;
+    vertical-align: top;
+    font-size: 0;
+}
+
+.coin {
+    width: 249rpx;
+}
+
+.powerImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.powerTxt {
+    position: absolute;
+    width: 38rpx;
+    height: 38rpx;
+    background-color: #fff;
+    font-size: 24rpx;
+    line-height: 38rpx;
+    color: #000;
+    text-align: center;
+    left: 30rpx;
+    top: 34rpx;
+    border-radius: 50%;
+}
+
+.currTime {
+    position: relative;
+    width: 100%;
+    height: 45rpx;
+    text-align: center;
+    font-size: 30rpx;
+    line-height: 45rpx;
+    color: #fff;
+    display: block;
+    z-index: 3;
+    top: 18rpx;
+}
+
+.main {
+    position: relative;
+    width: 100vw;
+    height: 63vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainImg {
+    position: relative;
+    width: 370rpx;
+    height: 241rpx;
+    top: -50rpx;
+}
+
+.duan {
+    width: 100vw;
+    height: 60rpx;
+    text-align: center;
+}
+
+.star {
+    width: 62rpx;
+    display: inline-block;
+    height: 60rpx;
+    margin: 0 10rpx;
+}
+
+.duanTxt {
+    width: 203rpx;
+    height: 57rpx;
+    margin-top: -30rpx;
+}
+
+.myDraw {
+    position: absolute;
+    top: 100rpx;
+    left: 0;
+    width: 78rpx;
+    height: 84rpx;
+}
+
+.notice {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 107rpx;
+    height: 67rpx;
+}
+
+.info {
+    position: relative;
+    width: 100vw;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    font-size: 30rpx;
+    color: #f6f6f6;
+    font-weight: 600;
+}
+
+.startGame {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20rpx;
+    box-shadow: 0 -4px 0px 0px #2375b1 inset;
+}
+
+.btns {
+    padding: 0 50rpx;
+    box-sizing: border-box;
+    position: relative;
+    width: 100vw;
+    height: 120rpx;
+    margin: 20rpx 0;
+}
+
+.btnCon {
+    position: relative;
+    width: 102rpx;
+    height: 111rpx;
+    margin: 0 18rpx;
+    display: inline-block;
+}
+
+.btnImg {
+    width: 100%;
+    height: 100%;
+}
+
+.getuser {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.toastBg {
+    width: 500rpx;
+}
+
+.toastBg .startGame {
+    height: 90rpx;
+    width: 240rpx;
+    border: 0!important;
+}
+
+.toastBg .flexBox .startGame {
+    height: 80rpx;
+    width: 180rpx;
+    margin-top: 42rpx;
+    box-shadow: 0 -4px 0px 0px #2375b1 inset;
+}
+
+.toastBg .startGame text {
+    font-size: 32rpx;
+    margin-top: -6rpx;
+    -webkit-text-stroke-width: 0;
+}
+
+.toastImg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    height: 570rpx;
+}
+
+.closeCon {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.closeImg {
+    width: 80rpx;
+    height: 86rpx;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.engTitle {
+    margin-bottom: 50rpx;
+}
+
+.eng {
+    position: relative;
+    display: block;
+    margin: 25rpx 0;
+    width: 120rpx;
+    height: 162rpx;
+    margin-left: calc((100% - 120rpx) / 2);
+}
+
+.engTxt {
+    position: relative;
+    margin-top: 38rpx;
+    text-align: center;
+    width: 100%;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 28rpx;
+    color: #0d0d0d;
+}
+
+.getTicket {
+    position: relative;
+    width: 173rpx;
+    height: 75rpx;
+    display: inline-block;
+    margin-top: 30rpx;
+}
+
+.engChange {
+    width: 350rpx;
+    height: 350rpx;
+    margin-left: calc((100% - 350rpx) / 2);
+}
+
+.toMain {
+    position: relative;
+    width: calc(100% - 40rpx);
+    margin-left: 20rpx;
+    margin-top: 20rpx;
+}
+
+.toMainItem {
+    position: relative;
+    width: 100%;
+    height: 120rpx;
+    border-radius: 15rpx;
+    border: 5rpx solid #000;
+    margin: 10rpx 0;
+    text-align: left;
+    background: #eee;
+    box-sizing: border-box;
+}
+
+.itemIcon {
+    width: 90rpx;
+    height: 90rpx;
+    margin-top: 15rpx;
+    margin-left: 10rpx;
+    vertical-align: top;
+}
+
+.itemTxt {
+    display: inline-block;
+    vertical-align: top;
+    height: 90rpx;
+    margin-top: 15rpx;
+    margin-left: 10rpx;
+    text-align: left;
+    font-size: 0;
+    overflow: hidden;
+    width: calc(100% - 234rpx);
+    margin-right: 10rpx;
+}
+
+.itemBtn {
+    width: 104rpx;
+    height: 51rpx;
+    margin-top: 34rpx;
+    position: relative;
+}
+
+.itemBtnCon {
+    width: 100%;
+    height: 100%;
+}
+
+.itemTxtTop,.itemTxtBottom {
+    display: block;
+    height: 40rpx;
+    line-height: 50rpx;
+    text-align: left;
+    font-size: 28rpx;
+    color: #2d2d2d;
+}
+
+.mainImgTitle {
+    position: relative;
+    width: 480rpx;
+    height: 160rpx;
+    top: -50rpx;
+}
+
+.btnhome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 36rpx;
+    margin-bottom: 10rpx;
+    height: 60rpx;
+}
+
+.mainBack {
+    width: 193rpx;
+    height: 42rpx;
+}
+
+.invite-btn {
+    width: 60rpx;
+    height: 60rpx;
+    margin: 0 0 0 20rpx;
+}
+
+.invite-btn image {
+    width: 60rpx;
+    height: 60rpx;
+}
+
+.adList {
+    width: 100rpx;
+    position: absolute;
+    top: 100rpx;
+    left: 20rpx;
+    height: 620rpx;
+}
+
+.adImg {
+    position: relative;
+    left: 0;
+    height: 100rpx;
+    width: 100rpx;
+    border-radius: 15rpx;
+    margin-bottom: 20rpx;
+    z-index: 1000;
+}
+
+.duanweiBg {
+    height: 950rpx;
+    top: -200rpx;
+    width: 500rpx;
+}
+
+.duanweiImg {
+    height: 850rpx;
+}
+
+.duansda {
+    width: 203rpx;
+    height: 57rpx;
+    margin-top: 490rpx;
+    position: relative;
+    z-index: 9999;
+    margin-left: calc((100% - 203rpx) / 2);
+    display: block;
+}
+
+.duanGold {
+    width: 162rpx;
+    height: 64rpx;
+    position: relative;
+    margin: 10rpx 0 10rpx calc((100% - 162rpx) / 2);
+    display: block;
+}
+
+.duanweiTxt {
+    position: relative;
+    font-size: 30rpx;
+    font-weight: bolder;
+    color: #fff;
+    line-height: 80rpx;
+}
+
+.duanweiGet {
+    width: 150rpx;
+    height: 75rpx;
+    position: relative;
+    margin-left: calc((100% - 150rpx) / 2);
+    display: block;
+    margin-top: 30rpx;
+}
+
+.rewardGet {
+    margin-top: 100rpx;
+}
+
+.selectCon {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 0;
+    overflow: hidden;
+    height: 50rpx;
+    line-height: 50rpx;
+}
+
+.selectImg {
+    height: 26rpx;
+    width: 26rpx;
+    display: inline-block;
+    margin-right: 15rpx;
+    vertical-align: top;
+    margin-top: 12rpx;
+    position: relative;
+}
+
+.selectImg image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.selectTxt {
+    color: #fde2e9;
+    font-size: 28rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: left;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.mjBanner {
+    position: absolute;
+    width: 600rpx;
+    margin-left: 75rpx;
+    bottom: 0rpx;
+    display: flex;
+}
+
+.more-game {
+    position: absolute;
+    left: 0;
+    top: 300rpx;
+}
+
+.more-game-img {
+    width: 90rpx;
+    height: 89rpx;
+    display: block;
+}
+
+.more-game-icon {
+    width: 96rpx;
+    height: 87rpx;
+    display: block;
+    position: absolute;
+    top: -30rpx;
+    left: 6rpx;
+}
+
+.more-game-text {
+    height: 33rpx;
+    width: 60rpx;
+    display: block;
+    position: absolute;
+    bottom: 14rpx;
+    z-index: 1;
+    top: 30%;
+    left: 14%;
+}
+
+@-webkit-keyframes moreGameIcon {
+    0% {
+        transform: rotate(0);
+    }
+
+    10% {
+        transform: rotate(10deg);
+    }
+
+    20% {
+        transform: rotate(-10deg);
+    }
+
+    30% {
+        transform: rotate(10deg);
+    }
+
+    40% {
+        transform: rotate(-10deg);
+    }
+
+    50% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+
+@keyframes moreGameIcon {
+    0% {
+        transform: rotate(0);
+    }
+
+    10% {
+        transform: rotate(10deg);
+    }
+
+    20% {
+        transform: rotate(-10deg);
+    }
+
+    30% {
+        transform: rotate(10deg);
+    }
+
+    40% {
+        transform: rotate(-10deg);
+    }
+
+    50% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+
+.game-input {
+    margin-top: 200rpx;
+}
+
+.joinGame {
+    display: block;
+    width: 300rpx;
+    margin-top: 200rpx;
+}
+
+.leftMoreGame {
+    position: absolute;
+    top: 450rpx;
+    left: 10rpx;
+}
+
+.leftImage,.rightImage {
+    margin-top: 40rpx;
+}
+
+.leftMoreGame image,.rightImage image {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.rightMoreGame {
+    position: absolute;
+    top: 450rpx;
+    right: 10rpx;
+}

@@ -1,0 +1,50 @@
+<view class="{{[theme+'-page']}}">
+    <uni-bar Max="{{barMax}}" bind:__l="__l" theme="{{theme}}" vueId="54fb8f20-1" vueSlots="{{['default']}}">
+        <nar-bar bind:__l="__l" bind:pageScrollTo="__e" data-event-opts="{{[ [ '^pageScrollTo',[ ['pageScrollTo'] ] ] ]}}" fixed="true" type="top" vueId="{{'54fb8f20-2'+','+'54fb8f20-1'}}"></nar-bar>
+        <view class="Maxtab" wx:if="{{!wxverify}}">
+            <view catchtap="__e" class="Maxtab-Item-Item" data-event-opts="{{[ [ 'tap',[ [ 'MaxTab',[index,'$0'],[ [ ['tablist','',index,'type_id'] ] ] ] ] ] ]}}" data-index="{{index}}" id="{{'id'+index}}" wx:for="{{tablist}}" wx:key="index">
+                <text class="{{['Maxtab-Item-text',index===MaxClick.index?'MaxClick':'']}}">{{item.type_name}}</text>
+            </view>
+        </view>
+        <view class="MinTablist" wx:if="{{shuaixuan}}">
+            <view class="MinTab">
+                <scroll-view class="MinTabItem" enableFlex="{{true}}" scrollAnchoring="{{true}}" scrollX="true" showScrollbar="false">
+                    <view bindtap="__e" class="{{['MinTabItem-item',one===MinClick[0].index?'MinClick':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'ClassClick',['$0',one],[ [ ['tablist.'+MaxClick.index+'.type_extend.class','',one] ] ] ] ] ] ]}}" wx:for="{{tablist[MaxClick.index].type_extend.class}}" wx:for-index="one" wx:for-item="classname" wx:key="one">
+                        <text class="{{['MinTabItem-text',one===MinClick[0].index?'MinClick-text':'']}}">{{classname}}</text>
+                    </view>
+                </scroll-view>
+                <scroll-view class="MinTabItem" enableFlex="{{true}}" scrollAnchoring="{{true}}" scrollX="true" showScrollbar="false">
+                    <view catchtap="__e" class="{{['MinTabItem-item',two===MinClick[1].index?'MinClick':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'EreaClick',['$0',two],[ [ ['tablist.'+MaxClick.index+'.type_extend.area','',two] ] ] ] ] ] ]}}" wx:for="{{tablist[MaxClick.index].type_extend.area}}" wx:for-index="two" wx:for-item="area" wx:key="two">
+                        <text class="{{['MinTabItem-text',two===MinClick[1].index?'MinClick-text':'']}}">{{area}}</text>
+                    </view>
+                </scroll-view>
+                <scroll-view class="MinTabItem" enableFlex="{{true}}" scrollAnchoring="{{true}}" scrollX="true" showScrollbar="false">
+                    <view catchtap="__e" class="{{['MinTabItem-item',three===MinClick[2].index?'MinClick':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'YearClick',['$0',three],[ [ ['tablist.'+MaxClick.index+'.type_extend.year','',three] ] ] ] ] ] ]}}" wx:for="{{tablist[MaxClick.index].type_extend.year}}" wx:for-index="three" wx:for-item="year" wx:key="three">
+                        <text class="{{['MinTabItem-text',three===MinClick[2].index?'MinClick-text':'']}}">{{year}}</text>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+        <view class="{{['carousel-by',theme+'-bg2']}}">
+            <view bindtap="__e" class="{{['switch',theme+'-title-color']}}" data-event-opts="{{[ [ 'tap',[ ['shuaixuantab'] ] ] ]}}">
+                <text class="cuIcon" style="font-size:30rpx;"></text>
+                <text class="switch-text cuIcon">筛选</text>
+            </view>
+            <view class="paixun">
+                <view catchtap="__e" class="paixunlist" data-event-opts="{{[ [ 'tap',[ [ 'sortClick',['$0',index],[ [ ['sortlist','',index,'id'] ] ] ] ] ] ]}}" data-index="{{index}}" id="{{'id'+index}}" wx:for="{{sortlist}}" wx:key="index">
+                    <text class="{{['paixunlist-text cuIcon',index===MinClick[0].sortid?'MinClick-text':'']}}">{{item.title}}</text>
+                </view>
+            </view>
+        </view>
+    </uni-bar>
+    <custom-ad bind:__l="__l" vueId="54fb8f20-3" ysId="{{wxAdId.ysId}}" wx:if="{{wxAdId.ysId}}"></custom-ad>
+    <view class="movlist">
+        <view class="movieList" wx:for="{{vodlist}}" wx:for-item="list" wx:key="index">
+            <vod-item bind:__l="__l" item="{{list}}" theme="{{theme}}" vueId="{{'54fb8f20-4-'+index}}"></vod-item>
+        </view>
+    </view>
+    <view class="{{['loading',theme+'-loading']}}" wx:if="{{noLoading}}">
+        <text class="cuIcon" style="font-size:30rpx;"></text>
+        <text>{{loadingText}}</text>
+    </view>
+</view>

@@ -1,0 +1,98 @@
+.cuIcon {
+    font-family: iconfont;
+    font-size: 40rpx;
+}
+
+.custom {
+    width: 750rpx;
+    z-index: 1024;
+    color: #fff;
+}
+
+.fixedView {
+    position: fixed;
+    top: 0;
+}
+
+.bar {
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.line {
+    width: .5px;
+    height: 60%;
+    background-color: hsla(0,0%,100%,.2);
+}
+
+.backOne {
+    font-weight: 800;
+    font-size: 48rpx;
+    background-color: hsla(0,0%,41.6%,.2);
+    border-radius: 50px;
+    text-align: center;
+    border: .2px solid #a3a3a3;
+}
+
+.backTwo {
+    background-color: hsla(0,0%,41.6%,.2);
+    border-radius: 50px;
+    height: 100%;
+    font-weight: 800;
+    border: .2px solid #a3a3a3;
+}
+
+.backTwo,.searchBox {
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: space-evenly;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+}
+
+.searchBox {
+    width: 90%;
+    color: #ababab;
+    background-color: #fff;
+    border-radius: 30rpx;
+    overflow: hidden;
+    font-size: 24rpx;
+    margin: 0 auto;
+}
+
+.switch {
+    width: 90%;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.switch-text {
+    margin: 0 10rpx;
+    font-size: 28rpx;
+}
+
+.switch-switch {
+    width: 80rpx;
+    transform: scale(.7);
+}
+
+.text {
+    width: 100%;
+    text-align: center;
+    font-size: 30rpx;
+}

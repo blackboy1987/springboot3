@@ -1,0 +1,48 @@
+<view class="{{[theme+'-page']}}">
+    <uni-bar Max="{{barMax}}" bind:__l="__l" theme="{{theme}}" vueId="50cad900-1" vueSlots="{{['default']}}">
+        <view style="{{barStyle}}"></view>
+        <view class="barInput" style="{{searchView}}">
+            <input bindconfirm="__e" bindinput="__e" bindnavbar="__e" class="barInput-input" confirmType="search" data-event-opts="{{[ [ 'input',[ [ 'input',['$event'] ] ] ],[ 'confirm',[ [ 'confirm',['$event'] ] ] ],[ 'navbar',[ [ 'navbar',['$event'] ] ] ] ]}}" placeholder="  输入搜索关键词" type="text" value="{{keyword}}"></input>
+            <text bindtap="__e" class="cuIcon" data-event-opts="{{[ [ 'tap',[ [ 'searchIcon',['$event'] ] ] ] ]}}" style="font-weight:900;font-size:45rpx;color:#DD524D;"></text>
+        </view>
+        <view class="{{['carousel-by',theme+'-bg1']}}"></view>
+    </uni-bar>
+    <view>
+        <view class="{{['hotkeyword',theme+'-title-color']}}" wx:if="{{nokeyword}}">
+            <view class="hottitle" wx:if="{{history.length>0}}">
+                <text class="cuIcon" style="font-size:45rpx;color:#ff8080;"></text>
+                <text class="icon" style="font-size:35rpx;">历史搜索</text>
+            </view>
+            <view class="history-div" wx:if="{{history.length>0}}">
+                <view bindtap="__e" class="{{['history-data',theme+'-bg3']}}" data-event-opts="{{[ [ 'tap',[ [ 'hotkeywordtab',['$0'],[ [ ['history','',index] ] ] ] ] ] ]}}" wx:for="{{history}}" wx:for-item="list" wx:key="index">
+                    <view class="history-title">
+                        <text class="history-title-title">{{list}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="hottitle">
+                <text class="cuIcon" style="font-size:45rpx;color:#ff8080;"></text>
+                <text class="hottitle-title " style="font-size:35rpx;">热门搜索</text>
+            </view>
+            <view class="hotkeyword-div">
+                <view bindtap="__e" class="{{['hotkeyword-data',theme+'-bg3']}}" data-event-opts="{{[ [ 'tap',[ [ 'hotkeywordtab',['$0'],[ [ ['hotkeywordlist','',index,'title'] ] ] ] ] ] ]}}" wx:for="{{hotkeywordlist}}" wx:for-item="list" wx:key="index">
+                    <text class="hotkeyword-title">{{list.title}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="vodlist" wx:if="{{!nokeyword}}">
+            <view wx:for="{{vodlistdata}}" wx:key="index">
+                <custom-ad bind:__l="__l" vueId="{{'50cad900-2-'+index}}" ysId="{{wxAdId.ysId}}" wx:if="{{index==2&&wxAdId.ysId}}"></custom-ad>
+                <shuvodlist bind:__l="__l" item="{{item}}" theme="{{theme}}" vueId="{{'50cad900-3-'+index}}"></shuvodlist>
+            </view>
+        </view>
+    </view>
+    <view class="selection" wx:if="{{noselection}}">
+        <view class="selection-item" wx:for="{{selection}}" wx:key="index">
+            <view bindtap="__e" class="selection-data" data-event-opts="{{[ [ 'tap',[ [ 'selectionTab',['$0'],[ [ ['selection','',index,'name'] ] ] ] ] ] ]}}">
+                <text class="selection-name">{{item.name}}</text>
+                <text class="cuIcon" style="font-size:35rpx;color:#666666;"></text>
+            </view>
+        </view>
+    </view>
+</view>

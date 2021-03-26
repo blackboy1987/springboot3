@@ -1,0 +1,131 @@
+
+page {
+    background: #fff;
+}
+
+.maina {
+    position: relative;
+}
+
+.maina .maina_bg image {
+    width: 100%;
+}
+
+.maina .box1 {
+    position: absolute;
+    top: 15%;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    font-size: 50px;
+    line-height: 120px;
+}
+
+.maina .box1 text {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAAB4CAYAAAByzOU/AAAC10lEQVR4nO3cv2pTYRyH8Sd60EVBhOKgKDra3kQFVze1uglScHJw8Q7URS/AVVERB2eLeBF2VZR2sA46ONg/yZHXnkLbJAo25xs1z2ds0sB58uPNe07C6dR1zS+cBK4Cs8BZYAo4OPzpE+UbsAR8AN4Az4D3wwIMC10C3wUuAfv7HtUgvSb2beBjf+heb/ffLgCPgMMDXky/VyZ9HniyI3RvZ+ibwH1gn0H3pCwTt4AHWy+yPfTl5l3o/HOH9Xcqsa80y0kJ3aVZkxeBQ5NeZ8TKMjJd1uyq+Sy8Y+RWlKb3ymR3ut3uKeCd63Jrytp8pqKu54zcqtJ2rqo3T0bUrtkK6hkjt26ms7G+/t3T6tatVTW1kdt3oGLgpQ6NWploowY40SEVlo6oBl+O1qg50SFOdIgTHeJEhzjRIdWQb8E1Yp6whHgKHuJEhzjRIeU7w4k40HGrzJzhRIe4jw7x9xwhTnSIEx3iRIe46whxHx3iRIc40SFOdIhX70K8Hh3iRIc40SFOdIgTHeIPaEL8SViIEx3iRIc40SHuOkLcR4f4nWGIl0lDvPAf4odhiNu7EJeOEHcdIeXepA51gBMdYugQQ4cYOsTQIYYOMXSIoUMMHWLoEEOHGDrE0CGGDjF0iKFDDB1i6BBDhxg6xNAhhg4xdIihQwwdYugQQ4cYOsTQIYYOMXSIoUMMHWLoEEOHGDrE0CGGDjF0iKFDDB1i6BBDhxg6xNAhhg4poVcn4kjHa7WEXpnkAiErJfTiRBzqeC2W0AuTXCBkodzq5wTwfvOOYWrBBnC6TPQS8NjCrSltlzrNvauOA2+BI//nsY7NV2AGWN7aRy8D1/Fug6NUN01L2x0nLC+A+WZN0d70gBtN0586A257dx54Chw19h/5AlwDXm7/50Gn4K+AaeAhsNb3qIZZa5pN747MkIne7hhwETjXvMBU3zMm2+fmhO818Bz4NLAG8AMayLicPIyECgAAAABJRU5ErkJggg==);
+    width: 80px;
+    height: 120px;
+    display: inline-block;
+    background-size: 100% 100%;
+    margin: 0 10px;
+    color: #ff9114;
+    font-weight: 700;
+}
+
+.maina .box2 {
+    position: absolute;
+    top: 45%;
+    background: rgba(255,137,1,.8);
+    width: 80%;
+    left: 50%;
+    margin-left: -40%;
+    border-radius: 100px;
+    line-height: 100px;
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+}
+
+.maina .box2 image {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 30px;
+    margin-right: 10px;
+}
+
+.mainb {
+    background: #fff;
+    box-shadow: 4px 8px 40px #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 60px 20px;
+    margin: -200px 20px 20px;
+    z-index: 9;
+    position: relative;
+}
+
+.mainb .cont{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.mainb .box {
+    width: 22.75%;
+    float: left;
+    background: #f0f0f0;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 24px;
+    padding: 20px 0;
+}
+
+.mainb .box.active {
+    background: #fe4c5a;
+    color: #fff;
+}
+
+.mainb .box:nth-child(4),.mainb .box:nth-child(7) {
+    margin-right: 0;
+}
+
+.mainb .box image {
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin: 6px auto;
+}
+
+.mainb .box2 {
+    width: 325px;
+    height: 188px;
+    display: flex;
+    padding-top: 50px;
+}
+
+.mainb .box2 .text {
+    height: 95px;
+    margin-left: 50px;
+    line-height: 47px;
+}
+
+.mainb .box2 image {
+    width: 88px;
+    height: 95px;
+    margin: 0 0 0 30px;
+}
+
+.mainb .btn {
+    width: 400px;
+    background: #ff9114;
+    line-height: 80px;
+    text-align: center;
+    border-radius: 100px;
+    color: #fff;
+    margin: 20px auto 0;
+}

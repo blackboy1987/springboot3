@@ -1,0 +1,422 @@
+<view class="seo">{{seo.seo_index}}</view>
+<view class="bg1"></view>
+<view>
+    <scroll-view class="container" scrollY="true">
+        <view class="top">
+            <view catchtap="checkEng" class="power">
+                <image class="powerImg" src="../../images/power.png"></image>
+                <text class="powerTxt">{{ticket}}</text>
+                <text class="currTime">{{resTime}}</text>
+            </view>
+            <view catchtap="checkGold" class="coin" data-name="vedioGold" wx:if="{{!config.is_share}}">
+                <image class="powerImg" src="../../images/coin.png"></image>
+                <text class="currTime">{{gold}}</text>
+            </view>
+        </view>
+        <view class="main">
+            <view catchtap="closeHuodong" class="view-notice" wx:if="{{notice}}">
+                <i-notice-bar loop color="#ed3f14" icon="systemprompt" speed="1200">{{notice}}</i-notice-bar>
+            </view>
+            <image catchtap="duanweiFun" class="mainImg" mode="aspectFit" src="{{rank_img}}"></image>
+            <view class="duanwei">{{value_name}}</view>
+            <view class="info">{{will_title}}</view>
+            <form bindsubmit="submitInfo" reportSubmit="true">
+                <view class="startGame" wx:if="{{flag_load}}">
+                    <button catchtap="toGameSubscribe" formType="submit" wx:if="{{!getuser}}">
+                        <text>闯关模式</text>
+                        <view class="flexBox flexBoxCenterAlign">
+                            <view class="barrier">第{{value}}关</view>
+                            <view class="elec flexBoxCenterAlign">
+                                <image src="/images/elec.png"></image>×1
+              </view>
+                        </view>
+                    </button>
+                    <button bindgetuserinfo="wxUserInfo" openType="getUserInfo" wx:if="{{getuser}}">
+                        <text>闯关模式</text>
+                        <view class="flexBox flexBoxCenterAlign">
+                            <view class="barrier">第{{value}}关</view>
+                            <view class="elec flexBoxCenterAlign">
+                                <image src="/images/elec.png"></image>×1
+              </view>
+                        </view>
+                    </button>
+                </view>
+                <view class="startGame pkGameMain" wx:if="{{flag_load}}">
+                    <view>
+                        <button catchtap="toPaiweiSubscribe" class="pkGame" formType="submit" wx:if="{{!getuser}}">
+                            <text>好友挑战</text>
+                            <view class="flexBox flexBoxCenterAlign">
+                                <view class="elec flexBoxCenterAlign ico_video" wx:if="{{excitation}}">
+                                    <image src="/images/ico_video.png"></image>
+                                </view>
+                            </view>
+                        </button>
+                        <button bindgetuserinfo="wxUserInfo" class="pkGame" openType="getUserInfo" wx:if="{{getuser}}">
+                            <text>好友挑战</text>
+                            <view class="flexBox flexBoxCenterAlign"></view>
+                        </button>
+                    </view>
+                </view>
+            </form>
+            <view class="btns" wx:if="{{flag_load}}">
+                <view class="btnCon" wx:if="{{!config.hook}}">
+                    <button bindgetuserinfo="wxUserInfo" class="getuser" openType="getUserInfo" wx:if="{{getuser}}"></button>
+                    <image catchtap="gift" class="btnImg" src="{{fn.baseurl(siteInfo.resourceroot)}}/addons/aaa_zhaocha/resource/images/gift.png"></image>
+                </view>
+                <view class="btnCon" wx:if="{{!config.hook}}">
+                    <button bindgetuserinfo="wxUserInfo" class="getuser" openType="getUserInfo" wx:if="{{getuser}}"></button>
+                    <image catchtap="rankFun" class="btnImg" src="{{fn.baseurl(siteInfo.resourceroot)}}/addons/aaa_zhaocha/resource/images/paihang.png"></image>
+                </view>
+                <view class="btnCon">
+                    <image catchtap="settingFun" class="btnImg" src="{{fn.baseurl(siteInfo.resourceroot)}}/addons/aaa_zhaocha/resource/images/setting.png"></image>
+                </view>
+                <view class="btnCon pk" wx:if="{{flag_load}}">
+                    <button catchtap="pkBtn" formType="submit" wx:if="{{!getuser}}">
+                        <image class="btnImg" src="/images/pk.png"></image>
+                    </button>
+                    <button bindgetuserinfo="wxUserInfo" openType="getUserInfo" wx:if="{{getuser}}">
+                        <image class="btnImg" src="{{fn.baseurl(siteInfo.resourceroot)}}/addons/aaa_zhaocha/resource/images/pk.png"></image>
+                    </button>
+                </view>
+            </view>
+        </view>
+        <view class="new-more-game2" wx:if="{{config.ysmb_box.length&&showAd}}">
+            <swiper autoplay="{{true}}" bindchange="change" circular="{{true}}" class="new-more-game-swiper2" duration="{{200}}" interval="{{3000}}">
+                <swiper-item catchtouchmove="catchtouchmove" wx:for="{{config.ysmb_box_arr}}" wx:key="{{index}}">
+                    <ad-custom binderror="adYsmbError" bindload="adYsmbLoad" unitId="{{config.ysmb_box}}"></ad-custom>
+                </swiper-item>
+            </swiper>
+            <view class="new-more-game-text-arrow2">
+                <view class="new-more-game-text2">{{config.ysmb_box_text}}</view>
+                <view class="new-more-game-arrow2"></view>
+            </view>
+        </view>
+        <view class="mjBanner2" style="bottom:{{isIphoneX?'100':'10'}}rpx">
+            <ad binderror="oneAdFail" bindload="oneAdSuccess" unitId="{{adList.one}}" wx:if="{{oneAd&&adList.one.length}}"></ad>
+        </view>
+    </scroll-view>
+    <view class="bg" wx:if="{{toastCtrol==1||toastCtrol==3}}">
+        <view class="toastBg" style="width: 500rpx;">
+            <view class="toastImg ">
+                <image src="../../images/01.png"></image>
+            </view>
+            <view class="engTitle" wx:if="{{toastCtrol==1}}">获得体力</view>
+            <image class="eng" src="../../images/eng.png" wx:if="{{toastCtrol==1}}"></image>
+            <view class="engTxt" wx:if="{{toastCtrol==1}}">还需要{{resTime}}分钟恢复一点体力</view>
+            <view class="ticket_tc1" wx:if="{{toastCtrol==1}}">
+                <view wx:if="{{toastCtrol==1&&excitation}}">
+                    <button catchtap="startVideo" class="itemBtnCon itemBtnCon2" data-name="vedioEng" style="margin-right:20rpx;">观看视频</button>
+                    <button data-other="share3" openType="share" style="margin-left:20rpx;" wx:if="{{!config.close_share}}">
+                        <view class="itemBtnCon itemBtnCon2" data-name="vedioEng">好友助力</view>
+                    </button>
+                </view>
+                <button data-other="share3" openType="share" wx:else>
+                    <view class="itemBtnCon itemBtnCon2">好友助力</view>
+                </button>
+            </view>
+            <view class="engTitle" wx:if="{{toastCtrol==3}}">获得体力</view>
+            <image class="eng" src="../../images/engSele.png" wx:if="{{toastCtrol==3}}"></image>
+            <view class="engTxt" wx:if="{{toastCtrol==3}}">已满</view>
+            <view catchtap="closeFun" class="closeCon">
+                <image class="closeImg" src="../../images/btn_close.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="bg" wx:if="{{toastCtrol==2}}">
+        <view class="toastBg" style="background:transparent;width: 560rpx;">
+            <image class="eng engChange" src="../../images/engA.png" wx:if="{{ticket_add==1}}"></image>
+            <image class="eng engChange" src="../../images/engB.png" wx:if="{{ticket_add==2}}"></image>
+            <image class="eng engChange" src="../../images/engC.png" wx:if="{{ticket_add==3}}"></image>
+            <image class="eng engChange" src="../../images/engD.png" wx:if="{{ticket_add==4}}"></image>
+            <image class="eng engChange" src="../../images/engE.png" wx:if="{{ticket_add==5}}"></image>
+            <form bindsubmit="submitInfo" reportSubmit="true">
+                <button catchtap="videoGetEng" class="getTicket" formType="submit">
+                    <view class="itemBtnCon itemBtnCon2">领取</view>
+                </button>
+            </form>
+        </view>
+    </view>
+    <view class="bg" wx:if="{{toastCtrol==4}}">
+        <view class="toastBg rankToast">
+            <view class="toastImg rankImg">
+                <image src="../../images/01.png"></image>
+            </view>
+            <view class="engTitle">礼包</view>
+            <scroll-view class="toMain" scrollY="true" style="height:600rpx;">
+                <view class="toMainItem" wx:if="{{!config.hook}}">
+                    <image class="itemIcon" src="../../images/ico_help.png"></image>
+                    <view class="itemTxt">
+                        <text class="itemTxtTop">好友助力</text>
+                        <text class="itemTxtBottom">领体力</text>
+                    </view>
+                    <button data-other="share1" openType="share">
+                        <view class="itemBtnCon" wx:if="{{help_flag}}">去领取</view>
+                        <view class="itemBtnCon" wx:if="{{!help_flag}}">已领取</view>
+                    </button>
+                </view>
+                <view class="toMainItem" wx:if="{{!config.hook}}">
+                    <image class="itemIcon" src="../../images/ico_invite.png"></image>
+                    <view class="itemTxt">
+                        <text class="itemTxtTop">邀请好友</text>
+                        <text class="itemTxtBottom">领更多体力</text>
+                    </view>
+                    <button data-other="share2" openType="share">
+                        <view class="itemBtnCon">去领取</view>
+                    </button>
+                </view>
+                <view class="toMainItem" wx:if="{{!config.close_share}}">
+                    <image class="itemIcon" src="../../images/ico_share.png"></image>
+                    <view class="itemTxt">
+                        <text class="itemTxtTop">分享到群里</text>
+                        <text class="itemTxtBottom">领体力</text>
+                    </view>
+                    <button data-other="share3" openType="share">
+                        <view class="itemBtnCon" wx:if="{{share_flag}}">去领取</view>
+                        <view class="itemBtnCon" wx:if="{{!share_flag}}">已领取</view>
+                    </button>
+                </view>
+                <view class="toMainItem" wx:if="{{excitation}}">
+                    <image class="itemIcon" src="../../images/ico_video.png"></image>
+                    <view class="itemTxt">
+                        <text class="itemTxtTop">看激励视频</text>
+                        <text class="itemTxtBottom">免费领体力</text>
+                    </view>
+                    <view catchtap="checkEng" class="itemBtnCon itemBtnCon1">去领取</view>
+                </view>
+                <view class="toMainItem" wx:if="{{!close_service}}">
+                    <image class="itemIcon" src="../../images/iconc.png"></image>
+                    <view class="itemTxt">
+                        <text class="itemTxtTop">客服会话</text>
+                        <text class="itemTxtBottom">每日得体力</text>
+                    </view>
+                    <button showMessageCard bindcontact="handleContact" catchtap="closeFun" class="itemBtn" openType="contact" sendMessageImg="{{config.service_img}}" sendMessagePath="/pages/index/index" sendMessageTitle="{{config.service_title}}" wx:if="{{!service_flag}}">
+                        <view class="itemBtnCon">去领取</view>
+                    </button>
+                    <button class="itemBtn" wx:if="{{service_flag}}">
+                        <view class="itemBtnCon">已领取</view>
+                    </button>
+                </view>
+            </scroll-view>
+            <view catchtap="closeFun" class="closeCon">
+                <image class="closeImg" src="../../images/btn_close.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="bg" wx:if="{{toastCtrol==5}}">
+        <view class="toastBg">
+            <view class="toastImg">
+                <image src="../../images/01.png"></image>
+            </view>
+            <view class="engTitle">抽奖活动</view>
+            <image class="getScratch" src="../../images/getScratch.png"></image>
+            <image catchtap="openDrawFun" class="scratch" src="../../images/scratch.png"></image>
+            <view catchtap="closeFun" class="closeCon">
+                <image class="closeImg" src="../../images/btn_close.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="bg" wx:if="{{toastCtrol==6}}">
+        <view class="toastBg rankToast">
+            <view class="toastImg rankImg">
+                <image src="../../images/01.png"></image>
+            </view>
+            <view class="rankMain">
+                <view class="engTitle">排行榜</view>
+                <scroll-view scrollY="true" style="height: 600rpx;border-bottom: 2rpx solid #eb7c02;">
+                    <view class="ranklist" wx:for="{{rankData}}" wx:key="{{key}}">
+                        <view class="rankItem">
+                            <view class="rankRow">
+                                <image mode="aspectFit" src="{{item.avatar_url}}"></image>
+                                <text>{{item.nickname}}</text>
+                            </view>
+                            <text>第{{item.level}}关</text>
+                        </view>
+                    </view>
+                </scroll-view>
+                <view class="ranklist">
+                    <view class="rankItem">
+                        <view class="rankRow">
+                            <image mode="aspectFit" src="{{myRankRow.avatar_url}}"></image>
+                            <text>{{myRankRow.nickname}}</text>
+                        </view>
+                        <text>第{{myRankRow.rank}}名</text>
+                    </view>
+                </view>
+            </view>
+            <view catchtap="closeFun" class="closeCon">
+                <image class="closeImg" src="../../images/btn_close.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="bg" wx:if="{{toastCtrol==7}}">
+        <view class="toastBg" style="width: 500rpx;">
+            <view class="toastImg">
+                <image src="../../images/01.png"></image>
+            </view>
+            <view class="engTitle">获得金币</view>
+            <image class="gold" src="../../images/10gold.png"></image>
+            <view class="engTxt" wx:if="{{excitation&&gold<50}}">观看激励视频或分享得金币</view>
+            <view class="engTxt" wx:elif="{{!excitation&&config.is_share&&gold<50}}">邀请好友,好友助力得金币</view>
+            <view class="engTxt" wx:else>邀请好友,好友助力得金币</view>
+            <view class="ticket_tc1" wx:if="{{excitation&&gold<50}}">
+                <button catchtap="startVideo" class="itemBtnCon itemBtnCon2" data-name="vedioGold" style="margin-right:20rpx;">观看视频</button>
+                <button data-other="share1" openType="share" style="margin-left:20rpx;">
+                    <view class="itemBtnCon itemBtnCon2">好友助力</view>
+                </button>
+            </view>
+            <button data-other="share1" openType="share" wx:else>
+                <view class="itemBtnCon itemBtnCon2">好友助力</view>
+            </button>
+            <view catchtap="closeFun" class="closeCon">
+                <image class="closeImg" src="../../images/btn_close.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="bg" wx:if="{{toastCtrol==8}}">
+        <view class="toastBg" style="background:transparent;width: 500rpx;">
+            <view class="engTitle">获得金币</view>
+            <image class="gold" src="../../images/10gold.png"></image>
+            <form bindsubmit="submitInfo" reportSubmit="true">
+                <button catchtap="videoGetGold" class="getTicket" formType="submit">
+                    <view class="itemBtnCon itemBtnCon2">领取</view>
+                </button>
+            </form>
+        </view>
+    </view>
+    <view class="bg" wx:if="{{toastCtrol==9}}">
+        <view class="toastBg rankToast">
+            <view class="toastImg rankImg">
+                <image src="../../images/01.png"></image>
+            </view>
+            <view class="engTitle">设置</view>
+            <view class="toMain settingBox">
+                <view class="toMainItem toMainFlex">
+                    <view class="itemTxt itemTxtRet">
+                        <text class="itemTxtCenter">小程序通知</text>
+                    </view>
+                    <switch bindchange="switchCard" checked="{{noticeCard}}"></switch>
+                </view>
+                <view class="toMainItem toMainFlex">
+                    <view class="itemTxt itemTxtRet">
+                        <text class="itemTxtCenter">声音开关</text>
+                    </view>
+                    <switch bindchange="switchSound" checked="{{open_sound}}"></switch>
+                </view>
+                <view bindtap="copy_opoenid" class="toMainItem toMainFlex">
+                    <view class="itemTxt itemTxtRet">
+                        <text class="itemTxtCenter">用户ID</text>
+                    </view>
+                    <view class="uid">{{uid}}</view>
+                </view>
+                <view bindtap="copy_kefu" class="toMainItem toMainFlex" wx:if="{{config.kefu_open}}">
+                    <view class="itemTxt itemTxtRet">
+                        <text class="itemTxtCenter">联系客服</text>
+                    </view>
+                    <view class="uid">{{config.kefu_tip}}</view>
+                </view>
+                <button class=" toMainItem toMainFlex contactBtn" openType="contact" wx:if="{{!config.kefu_open}}">
+                    <view>联系客服</view>
+                    <view class="iconc">
+                        <image src="/images/iconc.png"></image>
+                    </view>
+                </button>
+            </view>
+            <view catchtap="closeFun" class="closeCon">
+                <image class="closeImg" src="../../images/btn_close.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="bg" wx:if="{{toastCtrol==10}}">
+        <view class="toastBg rankToast">
+            <view class="toastImg rankImg">
+                <image src="../../images/01.png"></image>
+            </view>
+            <view class="rankMain">
+                <view class="engTitle">段位</view>
+                <scroll-view scrollY="true" scrollIntoView="{{scrollId}}" style="height: 700rpx;border-bottom: 0rpx solid #eb7c02;">
+                    <view class="ranklist" id="list-scroll-item{{item.rank}}" wx:for="{{rank_list}}" wx:key="{{key}}">
+                        <view class="rankItem duanweiItem">
+                            <view class="rankRow">
+                                <image mode="aspectFit" src="{{item.rank_img}}" wx:if="{{rank>=item.rank}}"></image>
+                                <image mode="aspectFit" src="{{item.img}}" wx:if="{{rank<item.rank}}"></image>
+                                <text>{{item.rank_name}}</text>
+                            </view>
+                            <text>{{item.value_title}}</text>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+            <view catchtap="closeFun" class="closeCon">
+                <image class="closeImg" src="../../images/btn_close.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="bg" wx:if="{{toastCtrol==11}}">
+        <view class="toastBg rankToast">
+            <view class="toastImg rankImg">
+                <image src="../../images/01.png"></image>
+            </view>
+            <view class="rankMain">
+                <view class="engTitle">加入房间</view>
+                <view class="ranklist">
+                    <input autoFocus bindinput="inupt_roomid" class="game-input" maxlength="6" placeholder="请输入房间号" type="number" value="{{roomid}}"></input>
+                    <button catchtap="joinGame" class="joinGame" plain="true" type="primary" wx:if="{{!getuser}}">加入房间</button>
+                    <button bindgetuserinfo="wxUserInfo" class="joinGame" openType="getUserInfo" plain="true" type="primary" wx:if="{{getuser}}">加入房间</button>
+                </view>
+            </view>
+            <view catchtap="closeFun" class="closeCon">
+                <image class="closeImg" src="../../images/btn_close.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="bg" wx:if="{{toastCtrol==12}}">
+        <view class="toastBg rankToast">
+            <view class="toastImg rankImg">
+                <image src="../../images/01.png"></image>
+            </view>
+            <view class="rankMain">
+                <view class="engTitle">兑换</view>
+                <scroll-view scrollY class="exchange-sv" style="height:600rpx;">
+                    <view class="exchangelist" wx:for="{{rewards.list}}" wx:key="*this">
+                        <view>兑换{{item.money}}{{config.rewards.unit}}</view>
+                        <view>{{item.status}}</view>
+                        <view>{{item.ts_create}}</view>
+                    </view>
+                </scroll-view>
+                <view class="user-exchange" wx:if="{{rewards.show}}">
+                    <button catchtap="goExchange" class="exchange-btn itemBtnCon " data-item="{{config.rewards}}" plain="true" type="primary">兑换:{{config.rewards.max_unit}}{{config.rewards.unit}}</button>
+                </view>
+            </view>
+            <view catchtap="closeFun" class="closeCon">
+                <image class="closeImg" src="../../images/btn_close.png"></image>
+            </view>
+        </view>
+    </view>
+    <view bindtap="toggleMoreGame" class="more-game" hoverClass="btn-click" hoverStartTime="0" hoverStayTime="100" style="top:{{notice?'352rpx':''}}" wx:if="{{moreGameList.length}}">
+        <image class="more-game-text" src="/images/more.png"></image>
+        <image class="more-game-img" src="{{fn.baseurl(siteInfo.resourceroot)}}/addons/aaa_zhaocha/resource/images/yxjs-gdyx.png"></image>
+    </view>
+    <popupMoreGame bind:close="toggleMoreGame" bindtoGame="toGameSubscribe" isShowDetention="{{isShowDetention}}" list="{{moreGameList}}" shareResult="{{shareResult}}" shareVideoRule="{{adunit}}" wx:if="{{showMoreGamePopup}}"></popupMoreGame>
+    <view class="leftMoreGame">
+        <view catchtap="tapMoreGame" class="leftImage" data-item="{{item}}" wx:for="{{leftMoreGame}}" wx:key="index">
+            <image src="{{item.gameIcon}}"></image>
+        </view>
+    </view>
+    <view class="rightMoreGame">
+        <view catchtap="tapMoreGame" class="rightImage" data-item="{{item}}" wx:for="{{rightMoreGame}}" wx:key="index">
+            <image src="{{item.gameIcon}}"></image>
+        </view>
+    </view>
+    <view bindtap="goRewards" class="rewards" data-item="{{config.rewards}}" style="top:{{notice?'352rpx':''}}" wx:if="{{config.rewards.open}}">
+        <image src="{{config.rewards.img}}"></image>
+        <view>{{money}}{{config.rewards.unit}}</view>
+    </view>
+</view>
+<view class="huodong bg" wx:if="{{huodongImg&&huodongStatus}}">
+    <view class="huodong-content">
+        <image catchtap="copyKefu" class="huodong-content-image" src="{{huodongImg}}"></image>
+        <image catchtap="closeHuodong" class="huodong-close-image" src="../../images/btn_close.png"></image>
+    </view>
+</view>
+<add-tips duration="10" wx:if="{{config.open_addminiapp}}"></add-tips>
+<wxs module="fn" src="../../common.wxs" />

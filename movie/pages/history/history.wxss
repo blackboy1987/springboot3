@@ -1,0 +1,77 @@
+.tab.data-v-8c502362 {
+    height: 80rpx;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.barButtonBox.data-v-8c502362 {
+    border: .5px solid #a3a3a3;
+}
+
+.tab-data.data-v-8c502362 {
+    width: 70%;
+    height: 60rpx;
+    text-align: center;
+    line-height: 60rpx;
+    color: #333;
+}
+
+.tab-text.data-v-8c502362 {
+    font-size: 30rpx;
+}
+
+.tab-click.data-v-8c502362 {
+    color: #fff;
+    background-color: #f49c36;
+}
+
+.vodlist.data-v-8c502362 {
+    width: 750rpx;
+}
+
+.listdata.data-v-8c502362 {
+    width: 750rpx;
+    height: 300px;
+    text-align: center;
+    line-height: 300px;
+    font-size: 30rpx;
+}
+
+.carousel-by.data-v-8c502362 {
+    width: 750rpx;
+    height: 100rpx;
+    border-top-left-radius: 20rpx;
+    border-top-right-radius: 20rpx;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin-bottom: 20rpx;
+}
+
+.barButtonBox.data-v-8c502362,.carousel-by.data-v-8c502362 {
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.barButtonBox.data-v-8c502362 {
+    width: 400rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    color: #ababab;
+    background-color: #fff;
+    border-radius: 30rpx;
+    overflow: hidden;
+    font-size: 26rpx;
+    flex-wrap: nowrap;
+    -webkit-box-pack: space-evenly;
+    justify-content: space-evenly;
+}

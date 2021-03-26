@@ -1,0 +1,37 @@
+<view class="vodlist-div">
+    <view class="{{['vodlist-item',theme+'-bg3']}}">
+        <image binderror="__e" bindload="__e" bindtap="__e" class="vodlist-image" data-event-opts="{{[ [ 'error',[ [ 'imgError',['$event'] ] ] ],[ 'load',[ [ 'imgload',['$event'] ] ] ],[ 'tap',[ [ 'play',['$0'],['item.vod_id'] ] ] ] ]}}" hidden="{{!showImg}}" lazyLoad="{{true}}" src="{{item.vod_pic}}" webp="{{true}}" wx:if="{{!picError}}"></image>
+        <block wx:else>
+            <view class="loadfail-img" wx:if="{{picError}}"></view>
+        </block>
+        <view class="loading-img" hidden="{{!(!showImg&&!picError)}}"></view>
+        <view class="vodlist-content" wx:if="{{lishi}}">
+            <view class="vodlist-content-div ">
+                <text class="{{['vodlist-content-title',theme+'-title-color']}}">{{item.vod_name}}</text>
+                <text class="vodlist-content-remarks">{{item.vod_serial>1?'连载至'+item.vod_serial+'集':item.vod_remarks}}</text>
+            </view>
+            <text class="vodlist-content-area">{{item.vod_year+'/'+item.vod_area}}</text>
+            <text class="vodlist-content-actor">{{item.vod_actor}}</text>
+            <text class="vodlist-content-content">{{vod_content}}</text>
+            <view class="vodlist-content-play">
+                <text></text>
+                <view bindtap="__e" class="vodlist-content-play-play" data-event-opts="{{[ [ 'tap',[ [ 'play',['$0'],['item.vod_id'] ] ] ] ]}}" wx:if="{{!WxVerify}}">
+                    <text class="vodlist-content-play-icon cuIcon"></text>
+                    <text class="vodlist-content-play-title">立即播放</text>
+                </view>
+            </view>
+        </view>
+        <view class="vodlist-content" wx:if="{{!lishi}}">
+            <view class="vodlist-content-div ">
+                <text class="vodlist-content-title" style="width:350rpx;">{{item.vod_name}}</text>
+            </view>
+            <text class="vodlist-content-area">{{'上次播放至:'+item.index+1+'集'}}</text>
+            <view class="vodlist-content-play">
+                <view bindtap="__e" class="vodlist-content-play-play" data-event-opts="{{[ [ 'tap',[ [ 'play',['$0'],['item.vod_id'] ] ] ] ]}}" wx:if="{{!WxVerify}}">
+                    <text class="vodlist-content-play-icon cuIcon"></text>
+                    <text class="vodlist-content-play-title">继续播放</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

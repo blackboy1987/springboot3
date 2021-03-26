@@ -1,0 +1,17 @@
+<popup bind:close="close" notShowClose="{{true}}">
+    <view class="component-container">
+        <image bindtap="close" class="close-btn" src="{{fn.baseurl(siteInfo.resourceroot)}}/addons/aaa_zhaocha/resource/images/hbtc-qx.png"></image>
+        <image class="title-img" src="{{fn.baseurl(siteInfo.resourceroot)}}/addons/aaa_zhaocha/resource/images/gdyx.png"></image>
+        <view class="page-bottom" wx:if="{{shareVideoRule.banner.length}}">
+            <ad unitId="{{shareVideoRule.banner}}"></ad>
+        </view>
+        <view class="content-list">
+            <view bindtap="clickItem" class="content-item" data-item="{{item}}" wx:for="{{moreGameList}}">
+                <image class="content-icon" src="{{item.gameIcon}}"></image>
+                <view class="content-name">{{item.gameName}}</view>
+            </view>
+            <view class="space-item" wx:if="{{moreGameList.length%3==2}}"></view>
+        </view>
+    </view>
+</popup>
+<wxs module="fn" src="../../common.wxs" />

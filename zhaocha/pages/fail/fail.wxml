@@ -1,0 +1,100 @@
+<view class="seo">{{seo.seo_fail}}</view>
+<view class="bg1"></view>
+<view wx:if="{{fy_show}}">
+    <view class="container">
+        <view class="top">
+            <view catchtap="checkEng" class="power">
+                <image class="powerImg" src="../../images/power.png"></image>
+                <text class="powerTxt">{{ticket}}</text>
+                <text class="currTime">{{resTime}}</text>
+            </view>
+        </view>
+        <view class="main">
+            <view class="timeTitle">时间到</view>
+            <image class="mainImg" mode="aspectFit" src="../../images/clock.png"></image>
+            <view catchtap="delayFun" class="startGame pkGameMain" data-name="延迟" wx:if="{{!config.is_share&&!excitation}}">
+                <text>延长{{appConfig.delay_time}}s</text>
+            </view>
+            <view catchtap="startVideo" class="startGame pkGameMain" data-name="延迟" wx:if="{{!config.is_share&&excitation}}">
+                <text>延长{{appConfig.delay_time}}s</text>
+                <view class="elec flexBoxCenterAlign ico_video" wx:if="{{excitation}}">
+                    <image src="/images/ico_video.png"></image>
+                </view>
+            </view>
+            <button class="startGame" data-other="延迟" openType="share" wx:if="{{config.is_share}}">
+                <view class="startGame pkGameMain">
+                    <text>延长{{appConfig.delay_time}}s</text>
+                </view>
+            </button>
+            <form bindsubmit="submitInfo" reportSubmit="true">
+                <button catchtap="nextSub" class="reset" formType="submit">
+                    <view class="startGame ">
+                        <text>重新开始</text>
+                    </view>
+                </button>
+            </form>
+            <view class="btnhome">
+                <image catchtap="toIndex" class="mainBack" src="../../images/backIndex.png"></image>
+                <button class="invite-btn" data-other="share3" hoverClass="none" openType="share">
+                    <image src="../../images/invite.png"></image>
+                </button>
+            </view>
+        </view>
+        <view class="bg" wx:if="{{toastCtrol==1||toastCtrol==3}}">
+            <view class="toastBg">
+                <image class="toastImg" src="../../images/01.png"></image>
+                <view class="engTitle" wx:if="{{toastCtrol==1}}">
+                    <text>获得体力</text>
+                </view>
+                <image class="eng" src="../../images/eng.png" wx:if="{{toastCtrol==1}}"></image>
+                <view class="engTxt" wx:if="{{toastCtrol==1}}">还需要{{resTime}}分钟恢复一点体力</view>
+                <view wx:if="{{toastCtrol==1}}">
+                    <view class="flexBox" wx:if="{{toastCtrol==1&&excitation}}">
+                        <button catchtap="startVideo" class="itemBtnCon itemBtnCon2" data-name="vedioEng" style="margin-right:20rpx;">观看视频</button>
+                        <button data-other="share3" openType="share" style="margin-left:20rpx;">
+                            <view class="itemBtnCon">分享好友</view>
+                        </button>
+                    </view>
+                    <button data-other="share3" openType="share" wx:else>
+                        <view class="itemBtnCon ">分享好友</view>
+                    </button>
+                </view>
+                <view class="engTitle" wx:if="{{toastCtrol==3}}">获得体力</view>
+                <image class="eng" src="../../images/engSele.png" wx:if="{{toastCtrol==3}}"></image>
+                <view class="engTxt" wx:if="{{toastCtrol==3}}">已满</view>
+                <view catchtap="closeFun" class="closeCon">
+                    <image class="closeImg" src="../../images/btn_close.png"></image>
+                </view>
+            </view>
+        </view>
+        <view class="bg" wx:if="{{toastCtrol==2}}">
+            <view class="toastBg" style="background:transparent;">
+                <image class="eng engChange" src="../../images/engA.png"></image>
+                <form bindsubmit="submitInfo" reportSubmit="true">
+                    <button catchtap="videoGetEng" class="getTicket" formType="submit">
+                        <view class="itemBtnCon ">领取</view>
+                    </button>
+                </form>
+            </view>
+        </view>
+    </view>
+    <view class="mjBanner" style="bottom:{{isIphoneX?'100':'10'}}rpx">
+        <ad binderror="oneAdFail" bindload="oneAdSuccess" unitId="{{adList.one}}" wx:if="{{curAD==0&&oneAd&&adList.one.length}}"></ad>
+    </view>
+    <view bindtap="toggleMoreGame" class="more-game" hoverClass="btn-click" hoverStartTime="0" hoverStayTime="100" wx:if="{{appConfig.moregame.length}}">
+        <image class="more-game-text" src="/images/more.png"></image>
+        <image class="more-game-img" src="{{fn.baseurl(siteInfo.resourceroot)}}/addons/aaa_zhaocha/resource/images/yxjs-gdyx.png"></image>
+    </view>
+    <popupMoreGame bind:close="toggleMoreGame" bindtoGame="toGame" isShowDetention="{{isShowDetention}}" list="{{appConfig.moregame}}" shareResult="{{shareResult}}" shareVideoRule="{{appConfig.adunit}}" wx:if="{{showMoreGamePopup}}"></popupMoreGame>
+    <view class="leftMoreGame">
+        <view catchtap="tapMoreGame" class="leftImage" data-item="{{item}}" wx:for="{{appConfig.leftMoreGame}}" wx:key="{{key}}">
+            <image src="{{item.gameIcon}}"></image>
+        </view>
+    </view>
+    <view class="rightMoreGame">
+        <view catchtap="tapMoreGame" class="rightImage" data-item="{{item}}" wx:for="{{appConfig.rightMoreGame}}" wx:key="{{key}}">
+            <image src="{{item.gameIcon}}"></image>
+        </view>
+    </view>
+</view>
+<wxs module="fn" src="../../common.wxs" />

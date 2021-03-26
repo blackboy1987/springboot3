@@ -1,0 +1,5 @@
+<view class="data-v-5224f1ac">
+    <view class="gg data-v-5224f1ac">
+        <image bindtap="__e" class="gg-img data-v-5224f1ac" data-event-opts="{{[ [ 'tap',[ [ 'ggImage',['$0','$1'],['gg.type','gg.url'] ] ] ] ]}}" mode="scaleToFill" showMenuByLongpress="{{true}}" src="{{gg.image}}"></image>
+    </view>
+</view>

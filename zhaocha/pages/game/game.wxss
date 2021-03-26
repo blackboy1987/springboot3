@@ -1,0 +1,333 @@
+.container {
+    position: relative;
+    width: 100ve;
+    height: 100vh;
+    padding-top: 100rpx;
+}
+
+.top {
+    position: relative;
+    width: 100vw;
+    text-align: center;
+    height: 80rpx;
+    font-size: 32rpx;
+}
+
+.time {
+    margin-top: 20rpx;
+    width: 100%;
+    height: 100rpx;
+    font-size: 70rpx;
+    font-weight: 600;
+    text-align: center;
+    line-height: 100rpx;
+    color: #1b1b1b;
+}
+
+.num {
+    position: relative;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: center;
+    font-size: 0;
+    overflow: hidden;
+    margin-bottom: 20rpx;
+}
+
+.numImg,.numImgSele,.circleGree {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #ededef;
+    margin: 5px 3px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.numImgSele {
+    background: #4ac44b;
+}
+
+.imgCon {
+    position: relative;
+    text-align: center;
+    margin-left: 15px;
+    border-radius: 20rpx;
+    font-size: 0;
+    margin-bottom: 8px;
+}
+
+.imgMain {
+    width: 100%;
+    height: 100%;
+    border-radius: 15rpx;
+}
+
+.imgIcon {
+    position: absolute;
+    padding: 8px;
+}
+
+.imgSpanA,.imgSpanB,.imgSpanRed {
+    position: absolute;
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+    border: 7rpx solid #f48d00;
+    z-index: 1000;
+}
+
+.imgSpanB {
+    border: 7rpx solid #3fb441;
+}
+
+.imgSpanRed {
+    width: 30px;
+    height: 30px;
+    border: unset;
+    border-radius: unset;
+}
+
+.opacity {
+    opacity: 0;
+}
+
+.sd {
+    font-size: 30rpx;
+    background: red;
+    width: 50rpx;
+    height: 50rpx;
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: 1s ease-in-out oDiv;
+}
+
+@-webkit-keyframes oDiv {
+    0% {
+        left: -180px;
+        top: 200px;
+        opacity: 0;
+    }
+
+    100% {
+        left: 200px;
+        top: 50px;
+        opacity: 1;
+    }
+}
+
+@keyframes oDiv {
+    0% {
+        left: -180px;
+        top: 200px;
+        opacity: 0;
+    }
+
+    100% {
+        left: 200px;
+        top: 50px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes oTip {
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+
+    70% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes oTip {
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+
+    70% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes oTipAnimate {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes oTipAnimate {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.star {
+    position: absolute;
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 50%;
+    background: red;
+    z-index: 10000;
+}
+
+.checkpoint {
+    position: absolute;
+    right: 30rpx;
+    text-align: right;
+    color: #7d7d7d;
+    font-size: 28rpx;
+    display: inline-block;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    font-weight: 600;
+}
+
+.tipImg {
+    width: 194rpx;
+    height: 71rpx;
+    margin-left: calc((100% - 194rpx) / 2);
+    position: relative;
+    margin-top: 10rpx;
+    animation: 3s oTip infinite;
+}
+
+.tipImgsd {
+    width: 80rpx;
+    height: 80rpx;
+    position: absolute;
+    z-index: 999999;
+}
+
+.tipImgsdChan {
+    animation: 1.2s oTipAnimate infinite;
+}
+
+.txtTip {
+    font-size: 36rpx;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    z-index: 99999999999999;
+    color: #ff4a4a;
+    margin-bottom: 15rpx;
+}
+
+.errorTx {
+    position: absolute;
+    font-size: 32rpx;
+    color: red;
+    opacity: 0;
+}
+
+.timeText {
+    color: #1b1b1b;
+}
+
+.circleGree {
+    margin: 0;
+    position: absolute;
+    background: transparent;
+    width: 100rpx;
+    height: 134rpx;
+    border-radius: 0;
+}
+
+.asdadf {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+}
+
+.pklist {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.pkinfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 25rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    width: 50vw;
+    color: #333;
+}
+
+.pkfn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.pkface {
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 20rpx;
+}
+
+.pknickname {
+    width: 90rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    margin-left: 7rpx;
+    overflow: hidden;
+}
+
+.invite-btn {
+    position: absolute;
+    right: 150rpx;
+    z-index: 101;
+}
+
+.invite-btn image {
+    width: 60rpx;
+    height: 60rpx;
+}

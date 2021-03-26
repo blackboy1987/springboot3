@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "popupMoreGame": "/component/popupMoreGame/popupMoreGame"
+    },
+    "disableScroll": true
+}

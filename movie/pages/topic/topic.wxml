@@ -1,0 +1,21 @@
+<view class="{{[theme+'-page']}}">
+    <uni-bar Max="{{barMax}}" bind:__l="__l" theme="{{theme}}" vueId="14d0dce0-1" vueSlots="{{['default']}}">
+        <nar-bar bind:__l="__l" bind:pageScrollTo="__e" data-event-opts="{{[ [ '^pageScrollTo',[ ['pageScrollTo'] ] ] ]}}" fixed="true" type="top" vueId="{{'14d0dce0-2'+','+'14d0dce0-1'}}"></nar-bar>
+        <scroll-view class="MinTabItem" enableFlex="{{true}}" scrollAnchoring="{{true}}" scrollX="true" showScrollbar="false" wx:if="{{tags.length>0}}">
+            <view bindtap="__e" class="{{['MinTabItem-item',index===tagIndex?'MinClick':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'tagClick',['$0',index],[ [ ['tags','',index] ] ] ] ] ] ]}}" wx:for="{{tags}}" wx:for-item="tag" wx:key="index">
+                <text class="{{['MinTabItem-text',index===tagIndex?'MinClick-text':'']}}">{{tag}}</text>
+            </view>
+        </scroll-view>
+    </uni-bar>
+    <view class="{{['topic',theme+'-title-color']}}" wx:for="{{topicList}}" wx:key="index">
+        <view bindtap="__e" class="topicItem" data-event-opts="{{[ [ 'tap',[ [ 'topicTab',['$0'],[ [ ['topicList','',index,'topic_id'] ] ] ] ] ] ]}}">
+            <image class="topicItem-pic" mode="aspectFill" src="{{item.topic_pic}}"></image>
+            <view class="topicItem-text ellipsis">{{item.topic_name}}</view>
+            <view class="topicItem-blurb ellipsis">{{item.topic_blurb}}</view>
+        </view>
+    </view>
+    <view class="{{['loading',theme+'-loading']}}" wx:if="{{noLoading}}">
+        <text class="cuIcon" style="font-size:30rpx;"></text>
+        <text>{{loadingText}}</text>
+    </view>
+</view>

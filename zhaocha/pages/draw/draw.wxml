@@ -1,0 +1,28 @@
+<view class="container" style="background: linear-gradient({{config.color1?config.color1:'#fbd3a4'}},{{config.color2?config.color2:'#fdbbb3'}});" wx:if="{{fy_show}}">
+    <image class="topBg" src="../../images/drawBg.png"></image>
+    <image catchtap="backFun" class="icon_back" src="../../images/icon_back.png"></image>
+    <image class="drawFree" src="../../images/drawFree.png"></image>
+    <view class="rule">
+        <image class="ruleBg" src="../../images/ruleBg.png"></image>
+        <view class="ruleTitle">抽奖规则</view>
+        <view class="ruleItem">
+            <text class="ruleL">一等奖：10体力值</text>
+            <text class="ruleR">每期1名</text>
+        </view>
+        <view class="ruleItem">
+            <text class="ruleL">二等奖：5体力值</text>
+            <text class="ruleR">每期3名</text>
+        </view>
+        <view class="ruleItem">
+            <text class="ruleL">一等奖：1-5体力值</text>
+            <text class="ruleR">每期1万名</text>
+        </view>
+    </view>
+    <image class="drawTiImg" src="../../images/drawTitle.png"></image>
+    <view class="main">
+        <view class="mainItem" wx:for="{{obj}}" wx:key="kjfgu">
+            <view class="mainTop">{{item.periodical}}</view>
+            <view class="mainBott">开奖时间：{{item.trophy_date}}</view>
+        </view>
+    </view>
+</view>

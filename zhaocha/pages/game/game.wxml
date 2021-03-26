@@ -1,0 +1,47 @@
+<view class="seo">{{seo.seo_game}}</view>
+<view class="container" style="background: #fff" wx:if="{{fy_show}}">
+    <view class="top" wx:if="{{flag_pk}}">
+        <image catchtap="backFun" class="icon_back" src="../../images/icon_back.png"></image>
+    </view>
+    <view class="time" wx:if="{{!flag_pk}}">
+        <text class="timeText" style="color:{{resTimeColor}}">{{resTimeTop}}</text>
+    </view>
+    <image catchtap="backFun" class="icon_back" src="../../images/icon_back.png" wx:if="{{!flag_pk}}"></image>
+    <view class="num" wx:if="{{!flag_pk}}">
+        <image class="{{item.isHas?'numImgSele':'numImg'}}" src="{{item.isHas?item.hasUrl:item.notHasUrl}}" wx:for="{{findList}}" wx:key="sd"></image>
+        <view class="checkpoint">关卡：{{value}}</view>
+    </view>
+    <view class="imgCon" style="width:{{imgWidth}}px;height:{{imgWidth/slots[0].width*slots[0].height}}px">
+        <image catchtap="getError" class="imgMain" src="{{slots[0].url}}" style=""></image>
+        <image catchtap="noneClick" class="imgIcon" data-index="{{index}}" data-item="{{item}}" data-place="topDiv" src="{{item.url}}" style="width:{{item.width}}px;height:{{item.height}}px;left:{{item.x-8}}px;top:{{item.y-8}}px;" wx:for="{{topProp}}" wx:key="ssd"></image>
+        <view class="imgSpanA" style="left:{{item.x}}px;top:{{item.y}}px;" wx:for="{{topCircle}}" wx:key="sssd"></view>
+        <image catchtap="noneClick" class="tipImgsd tipImgsdChan" data-isTip="提示" data-item="{{focus.item}}" hidden="{{tipCtrol}}" src="../../images/tip.png" style="left:{{focus.x}}px;top:{{focus.y}}px;opacity:{{focus.ctrol?1:0}}"></image>
+        <image class="imgSpanRed" src="../../images/errorClick.png" style="left:{{item.x}}px;top:calc({{item.y}}px - 230rpx - 15px);" wx:if="{{!flag_pk}}" wx:for="{{errorCircle}}" wx:key="ssad"></image>
+        <image class="imgSpanRed" src="../../images/errorClick.png" style="left:{{item.x}}px;top:calc({{item.y}}px - 120rpx - 15px);" wx:if="{{flag_pk}}" wx:for="{{errorCircle}}" wx:key="ssad"></image>
+        <image catchtap="noneClick" class="imgIcon opacity" data-index="{{index}}" data-item="{{item}}" data-place="topDiv" src="{{item.url}}" style="width:{{item.width}}px;height:{{item.height}}px;left:{{item.x-8}}px;top:{{item.y-8}}px;" wx:for="{{bottomProp}}" wx:key="ssd"></image>
+    </view>
+    <view class="txtTip" wx:if="{{first_login}}">{{txtTip}}</view>
+    <view class="imgCon" style="width:{{imgWidth}}px;height:{{imgWidth/slots[0].width*slots[0].height}}px">
+        <image catchtap="getError" class="imgMain" src="{{slots[0].url}}" style=""></image>
+        <image catchtap="noneClick" class="imgIcon" data-index="{{index}}" data-item="{{item}}" data-place="bottomDiv" src="{{item.url}}" style="width:{{item.width}}px;height:{{item.height}}px;left:{{item.x-8}}px;top:{{item.y-8}}px;" wx:for="{{bottomProp}}" wx:key="ssd"></image>
+        <view class="imgSpanB" style="left:{{item.x}}px;top:{{item.y}}px;" wx:for="{{bottomCircle}}" wx:key="ssd"></view>
+        <image catchtap="noneClick" class="tipImgsd tipImgsdChan" data-isTip="提示" data-item="{{focus.item}}" hidden="{{tipCtrol}}" src="../../images/tip.png" style="left:{{focus.x}}px;top:{{focus.y}}px;opacity:{{focus.ctrol?0:1}}"></image>
+        <image catchtap="noneClick" class="imgIcon opacity" data-index="{{index}}" data-item="{{item}}" data-place="bottomDiv" src="{{item.url}}" style="width:{{item.width}}px;height:{{item.height}}px;left:{{item.x-8}}px;top:{{item.y-8}}px;" wx:for="{{topProp}}" wx:key="ssd"></image>
+    </view>
+    <view class="errorTx" style="left:{{leftNum}}px;top:{{topNum}}px;opacity:{{opacity}};" wx:if="{{type=='1'}}">-20</view>
+    <view class="circleGree" style="left:{{leftNum}}px;top:{{topNum}}px;opacity:{{opacity}};" wx:if="{{type=='2'&&!flag_pk}}">
+        <image class="numImgSele asdadf" src="../../images/starline.png" style="margin:0;"></image>
+    </view>
+    <image catchtap="getTipFun" class="tipImg" src="../../images/gameTip.png" wx:if="{{gold>=10&&!flag_pk&&tip_num<1}}"></image>
+    <image catchtap="startVideo" class="tipImg" data-name="提示" src="../../images/gameTipVideo.png" wx:if="{{gold<10&&excitation&&!flag_pk&&tip_num<1}}"></image>
+    <view class="pklist">
+        <view class="pkinfo" wx:for="{{room_list}}" wx:key="*this">
+            <view class="pkfn">
+                <image class="pkface" src="{{item.avatar_url}}"></image>
+                <view class="pknickname">{{item.nickname}}</view>
+            </view>
+            <view class="pktime">{{item.residue}}</view>
+            <view class="pknum">{{item.num}}</view>
+        </view>
+    </view>
+</view>

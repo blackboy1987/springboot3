@@ -1,0 +1,4 @@
+<view class="{{[theme+'-page']}}">
+    <nar-bar bind:__l="__l" fixed="true" type="{{type}}" vueId="1fd9b120-1"></nar-bar>
+    <jyf-parser bind:__l="__l" bind:error="__e" bind:imgtap="__e" bind:linkpress="__e" bind:ready="__e" class="vue-ref" data-event-opts="{{[ [ '^error',[ ['error'] ] ],[ '^imgtap',[ ['imgtap'] ] ],[ '^linkpress',[ ['linkpress'] ] ],[ '^ready',[ ['ready'] ] ] ]}}" data-ref="article" html="{{artData.art_content}}" lazyLoad="{{true}}" selectable="{{true}}" showWithAnimation="{{true}}" useAnchor="{{true}}" vueId="1fd9b120-2"></jyf-parser>
+</view>

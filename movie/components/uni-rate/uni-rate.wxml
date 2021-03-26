@@ -1,0 +1,8 @@
+<view class="uni-rate data-v-576bbf52">
+    <view bindtap="__e" class="uni-rate__icon data-v-576bbf52" data-event-opts="{{[ [ 'tap',[ [ '_onClick',[index] ] ] ] ]}}" style="{{'margin-left:'+margin+'px'+';'}}" wx:for="{{stars}}" wx:for-item="star" wx:key="index">
+        <uni-icons bind:__l="__l" class="data-v-576bbf52" color="{{color}}" size="{{size}}" type="{{isFill?'star-filled':'star'}}" vueId="{{'3cadca3c-1-'+index}}"></uni-icons>
+        <view class="uni-rate__icon-on data-v-576bbf52" style="{{'width:'+star.activeWitch+';'+'top:'+-size/2+'px'+';'}}">
+            <uni-icons bind:__l="__l" class="data-v-576bbf52" color="{{activeColor}}" size="{{size}}" type="star-filled" vueId="{{'3cadca3c-2-'+index}}"></uni-icons>
+        </view>
+    </view>
+</view>

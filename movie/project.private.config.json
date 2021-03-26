@@ -1,0 +1,35 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/kankan/kankan",
+          "pathName": "pages/kankan/kankan",
+          "query": "id=3234",
+          "scene": null
+        },
+        {
+          "name": "pages/search/search",
+          "pathName": "pages/search/search",
+          "query": "id=3234",
+          "scene": null
+        },
+        {
+          "name": "pages/kankan/kankan",
+          "pathName": "pages/kankan/kankan",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

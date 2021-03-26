@@ -1,0 +1,9 @@
+<view class="{{['tanchuxuanji',theme+'-bg2']}}">
+    <scroll-view enableFlex="{{true}}" scrollIntoView="{{scrollViewId}}" scrollY="true" showScrollbar="false" style="height:700rpx;">
+        <view class="tanchuxuanji-list-scroll">
+            <view bindtap="__e" class="tanchuxuanji-list-fenge" data-event-opts="{{[ [ 'tap',[ [ 'xuanjitab',[i] ] ] ] ]}}" id="{{'g'+i}}" wx:for="{{vod_play_url[laiyuanindex][1]}}" wx:for-index="i" wx:key="i">
+                <view class="{{['tanchuxuanji-list-txt ellipsis',i==index?'xuanjion':'']}}">{{''+item.title+''}}</view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

@@ -1,0 +1,472 @@
+.top {
+    position: relative;
+    width: calc(100vw - 60rpx);
+    margin-left: 30rpx;
+    height: 120rpx;
+}
+
+.power,.coin {
+    position: relative;
+    width: 220rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    box-sizing: border-box;
+    display: inline-block;
+    margin-right: 15rpx;
+    vertical-align: top;
+    font-size: 0;
+}
+
+.coin {
+    width: 249rpx;
+}
+
+.powerImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.powerTxt {
+    position: absolute;
+    width: 38rpx;
+    height: 38rpx;
+    background-color: #fff;
+    font-size: 24rpx;
+    line-height: 38rpx;
+    color: #000;
+    text-align: center;
+    left: 30rpx;
+    top: 34rpx;
+    border-radius: 50%;
+}
+
+.currTime {
+    position: relative;
+    width: 100%;
+    height: 45rpx;
+    text-align: center;
+    font-size: 30rpx;
+    line-height: 45rpx;
+    color: #fff;
+    display: block;
+    z-index: 3;
+    top: 18rpx;
+}
+
+.main {
+    position: relative;
+    width: 100vw;
+    height: 63vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainImg {
+    position: relative;
+    width: 320rpx;
+    height: 260rpx;
+    display: inline-block;
+}
+
+.duan {
+    width: 100vw;
+    height: 60rpx;
+    text-align: center;
+}
+
+.star {
+    width: 62rpx;
+    display: inline-block;
+    height: 60rpx;
+    margin: 0 10rpx;
+}
+
+.duanTxt {
+    width: 203rpx;
+    height: 57rpx;
+    margin-top: 10rpx;
+}
+
+.myDraw {
+    position: absolute;
+    top: 100rpx;
+    left: 0;
+    width: 78rpx;
+    height: 84rpx;
+}
+
+.notice {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 107rpx;
+    height: 67rpx;
+}
+
+.info {
+    position: relative;
+    width: 100vw;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    font-size: 30rpx;
+    color: #000;
+    font-weight: 600;
+}
+
+.startGame {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30rpx;
+}
+
+.pkGameMain {
+    margin-top: 50rpx;
+}
+
+.toastBg {
+    width: 500rpx;
+}
+
+.toastBg .startGame {
+    height: 90rpx;
+    width: 240rpx;
+}
+
+.toastBg .flexBox .startGame {
+    height: 80rpx;
+    width: 180rpx;
+    margin-top: 42rpx;
+    box-shadow: 0 -4px 0px 0px #2375b1 inset;
+}
+
+.toastBg .startGame text {
+    font-size: 32rpx;
+    margin-top: -6rpx;
+    -webkit-text-stroke-width: .3px;
+}
+
+.btns {
+    padding: 0 50rpx;
+    box-sizing: border-box;
+    position: relative;
+    width: 100vw;
+    height: 120rpx;
+    margin: 20rpx 0;
+}
+
+.btnCon {
+    position: relative;
+    width: 102rpx;
+    height: 111rpx;
+    margin: 0 18rpx;
+    display: inline-block;
+}
+
+.btnImg {
+    width: 100%;
+    height: 100%;
+}
+
+.getuser {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.toastImg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    height: 570rpx;
+}
+
+.closeCon {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.closeImg {
+    width: 80rpx;
+    height: 86rpx;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.engTitle {
+    margin-bottom: 50rpx;
+}
+
+.eng {
+    position: relative;
+    display: block;
+    margin: 25rpx 0;
+    width: 120rpx;
+    height: 162rpx;
+    margin-left: calc((100% - 120rpx) / 2);
+}
+
+.engTxt {
+    position: relative;
+    margin-top: 38rpx;
+    text-align: center;
+    width: 100%;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 28rpx;
+    color: #0d0d0d;
+}
+
+.getTicket {
+    position: relative;
+    width: 173rpx;
+    height: 75rpx;
+    display: inline-block;
+    margin-top: 30rpx;
+}
+
+.engChange {
+    width: 350rpx;
+    height: 350rpx;
+    margin-left: calc((100% - 350rpx) / 2);
+}
+
+.btnhome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60rpx;
+    margin-bottom: 10rpx;
+    height: 60rpx;
+}
+
+.mainBack {
+    width: 193rpx;
+    height: 42rpx;
+}
+
+.invite-btn {
+    width: 60rpx;
+    height: 60rpx;
+    margin: 0 0 0 20rpx;
+}
+
+.invite-btn image {
+    width: 60rpx;
+    height: 60rpx;
+}
+
+.adList {
+    width: 100rpx;
+    position: absolute;
+    top: 100rpx;
+    left: 20rpx;
+    height: 620rpx;
+}
+
+.reset {
+    position: relative;
+    height: 131rpx;
+    width: 382rpx;
+    margin-top: 20rpx;
+}
+
+.timeTitle {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 50rpx;
+    font-weight: 600;
+    color: #fff;
+    align-self: flex-start;
+    top: -50rpx;
+}
+
+.mjBanner {
+    position: absolute;
+    width: 600rpx;
+    margin-left: 75rpx;
+    bottom: 10rpx;
+    display: flex;
+}
+
+.more-game {
+    position: absolute;
+    left: 0;
+    top: 300rpx;
+}
+
+.more-game-img {
+    width: 90rpx;
+    height: 89rpx;
+    display: block;
+}
+
+.more-game-icon {
+    width: 96rpx;
+    height: 87rpx;
+    display: block;
+    position: absolute;
+    top: -30rpx;
+    left: 6rpx;
+}
+
+.more-game-text {
+    height: 33rpx;
+    width: 60rpx;
+    display: block;
+    position: absolute;
+    bottom: 14rpx;
+    z-index: 1;
+    top: 30%;
+    left: 14%;
+}
+
+@-webkit-keyframes moreGameIcon {
+    0% {
+        transform: rotate(0);
+    }
+
+    10% {
+        transform: rotate(10deg);
+    }
+
+    20% {
+        transform: rotate(-10deg);
+    }
+
+    30% {
+        transform: rotate(10deg);
+    }
+
+    40% {
+        transform: rotate(-10deg);
+    }
+
+    50% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+
+@keyframes moreGameIcon {
+    0% {
+        transform: rotate(0);
+    }
+
+    10% {
+        transform: rotate(10deg);
+    }
+
+    20% {
+        transform: rotate(-10deg);
+    }
+
+    30% {
+        transform: rotate(10deg);
+    }
+
+    40% {
+        transform: rotate(-10deg);
+    }
+
+    50% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+
+.game-input {
+    margin-top: 200rpx;
+}
+
+.joinGame {
+    display: block;
+    width: 300rpx;
+    margin-top: 200rpx;
+}
+
+.leftMoreGame {
+    position: absolute;
+    top: 450rpx;
+    left: 10rpx;
+}
+
+.leftImage,.rightImage {
+    margin-top: 40rpx;
+}
+
+.leftMoreGame image,.rightImage image {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.rightMoreGame {
+    position: absolute;
+    top: 450rpx;
+    right: 10rpx;
+}
+
+.ico_video {
+    position: relative;
+    display: inline-block;
+    width: 46rpx;
+    height: 46rpx;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.ico_video image {
+    width: 60rpx;
+    height: 60rpx;
+    position: absolute;
+    left: -8rpx;
+    top: -8rpx;
+}
+
+.startGame text {
+    font-size: 46rpx;
+}
+
+.itemBtnCon {
+    height: 80rpx;
+    width: 180rpx;
+    line-height: 70rpx;
+    margin-top: 40rpx;
+    font-size: 32rpx!important;
+    color: #fff;
+    border-radius: 20rpx;
+    background: #4cd8f9!important;
+    box-shadow: 0 -4px 0px 0px #2375b1 inset;
+    display: inline-block;
+    border: 0!important;
+}

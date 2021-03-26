@@ -1,0 +1,72 @@
+<view class="{{['data-v-4496cd9e',theme+'-page']}}">
+    <uni-bar bind:__l="__l" class="data-v-4496cd9e" theme="{{theme}}" vueId="3db16520-1" vueSlots="{{['default']}}">
+        <nar-bar bind:__l="__l" class="data-v-4496cd9e" fixed="true" type="home" vueId="{{'3db16520-2'+','+'3db16520-1'}}"></nar-bar>
+        <view class="{{['bigContent data-v-4496cd9e',theme+'-title-color']}}">
+            <image binderror="__e" class="bigImg data-v-4496cd9e" data-event-opts="{{[ [ 'error',[ [ 'imgError',['$event'] ] ] ] ]}}" lazyLoad="true" src="{{voddata.vod_pic}}" webp="{{true}}"></image>
+            <view class="bigClass data-v-4496cd9e">
+                <text class="big_name ellipsis data-v-4496cd9e">{{''+voddata.vod_name}}</text>
+                <text class="big_year ellipsis data-v-4496cd9e" style="color:rgba(255, 0, 4, 1);font-size:22rpx;" wx:if="{{voddata.vod_remarks.length>3}}">{{voddata.type_id==1?voddata.vod_remarks:'更新至'+voddata.vod_play_url[0][2]+'集'}}</text>
+                <text class="big_year ellipsis data-v-4496cd9e">{{'类型 : '+(voddata.vod_class?voddata.vod_class:'未知')}}</text>
+                <text class="big_year ellipsis data-v-4496cd9e">{{'演员 : '+(voddata.vod_actor?voddata.vod_actor:'未知')}}</text>
+                <text class="big_year ellipsis data-v-4496cd9e">{{voddata.vod_year+' / '+(voddata.vod_area?voddata.vod_area:'未知')+' / '+(voddata.vod_director?voddata.vod_director:'未知')}}</text>
+                <view class="big_button data-v-4496cd9e">
+                    <button class="big_fx data-v-4496cd9e" openType="share">
+                        <view class="big_button_fx cuIcon-iconicon-test14 data-v-4496cd9e">分享</view>
+                    </button>
+                    <view bindtap="__e" class="big_button_sc cuIcon-iconzhangshangcaifuyemianshoujiban344-copy data-v-4496cd9e" data-event-opts="{{[ [ 'tap',[ ['haibao'] ] ] ]}}">海报</view>
+                </view>
+            </view>
+        </view>
+    </uni-bar>
+    <view class="playView data-v-4496cd9e" wx:if="{{!WxVerify}}">
+        <view class="vodMsg data-v-4496cd9e">
+            <view class="vodScore data-v-4496cd9e">
+                <text class="vodScore_text data-v-4496cd9e">{{voddata.vod_score>0?'豆瓣:'+voddata.vod_score:'暂无评分'}}</text>
+                <uni-rate activeColor="#f4d13a" bind:__l="__l" class="data-v-4496cd9e" color="#DADADA" disabled="true" size="22" value="{{voddata.vod_score/2}}" vueId="3db16520-3" wx:if="{{voddata.vod_score>0}}"></uni-rate>
+            </view>
+            <view class="vodWebkit data-v-4496cd9e"></view>
+            <view bindtap="__e" class="vodPlay data-v-4496cd9e" data-event-opts="{{[ [ 'tap',[ ['play'] ] ] ]}}">
+                <view class="cuIcon-iconbofang data-v-4496cd9e" style="color:#F8F8F8;font-size:45rpx;"></view>
+                <view class="vodSc data-v-4496cd9e">开始播放</view>
+            </view>
+        </view>
+    </view>
+    <custom-ad bind:__l="__l" class="data-v-4496cd9e" min="650" vueId="3db16520-4" ysId="{{wxAdId.ysId}}" wx:if="{{wxAdId.ysId}}"></custom-ad>
+    <view class="vod_content data-v-4496cd9e">
+        <view class="{{['vod_content_title cuIcon  data-v-4496cd9e',theme+'-title-color']}}">  影片简介</view>
+        <view class="vod_content_text data-v-4496cd9e">
+            <view class="data-v-4496cd9e" wx:if="{{showContent}}">{{''+voddata.vod_content+''}}<view bindtap="__e" class="vod_content_full cuIcon data-v-4496cd9e" data-event-opts="{{[ [ 'tap',[ [ 'contenTab',['$event'] ] ] ] ]}}" wx:if="{{voddata.vod_content!==null&&voddata.vod_content.length>85}}">收起 </view>
+            </view>
+            <view class="data-v-4496cd9e" wx:else>
+                <text class="data-v-4496cd9e">{{voddata.vod_mincontent}}</text>
+                <view bindtap="__e" class="vod_content_full cuIcon data-v-4496cd9e" data-event-opts="{{[ [ 'tap',[ [ 'contenTab',['$event'] ] ] ] ]}}" wx:if="{{voddata.vod_content!==null&&voddata.vod_content.length>85}}">展开 </view>
+            </view>
+        </view>
+    </view>
+    <view class="ad-view data-v-4496cd9e" style="width:700rpx;margin:0 auto;margin-bottom:20rpx;">
+        <uni-ad bind:__l="__l" class="data-v-4496cd9e" gg="{{gg}}" vueId="3db16520-5" wx:if="{{gg.radio=='1'}}"></uni-ad>
+    </view>
+    <view class="douban data-v-4496cd9e" wx:if="{{likeShow}}">
+        <view class="data-v-4496cd9e" style="width:94%;margin:0 auto;" wx:if="{{photos.length>0}}">
+            <view class="{{['vod_content_title cuIcon  data-v-4496cd9e',theme+'-title-color']}}">  精彩剧照</view>
+            <view class="functionaryJob data-v-4496cd9e" style="height:340rpx;display:flex;overflow:auto;">
+                <view class="directors data-v-4496cd9e" style="display:flex;width:auto;" wx:for="{{photos}}" wx:key="index">
+                    <view class="data-v-4496cd9e" style="width:430rpx;height:272rpx;position:relative;margin-right:20rpx;">
+                        <image bindtap="__e" class="data-v-4496cd9e" data-event-opts="{{[ [ 'tap',[ [ 'showPhotos',[index] ] ] ] ]}}" lazyLoad="{{true}}" src="{{item}}" style="width:430rpx;height:272rpx;border-radius:10rpx;" webp="{{true}}"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="data-v-4496cd9e" wx:if="{{likedata.length>0}}">
+        <view class="{{['vod_content_title cuIcon data-v-4496cd9e',theme+'-title-color']}}" style="margin-left:20rpx;">  精彩推荐</view>
+        <view class="like data-v-4496cd9e">
+            <scroll-view class="likelist data-v-4496cd9e" enableFlex="{{true}}" scrollX="true" showScrollbar="false">
+                <view bindtap="__e" class="likeitem data-v-4496cd9e" data-event-opts="{{[ [ 'tap',[ [ 'getDate',['$0'],[ [ ['likedata','',i,'vod_id'] ] ] ] ] ] ]}}" wx:for="{{likedata}}" wx:for-index="i" wx:key="i">
+                    <vod-item bind:__l="__l" class="data-v-4496cd9e" item="{{item}}" itemClick="{{itemClick}}" theme="{{theme}}" vueId="{{'3db16520-6-'+i}}"></vod-item>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+    <message bind:__l="__l" class="data-v-4496cd9e" vueId="3db16520-7" wx:if="{{message}}"></message>
+</view>

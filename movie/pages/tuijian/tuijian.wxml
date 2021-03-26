@@ -1,0 +1,18 @@
+<view class="{{[theme+'-page']}}">
+    <nar-bar bind:__l="__l" fixed="true" table="true" type="home" vueId="2518ea96-1"></nar-bar>
+    <view class="{{['topicTop',theme+'-title-color']}}">
+        <view class="topicTop-img">
+            <image class="topicTop-pic" mode="aspectFill" src="{{vodlist[0].vod_pic}}"></image>
+        </view>
+    </view>
+    <view class="vodlist">
+        <view wx:for="{{vodlist}}" wx:key="index">
+            <custom-ad bind:__l="__l" vueId="{{'2518ea96-2-'+index}}" ysId="{{wxAdId.ysId}}" wx:if="{{index==3&&wxAdId.ysId}}"></custom-ad>
+            <shuvodlist bind:__l="__l" item="{{item}}" theme="{{theme}}" vueId="{{'2518ea96-3-'+index}}"></shuvodlist>
+        </view>
+    </view>
+    <view class="{{['loading',theme+'-loading']}}" wx:if="{{noLoading}}">
+        <text class="cuIcon" style="font-size:30rpx;"></text>
+        <text>{{loadingText}}</text>
+    </view>
+</view>

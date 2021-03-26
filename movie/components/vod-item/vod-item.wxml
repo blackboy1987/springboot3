@@ -1,0 +1,13 @@
+<view class="moiveItem">
+    <view bindtap="__e" class="moviePic" data-event-opts="{{[ [ 'tap',[ [ 'play',['$0'],['item'] ] ] ] ]}}">
+        <image binderror="__e" bindload="__e" class="movieImg" data-event-opts="{{[ [ 'error',[ [ 'imgError',['$event'] ] ] ],[ 'load',[ [ 'imgload',['$event'] ] ] ] ]}}" hidden="{{!showImg}}" lazyLoad="{{true}}" src="{{item.vod_pic}}" webp="{{true}}" wx:if="{{!picError}}"></image>
+        <block wx:else>
+            <view class="loadfail-img" wx:if="{{picError}}"></view>
+        </block>
+        <view class="loading-img" hidden="{{!(!showImg&&!picError)}}"></view>
+        <text class="movieDb" wx:if="{{item.vod_score>1}}">{{item.vod_score}}</text>
+        <text class="movieRemarks ellipsis" wx:if="{{item.type_id>1}}">{{item.vod_remarks}}</text>
+        <view class="{{['moiveName ellipsis',theme+'-title-color']}}">{{item.vod_name}}</view>
+        <view class="{{['moiveActor ellipsis',theme+'-subtitle-color']}}">{{item.vod_actor?item.vod_actor:'未知'}}</view>
+    </view>
+</view>

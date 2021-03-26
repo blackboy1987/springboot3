@@ -1,0 +1,41 @@
+page {
+    background: #fff;
+}
+
+.list {
+    margin: 0 20px;
+}
+
+.list .box {
+    padding: 20px 0;
+    border-bottom: 2px solid #eee;
+}
+
+.list .box .text {
+    float: left;
+}
+
+.list .box .text .h3 {
+    font-size: 28px;
+    line-height: 40px;
+}
+
+.list .box .text .p {
+    color: #999;
+    font-size: 28px;
+    line-height: 40px;
+}
+
+.list .box .btn {
+    float: right;
+    color: red;
+    font-size: 28px;
+    margin-top: 18px;
+}
+
+.loading {
+    text-align: center;
+    line-height: 100px;
+    font-size: 28px;
+    color: #999;
+}

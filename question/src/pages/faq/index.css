@@ -1,0 +1,48 @@
+page {
+    background: #eee;
+}
+
+.help {
+    margin: 20px;
+}
+
+.help .help_item {
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px 0;
+}
+
+.help .help_item .title {
+    font-size: 30px;
+    display: flex;
+    color: #666;
+}
+
+.help .help_item .title .title_1 {
+    width: 630px;
+    line-height: 80px;
+    padding-left: 30px;
+    font-size: 28px;
+}
+
+.help .help_item .title .title_2 {
+    width: 80px;
+    height: 80px;
+    text-align: center;
+}
+
+.help .help_item .title .title_2 image {
+    width: 40px;
+    height: 40px;
+    margin: 20px auto;
+}
+
+.help .help_item .detail {
+    margin-bottom: 20px;
+    font-size: 28px;
+    line-height: 50px;
+    padding: 0 30px;
+    color: #666;
+}

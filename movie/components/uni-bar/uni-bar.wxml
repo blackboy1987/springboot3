@@ -1,0 +1,3 @@
+<view class="{{[Max?theme+'-detailBgMax':theme+'-detailBg']}}">
+    <slot></slot>
+</view>

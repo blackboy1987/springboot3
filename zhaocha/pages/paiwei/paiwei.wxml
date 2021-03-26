@@ -1,0 +1,27 @@
+<view class="bg1"></view>
+<view class="seo">{{seo.seo_paiwei}}</view>
+<view class="container" wx:if="{{fy_show}}">
+    <view class="top">
+        <text class="currTime">房间号:{{roomid}}</text>
+    </view>
+    <view class="main">
+        <view class="userinfo" wx:for="{{room_list}}" wx:key="{{key}}">
+            <view>
+                <image class="avatar_url" src="{{item.avatar_url}}"></image>
+                <view class="nickname">{{item.nickname}}</view>
+            </view>
+            <view catchtap="quit_room" class="delete" data-item="{{item}}" wx:if="{{master&&self.openid!=item.openid}}">X</view>
+        </view>
+    </view>
+    <view class="start">
+        <button catchtap="startGame" class="startGame" plain="true" style="display:block; width:300rpx;" type="primary" wx:if="{{master}}">
+            <text>开始游戏</text>
+        </button>
+        <view class="btnhome">
+            <image catchtap="backFun" class="mainBack" src="../../images/backIndex.png"></image>
+            <button class="invite-btn" hoverClass="none" openType="share">
+                <image src="../../images/invite.png"></image>
+            </button>
+        </view>
+    </view>
+</view>

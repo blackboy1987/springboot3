@@ -1,0 +1,97 @@
+.top {
+    position: relative;
+    width: 100vw;
+    text-align: center;
+    height: 120rpx;
+    font-size: 40rpx;
+    text-shadow: -1px 0 black,0 1px black,1px 0 black,0 -1px black;
+    color: #FFF;
+}
+
+.main {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 400rpx;
+    margin-left: 175rpx;
+    flex-wrap: wrap;
+}
+
+.avatar_url {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 60rpx;
+    background: #eee;
+}
+
+.nickname {
+    font-size: 28rpx;
+    text-shadow: black 0.1em 0.1em 0.2em;
+    color: #FFF;
+    width: 150rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    overflow: hidden;
+}
+
+.userinfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 200rpx;
+    margin-bottom: 50rpx;
+}
+
+.delete {
+    color: #FFF;
+    width: 50rpx;
+    height: 50rpx;
+    padding: 20rpx;
+    margin-left: -50rpx;
+    margin-top: -40rpx;
+}
+
+.btnhome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30rpx;
+    margin-bottom: 10rpx;
+    height: 60rpx;
+}
+
+.mainBack {
+    width: 193rpx;
+    height: 42rpx;
+}
+
+.start {
+    position: absolute;
+    bottom: 50rpx;
+    width: 100vw;
+    text-align: center;
+}
+
+.ico_right {
+    position: absolute;
+    right: 30rpx;
+    bottom: 100rpx;
+}
+
+.invite-btn {
+    width: 60rpx;
+    height: 60rpx;
+    margin: 0 0 0 20rpx;
+}
+
+.invite-btn image {
+    width: 60rpx;
+    height: 60rpx;
+}
+
+.startGame text {
+    margin-top: 20rpx;
+    display: inline-block;
+}

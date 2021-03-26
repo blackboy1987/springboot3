@@ -1,0 +1,38 @@
+<view class="{{['data-v-e661a0a8',theme+'-page']}}">
+    <uni-bar bind:__l="__l" class="data-v-e661a0a8" theme="{{theme}}" vueId="2f607dc0-1" vueSlots="{{['default']}}">
+        <nar-bar bind:__l="__l" class="data-v-e661a0a8" vueId="{{'2f607dc0-2'+','+'2f607dc0-1'}}"></nar-bar>
+        <view class="{{['userInfo data-v-e661a0a8',theme+'-title-color']}}">
+            <image class="userInfo-pic data-v-e661a0a8" src="{{userInfo.avatarUrl}}"></image>
+            <view class="user data-v-e661a0a8">
+                <text class="user-name ellipsis data-v-e661a0a8">{{userInfo.nickName}}</text>
+            </view>
+        </view>
+    </uni-bar>
+    <view class="{{['mylist data-v-e661a0a8',theme+'-title-color']}}">
+        <view catchtap="__e" class="mylist-data data-v-e661a0a8" data-event-opts="{{[ [ 'tap',[ [ 'listclick',[index] ] ] ] ]}}" wx:for="{{mylist}}" wx:for-item="data" wx:key="index">
+            <text class="cuIcon mylist-data-icon data-v-e661a0a8" style="{{'color:'+data.color+';'}}">{{data.icon}}</text>
+            <text class="mylist-data-text data-v-e661a0a8">{{data.text}}</text>
+        </view>
+    </view>
+    <view class="ad-view data-v-e661a0a8">
+        <view class="data-v-e661a0a8" style="display:flex;flex-direction:column;width:750rpx;align-items:center;border-top:1px solid rgba(204, 204, 204, .1);" wx:if="{{more.length>0}}">
+            <view class="{{['data-v-e661a0a8',theme+'-title-color']}}" style="display:flex;width:750rpx;height:180rpx;flex-direction:row;align-items:center;flex-wrap:wrap;">
+                <view catchtap="__e" class="mylist-data data-v-e661a0a8" data-event-opts="{{[ [ 'tap',[ [ 'moreClick',['$0'],[ [ ['more','',index,'appid'] ] ] ] ] ] ]}}" wx:for="{{more}}" wx:for-item="data" wx:key="index">
+                    <image class="data-v-e661a0a8" src="{{data.img}}" style="width:70rpx;height:70rpx;border-radius:10rpx;"></image>
+                    <text class="mylist-data-text ellipsis data-v-e661a0a8">{{data.name}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="ad-view data-v-e661a0a8" style="width:700rpx;margin:0 auto;margin-bottom:20rpx;">
+            <uni-ad bind:__l="__l" class="data-v-e661a0a8" gg="{{gg_wode}}" vueId="2f607dc0-3" wx:if="{{gg_wode.radio=='1'&&!wxverify}}"></uni-ad>
+            <custom-ad bind:__l="__l" class="data-v-e661a0a8" min="650" vueId="2f607dc0-4" ysId="{{wxAdId.ysId}}" wx:if="{{adShow&&wxAdId.ysId}}"></custom-ad>
+        </view>
+    </view>
+    <uni-popup bind:__l="__l" class="data-v-e661a0a8 vue-ref" data-ref="userLogin" maskClick="{{maskClick}}" type="center" vueId="2f607dc0-5" vueSlots="{{['default']}}">
+        <popup bind:__l="__l" class="data-v-e661a0a8" content="你尚未登录,请登录后使用" title="提示" vueId="{{'2f607dc0-6'+','+'2f607dc0-5'}}" vueSlots="{{['content']}}">
+            <view class="data-v-e661a0a8" slot="content">
+                <button bindgetuserinfo="__e" class="data-v-e661a0a8" data-event-opts="{{[ [ 'getuserinfo',[ [ 'onGotUserInfo',['$event'] ] ] ] ]}}" openType="getUserInfo" style="width:300rpx;height:70rpx;line-height:70rpx;" type="primary">一键登录</button>
+            </view>
+        </popup>
+    </uni-popup>
+</view>

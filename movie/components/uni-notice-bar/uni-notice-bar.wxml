@@ -1,0 +1,12 @@
+<view bindtap="__e" class="uni-noticebar data-v-75b5dee9" data-event-opts="{{[ [ 'tap',[ [ 'onClick',['$event'] ] ] ] ]}}" style="{{'background-color:'+backgroundColor+';'}}" wx:if="{{show}}">
+    <text bindtap="__e" class="uni-noticebar-close cuIcon data-v-75b5dee9" data-event-opts="{{[ [ 'tap',[ [ 'close',['$event'] ] ] ] ]}}" style="color:#de8c17;font-size:40rpx;" wx:if="{{showClose===true||showClose==='true'}}"></text>
+    <text class="uni-noticebar-icon cuIcon data-v-75b5dee9" style="color:#de8c17;font-size:40rpx;" wx:if="{{showIcon===true||showIcon==='true'}}"></text>
+    <view class="{{['uni-noticebar__content-wrapper data-v-75b5dee9 vue-ref',scrollable?'uni-noticebar__content-wrapper--scrollable':'',!scrollable&&(single||moreText)?'uni-noticebar__content-wrapper--single':'']}}" data-ref="textBox">
+        <view class="{{['uni-noticebar__content data-v-75b5dee9',scrollable?'uni-noticebar__content--scrollable':'',!scrollable&&(single||moreText)?'uni-noticebar__content--single':'']}}" id="{{elIdBox}}">
+            <text class="{{['uni-noticebar__content-text data-v-75b5dee9 vue-ref',scrollable?'uni-noticebar__content-text--scrollable':'',!scrollable&&(single||moreText)?'uni-noticebar__content-text--single':'']}}" data-ref="animationEle" id="{{elId}}" style="{{'color:'+color+';'+'width:'+wrapWidth+'px'+';'+'animation-duration:'+animationDuration+';'+'-webkit-animation-duration:'+animationDuration+';'+'animation-play-state:'+(webviewHide?'paused':animationPlayState)+';'+'-webkit-animation-play-state:'+(webviewHide?'paused':animationPlayState)+';'+'animation-delay:'+animationDelay+';'+'-webkit-animation-delay:'+animationDelay+';'}}">{{text}}</text>
+        </view>
+    </view>
+    <view bindtap="__e" class="uni-noticebar__more data-v-75b5dee9" data-event-opts="{{[ [ 'tap',[ [ 'clickMore',['$event'] ] ] ] ]}}" wx:if="{{showGetMore===true||showGetMore==='true'}}">
+        <text class="uni-noticebar__more-text data-v-75b5dee9" style="{{'color:'+moreColor+';'}}" wx:if="{{moreText}}">{{moreText}}</text>
+    </view>
+</view>

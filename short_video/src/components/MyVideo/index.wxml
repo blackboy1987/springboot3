@@ -1,0 +1,22 @@
+<view class="player playerV2" id="primaryPlayer">
+    <video
+            autoPlay="{{autoplay}}"
+            bindended="bindEnd"
+            bindplay="bindPlay"
+            bindtimeupdate="bindTimeUpdate"
+            className="player-video"
+            controls="{{controls}}"
+            danmuBtn="{{danmuBtn}}"
+            danmuList="{{danmuList}}"
+            duration="{{totaltime}}"
+            enableDanmu="{{enableDanmu}}"
+            id="myVideo"
+            poster="{{poster}}"
+            src="{{src}}"
+            style="display: block; width: 100%;"
+            unitId="{{unitId}}"
+            show-fullscreen-btn="{{false}}"
+    >
+        <cover-view className="cover" wx:if="{{showTips}}">{{message}}</cover-view>
+    </video>
+</view>

@@ -1,0 +1,4 @@
+.ad-ys-view {
+    margin: 10rpx auto;
+    border-radius: 10rpx;
+}

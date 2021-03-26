@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "popupMoreGame": "/component/popupMoreGame/popupMoreGame",
+        "i-notice-bar": "/component/notice-bar/index",
+        "add-tips": "/component/weplug-add-tips-master/index"
+    },
+    "disableScroll": true
+}

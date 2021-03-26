@@ -1,0 +1,30 @@
+<view class="bg1"></view>
+<view class="seo">{{seo.seo_paiwei_result}}</view>
+<view class="container" wx:if="{{fy_show}}">
+    <view class="top">
+        <image class="mainImgTitle" src="../../images/winTitle.png" wx:if="{{win_openid==self.openid}}"></image>
+        <image class="mainImgTitle" src="../../images/failTitle.png" wx:if="{{win_openid!=self.openid}}"></image>
+    </view>
+    <view class="main">
+        <view class="pklist">
+            <view class="pkinfo" wx:for="{{room_list}}" wx:key="{{key}}">
+                <view class="pkfn">
+                    <image class="pkface" src="{{item.avatar_url}}">
+                        <image class="win" src="../../images/winTitle.png" wx:if="{{win_openid==item.openid}}"></image>
+                    </image>
+                    <view class="pknickname">{{item.nickname}}</view>
+                </view>
+                <view class="pknum">{{win_openid==item.openid?'胜利':'失败'}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="again">
+        <view catchtap="againGame" class="startGame">
+            <text>再来一局</text>
+            <view class="elec flexBoxCenterAlign ico_video" wx:if="{{excitation}}">
+                <image src="/images/ico_video.png"></image>
+            </view>
+        </view>
+        <image catchtap="backFun" class="mainBack" src="../../images/backIndex.png"></image>
+    </view>
+</view>

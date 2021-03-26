@@ -1,0 +1,62 @@
+.player {
+    z-index: 20;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    background: black;
+}
+
+.player-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.player-media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+.player-media .poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.player-media .info-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 96%;
+    padding: 4px 2%;
+    background-color: rgba(0,0,0,0.5);
+    color: #dcdbdb;
+    font-size: 14px;
+    z-index: 10;
+    height: 22px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.player-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%,0);
+    width: 54px;
+    height: 54px;
+    background: url(http://static01.baomihua.com/img/mobile/v3/play-current20161111.png);
+    background-size: 190px 70px;
+    background-position: -8px -8px;
+    z-index: 15;
+}

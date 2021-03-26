@@ -1,0 +1,113 @@
+.top {
+    position: relative;
+    width: 100vw;
+    text-align: center;
+    height: 150rpx;
+    margin-top: 50rpx;
+}
+
+.mainImgTitle {
+    position: relative;
+    width: 500rpx;
+    height: 160rpx;
+}
+
+.main {
+    position: relative;
+    width: 100vw;
+    margin-top: 30rpx;
+}
+
+.again {
+    position: absolute;
+    bottom: 50rpx;
+    width: 100vw;
+    text-align: center;
+}
+
+.again .startGame text {
+    display: inline-block;
+    margin-top: 20rpx;
+}
+
+.avatar_url {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50rpx;
+}
+
+.nickname {
+    font-size: 30rpx;
+    color: #fff;
+    text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+.userinfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.delete {
+    color: #fff;
+}
+
+.mainBack {
+    position: relative;
+    width: 193rpx;
+    height: 42rpx;
+    display: block;
+    margin-left: calc((100% - 193rpx) / 2);
+    margin-top: 30rpx;
+    margin-bottom: 10rpx;
+}
+
+.pklist {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pkinfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 30rpx;
+    color: #fff;
+    text-shadow: -1px 0 black,0 1px black,1px 0 black,0 -1px black;
+    height: 100rpx;
+    line-height: 100rpx;
+    width: 100vw;
+}
+
+.pkfn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.pkface {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    background: #eee;
+}
+
+.pknickname {
+    width: 90rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    margin-left: 7rpx;
+    overflow: hidden;
+}
+
+.win {
+    position: absolute;
+    width: 100rpx;
+    height: 30rpx;
+    margin-top: -95rpx;
+    margin-left: -10rpx;
+}

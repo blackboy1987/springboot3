@@ -1,0 +1,80 @@
+.topicTop {
+    width: 750rpx;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.topicTop-img {
+    position: relative;
+}
+
+.topicTop-img,.topicTop-pic {
+    width: 750rpx;
+    height: 400rpx;
+}
+
+.topicTop-num {
+    left: 20rpx;
+}
+
+.topicTop-num,.topicTop-tag {
+    position: absolute;
+    bottom: 20rpx;
+    background-color: rgba(0,0,0,.5);
+    color: #dcdcdc;
+    padding: 10rpx 30rpx;
+    border-radius: 30rpx;
+    font-size: 28rpx;
+    font-weight: 800;
+}
+
+.topicTop-tag {
+    max-width: 400rpx;
+    right: 20rpx;
+}
+
+.topicTop-tilte {
+    width: 700rpx;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.topicTop-share {
+    font-size: 40rpx;
+    width: 100rpx;
+    height: 60rpx;
+    text-align: center;
+    line-height: 60rpx;
+    background-color: initial;
+}
+
+.topicTop-share::after {
+    border: none;
+}
+
+.topicTop-name {
+    width: 600rpx;
+    font-weight: 600;
+    font-size: 35rpx;
+}
+
+.topicTop-blurb {
+    width: 700rpx;
+    font-size: 28rpx;
+    padding: 20rpx 0;
+    color: #ababab;
+}
+
+.vodlist {
+    width: 750rpx;
+}

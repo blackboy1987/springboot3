@@ -1,0 +1,8 @@
+<view class="data-v-277b43c1">
+    <view class="tips-box data-v-277b43c1" wx:if="{{showTip}}">
+        <view bindtap="__e" class="tips-content data-v-277b43c1" data-event-opts="{{[ [ 'tap',[ [ 'hideTip',['$event'] ] ] ] ]}}">
+            <button class="tips-button data-v-277b43c1" openType="share" size="mini" type="default" wx:if="{{showButton}}">{{''+tip+''}}</button>
+            <text class="tips-content-text data-v-277b43c1" wx:else>{{tip}}</text>
+        </view>
+    </view>
+</view>

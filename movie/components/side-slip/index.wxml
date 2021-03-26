@@ -1,0 +1,10 @@
+<movable-area class="side data-v-54c88fd8">
+    <movable-view bindchange="__e" bindtouchend="__e" class="side__view data-v-54c88fd8" data-event-opts="{{[ [ 'change',[ [ 'change',['$event'] ] ] ],[ 'touchend',[ [ 'touchend',['$event'] ] ] ] ]}}" direction="horizontal" x="{{move}}">
+        <view class="side__con data-v-54c88fd8">
+            <slot></slot>
+        </view>
+        <view catchtap="__e" class="side__del data-v-54c88fd8" data-event-opts="{{[ [ 'tap',[ [ 'remove',['$event'] ] ] ] ]}}">
+            <text class="data-v-54c88fd8">删除</text>
+        </view>
+    </movable-view>
+</movable-area>
