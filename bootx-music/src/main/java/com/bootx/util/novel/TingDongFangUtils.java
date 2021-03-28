@@ -1,7 +1,8 @@
-package com.bootx.util;
+package com.bootx.util.novel;
 
 import com.bootx.entity.Novel;
 import com.bootx.entity.NovelItem;
+import com.bootx.util.WebUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
@@ -89,10 +90,12 @@ public final class TingDongFangUtils {
 
     }
 
+    // 这个是第一页
     private static Set<NovelItem> items(Document root,Long id) {
         Set<NovelItem> list = new HashSet<>();
         Element chapter = root.getElementsByClass("chapter").first();
         Elements alists = chapter.getElementsByClass("alist");
+
         if(alists.size()>0){
             for (int i = 0; i < alists.size(); i++) {
                 NovelItem novelItem = new NovelItem();
@@ -111,19 +114,34 @@ public final class TingDongFangUtils {
                 // novelItem.setResourceUrl(mp3(url));
                 list.add(novelItem);
             }
+
+            // 页码
+            Elements pgs = root.getElementsByClass("pg");
+            if(pgs!=null&&pgs.size()>0){
+                // 有多页
+            }
+
         }
         return list;
     }
 
 
-    private static String mp3(String url) {
+    public static String mp3(String url) {
         String result = WebUtils.get(url, null);
         Document root = Jsoup.parse(result);
         Element iframe = root.getElementsByTag("iframe").first();
-        String src = iframe.attr("src");
-        result = WebUtils.get("http://www.tingdongfang.com"+src, null);
-        result = result.split("file:")[1].split("\"")[1];
-        System.out.println(result);
+        if(iframe!=null){
+            String src = iframe.attr("src");
+            System.out.println(src);
+            result = WebUtils.get("http://www.tingdongfang.com"+src, null);
+            result = result.split("file:")[1].split("\"")[1];
+            return result;
+        }
+
         return "";
+    }
+
+    public static void main(String[] args) {
+        mp3("http://www.tingdongfang.com/book29325a79l1p2.html");
     }
 }

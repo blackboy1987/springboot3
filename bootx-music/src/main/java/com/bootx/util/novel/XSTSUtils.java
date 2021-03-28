@@ -1,7 +1,9 @@
-package com.bootx.util;
+package com.bootx.util.novel;
 
 import cn.hutool.core.thread.ExecutorBuilder;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
+import com.bootx.util.JsonUtils;
+import com.bootx.util.WebUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;

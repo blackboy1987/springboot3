@@ -4,38 +4,26 @@ import com.bootx.common.Pageable;
 import com.bootx.common.Result;
 import com.bootx.entity.Novel;
 import com.bootx.entity.NovelCategory;
-import com.bootx.entity.NovelTag;
 import com.bootx.service.NovelCategoryService;
 import com.bootx.service.NovelService;
-import com.bootx.service.NovelTagService;
 import com.bootx.service.RedisService;
-import com.bootx.util.IShuYinUtils;
+import com.bootx.util.novel.IShuYinUtils;
 import com.bootx.util.JsonUtils;
-import com.bootx.util.TingDongFangUtils;
-import com.bootx.util.XSTSUtils;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.RandomUtils;
+import com.bootx.util.novel.TingDongFangUtils;
+import com.bootx.util.novel.XSTSUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
-import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.naming.ldap.HasControls;
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 @RestController
 @RequestMapping("/init")
@@ -143,7 +131,25 @@ public class IndexController {
 
     @GetMapping("/url")
     private Result url(Long id,Long itemId){
-        return Result.success(jdbcTemplate.queryForObject("select resourceUrl from novelItem where novel_id=? and id=?",String.class,id,itemId));
+        String resourceUrl = jdbcTemplate.queryForObject("select resourceUrl from novelItem where novel_id=? and id=?",String.class,id,itemId);
+        if(StringUtils.isBlank(resourceUrl)){
+            resourceUrl = getResourceUrl(id,itemId);
+        }
+
+        return Result.success(resourceUrl);
+    }
+
+    private String getResourceUrl(Long id, Long itemId) {
+        Map<String,Object> map = jdbcTemplate.queryForMap("select resourceUrl,id,url,type from novelItem where novel_id=? and id=?",id,itemId);
+        String url = map.get("url")+"";
+        String type = map.get("type")+"";
+        String resourceUrl=map.get("resourceUrl")+"";
+        if(StringUtils.equalsAnyIgnoreCase("tingdongfang", type)){
+            resourceUrl = TingDongFangUtils.mp3(url);
+        }
+        System.out.println(resourceUrl);
+        jdbcTemplate.update("update novelItem set resourceUrl=? where id=? and novel_id=?", resourceUrl,itemId,id);
+        return resourceUrl;
     }
 
     @GetMapping
@@ -174,9 +180,10 @@ public class IndexController {
                 if(byName==null){
                     byName = new NovelCategory();
                     byName.setName(categoryName);
-                    novelCategoryService.save(byName);
-
+                    byName.setIsShow(true);
+                    byName = novelCategoryService.save(byName);
                 }
+                jdbcTemplate.update("update novel set novelCategory_id=? where categoryName=?",byName.getId(),categoryName);
             }
         });
 

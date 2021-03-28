@@ -1,6 +1,7 @@
-package com.bootx.util;
+package com.bootx.util.novel;
 
 
+import com.bootx.util.WebUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;

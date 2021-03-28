@@ -1,6 +1,7 @@
-package com.bootx.util;
+package com.bootx.util.novel;
 
 
+import com.bootx.util.WebUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
