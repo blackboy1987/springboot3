@@ -10,10 +10,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableCaching
 @EnableScheduling
 @EnableAsync
-public class BootxMovieApplication {
+public class BootxMusicApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BootxMovieApplication.class, args);
+        SpringApplication.run(BootxMusicApplication.class, args);
     }
 
 }
