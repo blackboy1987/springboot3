@@ -1,10 +1,13 @@
 package com.bootx.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class NovelItem extends OrderedEntity<Long>{
 
     private String title;
@@ -19,6 +22,10 @@ public class NovelItem extends OrderedEntity<Long>{
     private Novel novel;
 
     private String resourceUrl;
+
+    @NotEmpty
+    @Column(nullable = false,updatable = false)
+    private String type;
 
 
     public String getTitle() {
@@ -51,5 +58,13 @@ public class NovelItem extends OrderedEntity<Long>{
 
     public void setResourceUrl(String resourceUrl) {
         this.resourceUrl = resourceUrl;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

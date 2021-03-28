@@ -78,7 +78,7 @@ public class XSTSUtils {
         String content = parse.getElementsByClass("album-intro  _t4_").first().text();
         data.put("content",content.trim());
 
-
+        data.put("type", "xsts");
         data.put("novelItems",items(parse));
 
         return data;
@@ -93,6 +93,7 @@ public class XSTSUtils {
             map.put("order",i+1);
             map.put("url","https://www.xsts.net"+ as.get(i).attr("href"));
             map.put("title",as.get(i).text());
+            map.put("type", "xsts");
             //map.put("resourceUrl",mp3("https://www.xsts.net"+ as.get(i).attr("href")));
             map.put("resourceUrl",as.get(i).text());
             list.add(map);

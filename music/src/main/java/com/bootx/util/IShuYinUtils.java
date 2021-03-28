@@ -38,8 +38,8 @@ public class IShuYinUtils {
                 Element a = li.getElementsByTag("a").first();
                 String href = a.attr("href");
                 Novel novel = detail(href,null);
+                novel.setType("ishuyin");
                 novels.add(novel);
-                System.out.println(page+"============================================"+novel.getUrl());
             }
         }
         return novels;
@@ -60,6 +60,7 @@ public class IShuYinUtils {
         if(novel==null){
             novel = new Novel();
         }
+        novel.setType("ishuyin");
         novel.setUrl(urlPrefix + href);
         String s = WebUtils.get(novel.getUrl(), null);
         Document root = Jsoup.parse(s);
@@ -88,14 +89,14 @@ public class IShuYinUtils {
         // 集数
         Set<NovelItem> novelItemSet = new HashSet<>();
         Elements elementsByTags = root.getElementById("articleDiv").getElementsByClass("box").first().getElementsByTag("a");
-        novel.setItemCount((long) elementsByTags.size());
+        novel.setItemCount(elementsByTags.size());
         for (Element item:elementsByTags) {
             NovelItem novelItem = new NovelItem();
             novelItem.setTitle(item.text());
             // novelItem.setUrl(getResourceUrl(item.attr("href")));
             novelItem.setUrl(item.attr("href"));
             novelItem.setNovel(novel);
-
+            novelItem.setType("ishuyin");
             try{
                 String orderStr = novelItem.getTitle().split("集")[0];
                 novelItem.setOrder(Integer.valueOf(orderStr.replaceAll("第","")));

@@ -1,6 +1,7 @@
 package com.bootx.entity;
 
 import com.bootx.common.BaseAttributeConverter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.Length;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Novel extends BaseEntity<Long>{
 
     private String title;
@@ -35,8 +37,6 @@ public class Novel extends BaseEntity<Long>{
 
     private String updateTime;
 
-
-
     private String categoryName;
 
     @Convert(converter = TagConverter.class)
@@ -51,13 +51,17 @@ public class Novel extends BaseEntity<Long>{
     @NotNull
     @Min(0)
     @Column(nullable = false)
-    private Long itemCount;
+    private Integer itemCount;
 
     /**
      * 文章分类
      */
     @ManyToOne(fetch = FetchType.LAZY)
     private NovelCategory novelCategory;
+
+    @NotEmpty
+    @Column(nullable = false,updatable = false)
+    private String type;
 
     /**
      * 文章标签
@@ -167,11 +171,11 @@ public class Novel extends BaseEntity<Long>{
         this.novelItems = novelItems;
     }
 
-    public Long getItemCount() {
+    public Integer getItemCount() {
         return itemCount;
     }
 
-    public void setItemCount(Long itemCount) {
+    public void setItemCount(Integer itemCount) {
         this.itemCount = itemCount;
     }
 
@@ -205,6 +209,14 @@ public class Novel extends BaseEntity<Long>{
 
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Converter

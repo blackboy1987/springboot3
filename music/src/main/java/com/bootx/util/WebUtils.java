@@ -241,6 +241,68 @@ public final class WebUtils {
 		}
 	}
 
+	public static String post(String url, Map<String, Object> parameterMap,Map<String,String> headers) {
+		Assert.hasText(url, "[Assertion failed] - url must have text; it must not be null, empty, or blank");
+
+		try {
+			List<NameValuePair> nameValuePairs = new ArrayList<>();
+			if (parameterMap != null) {
+				for (Map.Entry<String, Object> entry : parameterMap.entrySet()) {
+					String name = entry.getKey();
+					String value = ConvertUtils.convert(entry.getValue());
+					if (StringUtils.isNotEmpty(name)) {
+						nameValuePairs.add(new BasicNameValuePair(name, value));
+					}
+				}
+			}
+
+			return post1(url, headers, new UrlEncodedFormEntity(nameValuePairs, "UTF-8"),String.class);
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+	}
+
+
+	public static <T> T post1(String url, Map<String,String> headers, HttpEntity entity, Class<T> resultType) {
+		Assert.hasText(url, "[Assertion failed] - url must have text; it must not be null, empty, or blank");
+		Assert.notNull(resultType, "[Assertion failed] - resultType is required; it must not be null");
+
+		try {
+			HttpPost httpPost = new HttpPost(url);
+			if (headers != null&&headers.size()>0) {
+				for (String key:headers.keySet()) {
+					httpPost.setHeader(key,headers.get(key));
+				}
+			}
+			if (entity != null) {
+				httpPost.setEntity(entity);
+			}
+			CloseableHttpResponse httpResponse = HTTP_CLIENT.execute(httpPost);
+			HttpEntity httpEntity = null;
+			try {
+				System.out.println(httpResponse.getStatusLine().getStatusCode());
+				httpEntity = httpResponse.getEntity();
+				if (httpEntity != null) {
+					if (String.class.isAssignableFrom(resultType)) {
+						return (T) EntityUtils.toString(httpEntity, "UTF-8");
+					} else if (resultType.isArray() && byte.class.isAssignableFrom(resultType.getComponentType())) {
+						return (T) EntityUtils.toByteArray(httpEntity);
+					}
+				}
+			} finally {
+				EntityUtils.consume(httpEntity);
+				IOUtils.closeQuietly(httpResponse);
+			}
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		} catch (ParseException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		return null;
+	}
+
 	/**
 	 * POST请求
 	 * 

@@ -11,6 +11,7 @@ import com.bootx.service.NovelTagService;
 import com.bootx.service.RedisService;
 import com.bootx.util.IShuYinUtils;
 import com.bootx.util.JsonUtils;
+import com.bootx.util.TingDongFangUtils;
 import com.bootx.util.XSTSUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomUtils;
@@ -74,18 +75,8 @@ public class IndexController {
 
     }
 
-    @GetMapping("/init2")
-    public Result init2() throws IOException {
-        /*File[] files = new File("C:\\Users\\black\\Desktop\\novel\\xsts").listFiles();
-        for (File file:files) {
-            String s = FileUtils.readFileToString(file, Charset.defaultCharset());
-            Novel novel = JsonUtils.toObject(s, Novel.class);
-            novelService.save(novel);
-            FileUtils.deleteQuietly(file);
-
-        }
-*/
-
+    @GetMapping("/xsts")
+    public Result xsts() throws IOException {
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
         for (int i = 1; i < 1486; i++) {
             int finalI = i;
@@ -94,7 +85,7 @@ public class IndexController {
                 if(detail!=null){
                     Novel novel = JsonUtils.toObject(JsonUtils.toJson(detail),Novel.class);
                     novel.getNovelItems().stream().forEach(item->item.setNovel(novel));
-                    novel.setItemCount(novel.getNovelItems().size()+0L);
+                    novel.setItemCount(novel.getNovelItems().size());
                     Novel byUrl = novelService.findByUrl(novel.getUrl());
                     if(byUrl!=null){
                         byUrl.setCategoryName(novel.getCategoryName());
@@ -105,13 +96,27 @@ public class IndexController {
                 }
             });
         }
-
-
         return Result.success("ok");
-
     }
 
+    @GetMapping("/tingdongfang")
+    public Result tingdongfang() throws IOException {
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
+        for (Long i = 1L; i < 30000L; i++) {
+            Long finalI = i;
+            fixedThreadPool.execute(()->{
+                Novel novel = TingDongFangUtils.detail(finalI);
+                if(novel!=null){
 
+                    novel.getNovelItems().stream().forEach(item->item.setNovel(novel));
+                    novelService.save(novel);
+                }
+
+            });
+        }
+
+        return Result.success("ok");
+    }
 
     @GetMapping("/list")
     private Result list(Pageable pageable,Long categoryId){
@@ -130,10 +135,8 @@ public class IndexController {
 
     @GetMapping("/detail")
     private Result detail(Long id){
-        Map<String,Object> data = new HashMap<>();
-        data.put("detail",jdbcTemplate.queryForMap("select title,img,title,content,memo from novel where id=?",id));
-        data.put("items",jdbcTemplate.queryForList("select id,title from novelItem where novel_id=?",id));
-
+        Map<String,Object> data = jdbcTemplate.queryForMap("select title,img,title,content,memo from novel where id=?",id);
+        data.put("items", jdbcTemplate.queryForList("select id,title,orders from novelItem where novel_id=?",id));
         return Result.success(data);
     }
 
