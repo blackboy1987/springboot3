@@ -4,13 +4,12 @@ import com.bootx.common.Pageable;
 import com.bootx.common.Result;
 import com.bootx.entity.Novel;
 import com.bootx.entity.NovelCategory;
+import com.bootx.entity.NovelItem;
 import com.bootx.service.NovelCategoryService;
 import com.bootx.service.NovelService;
 import com.bootx.service.RedisService;
-import com.bootx.util.novel.IShuYinUtils;
+import com.bootx.util.novel.*;
 import com.bootx.util.JsonUtils;
-import com.bootx.util.novel.TingDongFangUtils;
-import com.bootx.util.novel.XSTSUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -99,12 +98,89 @@ public class IndexController {
                     novel.getNovelItems().stream().forEach(item->item.setNovel(novel));
                     novelService.save(novel);
                 }
+            });
+        }
+        return Result.success("ok");
+    }
+
+    @GetMapping("/tingchina")
+    public Result tingchina() {
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
+        for (Long i = 40000L; i < 50000L; i++) {
+            Long finalI = i;
+            fixedThreadPool.execute(()->{
+                try {
+                    Novel novel = TingChina.detail(finalI);
+                    if(novel!=null){
+                        novel.getNovelItems().stream().forEach(item->item.setNovel(novel));
+                        novelService.save(novel);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+        return Result.success("ok");
+    }
+
+    @GetMapping("/ting55")
+    public Result ting55() {
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
+        for (Long i = 1L; i < 50000L; i++) {
+            Long finalI = i;
+            fixedThreadPool.execute(()->{
+                try {
+                    Novel novel = Ting55Utils.detail(finalI);
+                    if(novel!=null){
+                        novel.getNovelItems().stream().forEach(item->item.setNovel(novel));
+                        novelService.save(novel);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+        return Result.success("ok");
+    }
+
+
+    @GetMapping("/tingchina/mp3")
+    public Result tingchinaMp3() {
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
+        List<Map<String, Object>> list = jdbcTemplate.queryForList("select id,url from novelItem where type='tingchina'");
+        for (Map<String,Object> item:list) {
+            fixedThreadPool.execute(()->{
+                String mp3 = TingChina.mp3(item.get("url")+"");
+                if(StringUtils.isNotBlank(mp3)){
+                    System.out.println(mp3);
+                   jdbcTemplate.update("update novelItem set resourceUrl=? where id=?",mp3,item.get("id"));
+                }
 
             });
         }
 
         return Result.success("ok");
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @GetMapping("/list")
     private Result list(Pageable pageable,Long categoryId){
