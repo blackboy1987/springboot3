@@ -1,4 +1,4 @@
-package com.bootx.util.baidu;
+package com.bootx.util.baidu.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
