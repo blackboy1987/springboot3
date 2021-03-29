@@ -24,10 +24,11 @@ public class Ting55Utils {
     private static final String prefixUrl = "https://www.ting55.com";
 
     public static Novel detail(Long id) throws IOException {
+        String url = prefixUrl + "/book/"+ id;
         Map<String,String> headers = new HashMap<>();
         headers.put("Host", " www.ting55.com");
         headers.put("User-Agent"," Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36");
-        String s = WebUtils.get(prefixUrl + "/book/"+ id, headers, null);
+        String s = WebUtils.get(url, headers, null);
 
         Document parse = Jsoup.parse(s);
         Element left = parse.getElementsByClass("left").first();
@@ -38,7 +39,7 @@ public class Ting55Utils {
 
         Novel novel = new Novel();
         novel.setType("ting55");
-        novel.setUrl(prefixUrl + id);
+        novel.setUrl(url);
         Element bread = left.getElementsByClass("bread").first();
         String[] split = bread.text().split(">");
         String categoryName = split[1].trim();
