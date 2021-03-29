@@ -125,7 +125,7 @@ public class IndexController {
 
     @GetMapping("/ting55")
     public Result ting55() {
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
         for (Long i = 1L; i < 20000L; i++) {
             Long finalI = i;
             fixedThreadPool.execute(()->{
