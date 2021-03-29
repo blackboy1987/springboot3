@@ -125,16 +125,23 @@ public class IndexController {
 
     @GetMapping("/ting55")
     public Result ting55() {
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(20);
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
         for (Long i = 1L; i < 20000L; i++) {
             Long finalI = i;
             fixedThreadPool.execute(()->{
                 try {
-                    Novel novel = Ting55Utils.detail(finalI);
-                    if(novel!=null){
-                        novel.getNovelItems().stream().forEach(item->item.setNovel(novel));
-                        novelService.save(novel);
+                    String url = "https://www.ting55.com" + "/book/"+ finalI;
+                    if(!novelService.urlExists(url)){
+                        Novel novel = Ting55Utils.detail(finalI);
+                        if(novel!=null){
+                            novel.getNovelItems().stream().forEach(item->item.setNovel(novel));
+                            System.out.println("charu:"+finalI);
+                            novelService.save(novel);
+                        }
+                    }else{
+                        System.out.println("数据库存在:"+finalI);
                     }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -33,7 +33,7 @@ public class Ting55Utils {
         Document parse = Jsoup.parse(s);
         Element left = parse.getElementsByClass("left").first();
         if(left==null){
-            System.out.println("无==========================================="+id);
+           // System.out.println("无==========================================="+id);
             return null;
         }
 
@@ -53,17 +53,27 @@ public class Ting55Utils {
 
         Element binfo = bookinfo.getElementsByClass("binfo").first();
         Elements children = binfo.children();
+
+        // 标题
         children.get(0).text();
-        String author = children.get(1).text();
-        novel.setAuthor(author.trim());
-        String announcer = children.get(2).text();
-        novel.setAnnouncer(announcer.trim());
-        String memo = children.get(3).text();
-        novel.setMemo(memo.trim());
-        String updateTime = children.get(4).text();
-        novel.setUpdateTime(updateTime.trim());
+        // 类别
+        children.get(1).text();
+
+        String author = children.get(2).text();
+        novel.setAuthor(author.replace("作者：","").trim());
+
+        String announcer = children.get(3).text();
+        novel.setAnnouncer(announcer.replace("播音：","").trim());
+
+        String memo = children.get(4).text();
+        novel.setMemo(memo.replace("状态：","").trim());
+
+        String updateTime = children.get(5).text();
+        novel.setUpdateTime(updateTime.replace("时间：","").trim());
+
         String content = left.getElementsByClass("intro").first().text();
-        novel.setContent(content.trim());
+        novel.setContent(content.trim())
+        ;
         novel.setNovelItems(items(left));
         novel.setItemCount(novel.getNovelItems().size());
         System.out.println("ok======================================================================================================================="+id);
