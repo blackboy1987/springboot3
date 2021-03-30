@@ -14,26 +14,31 @@ class CenterCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Container(
-          width: size,
-          height: size,
-          decoration: BoxDecoration(
-            color: bgColor,
-            borderRadius: BorderRadius.circular(size),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: bgColor,
-                offset: Offset(0.0, 4.0),
-                blurRadius: 10,
-                spreadRadius: 0,
+        GestureDetector(
+          onTap: (){
+            Navigator.pushNamed(context,"/play");
+          },
+          child: Container(
+            width: size,
+            height: size,
+            decoration: BoxDecoration(
+              color: bgColor,
+              borderRadius: BorderRadius.circular(size),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: bgColor,
+                  offset: Offset(0.0, 4.0),
+                  blurRadius: 10,
+                  spreadRadius: 0,
+                ),
+              ],
+            ),
+            child: Center(
+              child: Icon(
+                icon,
+                color: Colors.white,
+                size: 28.0,
               ),
-            ],
-          ),
-          child: Center(
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 28.0,
             ),
           ),
         ),

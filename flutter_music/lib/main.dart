@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/pages/index/Index.dart';
+import 'package:flutter_music/pages/play/play.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,6 +14,7 @@ class MyApp extends StatefulWidget {
 var routes = {
   '/': (BuildContext context) => Index(),
   '/app': (BuildContext context) => Index(),
+  '/play': (BuildContext context) => Play(),
 };
 
 class _MyAppState extends State<MyApp> {
