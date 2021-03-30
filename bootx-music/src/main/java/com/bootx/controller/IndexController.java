@@ -10,6 +10,7 @@ import com.bootx.service.NovelService;
 import com.bootx.service.RedisService;
 import com.bootx.util.novel.*;
 import com.bootx.util.JsonUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,29 +19,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @RestController
-@RequestMapping("/init")
+@RequestMapping
 public class IndexController {
 
-    public static final Map<String,Integer> map = new HashMap<>();
-
-
-    static {
-        map.put("30",34);
-        map.put("59",1);
-        map.put("35",2);
-        map.put("61",1);
-        map.put("34",1);
-        map.put("28",720);
-        map.put("29",113);
-    }
-
+    public static Map<String,String> map = new HashMap<>();
 
     @Resource
     private NovelService novelService;
@@ -54,139 +41,78 @@ public class IndexController {
     @Resource
     private JdbcTemplate jdbcTemplate;
 
+    static {
+        map.put("人物传记","人物传记");
+        map.put("刑侦推理","刑侦推理");
+        map.put("推理","刑侦推理");
+        map.put("历史军事","历史军事");
+        map.put("历史","历史军事");
+        map.put("官场商战","官场商战");
+        map.put("恐怖惊悚","恐怖惊悚");
+        map.put("恐怖","恐怖惊悚");
+        map.put("惊悚","恐怖惊悚");
+        map.put("武侠小说","武侠小说");
+        map.put("武侠","武侠小说");
+        map.put("玄幻奇幻","玄幻奇幻");
+        map.put("玄幻","玄幻奇幻");
+        map.put("百家讲坛","百家讲坛");
+        map.put("相声","相声评书");
+        map.put("评书","相声评书");
+        map.put("科幻有声","科幻有声");
+        map.put("经典","科幻有声");
+        map.put("科幻","经典纪实");
+        map.put("经典纪实","经典纪实");
+        map.put("都市言情","都市言情");
+        map.put("言情","都市言情");
+        map.put("都市","都市言情");
+        map.put("通俗文学","通俗文学");
+    }
+
 
     @GetMapping("/category")
     private Result category(){
-
         return Result.success(jdbcTemplate.queryForList("select id,name from novelCategory where isShow=true order by orders asc "));
 
     }
 
-    @GetMapping("/xsts")
-    public Result xsts() throws IOException {
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
-        for (int i = 1; i < 1486; i++) {
-            int finalI = i;
-            fixedThreadPool.execute(()->{
-                Map<String, Object> detail = XSTSUtils.detail("https://www.xsts.net/"+ finalI +".html");
-                if(detail!=null){
-                    Novel novel = JsonUtils.toObject(JsonUtils.toJson(detail),Novel.class);
-                    novel.getNovelItems().stream().forEach(item->item.setNovel(novel));
-                    novel.setItemCount(novel.getNovelItems().size());
-                    Novel byUrl = novelService.findByUrl(novel.getUrl());
-                    if(byUrl!=null){
-                        byUrl.setCategoryName(novel.getCategoryName());
-                        novelService.update(byUrl);
-                    }else{
-                        novelService.save(novel);
-                    }
-                }
-            });
-        }
-        return Result.success("ok");
+    /**
+     * 加载精选内容
+     * @return
+     */
+    @GetMapping("/index")
+    public Result index(){
+        Map<String,Object> data = new HashMap<>();
+
+        data.put("list",list());
+        data.put("news",list1(2,null,10));
+
+        return  Result.success(data);
     }
 
-    @GetMapping("/tingdongfang")
-    public Result tingdongfang() throws IOException {
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
-        for (Long i = 1L; i < 30000L; i++) {
-            Long finalI = i;
-            fixedThreadPool.execute(()->{
-                Novel novel = TingDongFangUtils.detail(finalI);
-                if(novel!=null){
+    private List<Map<String,Object>> list() {
+        List<Map<String,Object>> list = new ArrayList<>();
+        Map<String,Object> map = new HashMap<>();
+        map.put("title","人气必听");
+        map.put("list",list1(0,null,6));
+        list.add(map);
 
-                    novel.getNovelItems().stream().forEach(item->item.setNovel(novel));
-                    novelService.save(novel);
-                }
-            });
-        }
-        return Result.success("ok");
+        Map<String,Object> map1 = new HashMap<>();
+        map1.put("title","精彩好书");
+        map1.put("list",list1(1,null,6));
+        list.add(map1);
+
+        Map<String,Object> map2 = new HashMap<>();
+        map2.put("title","穿越重生");
+        map2.put("list",list1(2,12L,6));
+        list.add(map2);
+
+        Map<String,Object> map3 = new HashMap<>();
+        map3.put("title","都市爽听");
+        map3.put("list",list1(3,13L,6));
+        list.add(map3);
+
+        return list;
     }
-
-    @GetMapping("/tingchina")
-    public Result tingchina() {
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
-        for (Long i = 40000L; i < 50000L; i++) {
-            Long finalI = i;
-            fixedThreadPool.execute(()->{
-                try {
-                    Novel novel = TingChina.detail(finalI);
-                    if(novel!=null){
-                        novel.getNovelItems().stream().forEach(item->item.setNovel(novel));
-                        novelService.save(novel);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-        }
-        return Result.success("ok");
-    }
-
-    @GetMapping("/ting55")
-    public Result ting55() {
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
-        for (Long i = 1L; i < 20000L; i++) {
-            Long finalI = i;
-            fixedThreadPool.execute(()->{
-                try {
-                    String url = "https://www.ting55.com" + "/book/"+ finalI;
-                    if(!novelService.urlExists(url)){
-                        Novel novel = Ting55Utils.detail(finalI);
-                        if(novel!=null){
-                            novel.getNovelItems().stream().forEach(item->item.setNovel(novel));
-                            System.out.println("charu:"+finalI);
-                            novelService.save(novel);
-                        }
-                    }else{
-                        System.out.println("数据库存在:"+finalI);
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-        }
-        return Result.success("ok");
-    }
-
-
-    @GetMapping("/tingchina/mp3")
-    public Result tingchinaMp3() {
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
-        List<Map<String, Object>> list = jdbcTemplate.queryForList("select id,url from novelItem where type='tingchina'");
-        for (Map<String,Object> item:list) {
-            fixedThreadPool.execute(()->{
-                String mp3 = TingChina.mp3(item.get("url")+"");
-                if(StringUtils.isNotBlank(mp3)){
-                    System.out.println(mp3);
-                   jdbcTemplate.update("update novelItem set resourceUrl=? where id=?",mp3,item.get("id"));
-                }
-
-            });
-        }
-
-        return Result.success("ok");
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @GetMapping("/list")
@@ -201,6 +127,34 @@ public class IndexController {
         pageable.setPageSize(10);
         return Result.success(jdbcTemplate.queryForList("select id,title,img,itemCount,content,readCount from novel where novelCategory_id=1 or novelCategory_id in (select id from novelcategory where parent_id=1) limit "+(pageable.getPageNumber()-1)*pageable.getPageSize()+", "+pageable.getPageSize()));
     }
+
+    @GetMapping("/list1")
+    private List<Map<String,Object>> list1(Integer type,Long categoryId,Integer count){
+        if(count==null){
+            count = 6;
+        }
+        String orderBy = "readCount";
+        String whereClause = "";
+        if(type==0){
+            orderBy="readCount";
+        }else if(type==1){
+            orderBy = "commentCount";
+        }else if(type==2){
+            orderBy = "collectionCount";
+        }else if(type==2){
+            orderBy = "updateTime";
+        }else{
+            orderBy = "readCount";
+        }
+        if (categoryId!=null) {
+            whereClause = " and novelCategory_id="+categoryId;
+        }
+
+        String sql="select id,title,img,author,itemCount,content,readCount from novel where 1=1 "+whereClause+" order by "+orderBy+" desc limit "+count;
+        System.out.println(sql);
+        return jdbcTemplate.queryForList(sql);
+    }
+
 
 
 
@@ -237,72 +191,39 @@ public class IndexController {
 
     @GetMapping
     public String init(){
-        /*List<Novel> all = novelService.findAll();
-        for (Novel novel:all) {
-            if(StringUtils.isNotBlank(novel.getCategoryName())){
-                continue;
-            }
-            novel.setReadCount(RandomUtils.nextInt(100000,10000000)+0L);
-            novel.setCollectionCount(RandomUtils.nextInt(10000,100000)+0L);
-            NovelCategory novelCategory = novel.getNovelCategory();
-            if(novelCategory!=null&&novelCategory.getParent()!=null){
-                novel.setCategoryName(novelCategory.getParent().getName());
-            }else if(novelCategory!=null){
-                novel.setCategoryName(novelCategory.getName());
-            }
-            new Thread(()->{
-                System.out.println("+++++++++++++++++++++++++++++++++++++++++"+ novel.getId());
-                novelService.update(novel);
-            }).start();
-        }*/
         List<Map<String, Object>> list = jdbcTemplate.queryForList("select categoryName from novel group by categoryName");
         list.stream().forEach(item->{
             String categoryName = item.get("categoryName")+"";
             if(StringUtils.isNotBlank(categoryName)){
-                NovelCategory byName = novelCategoryService.findByName(categoryName);
+                String categoryName1= categoryName;
+                if(StringUtils.isNotBlank(map.get(categoryName))){
+                    categoryName1 = map.get(categoryName);
+                }
+                NovelCategory byName = novelCategoryService.findByName(categoryName1);
                 if(byName==null){
                     byName = new NovelCategory();
-                    byName.setName(categoryName);
+                    byName.setName(categoryName1);
                     byName.setIsShow(true);
                     byName = novelCategoryService.save(byName);
                 }
-                jdbcTemplate.update("update novel set novelCategory_id=? where categoryName=?",byName.getId(),categoryName);
+                jdbcTemplate.update("update novel set novelCategory_id=?,categoryName=? where categoryName=?",byName.getId(),categoryName1,categoryName);
             }
+        });
+        return "ok";
+    }
+    @GetMapping("/init1")
+    public String init1(){
+        List<Novel> novels = novelService.findAll();
+        novels.stream().forEach(item->{
+            item.setCommentCount(RandomUtils.nextLong(100,2000));
+            item.setCollectionCount(RandomUtils.nextLong(2000,100000));
+            item.setReadCount(RandomUtils.nextLong(10000,100000000));
+
+            novelService.update(item);
         });
 
 
 
-
-
-
-        return "ok";
-    }
-
-    @GetMapping("/init1")
-    public String init1(){
-        // https://www.ishuyin.com/show-24073.html
-        for (int i=1;i<100000;i++) {
-            Novel novel = IShuYinUtils.detail("https://www.ishuyin.com/show-"+i+".html",null);
-            boolean b = redisService.hasKey(novel.getUrl());
-            if(!b){
-                new Thread(()->{
-                    Novel novell = novelService.findByUrl(novel.getUrl());
-                    if(novell==null){
-                        novel.setReadCount(0L);
-                        novel.setCollectionCount(0L);
-                        novel.setCommentCount(0L);
-                        novelService.save(novel);
-                        redisService.set(novel.getUrl(),novel.getUrl());
-                    }else{
-                        if(novell.getItemCount()!=novel.getItemCount()){
-                            novell.setItemCount(novel.getItemCount());
-                            novelService.update(novell);
-                            redisService.set(novel.getUrl(),novel.getUrl());
-                        }
-                    }
-                }).start();
-            }
-        }
         return "ok";
     }
 

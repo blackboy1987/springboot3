@@ -49,7 +49,7 @@ public class Ting55Utils {
         Element bookinfo = left.getElementsByClass("bookinfo").first();
         Element img = bookinfo.getElementsByTag("img").first();
         String image = img.attr("src");
-        novel.setImg(image.trim());
+        novel.setImg("https:"+image.trim());
 
         Element binfo = bookinfo.getElementsByClass("binfo").first();
         Elements children = binfo.children();

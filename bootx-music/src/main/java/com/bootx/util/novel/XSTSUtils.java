@@ -23,6 +23,7 @@ import java.util.Map;
 /**
  * https://www.xsts.net/
  */
+@Deprecated
 public class XSTSUtils {
 
     public static Map<String,Object> detail(String url){
@@ -103,7 +104,7 @@ public class XSTSUtils {
         return list;
     }
 
-    private static String mp3(String href) {
+    public static String mp3(String href) {
         String s = WebUtils.get(href, null);
         Document parse = Jsoup.parse(s);
         Elements script = parse.getElementsByTag("script");
@@ -123,21 +124,9 @@ public class XSTSUtils {
     }
 
     public static void main(String[] args){
-        /*ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
-        for (int i = 1; i < 1486; i++) {
-            int finalI = i;
-            fixedThreadPool.execute(()->{
-               Map<String, Object> detail = detail("https://www.xsts.net/"+ finalI +".html");
-               if(detail!=null){
-                   try {
-                       FileUtils.writeStringToFile(new File("C:\\Users\\black\\Desktop\\novel\\xsts", finalI +".txt"),JsonUtils.toJson(detail), Charset.defaultCharset());
-                   } catch (IOException e) {
-                       e.printStackTrace();
-                   }
-               }
-           });
-        }*/
-        Map<String, Object> detail = detail("https://www.xsts.net/"+ 1 +".html");
+        String s = mp3("https://www.xsts.net/1484-2.html");
+
+        System.out.println(s);
 
     }
 }

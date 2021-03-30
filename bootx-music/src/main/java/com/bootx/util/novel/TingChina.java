@@ -25,12 +25,12 @@ public final class TingChina {
 
     static {
         map.put("有声小说","https://www.tingchina.com/yousheng/");
-        map.put("相声","https://www.tingchina.com/xiangsheng/");
+       /* map.put("相声","https://www.tingchina.com/xiangsheng/");
         map.put("评书","https://www.tingchina.com/pingshu/");
         map.put("戏曲","https://www.tingchina.com/xiqu/");
         map.put("儿歌","https://www.tingchina.com/erge/");
         map.put("人文","https://www.tingchina.com/jiaoyu/");
-        map.put("笑话","https://www.tingchina.com/xiaohua/");
+        map.put("笑话","https://www.tingchina.com/xiaohua/");*/
     }
 
 

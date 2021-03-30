@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 /**
  * http://www.tingdongfang.com/
  */
+@Deprecated
 public final class TingDongFangUtils {
 
     public static Novel detail(Long id){
