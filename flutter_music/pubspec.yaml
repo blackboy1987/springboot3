@@ -32,6 +32,7 @@ dependencies:
   flutter_svg: ^0.19.3
   flutter_swiper: ^1.1.6
   dio: ^4.0.0
+  audioplayers: ^0.18.3
 
 dev_dependencies:
   flutter_test:

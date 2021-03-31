@@ -9,6 +9,7 @@ class Http {
     print("==========================url");
     print(url);
     Dio().get(baseUrl + url).then((response) {
+      print(response.data);
       callback(response.data);
     });
   }

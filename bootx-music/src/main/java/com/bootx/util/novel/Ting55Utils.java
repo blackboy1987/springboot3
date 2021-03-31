@@ -108,11 +108,14 @@ public class Ting55Utils {
             return null;
         }
         Map<String,String> headers = new HashMap<>();
+        headers.put("Host", "m.ting55.com");
+        headers.put("Origin", "https://m.ting55.com");
         headers.put("Referer", url);
-        headers.put("X-Requested-With", "XMLHttpRequest");
-        headers.put("xt", "dc27074ddbb623eec9fb1ccada4a3f85");
-        headers.put("User-Agent"," Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36");
-        String result = WebUtils.post("https://ting55.com/glink",params,headers);
+        headers.put("User-Agent","Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Mobile Safari/537.36");
+        headers.put("xt", "41db90d2497847ebb020adfb884c8062");
+        headers.put("Postman-Token", "5bc4292b-3f83-4f74-ab08-0a6bca4d7b56");
+        headers.put("Cookie", "mhting55=6d91c21dac45fb4b");
+        String result = WebUtils.post("https://ting55.com/mlink?bookId="+params.get("bookId")+"&page="+params.get("page"),null,headers);
         System.out.println(result);
         return result;
     }
@@ -130,8 +133,7 @@ public class Ting55Utils {
     }
 
     public static void main(String[] args) throws IOException {
-       // mp3("https://www.ting55.com/book/13829-458");
-        detail(14931L);
+       mp3("https://www.ting55.com/book/13829-458");
     }
 
 

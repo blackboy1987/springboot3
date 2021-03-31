@@ -145,8 +145,7 @@ public class IndexController {
         if (categoryId!=null) {
             whereClause = " and novelCategory_id="+categoryId;
         }
-
-        String sql="select id,title,img,author,itemCount,content,readCount from novel where 1=1 "+whereClause+" order by "+orderBy+" desc limit "+count;
+        String sql="select id,title,img,author,itemCount,content,readCount from novel where 1=1 and type !='ting55'"+whereClause+" order by "+orderBy+" desc limit "+count;
         System.out.println(sql);
         return jdbcTemplate.queryForList(sql);
     }
@@ -157,7 +156,7 @@ public class IndexController {
     @GetMapping("/detail")
     private Result detail(Long id){
         Map<String,Object> data = jdbcTemplate.queryForMap("select title,img,title,content,memo from novel where id=?",id);
-        data.put("items", jdbcTemplate.queryForList("select id,title,orders from novelItem where novel_id=?",id));
+        data.put("items", jdbcTemplate.queryForList("select id,title,orders from novelItem where novel_id=? order by orders asc ",id));
         return Result.success(data);
     }
 
@@ -168,7 +167,6 @@ public class IndexController {
         if(StringUtils.isBlank(resourceUrl)){
             resourceUrl = getResourceUrl(id,itemId);
         }
-
         return Result.success(resourceUrl);
     }
 
@@ -176,9 +174,14 @@ public class IndexController {
         Map<String,Object> map = jdbcTemplate.queryForMap("select resourceUrl,id,url,type from novelItem where novel_id=? and id=?",id,itemId);
         String url = map.get("url")+"";
         String type = map.get("type")+"";
+        System.out.println(type);
         String resourceUrl=map.get("resourceUrl")+"";
         if(StringUtils.equalsAnyIgnoreCase("tingdongfang", type)){
             resourceUrl = TingDongFangUtils.mp3(url);
+        }else if(StringUtils.equalsAnyIgnoreCase("ting55", type)){
+            resourceUrl = Ting55Utils.mp3(url);
+        }else if(StringUtils.equalsAnyIgnoreCase("tingchina", type)){
+            resourceUrl = TingChina.mp3(url);
         }
         System.out.println(resourceUrl);
         jdbcTemplate.update("update novelItem set resourceUrl=? where id=? and novel_id=?", resourceUrl,itemId,id);
