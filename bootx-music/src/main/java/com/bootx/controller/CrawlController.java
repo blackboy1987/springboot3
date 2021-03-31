@@ -6,10 +6,7 @@ import com.bootx.service.NovelCategoryService;
 import com.bootx.service.NovelService;
 import com.bootx.service.RedisService;
 import com.bootx.util.JsonUtils;
-import com.bootx.util.novel.Ting55Utils;
-import com.bootx.util.novel.TingChina;
-import com.bootx.util.novel.TingDongFangUtils;
-import com.bootx.util.novel.XSTSUtils;
+import com.bootx.util.novel.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -83,22 +80,26 @@ public class CrawlController {
         return Result.success("ok");
     }
 
-
-    @GetMapping("/tingchina/mp3")
-    public Result tingchinaMp3() {
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
-        List<Map<String, Object>> list = jdbcTemplate.queryForList("select id,url from novelItem where type='tingchina'");
-        for (Map<String,Object> item:list) {
+    @GetMapping("/etingshu")
+    public Result etingshu() {
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+        for (Long i = 1L; i < 30000L; i++) {
+            Long finalI = i;
             fixedThreadPool.execute(()->{
-                String mp3 = TingChina.mp3(item.get("url")+"");
-                if(StringUtils.isNotBlank(mp3)){
-                    System.out.println(mp3);
-                   jdbcTemplate.update("update novelItem set resourceUrl=? where id=?",mp3,item.get("id"));
+                String url = "https://www.etingshu.com/"+"show/"+finalI+".html";
+                if(!novelService.urlExists(url)){
+                    Novel novel = ETingShuUtils.detail(finalI);
+                    if(novel!=null){
+                        novel.getNovelItems().stream().forEach(item->item.setNovel(novel));
+                        System.out.println("charu:"+finalI);
+                        novelService.save(novel);
+                    }
+                }else{
+                    System.out.println("数据库存在:"+finalI);
                 }
 
             });
         }
-
         return Result.success("ok");
     }
 }

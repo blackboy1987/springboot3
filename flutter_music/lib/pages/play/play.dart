@@ -3,11 +3,32 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music/constant/MyColor.dart';
+import 'package:flutter_music/iconfont/icon_font.dart';
 import 'package:flutter_music/util/http.dart';
 import 'package:flutter/foundation.dart';
 
 const List<String> urls = [
   "https://pp.ting55.com/202103311528/09192ac8026a6af85a8e1106792bb1b9/2015/01/36/1.mp3?v=1617173933078"
+];
+
+const List<double> rates = [
+  0.5,
+  0.75,
+  1.0,
+  1.25,
+  1.5,
+  1.75,
+  2.0,
+];
+
+List rateIcons = [
+  IconFont(IconNames.beisu_x,color: '#2c2c2c',size: 28,),
+  IconFont(IconNames.beisu_x_9,color: '#2c2c2c',size: 28,),
+  IconFont(IconNames.beisu_x_1,color: '#2c2c2c',size: 28,),
+  IconFont(IconNames.beisu_x_4,color: '#2c2c2c',size: 28,),
+  IconFont(IconNames.beisu_x_2,color: '#2c2c2c',size: 28,),
+  IconFont(IconNames.beisu_x_5,color: '#2c2c2c',size: 28,),
+  IconFont(IconNames.beisu_x_3,color: '#2c2c2c',size: 28,),
 ];
 
 class Play extends StatefulWidget {
@@ -23,7 +44,7 @@ enum PlayerState { stopped, playing, paused }
 enum PlayingRouteState { speakers, earpiece }
 
 class _PlayState extends State<Play> {
-  double _currentRate = 0;
+  int _currentRateIndex = 0;
 
   double currentSeconds = 0;
   double totalSeconds = 23840;
@@ -310,24 +331,57 @@ class _PlayState extends State<Play> {
                       ),
                     ],
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Icon(
-                        Icons.star_border,
-                        color: Color(0xFF2c2c2c),
-                      ),
-                      Container(
-                        width: 4,
-                      ),
-                      Text(
-                        '倍速',
-                        style: TextStyle(
-                          color: Color(0xFF6e6a6b),
+                  GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            height: MediaQuery.of(context).size.height * 0.5,
+                            child: ListView.separated(
+                                controller: new ScrollController(
+                                  keepScrollOffset: true,
+                                ),
+                                itemBuilder: (context, index) {
+                                  return ListTile(
+                                    onTap: () {
+                                      setState(() {
+                                        _currentRateIndex = index;
+                                        _audioPlayer.setPlaybackRate(
+                                            playbackRate: rates[index]);
+                                        Navigator.of(context).pop();
+                                      });
+                                    },
+                                    title: Text('${rates[index]} 倍'),
+                                    trailing: index==_currentRateIndex ? Icon(Icons.done) : null,
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return Divider(
+                                    color: Colors.red,
+                                  );
+                                },
+                                itemCount: rates.length),
+                          );
+                        },
+                      );
+                    },
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        rateIcons[_currentRateIndex],
+                        Container(
+                          width: 4,
                         ),
-                      ),
-                    ],
+                        Text(
+                          '倍速',
+                          style: TextStyle(
+                            color: Color(0xFF6e6a6b),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   GestureDetector(
                     onTapDown: (TapDownDetails details) {

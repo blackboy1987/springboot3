@@ -2,6 +2,7 @@ package com.bootx.util.novel;
 
 import com.bootx.entity.Novel;
 import com.bootx.entity.NovelItem;
+import com.bootx.util.JsonUtils;
 import com.bootx.util.WebUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
@@ -26,6 +27,7 @@ public class ETingShuUtils {
         Document parse = Jsoup.parse(s);
         Element contentright = parse.getElementsByClass("contentright").first();
         if(contentright==null){
+            System.out.println("无==========="+id);
             return null;
         }
         Novel novel = new Novel();
@@ -42,31 +44,31 @@ public class ETingShuUtils {
         String title = playbox.getElementsByTag("h2").first().text();
         novel.setTitle(title);
         Elements div = playbox.getElementsByTag("div");
-        for (int i = 0; i < div.size(); i++) {
+        for (int i = 1; i < div.size(); i++) {
             Element element = div.get(i);
             //0:播 音：内详
-            if(i==0){
+            if(i==1){
                 String announcer = element.text().replace("播 音：","").trim();
                 novel.setAnnouncer(announcer);
             }
             //1:作 者：最美书女
-            if(i==1){
+            if(i==2){
                 String author = element.text().replace("作 者：","").trim();
                 novel.setAuthor(author);
             }
             //2:推荐等级：
             //3:小说类型：恐怖
-            if(i==3){
+            if(i==4){
                 String categoryName = element.text().replace("小说类型：","").trim();
                 novel.setCategoryName(categoryName);
             }
             //4:更新时间：2019-09-26 13:07
-            if(i==4){
+            if(i==5){
                 String updateTime = element.text().replace("更新时间：","").trim();
                 novel.setUpdateTime(updateTime);
             }
             //5:更新状态：完结
-            if(i==5){
+            if(i==6){
                 String memo = element.text().replace("更新状态：","").trim();
                 novel.setMemo(memo);
             }
@@ -81,6 +83,9 @@ public class ETingShuUtils {
 
         }
         novel.setNovelItems(items(contentright));
+        novel.setItemCount(novel.getNovelItems().size());
+        System.out.println(JsonUtils.toJson(novel.getNovelItems()));
+        System.out.println("ok================================================"+id);
         return novel;
     }
 
@@ -92,10 +97,10 @@ public class ETingShuUtils {
         for (int i = 0; i < a.size(); i++) {
             if(StringUtils.isNotBlank(a.attr("href"))){
                 NovelItem novelItem = new NovelItem();
-                novelItem.setUrl("https://www.etingshu.com"+a.attr("href"));
+                novelItem.setUrl("https://www.etingshu.com"+a.get(i).attr("href"));
                 novelItem.setType("etingshu");
                 novelItem.setOrder(++order);
-                novelItem.setTitle(a.text());
+                novelItem.setTitle(a.get(i).text());
                 novelItem.setResourceUrl(mp3(novelItem.getUrl()));
                 novelItems.add(novelItem);
             }
@@ -112,14 +117,11 @@ public class ETingShuUtils {
         s = s.substring("unescape".length()+2);
         s = s.substring(0,s.length()-2);
         s = s.replace("%3A%2F%2F","://").replaceAll("%2F","/");
-        System.out.println(s);
         return s;
-
-
     }
 
 
     public static void main(String[] args) {
-        detail(1L);
+        detail(2L);
     }
 }

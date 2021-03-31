@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 
 class Http {
-  static const String baseUrl = "http://172.16.12.223:9000/";
+  // static const String baseUrl = "http://172.16.12.223:9000/";
 
-  // static const String baseUrl = "http://192.168.0.108:9000/";
+  static const String baseUrl = "http://192.168.0.106:9000/";
 
   static void get(url, callback) {
     print("==========================url");
