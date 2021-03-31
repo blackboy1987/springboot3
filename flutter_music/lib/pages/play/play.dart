@@ -361,7 +361,7 @@ class _PlayState extends State<Play> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        Text("共1234集"),
+                                        Text("共${data["items"].length}集"),
                                         Container(
                                           child: Row(
                                             crossAxisAlignment:
