@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/constant/MyColor.dart';
+import 'package:flutter_music/util/http.dart';
 
 class Play extends StatefulWidget {
+  final Map arguments;
+
+  Play({Key key, this.arguments}) : super(key: key);
+
   @override
-  _PlayState createState() => _PlayState();
+  _PlayState createState() => _PlayState(this.arguments);
 }
 
 class _PlayState extends State<Play> {
@@ -12,6 +17,31 @@ class _PlayState extends State<Play> {
   double currentSeconds = 0;
   double totalSeconds = 23840;
 
+  final Map arguments;
+
+  Map data = {};
+
+  _PlayState(this.arguments);
+
+  void load() {
+    Http.get(
+      "detail?id=${this.arguments["id"]}",
+      (result) {
+        setState(() {
+          data = result["data"];
+          print(result["data"]);
+        });
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    load();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +49,7 @@ class _PlayState extends State<Play> {
         elevation: 0.0,
         backgroundColor: MyColor.playAppBarColor,
         title: Text(
-          '女教师的超级高手',
+          data["title"]??'',
           style: TextStyle(
             color: MyColor.playAppBarTextColor,
           ),
@@ -59,7 +89,7 @@ class _PlayState extends State<Play> {
                   borderRadius: BorderRadius.circular(20.0),
                   image: DecorationImage(
                     image: NetworkImage(
-                      "https://img.tingchina.com/bookimg/yousheng/30854.gif",
+                      data["img"]??'',
                     ),
                     fit: BoxFit.fill,
                   ),

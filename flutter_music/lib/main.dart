@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 var routes = {
   '/': (BuildContext context) => Index(),
   '/app': (BuildContext context) => Index(),
-  '/play': (BuildContext context) => Play(),
+  '/play': (BuildContext context, {arguments}) => Play(arguments: arguments),
 };
 
 class _MyAppState extends State<MyApp> {
@@ -22,25 +22,23 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       initialRoute: 'app',
-      onGenerateRoute: onGenerateRoute,
+      onGenerateRoute: (settings) {
+        final String name = settings.name;
+        final Function pageContentBuilder = routes[name];
+        if (pageContentBuilder != null) {
+          if (settings.arguments != null) {
+            final Route route = MaterialPageRoute(
+                builder: (context) =>
+                    pageContentBuilder(context, arguments: settings.arguments));
+            //放回路由组件对象
+            return route;
+          } else {
+            final Route route = MaterialPageRoute(
+                builder: (context) => pageContentBuilder(context));
+            return route;
+          }
+        }
+      },
     );
   }
 }
-
-var onGenerateRoute = (RouteSettings setting) {
-  print('$setting');
-  final String name = setting.name;
-  final Function pageContentBuilder = routes[name];
-  if (pageContentBuilder != null) {
-    if (setting.arguments != null) {
-      final Route route = MaterialPageRoute(
-          builder: (context) =>
-              pageContentBuilder(context, arguments: setting.arguments));
-      return route;
-    } else {
-      final Route route =
-      MaterialPageRoute(builder: (context) => pageContentBuilder(context));
-      return route;
-    }
-  }
-};
