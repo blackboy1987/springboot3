@@ -120,12 +120,8 @@ public class IndexController {
         if(categoryId==null){
             categoryId =0L;
         }
-        if(categoryId!=0L){
-            pageable.setPageSize(10);
-            return Result.success(jdbcTemplate.queryForList("select id,title,img,itemCount,content,readCount from novel where novelCategory_id="+categoryId+" or novelCategory_id in (select id from novelcategory where parent_id="+categoryId+") limit "+(pageable.getPageNumber()-1)*pageable.getPageSize()+", "+pageable.getPageSize()));
-        }
         pageable.setPageSize(10);
-        return Result.success(jdbcTemplate.queryForList("select id,title,img,itemCount,content,readCount from novel where novelCategory_id=1 or novelCategory_id in (select id from novelcategory where parent_id=1) limit "+(pageable.getPageNumber()-1)*pageable.getPageSize()+", "+pageable.getPageSize()));
+        return Result.success(jdbcTemplate.queryForList("select id,title,img,itemCount,content,readCount from novel where novelCategory_id="+categoryId+" or novelCategory_id in (select id from novelcategory where parent_id="+categoryId+") limit "+(pageable.getPageNumber()-1)*pageable.getPageSize()+", "+pageable.getPageSize()));
     }
 
     @GetMapping("/list1")
@@ -215,11 +211,15 @@ public class IndexController {
     public String init1(){
         List<Novel> novels = novelService.findAll();
         novels.stream().forEach(item->{
-            item.setCommentCount(RandomUtils.nextLong(100,2000));
-            item.setCollectionCount(RandomUtils.nextLong(2000,100000));
-            item.setReadCount(RandomUtils.nextLong(10000,100000000));
+            if(item.getReadCount()==null){
+                new Thread(()->{
+                    item.setCommentCount(RandomUtils.nextLong(100,2000));
+                    item.setCollectionCount(RandomUtils.nextLong(2000,100000));
+                    item.setReadCount(RandomUtils.nextLong(10000,100000000));
 
-            novelService.update(item);
+                    novelService.update(item);
+                }).start();
+            }
         });
 
 

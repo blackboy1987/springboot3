@@ -7,8 +7,7 @@ class Play extends StatefulWidget {
 }
 
 class _PlayState extends State<Play> {
-
-  double _currentRate=0;
+  double _currentRate = 0;
 
   double currentSeconds = 0;
   double totalSeconds = 23840;
@@ -183,7 +182,7 @@ class _PlayState extends State<Play> {
                       max: totalSeconds,
                       onChanged: (val) {
                         setState(() {
-                          _currentRate= val;
+                          _currentRate = val;
                         });
                       },
                     ),
@@ -199,11 +198,9 @@ class _PlayState extends State<Play> {
   }
 
   String formatTime(double totalSeconds) {
-
-    print(totalSeconds%60);
-    print(totalSeconds/60);
+    print(totalSeconds % 60);
+    print(totalSeconds / 60);
 
     return "123:00";
-
   }
 }
