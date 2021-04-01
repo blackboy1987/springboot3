@@ -7,12 +7,6 @@ import java.util.List;
 
 public class Demo {
 
-    /**
-     * Code : 200
-     * Data : {"app":"微信","info":"info","admin":"岁岁热剧","site":{"message":{"radio":"1","tmpIds":"m9Tnwq3Ep3gNgKlhV8HYc1xc4Xk_15_-NbwPmP2tbI4"},"sharepic":"","kefu":{"type":"1","url":"https://dl.yulu123.xyz/upload/vod/20201125-1/c33f4fbe36c815cacbfec5a826391350.jpeg"},"share":{"type":"0","wxText":""},"platform":"0","ip":{"radio":"1","text":"腾讯云"},"login":{"radio":"0","num":""}},"index":{"wxAdId":{"cpId":"adunit-480cbd6aaa7ff814","ysId":"adunit-e9211ec2715058f8"},"tanchuang":{"radio":"0","type":"2","image":"","url":""},"share":{"title":"","image":""},"notice":"","more":"1"},"detail":{"play":{"radio":"0","APPID":""},"douban":"1","dbUpdate":"1","dbStills":"1","gg":{"radio":"0","type":"0","image":"","url":""},"wxAdId":{"cpId":"adunit-480cbd6aaa7ff814","ysId":"adunit-e9211ec2715058f8","jlspId":""},"adMsg":{"start":"","close":""}},"feilei":{"wxAdId":{"ysId":"adunit-3a8a1b9ec6526a5c","cpId":"adunit-480cbd6aaa7ff814"},"type_class":"[{\r\n\t\"type_name\": \"连续剧\",\r\n\t\"type_id\": \"2\",\r\n\t\"type_extend\": {\r\n\t\t\"class\": [\"全部\", \"言情\", \"喜剧\", \"悬疑\", \"都市\", \"偶像\", \"古装\", \"军事\", \"警匪\", \"历史\", \"励志\", \"神话\", \"谍战\", \"青春\", \"家庭\", \"动作\", \"情景\", \"武侠\",\r\n\t\t\t\"科幻\", \"其他\"\r\n\t\t],\r\n\t\t\"area\": [\"全部\", \"大陆\", \"美国\", \"香港\", \"台湾\", \"韩国\", \"泰国\", \"日本\", \"英国\", \"新加坡\"],\r\n\t\t\"lang\": \"全部,国语,英语,粤语,闽南语,韩语,日语,其它\",\r\n\t\t\"year\": [\"全部\", \"2020\", \"2019\", \"2018\", \"2017\", \"2016\", \"2015\", \"2014\", \"2013\", \"2012\", \"2011\", \"2010\", \"2009\",\r\n\t\t\t\"2008\", \"2006\", \"2005\", \"2004\"\r\n\t\t]\r\n\t}\r\n}, {\r\n\t\"type_name\": \"电影\",\r\n\t\"type_id\": \"1\",\r\n\t\"type_extend\": {\r\n\t\t\"class\": [\"全部\", \"喜剧\", \"爱情\", \"动作\", \"恐怖\", \"科幻\", \"剧情\", \"犯罪\", \"奇幻\", \"战争\", \"悬疑\", \"动画\", \"文艺\", \"伦理\", \"纪录\", \"传记\", \"歌舞\", \"古装\",\r\n\t\t\t\"历史\", \"惊悚\", \"其他\"\r\n\t\t],\r\n\t\t\"area\": [\"全部\", \"大陆\", \"美国\", \"香港\", \"韩国\", \"日本\", \"法国\", \"英国\", \"德国\", \"台湾\", \"泰国\", \"印度\", \"其他\"],\r\n\t\t\"year\": [\"全部\", \"2020\", \"2019\", \"2018\", \"2017\", \"2016\", \"2015\", \"2014\", \"2013\", \"2012\", \"2011\", \"2010\"]\r\n\t}\r\n}, {\r\n\t\"type_name\": \"综艺\",\r\n\t\"type_id\": \"3\",\r\n\t\"type_extend\": {\r\n\t\t\"class\": [\"全部\", \"选秀\", \"情感\", \"访谈\", \"播报\", \"旅游\", \"音乐\", \"美食\", \"纪实\", \"曲艺\", \"生活\", \"游戏互动\", \"财经\", \"求职\", \"其他\"],\r\n\t\t\"area\": [\"全部\", \"内地\", \"港台\", \"日韩\", \"欧美\", \"其他\"],\r\n\t\t\"year\": [\"全部\", \"2020\", \"2019\", \"2018\", \"2017\", \"2016\", \"2015\", \"2014\", \"2013\", \"2012\", \"2011\", \"2010\"]\r\n\t}\r\n}, {\r\n\t\"type_name\": \"动漫\",\r\n\t\"type_id\": \"4\",\r\n\t\"type_extend\": {\r\n\t\t\"class\": [\"全部\", \"热血\", \"科幻\", \"美少女\", \"魔幻\", \"经典\", \"励志\", \"少儿\", \"冒险\", \"搞笑\", \"推理\", \"恋爱\", \"治愈\", \"幻想\", \"校园\", \"动物\", \"机战\",\r\n\t\t\t\"亲子\", \"儿歌\", \"运动\", \"悬疑\", \"怪物\", \"战争\", \"益智\", \"青春\", \"童话\", \"竞技\", \"动作\", \"社会\", \"友情\", \"真人版\", \"电影版\", \"OVA版\", \"TV版\", \"新番动画\",\r\n\t\t\t\"完结动画\"\r\n\t\t],\r\n\t\t\"area\": [\"全部\", \"日本\", \"美国\", \"大陆\"],\r\n\t\t\"lang\": \"全部,国语,英语,粤语,闽南语,韩语,日语,其它\",\r\n\t\t\"year\": [\"全部\", \"2020\", \"2019\", \"2018\", \"2017\", \"2016\", \"2015\", \"2014\", \"2013\", \"2012\", \"2011\", \"2010\", \"2009\",\r\n\t\t\t\"2008\", \"2007\", \"2006\", \"2005\", \"2004\"\r\n\t\t]\r\n\t}\r\n}]"},"topic":{"wxAdId":{"ysId":"adunit-e9211ec2715058f8","cpId":"adunit-480cbd6aaa7ff814"},"tags":""},"play":{"isPoints":"1","enforce":"0","second":"","num":"","interval":0,"adMsg":{"start":"","close":""},"gg":{"radio":"0","type":"0","image":"","url":""},"wxAdId":{"jlspId":"adunit-c5ecca0f90e19f5a","cpId":"adunit-480cbd6aaa7ff814","spqtId":"adunit-4077ea75079b2394","ysId":"adunit-e9211ec2715058f8"},"vodPlayer":{"id":["qq","qiyi","youku","mgtv","dbm3u8","bjm3u8","tkm3u8","zuidam3u8"],"title":["tx线路","qy线路","yk线路","mg线路","db线路","bj线路","tk线路","zd线路"]}},"wode":{"gg":{"radio":"0","type":"2","image":"https://dl.yulu123.xyz/upload/vod/20201125-1/b0e8f9992929a88a39f6fad80b23d9c4.png","url":""},"statement":"","wxAdId":{"ysId":"adunit-e9211ec2715058f8"},"more":{"radio":"0"}},"other":{"wxAdId":{"cpId":"adunit-480cbd6aaa7ff814","ysId":"adunit-e9211ec2715058f8"}},"wxverify":true,"check":"get"}
-     * msg :
-     */
-
     @JsonProperty("Code")
     private Integer Code;
     @JsonProperty("Data")
@@ -45,22 +39,6 @@ public class Demo {
     }
 
     public static class DataDTO {
-        /**
-         * app : 微信
-         * info : info
-         * admin : 岁岁热剧
-         * site : {"message":{"radio":"1","tmpIds":"m9Tnwq3Ep3gNgKlhV8HYc1xc4Xk_15_-NbwPmP2tbI4"},"sharepic":"","kefu":{"type":"1","url":"https://dl.yulu123.xyz/upload/vod/20201125-1/c33f4fbe36c815cacbfec5a826391350.jpeg"},"share":{"type":"0","wxText":""},"platform":"0","ip":{"radio":"1","text":"腾讯云"},"login":{"radio":"0","num":""}}
-         * index : {"wxAdId":{"cpId":"adunit-480cbd6aaa7ff814","ysId":"adunit-e9211ec2715058f8"},"tanchuang":{"radio":"0","type":"2","image":"","url":""},"share":{"title":"","image":""},"notice":"","more":"1"}
-         * detail : {"play":{"radio":"0","APPID":""},"douban":"1","dbUpdate":"1","dbStills":"1","gg":{"radio":"0","type":"0","image":"","url":""},"wxAdId":{"cpId":"adunit-480cbd6aaa7ff814","ysId":"adunit-e9211ec2715058f8","jlspId":""},"adMsg":{"start":"","close":""}}
-         * feilei : {"wxAdId":{"ysId":"adunit-3a8a1b9ec6526a5c","cpId":"adunit-480cbd6aaa7ff814"},"type_class":"[{\r\n\t\"type_name\": \"连续剧\",\r\n\t\"type_id\": \"2\",\r\n\t\"type_extend\": {\r\n\t\t\"class\": [\"全部\", \"言情\", \"喜剧\", \"悬疑\", \"都市\", \"偶像\", \"古装\", \"军事\", \"警匪\", \"历史\", \"励志\", \"神话\", \"谍战\", \"青春\", \"家庭\", \"动作\", \"情景\", \"武侠\",\r\n\t\t\t\"科幻\", \"其他\"\r\n\t\t],\r\n\t\t\"area\": [\"全部\", \"大陆\", \"美国\", \"香港\", \"台湾\", \"韩国\", \"泰国\", \"日本\", \"英国\", \"新加坡\"],\r\n\t\t\"lang\": \"全部,国语,英语,粤语,闽南语,韩语,日语,其它\",\r\n\t\t\"year\": [\"全部\", \"2020\", \"2019\", \"2018\", \"2017\", \"2016\", \"2015\", \"2014\", \"2013\", \"2012\", \"2011\", \"2010\", \"2009\",\r\n\t\t\t\"2008\", \"2006\", \"2005\", \"2004\"\r\n\t\t]\r\n\t}\r\n}, {\r\n\t\"type_name\": \"电影\",\r\n\t\"type_id\": \"1\",\r\n\t\"type_extend\": {\r\n\t\t\"class\": [\"全部\", \"喜剧\", \"爱情\", \"动作\", \"恐怖\", \"科幻\", \"剧情\", \"犯罪\", \"奇幻\", \"战争\", \"悬疑\", \"动画\", \"文艺\", \"伦理\", \"纪录\", \"传记\", \"歌舞\", \"古装\",\r\n\t\t\t\"历史\", \"惊悚\", \"其他\"\r\n\t\t],\r\n\t\t\"area\": [\"全部\", \"大陆\", \"美国\", \"香港\", \"韩国\", \"日本\", \"法国\", \"英国\", \"德国\", \"台湾\", \"泰国\", \"印度\", \"其他\"],\r\n\t\t\"year\": [\"全部\", \"2020\", \"2019\", \"2018\", \"2017\", \"2016\", \"2015\", \"2014\", \"2013\", \"2012\", \"2011\", \"2010\"]\r\n\t}\r\n}, {\r\n\t\"type_name\": \"综艺\",\r\n\t\"type_id\": \"3\",\r\n\t\"type_extend\": {\r\n\t\t\"class\": [\"全部\", \"选秀\", \"情感\", \"访谈\", \"播报\", \"旅游\", \"音乐\", \"美食\", \"纪实\", \"曲艺\", \"生活\", \"游戏互动\", \"财经\", \"求职\", \"其他\"],\r\n\t\t\"area\": [\"全部\", \"内地\", \"港台\", \"日韩\", \"欧美\", \"其他\"],\r\n\t\t\"year\": [\"全部\", \"2020\", \"2019\", \"2018\", \"2017\", \"2016\", \"2015\", \"2014\", \"2013\", \"2012\", \"2011\", \"2010\"]\r\n\t}\r\n}, {\r\n\t\"type_name\": \"动漫\",\r\n\t\"type_id\": \"4\",\r\n\t\"type_extend\": {\r\n\t\t\"class\": [\"全部\", \"热血\", \"科幻\", \"美少女\", \"魔幻\", \"经典\", \"励志\", \"少儿\", \"冒险\", \"搞笑\", \"推理\", \"恋爱\", \"治愈\", \"幻想\", \"校园\", \"动物\", \"机战\",\r\n\t\t\t\"亲子\", \"儿歌\", \"运动\", \"悬疑\", \"怪物\", \"战争\", \"益智\", \"青春\", \"童话\", \"竞技\", \"动作\", \"社会\", \"友情\", \"真人版\", \"电影版\", \"OVA版\", \"TV版\", \"新番动画\",\r\n\t\t\t\"完结动画\"\r\n\t\t],\r\n\t\t\"area\": [\"全部\", \"日本\", \"美国\", \"大陆\"],\r\n\t\t\"lang\": \"全部,国语,英语,粤语,闽南语,韩语,日语,其它\",\r\n\t\t\"year\": [\"全部\", \"2020\", \"2019\", \"2018\", \"2017\", \"2016\", \"2015\", \"2014\", \"2013\", \"2012\", \"2011\", \"2010\", \"2009\",\r\n\t\t\t\"2008\", \"2007\", \"2006\", \"2005\", \"2004\"\r\n\t\t]\r\n\t}\r\n}]"}
-         * topic : {"wxAdId":{"ysId":"adunit-e9211ec2715058f8","cpId":"adunit-480cbd6aaa7ff814"},"tags":""}
-         * play : {"isPoints":"1","enforce":"0","second":"","num":"","interval":0,"adMsg":{"start":"","close":""},"gg":{"radio":"0","type":"0","image":"","url":""},"wxAdId":{"jlspId":"adunit-c5ecca0f90e19f5a","cpId":"adunit-480cbd6aaa7ff814","spqtId":"adunit-4077ea75079b2394","ysId":"adunit-e9211ec2715058f8"},"vodPlayer":{"id":["qq","qiyi","youku","mgtv","dbm3u8","bjm3u8","tkm3u8","zuidam3u8"],"title":["tx线路","qy线路","yk线路","mg线路","db线路","bj线路","tk线路","zd线路"]}}
-         * wode : {"gg":{"radio":"0","type":"2","image":"https://dl.yulu123.xyz/upload/vod/20201125-1/b0e8f9992929a88a39f6fad80b23d9c4.png","url":""},"statement":"","wxAdId":{"ysId":"adunit-e9211ec2715058f8"},"more":{"radio":"0"}}
-         * other : {"wxAdId":{"cpId":"adunit-480cbd6aaa7ff814","ysId":"adunit-e9211ec2715058f8"}}
-         * wxverify : true
-         * check : get
-         */
-
         @JsonProperty("app")
         private String app;
         @JsonProperty("info")
@@ -193,16 +171,6 @@ public class Demo {
         }
 
         public static class SiteDTO {
-            /**
-             * message : {"radio":"1","tmpIds":"m9Tnwq3Ep3gNgKlhV8HYc1xc4Xk_15_-NbwPmP2tbI4"}
-             * sharepic :
-             * kefu : {"type":"1","url":"https://dl.yulu123.xyz/upload/vod/20201125-1/c33f4fbe36c815cacbfec5a826391350.jpeg"}
-             * share : {"type":"0","wxText":""}
-             * platform : 0
-             * ip : {"radio":"1","text":"腾讯云"}
-             * login : {"radio":"0","num":""}
-             */
-
             @JsonProperty("message")
             private MessageDTO message;
             @JsonProperty("sharepic")
@@ -275,11 +243,6 @@ public class Demo {
             }
 
             public static class MessageDTO {
-                /**
-                 * radio : 1
-                 * tmpIds : m9Tnwq3Ep3gNgKlhV8HYc1xc4Xk_15_-NbwPmP2tbI4
-                 */
-
                 @JsonProperty("radio")
                 private String radio;
                 @JsonProperty("tmpIds")
@@ -303,11 +266,6 @@ public class Demo {
             }
 
             public static class KefuDTO {
-                /**
-                 * type : 1
-                 * url : https://dl.yulu123.xyz/upload/vod/20201125-1/c33f4fbe36c815cacbfec5a826391350.jpeg
-                 */
-
                 @JsonProperty("type")
                 private String type;
                 @JsonProperty("url")
@@ -331,11 +289,6 @@ public class Demo {
             }
 
             public static class ShareDTO {
-                /**
-                 * type : 0
-                 * wxText :
-                 */
-
                 @JsonProperty("type")
                 private String type;
                 @JsonProperty("wxText")
@@ -359,11 +312,6 @@ public class Demo {
             }
 
             public static class IpDTO {
-                /**
-                 * radio : 1
-                 * text : 腾讯云
-                 */
-
                 @JsonProperty("radio")
                 private String radio;
                 @JsonProperty("text")
@@ -387,11 +335,6 @@ public class Demo {
             }
 
             public static class LoginDTO {
-                /**
-                 * radio : 0
-                 * num :
-                 */
-
                 @JsonProperty("radio")
                 private String radio;
                 @JsonProperty("num")
@@ -416,14 +359,6 @@ public class Demo {
         }
 
         public static class IndexDTO {
-            /**
-             * wxAdId : {"cpId":"adunit-480cbd6aaa7ff814","ysId":"adunit-e9211ec2715058f8"}
-             * tanchuang : {"radio":"0","type":"2","image":"","url":""}
-             * share : {"title":"","image":""}
-             * notice :
-             * more : 1
-             */
-
             @JsonProperty("wxAdId")
             private WxAdIdDTO wxAdId;
             @JsonProperty("tanchuang")
@@ -476,11 +411,6 @@ public class Demo {
             }
 
             public static class WxAdIdDTO {
-                /**
-                 * cpId : adunit-480cbd6aaa7ff814
-                 * ysId : adunit-e9211ec2715058f8
-                 */
-
                 @JsonProperty("cpId")
                 private String cpId;
                 @JsonProperty("ysId")
@@ -504,13 +434,6 @@ public class Demo {
             }
 
             public static class TanchuangDTO {
-                /**
-                 * radio : 0
-                 * type : 2
-                 * image :
-                 * url :
-                 */
-
                 @JsonProperty("radio")
                 private String radio;
                 @JsonProperty("type")
@@ -554,11 +477,6 @@ public class Demo {
             }
 
             public static class ShareDTO {
-                /**
-                 * title :
-                 * image :
-                 */
-
                 @JsonProperty("title")
                 private String title;
                 @JsonProperty("image")
@@ -583,16 +501,6 @@ public class Demo {
         }
 
         public static class DetailDTO {
-            /**
-             * play : {"radio":"0","APPID":""}
-             * douban : 1
-             * dbUpdate : 1
-             * dbStills : 1
-             * gg : {"radio":"0","type":"0","image":"","url":""}
-             * wxAdId : {"cpId":"adunit-480cbd6aaa7ff814","ysId":"adunit-e9211ec2715058f8","jlspId":""}
-             * adMsg : {"start":"","close":""}
-             */
-
             @JsonProperty("play")
             private PlayDTO play;
             @JsonProperty("douban")
@@ -665,11 +573,6 @@ public class Demo {
             }
 
             public static class PlayDTO {
-                /**
-                 * radio : 0
-                 * APPID :
-                 */
-
                 @JsonProperty("radio")
                 private String radio;
                 @JsonProperty("APPID")
@@ -693,13 +596,6 @@ public class Demo {
             }
 
             public static class GgDTO {
-                /**
-                 * radio : 0
-                 * type : 0
-                 * image :
-                 * url :
-                 */
-
                 @JsonProperty("radio")
                 private String radio;
                 @JsonProperty("type")
@@ -743,12 +639,6 @@ public class Demo {
             }
 
             public static class WxAdIdDTO {
-                /**
-                 * cpId : adunit-480cbd6aaa7ff814
-                 * ysId : adunit-e9211ec2715058f8
-                 * jlspId :
-                 */
-
                 @JsonProperty("cpId")
                 private String cpId;
                 @JsonProperty("ysId")
@@ -782,11 +672,6 @@ public class Demo {
             }
 
             public static class AdMsgDTO {
-                /**
-                 * start :
-                 * close :
-                 */
-
                 @JsonProperty("start")
                 private String start;
                 @JsonProperty("close")
@@ -811,55 +696,6 @@ public class Demo {
         }
 
         public static class FeileiDTO {
-            /**
-             * wxAdId : {"ysId":"adunit-3a8a1b9ec6526a5c","cpId":"adunit-480cbd6aaa7ff814"}
-             * type_class : [{
-             "type_name": "连续剧",
-             "type_id": "2",
-             "type_extend": {
-             "class": ["全部", "言情", "喜剧", "悬疑", "都市", "偶像", "古装", "军事", "警匪", "历史", "励志", "神话", "谍战", "青春", "家庭", "动作", "情景", "武侠",
-             "科幻", "其他"
-             ],
-             "area": ["全部", "大陆", "美国", "香港", "台湾", "韩国", "泰国", "日本", "英国", "新加坡"],
-             "lang": "全部,国语,英语,粤语,闽南语,韩语,日语,其它",
-             "year": ["全部", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009",
-             "2008", "2006", "2005", "2004"
-             ]
-             }
-             }, {
-             "type_name": "电影",
-             "type_id": "1",
-             "type_extend": {
-             "class": ["全部", "喜剧", "爱情", "动作", "恐怖", "科幻", "剧情", "犯罪", "奇幻", "战争", "悬疑", "动画", "文艺", "伦理", "纪录", "传记", "歌舞", "古装",
-             "历史", "惊悚", "其他"
-             ],
-             "area": ["全部", "大陆", "美国", "香港", "韩国", "日本", "法国", "英国", "德国", "台湾", "泰国", "印度", "其他"],
-             "year": ["全部", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010"]
-             }
-             }, {
-             "type_name": "综艺",
-             "type_id": "3",
-             "type_extend": {
-             "class": ["全部", "选秀", "情感", "访谈", "播报", "旅游", "音乐", "美食", "纪实", "曲艺", "生活", "游戏互动", "财经", "求职", "其他"],
-             "area": ["全部", "内地", "港台", "日韩", "欧美", "其他"],
-             "year": ["全部", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010"]
-             }
-             }, {
-             "type_name": "动漫",
-             "type_id": "4",
-             "type_extend": {
-             "class": ["全部", "热血", "科幻", "美少女", "魔幻", "经典", "励志", "少儿", "冒险", "搞笑", "推理", "恋爱", "治愈", "幻想", "校园", "动物", "机战",
-             "亲子", "儿歌", "运动", "悬疑", "怪物", "战争", "益智", "青春", "童话", "竞技", "动作", "社会", "友情", "真人版", "电影版", "OVA版", "TV版", "新番动画",
-             "完结动画"
-             ],
-             "area": ["全部", "日本", "美国", "大陆"],
-             "lang": "全部,国语,英语,粤语,闽南语,韩语,日语,其它",
-             "year": ["全部", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009",
-             "2008", "2007", "2006", "2005", "2004"
-             ]
-             }
-             }]
-             */
 
             @JsonProperty("wxAdId")
             private WxAdIdDTO wxAdId;
@@ -883,11 +719,6 @@ public class Demo {
             }
 
             public static class WxAdIdDTO {
-                /**
-                 * ysId : adunit-3a8a1b9ec6526a5c
-                 * cpId : adunit-480cbd6aaa7ff814
-                 */
-
                 @JsonProperty("ysId")
                 private String ysId;
                 @JsonProperty("cpId")
@@ -939,11 +770,6 @@ public class Demo {
             }
 
             public static class WxAdIdDTO {
-                /**
-                 * ysId : adunit-e9211ec2715058f8
-                 * cpId : adunit-480cbd6aaa7ff814
-                 */
-
                 @JsonProperty("ysId")
                 private String ysId;
                 @JsonProperty("cpId")
@@ -968,17 +794,6 @@ public class Demo {
         }
 
         public static class PlayDTO {
-            /**
-             * isPoints : 1
-             * enforce : 0
-             * second :
-             * num :
-             * interval : 0
-             * adMsg : {"start":"","close":""}
-             * gg : {"radio":"0","type":"0","image":"","url":""}
-             * wxAdId : {"jlspId":"adunit-c5ecca0f90e19f5a","cpId":"adunit-480cbd6aaa7ff814","spqtId":"adunit-4077ea75079b2394","ysId":"adunit-e9211ec2715058f8"}
-             * vodPlayer : {"id":["qq","qiyi","youku","mgtv","dbm3u8","bjm3u8","tkm3u8","zuidam3u8"],"title":["tx线路","qy线路","yk线路","mg线路","db线路","bj线路","tk线路","zd线路"]}
-             */
 
             @JsonProperty("isPoints")
             private String isPoints;
@@ -1100,13 +915,6 @@ public class Demo {
             }
 
             public static class GgDTO {
-                /**
-                 * radio : 0
-                 * type : 0
-                 * image :
-                 * url :
-                 */
-
                 @JsonProperty("radio")
                 private String radio;
                 @JsonProperty("type")
@@ -1150,13 +958,6 @@ public class Demo {
             }
 
             public static class WxAdIdDTO {
-                /**
-                 * jlspId : adunit-c5ecca0f90e19f5a
-                 * cpId : adunit-480cbd6aaa7ff814
-                 * spqtId : adunit-4077ea75079b2394
-                 * ysId : adunit-e9211ec2715058f8
-                 */
-
                 @JsonProperty("jlspId")
                 private String jlspId;
                 @JsonProperty("cpId")
@@ -1224,13 +1025,6 @@ public class Demo {
         }
 
         public static class WodeDTO {
-            /**
-             * gg : {"radio":"0","type":"2","image":"https://dl.yulu123.xyz/upload/vod/20201125-1/b0e8f9992929a88a39f6fad80b23d9c4.png","url":""}
-             * statement :
-             * wxAdId : {"ysId":"adunit-e9211ec2715058f8"}
-             * more : {"radio":"0"}
-             */
-
             @JsonProperty("gg")
             private GgDTO gg;
             @JsonProperty("statement")
@@ -1273,13 +1067,6 @@ public class Demo {
             }
 
             public static class GgDTO {
-                /**
-                 * radio : 0
-                 * type : 2
-                 * image : https://dl.yulu123.xyz/upload/vod/20201125-1/b0e8f9992929a88a39f6fad80b23d9c4.png
-                 * url :
-                 */
-
                 @JsonProperty("radio")
                 private String radio;
                 @JsonProperty("type")
@@ -1323,10 +1110,6 @@ public class Demo {
             }
 
             public static class WxAdIdDTO {
-                /**
-                 * ysId : adunit-e9211ec2715058f8
-                 */
-
                 @JsonProperty("ysId")
                 private String ysId;
 
@@ -1340,10 +1123,6 @@ public class Demo {
             }
 
             public static class MoreDTO {
-                /**
-                 * radio : 0
-                 */
-
                 @JsonProperty("radio")
                 private String radio;
 
@@ -1358,9 +1137,6 @@ public class Demo {
         }
 
         public static class OtherDTO {
-            /**
-             * wxAdId : {"cpId":"adunit-480cbd6aaa7ff814","ysId":"adunit-e9211ec2715058f8"}
-             */
 
             @JsonProperty("wxAdId")
             private WxAdIdDTO wxAdId;
@@ -1374,10 +1150,6 @@ public class Demo {
             }
 
             public static class WxAdIdDTO {
-                /**
-                 * cpId : adunit-480cbd6aaa7ff814
-                 * ysId : adunit-e9211ec2715058f8
-                 */
 
                 @JsonProperty("cpId")
                 private String cpId;
