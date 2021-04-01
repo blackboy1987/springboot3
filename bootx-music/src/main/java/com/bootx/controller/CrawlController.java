@@ -82,7 +82,7 @@ public class CrawlController {
 
     @GetMapping("/etingshu")
     public Result etingshu() {
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
         for (Long i = 1L; i < 30000L; i++) {
             Long finalI = i;
             fixedThreadPool.execute(()->{

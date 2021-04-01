@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_music/components/dialog/message_config.dart';
+import 'package:flutter_music/components/dialog/my_dialog.dart';
 import 'package:flutter_music/constant/MyColor.dart';
 import 'package:flutter_music/iconfont/icon_font.dart';
 import 'package:flutter_music/util/http.dart';
@@ -289,247 +291,252 @@ class _PlayState extends State<Play> {
               height: 60,
             ),
             Container(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Icon(
-                        Icons.favorite_border,
-                        color: Color(0xFF2c2c2c),
-                      ),
-                      Container(
-                        width: 4,
-                      ),
-                      Text(
-                        '收藏',
-                        style: TextStyle(
-                          color: Color(0xFF6e6a6b),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Icon(
-                        Icons.timer,
-                        color: Color(0xFF2c2c2c),
-                      ),
-                      Container(
-                        width: 4,
-                      ),
-                      Text(
-                        '定时',
-                        style: TextStyle(
-                          color: Color(0xFF6e6a6b),
-                        ),
-                      ),
-                    ],
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Container(
-                            height: MediaQuery.of(context).size.height * 0.5,
-                            child: ListView.separated(
-                                controller: new ScrollController(
-                                  keepScrollOffset: true,
-                                ),
-                                itemBuilder: (context, index) {
-                                  return ListTile(
-                                    onTap: () {
-                                      setState(() {
-                                        _currentRateIndex = index;
-                                        _audioPlayer.setPlaybackRate(
-                                            playbackRate: rates[index]);
-                                        Navigator.of(context).pop();
-                                      });
-                                    },
-                                    title: Text('${rates[index]} 倍'),
-                                    trailing: index==_currentRateIndex ? Icon(Icons.done) : null,
-                                  );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return Divider(
-                                    color: Colors.red,
-                                  );
-                                },
-                                itemCount: rates.length),
-                          );
-                        },
-                      );
-                    },
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        rateIcons[_currentRateIndex],
-                        Container(
-                          width: 4,
-                        ),
-                        Text(
-                          '倍速',
-                          style: TextStyle(
-                            color: Color(0xFF6e6a6b),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTapDown: (TapDownDetails details) {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xFFe2e2e2).withAlpha(100),
-                              ),
-                              child: Column(
-                                children: <Widget>[
-                                  Container(
-                                    height: 60,
-                                    padding: EdgeInsets.only(
-                                      left: 32.0,
-                                      right: 32.0,
-                                    ),
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                      border: Border(
-                                        bottom: BorderSide(
-                                          width: 2.0,
-                                          color: Color(0xFFafafaf),
-                                        ),
-                                      ),
-                                    ),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Text("共${data["items"].length}集"),
-                                        Container(
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: <Widget>[
-                                              IconButton(
-                                                icon:
-                                                    Icon(Icons.cloud_download),
-                                              ),
-                                              GestureDetector(
-                                                child: Text(" 批量下载"),
-                                              ),
-                                              Container(
-                                                width: 10,
-                                              ),
-                                              IconButton(
-                                                  icon: Icon(Icons.list)),
-                                              GestureDetector(
-                                                  child: Text(" 正序")),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: ListView.separated(
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          return Container(
-                                            child: ListTile(
-                                              onTap: () {
-                                                getUrl(
-                                                    data["items"][index]["id"]);
-                                              },
-                                              leading: Icon(Icons.details),
-                                              title: Text(data["items"][index]
-                                                  ["title"]),
-                                              trailing: IconButton(
-                                                onPressed: () {
-                                                  print("download");
-                                                },
-                                                icon:
-                                                    Icon(Icons.download_sharp),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        separatorBuilder:
-                                            (BuildContext context, int index) {
-                                          return Divider(
-                                            color: Color(0xFFaca8a9),
-                                          );
-                                        },
-                                        itemCount: data["items"].length ?? 0),
-                                  ),
-                                  GestureDetector(
-                                    onTapDown: (details) {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Container(
-                                      height: 60,
-                                      width: MediaQuery.of(context).size.width,
-                                      decoration: BoxDecoration(
-                                        border: Border(
-                                          top: BorderSide(
-                                            width: 1.0,
-                                            color: Color(0xFFaea2a6),
-                                          ),
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          "关闭",
-                                          style: TextStyle(
-                                            color: Color(0xFF222222),
-                                            fontSize: 20,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ));
-                        },
-                      );
-                    },
-                    child: Row(
+              child: GestureDetector(
+                onTap: (){
+                    MyDialog.successDialog(context);
+                },
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Icon(
-                          Icons.list,
+                          Icons.favorite_border,
                           color: Color(0xFF2c2c2c),
                         ),
                         Container(
                           width: 4,
                         ),
-                        Divider(
-                          color: Color(0xFFababab),
-                          thickness: 2,
-                        ),
                         Text(
-                          '列表',
+                          '收藏',
                           style: TextStyle(
                             color: Color(0xFF6e6a6b),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ],
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Icon(
+                          Icons.timer,
+                          color: Color(0xFF2c2c2c),
+                        ),
+                        Container(
+                          width: 4,
+                        ),
+                        Text(
+                          '定时',
+                          style: TextStyle(
+                            color: Color(0xFF6e6a6b),
+                          ),
+                        ),
+                      ],
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Container(
+                              height: MediaQuery.of(context).size.height * 0.5,
+                              child: ListView.separated(
+                                  controller: new ScrollController(
+                                    keepScrollOffset: true,
+                                  ),
+                                  itemBuilder: (context, index) {
+                                    return ListTile(
+                                      onTap: () {
+                                        setState(() {
+                                          _currentRateIndex = index;
+                                          _audioPlayer.setPlaybackRate(
+                                              playbackRate: rates[index]);
+                                          Navigator.of(context).pop();
+                                        });
+                                      },
+                                      title: Text('${rates[index]} 倍'),
+                                      trailing: index==_currentRateIndex ? Icon(Icons.done) : null,
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return Divider(
+                                      color: Colors.red,
+                                    );
+                                  },
+                                  itemCount: rates.length),
+                            );
+                          },
+                        );
+                      },
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          rateIcons[_currentRateIndex],
+                          Container(
+                            width: 4,
+                          ),
+                          Text(
+                            '倍速',
+                            style: TextStyle(
+                              color: Color(0xFF6e6a6b),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    GestureDetector(
+                      onTapDown: (TapDownDetails details) {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Container(
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFe2e2e2).withAlpha(100),
+                                ),
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 60,
+                                      padding: EdgeInsets.only(
+                                        left: 32.0,
+                                        right: 32.0,
+                                      ),
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(
+                                            width: 2.0,
+                                            color: Color(0xFFafafaf),
+                                          ),
+                                        ),
+                                      ),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Text("共${data["items"].length}集"),
+                                          Container(
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: <Widget>[
+                                                IconButton(
+                                                  icon:
+                                                      Icon(Icons.cloud_download),
+                                                ),
+                                                GestureDetector(
+                                                  child: Text(" 批量下载"),
+                                                ),
+                                                Container(
+                                                  width: 10,
+                                                ),
+                                                IconButton(
+                                                    icon: Icon(Icons.list)),
+                                                GestureDetector(
+                                                    child: Text(" 正序")),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: ListView.separated(
+                                          itemBuilder:
+                                              (BuildContext context, int index) {
+                                            return Container(
+                                              child: ListTile(
+                                                onTap: () {
+                                                  getUrl(
+                                                      data["items"][index]["id"]);
+                                                },
+                                                leading: Icon(Icons.details),
+                                                title: Text(data["items"][index]
+                                                    ["title"]),
+                                                trailing: IconButton(
+                                                  onPressed: () {
+                                                    print("download");
+                                                  },
+                                                  icon:
+                                                      Icon(Icons.download_sharp),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          separatorBuilder:
+                                              (BuildContext context, int index) {
+                                            return Divider(
+                                              color: Color(0xFFaca8a9),
+                                            );
+                                          },
+                                          itemCount: data["items"].length ?? 0),
+                                    ),
+                                    GestureDetector(
+                                      onTapDown: (details) {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Container(
+                                        height: 60,
+                                        width: MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                          border: Border(
+                                            top: BorderSide(
+                                              width: 1.0,
+                                              color: Color(0xFFaea2a6),
+                                            ),
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            "关闭",
+                                            style: TextStyle(
+                                              color: Color(0xFF222222),
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ));
+                          },
+                        );
+                      },
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Icon(
+                            Icons.list,
+                            color: Color(0xFF2c2c2c),
+                          ),
+                          Container(
+                            width: 4,
+                          ),
+                          Divider(
+                            color: Color(0xFFababab),
+                            thickness: 2,
+                          ),
+                          Text(
+                            '列表',
+                            style: TextStyle(
+                              color: Color(0xFF6e6a6b),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Container(

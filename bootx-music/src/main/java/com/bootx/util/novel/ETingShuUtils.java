@@ -12,7 +12,6 @@ import org.jsoup.select.Elements;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * https://www.etingshu.com
@@ -39,7 +38,7 @@ public class ETingShuUtils {
         Element playbox = border.getElementsByClass("playbox").first();
         Element img = playbox.getElementsByTag("img").first();
         String src = img.attr("src");
-        novel.setImg(src);
+        novel.setImg("https://www.etingshu.com"+src);
 
         String title = playbox.getElementsByTag("h2").first().text();
         novel.setTitle(title);
@@ -84,7 +83,6 @@ public class ETingShuUtils {
         }
         novel.setNovelItems(items(contentright));
         novel.setItemCount(novel.getNovelItems().size());
-        System.out.println(JsonUtils.toJson(novel.getNovelItems()));
         System.out.println("ok================================================"+id);
         return novel;
     }
