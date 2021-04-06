@@ -5,6 +5,7 @@ import com.bootx.controller.wechat.WeChatUser;
 import com.bootx.dao.AdminDao;
 import com.bootx.entity.Admin;
 import com.bootx.entity.App;
+import com.bootx.member.entity.PointLog;
 import com.bootx.service.AdminService;
 import com.bootx.util.JWTUtils;
 import io.jsonwebtoken.Claims;
@@ -14,6 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Service - 管理员
@@ -30,6 +34,11 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
     @Override
     public Admin findByOpenId(String openId) {
         return adminDao.find("openId",openId);
+    }
+
+    @Override
+    public Admin findByUsername(String username) {
+        return adminDao.find("username",username);
     }
 
     @Override
@@ -58,4 +67,15 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
         return null;
     }
 
+    @Override
+    public Map<String, Object> getData(Admin admin) {
+        Map<String,Object> data = new HashMap<>();
+        if(admin==null){
+            return data;
+        }
+        data.put("id",admin.getId());
+        data.put("username",admin.getUsername());
+
+        return data;
+    }
 }

@@ -10,6 +10,8 @@ import com.bootx.service.SubscriptionRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Service - 素材目录
  * 
@@ -26,5 +28,10 @@ public class SubscriptionRecordServiceImpl extends BaseServiceImpl<SubscriptionR
     @Override
     public Long count(App app, Member member, SubscriptionTemplate subscriptionTemplate) {
         return subscriptionRecordDao.count(app,member,subscriptionTemplate);
+    }
+
+    @Override
+    public List<SubscriptionRecord> findListByStatus(Integer status) {
+        return subscriptionRecordDao.findListByStatus(status);
     }
 }

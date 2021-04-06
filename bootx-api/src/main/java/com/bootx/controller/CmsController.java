@@ -24,9 +24,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController("apiIndexController")
-@RequestMapping("/api")
-public class IndexController {
+@RestController("cmsController")
+@RequestMapping("/cms")
+public class CmsController {
 
     @Resource
     private AppService appService;

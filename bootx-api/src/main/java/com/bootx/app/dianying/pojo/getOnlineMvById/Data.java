@@ -1,31 +1,22 @@
 /**
   * Copyright 2021 json.cn 
   */
-package cn.json.pojo;
+package com.bootx.app.dianying.pojo.getOnlineMvById;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Auto-generated: 2021-04-05 9:37:43
- *
- * @author json.cn (i@json.cn)
- * @website http://www.json.cn/java2pojo/
- */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Data {
 
-    private List<Items> items;
-    private Level level;
+    private List<Items> items = new ArrayList<>();
+
+    public List<Items> getItems() {
+        return items;
+    }
+
     public void setItems(List<Items> items) {
-         this.items = items;
-     }
-     public List<Items> getItems() {
-         return items;
-     }
-
-    public void setLevel(Level level) {
-         this.level = level;
-     }
-     public Level getLevel() {
-         return level;
-     }
-
+        this.items = items;
+    }
 }

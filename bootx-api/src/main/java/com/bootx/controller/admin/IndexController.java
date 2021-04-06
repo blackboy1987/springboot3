@@ -7,6 +7,7 @@ import com.bootx.entity.App;
 import com.bootx.service.AdminService;
 import com.bootx.service.AppService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController("apiAdminIndexController")
+@RequestMapping("/admin/api")
 public class IndexController extends BaseController {
 
     @Resource
@@ -31,7 +33,8 @@ public class IndexController extends BaseController {
         Map<String,Object> data = new HashMap<>();
         App app = admin.getApp();
         if(app!=null){
-            data.put("id",app.getId());
+            data.put("id",admin.getId());
+            data.put("username",admin.getUsername());
             data.put("appName", app.getAppName());
             data.put("logo", app.getLogo());
         }else{

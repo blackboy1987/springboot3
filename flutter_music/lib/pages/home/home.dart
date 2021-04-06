@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/constant/MyColor.dart';
-import 'package:flutter_music/pages/home/category.dart';
 import 'package:flutter_music/pages/home/first.dart';
+import 'package:flutter_music/util/http.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,22 +12,38 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController tabController;
 
   List categories = [
-    {"id": 0, "name": "精选"},
-    {"id": 1, "name": "人物传记"},
-    {"id": 2, "name": "刑侦推理"},
-    {"id": 3, "name": "历史军事"},
-    {"id": 4, "name": "官场商战"},
-    {"id": 5, "name": "恐怖惊悚"},
-    {"id": 6, "name": "武侠小说"},
-    {"id": 7, "name": "玄幻奇幻"},
-    {"id": 8, "name": "百家讲坛"},
-    {"id": 9, "name": "相声评书"},
-    {"id": 10, "name": "经典纪实"},
-    {"id": 11, "name": "科幻有声"},
-    {"id": 12, "name": "穿越"},
-    {"id": 13, "name": "都市言情"},
-    {"id": 14, "name": "通俗文学"}
+    {"id": "34", "name": "相声小品"},
+    {"id": "44", "name": "都市言情"},
+    {"id": "43", "name": "财经"},
+    {"id": "42", "name": "诗歌"},
+    {"id": "41", "name": "网游"},
+    {"id": "40", "name": "经典纪实"},
+    {"id": "39", "name": "粤语"},
+    {"id": "38", "name": "笑话"},
+    {"id": "37", "name": "穿越"},
+    {"id": "36", "name": "科幻有声"},
+    {"id": "35", "name": "相声评书"},
+    {"id": "23", "name": "儿童"},
+    {"id": "33", "name": "百家讲坛"},
+    {"id": "32", "name": "玄幻奇幻"},
+    {"id": "31", "name": "武侠小说"},
+    {"id": "30", "name": "文学"},
+    {"id": "29", "name": "戏曲"},
+    {"id": "28", "name": "恐怖惊悚"},
+    {"id": "27", "name": "广播"},
+    {"id": "26", "name": "历史军事"},
+    {"id": "25", "name": "刑侦推理"},
+    {"id": "24", "name": "军事"}
   ];
+
+  void load() {
+    Http.get("category", (data) {
+      print(data);
+      setState(() {
+        // categories = data["data"];
+      });
+    });
+  }
 
   @override
   void initState() {
@@ -36,6 +52,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       length: categories.length,
       vsync: this,
     );
+    load();
     super.initState();
   }
 
@@ -78,7 +95,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         controller: tabController,
         children: List.generate(
           categories.length,
-          (index) => index == 0 ? First() : Category(categories[index]),
+          (index) => First(categories[index]),
         ),
       ),
     );

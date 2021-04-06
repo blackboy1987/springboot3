@@ -10,7 +10,7 @@ public class Demo {
     @JsonProperty("Code")
     private Integer Code;
     @JsonProperty("Data")
-    private DataDTO Data;
+    private DataDTO data;
     @JsonProperty("msg")
     private String msg;
 
@@ -23,11 +23,11 @@ public class Demo {
     }
 
     public DataDTO getData() {
-        return Data;
+        return data;
     }
 
     public void setData(DataDTO data) {
-        Data = data;
+        this.data = data;
     }
 
     public String getMsg() {

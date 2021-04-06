@@ -9,10 +9,6 @@ import 'package:flutter_music/iconfont/icon_font.dart';
 import 'package:flutter_music/util/http.dart';
 import 'package:flutter/foundation.dart';
 
-const List<String> urls = [
-  "https://pp.ting55.com/202103311528/09192ac8026a6af85a8e1106792bb1b9/2015/01/36/1.mp3?v=1617173933078"
-];
-
 const List<double> rates = [
   0.5,
   0.75,
@@ -24,13 +20,41 @@ const List<double> rates = [
 ];
 
 List rateIcons = [
-  IconFont(IconNames.beisu_x,color: '#2c2c2c',size: 28,),
-  IconFont(IconNames.beisu_x_9,color: '#2c2c2c',size: 28,),
-  IconFont(IconNames.beisu_x_1,color: '#2c2c2c',size: 28,),
-  IconFont(IconNames.beisu_x_4,color: '#2c2c2c',size: 28,),
-  IconFont(IconNames.beisu_x_2,color: '#2c2c2c',size: 28,),
-  IconFont(IconNames.beisu_x_5,color: '#2c2c2c',size: 28,),
-  IconFont(IconNames.beisu_x_3,color: '#2c2c2c',size: 28,),
+  IconFont(
+    IconNames.beisu_x,
+    color: '#2c2c2c',
+    size: 28,
+  ),
+  IconFont(
+    IconNames.beisu_x_9,
+    color: '#2c2c2c',
+    size: 28,
+  ),
+  IconFont(
+    IconNames.beisu_x_1,
+    color: '#2c2c2c',
+    size: 28,
+  ),
+  IconFont(
+    IconNames.beisu_x_4,
+    color: '#2c2c2c',
+    size: 28,
+  ),
+  IconFont(
+    IconNames.beisu_x_2,
+    color: '#2c2c2c',
+    size: 28,
+  ),
+  IconFont(
+    IconNames.beisu_x_5,
+    color: '#2c2c2c',
+    size: 28,
+  ),
+  IconFont(
+    IconNames.beisu_x_3,
+    color: '#2c2c2c',
+    size: 28,
+  ),
 ];
 
 class Play extends StatefulWidget {
@@ -46,14 +70,22 @@ enum PlayerState { stopped, playing, paused }
 enum PlayingRouteState { speakers, earpiece }
 
 class _PlayState extends State<Play> {
-  int _currentRateIndex = 0;
+  int _currentRateIndex = 2;
+  int _currentPlayUrlIndex = 0;
 
   double currentSeconds = 0;
   double totalSeconds = 23840;
 
   final Map arguments;
 
-  Map data = {};
+  Map data = {
+    "items": [
+      {
+        "title": '',
+        "img": '',
+      }
+    ],
+  };
 
   AudioPlayer _audioPlayer;
   AudioPlayerState _audioPlayerState;
@@ -85,9 +117,28 @@ class _PlayState extends State<Play> {
       (result) {
         setState(() {
           data = result["data"];
+          _position = Duration();
+          _currentPlayUrlIndex = 0;
+          _play();
         });
       },
     );
+  }
+
+  // 用来获取当前用户对当前曲目是否收藏
+  void _collect({BuildContext context, int type}) {
+    /**
+     *  1. type 不传，获取收藏状态
+     *  2. type 传值，修改收藏状态。
+     */
+    Http.get("collect", (data) {
+      print(data);
+      if (context != null && type != null) {
+        MyDialog.successDialog(context, messageConfig: MessageConfig(
+          title:'aaa',
+        ));
+      }
+    });
   }
 
   @override
@@ -114,8 +165,6 @@ class _PlayState extends State<Play> {
 
     _durationSubscription = _audioPlayer.onDurationChanged.listen((duration) {
       setState(() => _duration = duration);
-
-      // TODO implemented for iOS, waiting for android impl
       if (Theme.of(context).platform == TargetPlatform.iOS) {
         // (Optional) listen for notification updates in the background
         _audioPlayer.startHeadlessService();
@@ -142,6 +191,7 @@ class _PlayState extends State<Play> {
               _position = p;
             }));
 
+    // 监控播放完成
     _playerCompleteSubscription =
         _audioPlayer.onPlayerCompletion.listen((event) {
       _onComplete();
@@ -189,7 +239,10 @@ class _PlayState extends State<Play> {
             _position.inMilliseconds < _duration.inMilliseconds)
         ? _position
         : null;
-    final result = await _audioPlayer.play(urls[0], position: playPosition);
+    print(data['items'][_currentPlayUrlIndex]["resourceUrl"]);
+    final result = await _audioPlayer.play(
+        data['items'][_currentPlayUrlIndex]["resourceUrl"],
+        position: playPosition);
     if (result == 1) setState(() => _playerState = PlayerState.playing);
     _audioPlayer.setPlaybackRate(playbackRate: 1.0);
     return result;
@@ -205,19 +258,18 @@ class _PlayState extends State<Play> {
   }
 
   void _onComplete() {
-    setState(() => _playerState = PlayerState.stopped);
-  }
-
-  /**
-   * 获取播放地址
-   */
-  void getUrl(int novelItemId) {
-    Http.get(
-      "url?itemId=$novelItemId&id=${this.arguments["id"]}",
-      (result) {
-        print("$result");
-      },
-    );
+    setState(() {
+      // 下一集
+      _playerState = PlayerState.stopped;
+      if (_currentPlayUrlIndex < data["items"].length) {
+        _currentPlayUrlIndex = _currentPlayUrlIndex + 1;
+        _duration = Duration();
+        _play();
+      } else {
+        // 播放完成
+        print("++++++++++++++++++++end");
+      }
+    });
   }
 
   @override
@@ -279,7 +331,7 @@ class _PlayState extends State<Play> {
             ),
             Center(
               child: Text(
-                "第0001集-桃子熟了",
+                data["items"][_currentPlayUrlIndex]['title'],
                 style: TextStyle(
                   color: Color(0xFF343434),
                   fontSize: 16,
@@ -292,8 +344,9 @@ class _PlayState extends State<Play> {
             ),
             Container(
               child: GestureDetector(
-                onTap: (){
-                    MyDialog.successDialog(context);
+                onTap: () {
+                  // 收藏
+                  _collect(context: context);
                 },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -359,7 +412,9 @@ class _PlayState extends State<Play> {
                                         });
                                       },
                                       title: Text('${rates[index]} 倍'),
-                                      trailing: index==_currentRateIndex ? Icon(Icons.done) : null,
+                                      trailing: index == _currentRateIndex
+                                          ? Icon(Icons.done)
+                                          : null,
                                     );
                                   },
                                   separatorBuilder: (context, index) {
@@ -430,8 +485,8 @@ class _PlayState extends State<Play> {
                                                   MainAxisAlignment.end,
                                               children: <Widget>[
                                                 IconButton(
-                                                  icon:
-                                                      Icon(Icons.cloud_download),
+                                                  icon: Icon(
+                                                      Icons.cloud_download),
                                                 ),
                                                 GestureDetector(
                                                   child: Text(" 批量下载"),
@@ -440,9 +495,11 @@ class _PlayState extends State<Play> {
                                                   width: 10,
                                                 ),
                                                 IconButton(
-                                                    icon: Icon(Icons.list)),
+                                                  icon: Icon(Icons.list),
+                                                ),
                                                 GestureDetector(
-                                                    child: Text(" 正序")),
+                                                  child: Text(" 正序"),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -451,29 +508,40 @@ class _PlayState extends State<Play> {
                                     ),
                                     Expanded(
                                       child: ListView.separated(
-                                          itemBuilder:
-                                              (BuildContext context, int index) {
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
                                             return Container(
                                               child: ListTile(
                                                 onTap: () {
-                                                  getUrl(
-                                                      data["items"][index]["id"]);
+                                                  setState(() {
+                                                    _currentPlayUrlIndex =
+                                                        index;
+                                                    _position = Duration();
+                                                  });
+                                                  _play();
+                                                  Navigator.of(context).pop();
                                                 },
-                                                leading: Icon(Icons.details),
+                                                leading: _currentPlayUrlIndex ==
+                                                        index
+                                                    ? Image.asset(
+                                                        "images/play_now_yellow.gif",
+                                                      )
+                                                    : null,
                                                 title: Text(data["items"][index]
                                                     ["title"]),
                                                 trailing: IconButton(
                                                   onPressed: () {
                                                     print("download");
                                                   },
-                                                  icon:
-                                                      Icon(Icons.download_sharp),
+                                                  icon: Icon(
+                                                      Icons.download_sharp),
                                                 ),
                                               ),
                                             );
                                           },
                                           separatorBuilder:
-                                              (BuildContext context, int index) {
+                                              (BuildContext context,
+                                                  int index) {
                                             return Divider(
                                               color: Color(0xFFaca8a9),
                                             );
@@ -486,7 +554,8 @@ class _PlayState extends State<Play> {
                                       },
                                       child: Container(
                                         height: 60,
-                                        width: MediaQuery.of(context).size.width,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         decoration: BoxDecoration(
                                           border: Border(
                                             top: BorderSide(
@@ -592,10 +661,22 @@ class _PlayState extends State<Play> {
                       size: 32,
                     ),
                   ),
-                  Icon(
-                    Icons.skip_previous,
-                    color: Color(0xFF222222),
-                    size: 32,
+                  GestureDetector(
+                    onTapDown: (TapDownDetails details) {
+                      // 上一集
+                      if (_currentPlayUrlIndex > 0) {
+                        setState(() {
+                          _currentPlayUrlIndex = _currentPlayUrlIndex - 1;
+                          _position = Duration();
+                        });
+                        _play();
+                      }
+                    },
+                    child: Icon(
+                      Icons.skip_previous,
+                      color: Color(0xFF222222),
+                      size: 32,
+                    ),
                   ),
                   _playerState == PlayerState.playing
                       ? GestureDetector(
@@ -618,10 +699,22 @@ class _PlayState extends State<Play> {
                             size: 64,
                           )),
                         ),
-                  Icon(
-                    Icons.skip_next,
-                    color: Color(0xFF222222),
-                    size: 32,
+                  GestureDetector(
+                    onTapDown: (TapDownDetails details) {
+                      // 上一集
+                      if (_currentPlayUrlIndex < data["items"].length - 1) {
+                        setState(() {
+                          _currentPlayUrlIndex = _currentPlayUrlIndex + 1;
+                          _position = Duration();
+                        });
+                        _play();
+                      }
+                    },
+                    child: Icon(
+                      Icons.skip_next,
+                      color: Color(0xFF222222),
+                      size: 32,
+                    ),
                   ),
                   GestureDetector(
                     onTapDown: (TapDownDetails details) {

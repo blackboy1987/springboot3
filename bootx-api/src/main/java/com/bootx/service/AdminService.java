@@ -6,6 +6,7 @@ import com.bootx.entity.Admin;
 import com.bootx.entity.App;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * Service - 管理员
@@ -17,8 +18,11 @@ public interface AdminService extends BaseService<Admin, Long> {
 
     Admin findByOpenId(String openId);
 
+    Admin findByUsername(String username);
+
     Admin create(WeChatUser weChatUser);
 
     Admin get(HttpServletRequest request);
 
+    Map<String, Object> getData(Admin admin);
 }

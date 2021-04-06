@@ -16,9 +16,7 @@ public final class CodeUtils {
 
     private static final Random RANDOM = new Random();
 
-
     private CodeUtils(){}
-
 
     public static String getCode(Integer length){
         StringBuffer sb = new StringBuffer();
@@ -28,14 +26,8 @@ public final class CodeUtils {
         return sb.toString();
     }
 
-
     public static String getToken(String code){
         String s = SecureUtil.sha256(code);
-        System.out.println(s);
         return s;
-    }
-
-    public static void main(String[] args) {
-        getToken(getToken(getCode(12)));
     }
 }

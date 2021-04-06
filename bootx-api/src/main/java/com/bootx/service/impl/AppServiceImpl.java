@@ -156,7 +156,17 @@ public class AppServiceImpl extends BaseServiceImpl<App, Long> implements AppSer
 
     }
 
+    @Override
+    public App update(App app) {
+        String cacheKey = App.CACHE_PREFIX + app.getAppCode();
+        redisService.set(cacheKey, JsonUtils.toJson(app));
+        return super.update(app);
+    }
 
-
-
+    @Override
+    public App update(App app, String... ignoreProperties) {
+        String cacheKey = App.CACHE_PREFIX + app.getAppCode();
+        redisService.set(cacheKey, JsonUtils.toJson(app));
+        return super.update(app, ignoreProperties);
+    }
 }

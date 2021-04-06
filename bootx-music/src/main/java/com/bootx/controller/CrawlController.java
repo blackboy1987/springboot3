@@ -82,8 +82,8 @@ public class CrawlController {
 
     @GetMapping("/etingshu")
     public Result etingshu() {
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
-        for (Long i = 1L; i < 30000L; i++) {
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(20);
+        for (Long i = 11917L; i > 1L; i-=1) {
             Long finalI = i;
             fixedThreadPool.execute(()->{
                 String url = "https://www.etingshu.com/"+"show/"+finalI+".html";

@@ -45,8 +45,10 @@ public class SubscriptionRecord extends BaseEntity<Long>{
      */
     private String content;
 
-    @Convert(converter = ParamConverter.class)
-    private Map<String, String> param = new HashMap<>();
+    private String page;
+
+    @Convert(converter = SubscriptionTemplate.ParamConverter.class)
+    private Map<String, SubscriptionTemplate.Value> param = new HashMap<>();
 
     public App getApp() {
         return app;
@@ -88,12 +90,20 @@ public class SubscriptionRecord extends BaseEntity<Long>{
         this.content = content;
     }
 
-    public Map<String, String> getParam() {
+    public Map<String, SubscriptionTemplate.Value> getParam() {
         return param;
     }
 
-    public void setParam(Map<String, String> param) {
+    public void setParam(Map<String, SubscriptionTemplate.Value> param) {
         this.param = param;
+    }
+
+    public String getPage() {
+        return page;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
     }
 
     @Converter

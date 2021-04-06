@@ -55,10 +55,11 @@ public class SubscriptionTemplateDaoImpl extends BaseDaoImpl<SubscriptionTemplat
         Predicate restrictions = criteriaBuilder.conjunction();
         restrictions = criteriaBuilder.and(restrictions, criteriaBuilder.equal(root.get("app"), app));
 
-        CriteriaBuilder.In<List<String>> groupIdInClause = criteriaBuilder.in(root.get("templateId"));
-        groupIdInClause.value(criteriaBuilder.literal(Arrays.asList(tmpIds)));
-
-        restrictions = criteriaBuilder.and(restrictions, groupIdInClause);
+        if(tmpIds!=null){
+            CriteriaBuilder.In<List<String>> groupIdInClause = criteriaBuilder.in(root.get("templateId"));
+            groupIdInClause.value(criteriaBuilder.literal(Arrays.asList(tmpIds)));
+            restrictions = criteriaBuilder.and(restrictions, groupIdInClause);
+        }
         criteriaQuery.where(restrictions);
         return super.findList(criteriaQuery);
 

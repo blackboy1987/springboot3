@@ -109,12 +109,12 @@
                 onReady: function() {},
                 onShareAppMessage: function(a) {
                     var o = t.getStorageSync("$userInfo").user_id, e = "/pages/detail/detail?id=" + this.voddata.vod_id;
-                    return o && (e = "pages/detail/detail?uid=" + o + "&id=" + this.voddata.vod_id), 
+                    return o && (e = "pages/detail/detail?uid=" + o + "&id=" + this.voddata.vod_id),
                     this.api.onShare(this.voddata.vod_name + "在线观看", e, this.voddata.vod_pic);
                 },
                 onShareTimeline: function(a) {
                     var o = t.getStorageSync("$userInfo").user_id, e = "/pages/detail/detail?id=" + this.voddata.vod_id;
-                    return o && (e = "pages/detail/detail?uid=" + o + "&id=" + this.voddata.vod_id), 
+                    return o && (e = "pages/detail/detail?uid=" + o + "&id=" + this.voddata.vod_id),
                     {
                         title: this.voddata.vod_name + "在线观看",
                         path: e,
@@ -138,11 +138,11 @@
                         var a = this, i = this;
                         this.wxAdId = o.$config.detail.wxAdId, this.gg = o.$config.detail.gg;
                         var n = parseInt(Date.parse(new Date())) / 1e3;
-                        "1" == o.$config.play.isPoints && t.getStorageSync("$adNum") < parseInt(o.$config.play.num) && (0 == o.$config.play.hasOwnProperty("interval") && o.$config.play.interval, 
-                        t.getStorageSync("$interval") || t.setStorageSync("$interval", 0), n - t.getStorageSync("$interval") > parseInt(o.$config.play.interval) ? o.$points = !0 : console.log(t.getStorageSync("$interval") + parseInt(o.$config.play.interval) - n + "开始下次广告")), 
+                        "1" == o.$config.play.isPoints && t.getStorageSync("$adNum") < parseInt(o.$config.play.num) && (0 == o.$config.play.hasOwnProperty("interval") && o.$config.play.interval,
+                        t.getStorageSync("$interval") || t.setStorageSync("$interval", 0), n - t.getStorageSync("$interval") > parseInt(o.$config.play.interval) ? o.$points = !0 : console.log(t.getStorageSync("$interval") + parseInt(o.$config.play.interval) - n + "开始下次广告")),
                         "1" == o.$config.site.message.radio && (this.message = !0), wx.createInterstitialAd && i.wxAdId.cpId && (this.interstitialAd = wx.createInterstitialAd({
                             adUnitId: i.wxAdId.cpId
-                        }), this.interstitialAd.onLoad(function() {}), this.interstitialAd.onError(function(t) {}), 
+                        }), this.interstitialAd.onLoad(function() {}), this.interstitialAd.onError(function(t) {}),
                         this.interstitialAd.onClose(function() {
                             a.interstitialAd.destroy(), a.interstitialAd = null;
                         })), wx.createRewardedVideoAd && this.wxAdId.jlspId && ((e = wx.createRewardedVideoAd({
@@ -156,7 +156,7 @@
                                 t.setStorageSync("$interval", d);
                             } else {
                                 var s = "广告完成后开始播放,是否继续观看视频";
-                                o.$config.detail.adMsg.hasOwnProperty("close") && (s = o.$config.detail.adMsg.close), 
+                                o.$config.detail.adMsg.hasOwnProperty("close") && (s = o.$config.detail.adMsg.close),
                                 t.showModal({
                                     content: s,
                                     confirmColor: "#ff9900",
@@ -165,7 +165,7 @@
                                     }
                                 });
                             }
-                        })), "pages/index/index" !== o.$scene.path && i.interstitialAd && (console.log(o.$scene.path), 
+                        })), "pages/index/index" !== o.$scene.path && i.interstitialAd && (console.log(o.$scene.path),
                         setTimeout(function() {
                             i.interstitialAd.show().catch(function(t) {
                                 console.error(t);
@@ -180,8 +180,8 @@
                         });
                         var n = this.md5(this.mark + "App.Mov.GetOnlineMvById" + a), d = this.cjurl + "wxApi/public/?service=App.Mov.GetOnlineMvById&vodid=" + a + "&mark=" + this.mark + "&sign=" + n;
                         this.api.apiRequest(d).then(function(a) {
-                            t.hideLoading(), 200 == a.Code && a.Data.items.length > 0 ? (i.voddata = i.api.vodCl(a.Data.items[0]), 
-                            i.doubanView(), t.setStorageSync("$voddata", i.voddata), e.likedata = a.Data.level.list, 
+                            t.hideLoading(), 200 == a.Code && a.Data.items.length > 0 ? (i.voddata = i.api.vodCl(a.Data.items[0]),
+                            i.doubanView(), t.setStorageSync("$voddata", i.voddata), e.likedata = a.Data.level.list,
                             e.init(), i.voddata.vod_name && t.setNavigationBarTitle({
                                 title: i.voddata.vod_name
                             })) : t.showToast({
@@ -192,36 +192,37 @@
                         });
                     },
                     doubanView: function() {
-                        "1" == o.$config.detail.douban && this.voddata.hasOwnProperty("vod_douban_id") && (this.voddata.vod_douban_id < 1 ? this.searchDouban(this.voddata.vod_name) : ("1" == o.$config.detail.dbStills && this.dbStills(), 
+                        "1" == o.$config.detail.douban && this.voddata.hasOwnProperty("vod_douban_id") && (this.voddata.vod_douban_id < 1 ? this.searchDouban(this.voddata.vod_name) : ("1" == o.$config.detail.dbStills && this.dbStills(),
                         "1" == o.$config.detail.dbUpdate && this.getDouban(), this.likeShow = !0));
                     },
+
                     searchDouban: function(a) {
-                        var o = this, e = this;
+                        /*var o = this, e = this;
                         t.request({
                             url: "https://frodo.douban.com/api/v2/search?&apiKey=054022eaeae0b00e0fc068c0c0a2102a&q=" + a,
                             dataType: "json",
                             success: function(t) {
                                 if (t.data.subjects.length > 0) for (var i = t.data.subjects, n = 0; n < i.length; n++) {
                                     var d, s = i[n].title.replace(/[\·|\s*]/g, "");
-                                    if (((a = a.replace(/[\·|\s*]/g, "")).indexOf(s) >= 0 || s.indexOf(a) >= 0) && (i[n].hasOwnProperty("actors") && 0 != i[n].actors.length && "" !== e.voddata.vod_actor && (d = e.voddata.vod_actor.indexOf(i[n].actors[0].name), 
-                                    console.log("actor:" + d)), d < 0 && i[n].hasOwnProperty("directors") && 0 != i[n].directors && "" !== e.voddata.vod_director && (d = e.voddata.vod_director.indexOf(i[n].directors[0].name), 
-                                    console.log("directors:" + d)), d < 0 && e.voddata.vod_year == i[n].year && (d = 1, 
+                                    if (((a = a.replace(/[\·|\s*]/g, "")).indexOf(s) >= 0 || s.indexOf(a) >= 0) && (i[n].hasOwnProperty("actors") && 0 != i[n].actors.length && "" !== e.voddata.vod_actor && (d = e.voddata.vod_actor.indexOf(i[n].actors[0].name),
+                                    console.log("actor:" + d)), d < 0 && i[n].hasOwnProperty("directors") && 0 != i[n].directors && "" !== e.voddata.vod_director && (d = e.voddata.vod_director.indexOf(i[n].directors[0].name),
+                                    console.log("directors:" + d)), d < 0 && e.voddata.vod_year == i[n].year && (d = 1,
                                     console.log("year:" + d)), d >= 0)) {
-                                        e.voddata.vod_score = i[n].rating.value, e.voddata.vod_douban_score = i[n].rating.value, 
-                                        e.voddata.vod_douban_id = i[n].id, i[n].rating.count > e.voddata.vod_hits && (e.voddata.vod_hits = i[n].rating.count), 
+                                        e.voddata.vod_score = i[n].rating.value, e.voddata.vod_douban_score = i[n].rating.value,
+                                        e.voddata.vod_douban_id = i[n].id, i[n].rating.count > e.voddata.vod_hits && (e.voddata.vod_hits = i[n].rating.count),
                                         e.voddata.vod_class = i[n].genres.join(","), o.doubanInfo();
                                         break;
                                     }
                                 }
                             },
                             complete: function() {}
-                        });
+                        });*/
                     },
                     doubanInfo: function() {
                         var t = {};
-                        this.picError && (t.vod_pic = this.voddata.vod_pic), t.vod_id = this.voddata.vod_id, 
-                        t.vod_douban_score = this.voddata.vod_douban_score, t.vod_score = this.voddata.vod_score, 
-                        t.vod_douban_id = this.voddata.vod_douban_id, t.vod_duration = this.voddata.vod_duration, 
+                        this.picError && (t.vod_pic = this.voddata.vod_pic), t.vod_id = this.voddata.vod_id,
+                        t.vod_douban_score = this.voddata.vod_douban_score, t.vod_score = this.voddata.vod_score,
+                        t.vod_douban_id = this.voddata.vod_douban_id, t.vod_duration = this.voddata.vod_duration,
                         t.vod_class = this.voddata.vod_class, t.vod_tag = this.voddata.vod_tag, t = JSON.stringify(t);
                         var a = this.md5("App.Mov.SetMovById" + t), o = this.cjurl + "wxApi/public/?service=App.Mov.SetMovById&vod=" + t + "&sign=" + a;
                         this.api.apiRequest(o).then(function(t) {});
@@ -234,7 +235,7 @@
                         });
                         var n = this.md5("微信" + this.mark + e + "App.Code.WxPoster" + a), d = this.cjurl + "wxApi/public/?service=App.Code.WxPoster&iMark=" + this.mark + "&app=微信&path=" + e + "&text=" + a + "&sign=" + n;
                         this.api.apiRequest(d).then(function(a) {
-                            200 == a.Code && 0 != a.Data.imgUrl ? i.posterImg = a.Data.imgUrl : i.posterImg = o.$config.site.sharepic, 
+                            200 == a.Code && 0 != a.Data.imgUrl ? i.posterImg = a.Data.imgUrl : i.posterImg = o.$config.site.sharepic,
                             wx.previewImage({
                                 current: i.posterImg,
                                 urls: [ i.posterImg ]
@@ -260,18 +261,23 @@
                         });
                     },
                     dbStills: function() {
+                        var globalData = getApp().globalData;
                         var a = this, o = "tv";
                         1 != a.voddata.type_id && 23 != a.voddata.type_id || (o = "movie"), t.request({
-                            url: "https://frodo.douban.com/api/v2/" + o + "/" + this.voddata.vod_douban_id + "/photos?start=0&count=12&apiKey=054022eaeae0b00e0fc068c0c0a2102a",
+                            url: getApp().globalData.baseUrl + o + "/" + this.voddata.vod_douban_id + "/photos",
                             method: "GET",
                             header: {
-                                "Content-Type": "application/text"
+                                "Content-Type": "application/text",
+                                token:wx.getStorageSync("token"),
+                                appCode:getApp().globalData.appCode,
+                                appToken:getApp().globalData.appToken,
                             },
                             success: function(t) {
                                 if (404 != t.data.code) {
-                                    var o = t.data.photos.length, e = [], i = [];
+                                    const photos = t.data.Data.photos;
+                                    var o = photos.length, e = [], i = [];
                                     if (o > 0) {
-                                        for (var n = 0; n < o; n++) e[n] = t.data.photos[n].image.small.url, i[n] = t.data.photos[n].image.large.url;
+                                        for (var n = 0; n < o; n++) e[n] = photos[n].small.url, i[n] = photos[n].large.url;
                                         a.maxPhotos = i, a.photos = e, a.likeShow = !0;
                                     }
                                 }
@@ -296,16 +302,20 @@
                     getDouban: function() {
                         var a = this;
                         t.request({
-                            url: "https://frodo.douban.com/api/v2/movie/" + this.voddata.vod_douban_id + "?apikey=054022eaeae0b00e0fc068c0c0a2102a",
+                            url: getApp().globalData.baseUrl + "info/"+ this.voddata.vod_douban_id,
                             method: "GET",
                             header: {
-                                "Content-Type": "application/text"
+                                "Content-Type": "application/text",
+                                token:wx.getStorageSync("token"),
+                                appCode:getApp().globalData.appCode,
+                                appToken:getApp().globalData.appToken,
                             },
                             success: function(o) {
-                                (a.voddata.vod_douban_score != o.data.rating.value || a.picError && a.voddata.vod_pic !== o.data.pic.normal) && (a.voddata.vod_douban_score = o.data.rating.value, 
-                                a.voddata.vod_score = o.data.rating.value, a.voddata.vod_duration = o.data.durations[0], 
-                                a.voddata.vod_class = o.data.genres.join(","), a.picError && (a.voddata.vod_pic = o.data.pic.normal), 
-                                t.setStorageSync("$voddata", a.voddata), a.doubanInfo());
+                                a.voddata.vod_score = o.data.rating.value;
+                                (a.voddata.vod_douban_score != o.data.rating.value || a.picError && a.voddata.vod_pic !== o.data.pic.normal) && (a.voddata.vod_douban_score = o.data.rating.value,
+                                a.voddata.vod_score = o.data.rating.value, a.voddata.vod_duration = o.data.durations[0],
+                                a.voddata.vod_class = o.data.genres.join(","), a.picError && (a.voddata.vod_pic = o.data.pic.normal),
+                                t.setStorageSync("$voddata", a.voddata));
                             },
                             fail: function() {}
                         });
@@ -330,11 +340,11 @@
                             }
                         }); else if (o.$points && e) {
                             var i = "正在加载视频,广告完成后开始播放!";
-                            o.$config.detail.adMsg.hasOwnProperty("start") && (i = o.$config.detail.adMsg.start), 
+                            o.$config.detail.adMsg.hasOwnProperty("start") && (i = o.$config.detail.adMsg.start),
                             t.showModal({
                                 content: i,
                                 success: function(t) {
-                                    t.confirm ? a.adTab() : "0" == o.$config.play.enforce && (console.log("详情不强制观看广告跳过"), 
+                                    t.confirm ? a.adTab() : "0" == o.$config.play.enforce && (console.log("详情不强制观看广告跳过"),
                                     this.playType());
                                 }
                             });

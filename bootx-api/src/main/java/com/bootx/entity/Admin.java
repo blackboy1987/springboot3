@@ -25,6 +25,10 @@ public class Admin extends BaseEntity<Long> {
 	@OneToOne(mappedBy = "admin", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private App app;
 
+	@NotEmpty
+	@Column(nullable = false,updatable = false,unique = true)
+	private String username;
+
 	/**
 	 * 密码
 	 */
@@ -38,6 +42,15 @@ public class Admin extends BaseEntity<Long> {
 	 */
 	@Column(nullable = false)
 	private String encodedPassword;
+
+	/**
+	 * 0:待审核
+	 * 1：已通过
+	 * 2：已拒绝
+	 */
+	@NotNull
+	@Column(nullable = false)
+	private Integer status;
 
 
 	public String getOpenId() {
@@ -95,6 +108,22 @@ public class Admin extends BaseEntity<Long> {
 	 */
 	public void setEncodedPassword(String encodedPassword) {
 		this.encodedPassword = encodedPassword;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	@Transient

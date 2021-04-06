@@ -29,12 +29,13 @@ var e = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? func
                     $theme: "black",
                     systemInfo: [],
                     $platform: "android",
-                    appCode:"IEC4OARSJZAB4SG3TA",
-                    appToken:"fcb1123588b8c311c661e2e2f6bff63195fb1932809403507e67044dfadgg755",
+                    appCode:"AEC4OARSJZAB4SG3TA",
+                    appToken:"bdb1123588b8c311c661e2e2f6bff63195fb1932809403507e67044dfadgg755",
+                    baseUrl:"http://localhost:8180/api/v3/",
                 },
                 onLaunch: function() {
                     var t = this, o = this.$scope.globalData, r = wx.getLaunchOptionsSync();
-                    o.$scene = r, e.getStorageSync("$theme") && (o.$theme = e.getStorageSync("$theme")), 
+                    o.$scene = r, e.getStorageSync("$theme") && (o.$theme = e.getStorageSync("$theme")),
                     "white" == o.$theme && (e.setTabBarStyle({
                         color: "#A9A9A9",
                         selectedColor: "#f49c36",
@@ -55,9 +56,9 @@ var e = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? func
                                 }));
                             });
                             var a = wx.getMenuButtonBoundingClientRect();
-                            o.systemInfo.windowWidth = t.windowWidth, o.systemInfo.windowHeight = t.windowHeight, 
-                            o.systemInfo.statusBarHeight = t.statusBarHeight, o.systemInfo.customWidth = a.width, 
-                            o.systemInfo.customHeight = a.height, o.systemInfo.customTop = a.top, o.systemInfo.customlLeft = a.left, 
+                            o.systemInfo.windowWidth = t.windowWidth, o.systemInfo.windowHeight = t.windowHeight,
+                            o.systemInfo.statusBarHeight = t.statusBarHeight, o.systemInfo.customWidth = a.width,
+                            o.systemInfo.customHeight = a.height, o.systemInfo.customTop = a.top, o.systemInfo.customlLeft = a.left,
                             o.systemInfo.customBar = a.height + a.top + 10;
                         }
                     }), this.api.getSetting().then(function(r) {
@@ -66,7 +67,7 @@ var e = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? func
                             n.default.prototype.$user_login = r;
                             var a = o.$config.site.login, f = t.md5(i + o.$platform + o.$scene.scene + "App.User.WxLogin"), c = t.cjurl + "wxApi/public/?service=App.User.WxLogin&openid=" + i + "&scene=" + o.$scene.scene + "&platform=" + o.$platform + "&sign=" + f;
                             t.api.apiRequest(c).then(function(n) {
-                                200 == n.Code && (0 == n.Data.user_status ? o.$wxverify = !0 : "1" == a.radio && n.Data.user_login_num >= Number(a.num) && ("android" != o.$platform && "ios" != o.$platform || (o.$wxverify = !1)), 
+                                200 == n.Code && (0 == n.Data.user_status ? o.$wxverify = !0 : "1" == a.radio && n.Data.user_login_num >= Number(a.num) && ("android" != o.$platform && "ios" != o.$platform || (o.$wxverify = !1)),
                                 t.$user_login = !0, e.setStorageSync("$userInfo", n.Data)), o.$login = !0;
                             });
                         } else o.$login = !0, n.default.prototype.$user_login = !1;
@@ -146,10 +147,10 @@ var e = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? func
             }
             n("3079");
             var c = i(n("66fd")), u = i(n("d64e")), l = i(n("a420")), p = r(n("4a78")), s = r(n("0996"));
-            c.default.prototype.md5 = l.default, c.default.prototype.db = p, c.default.prototype.api = s, 
-            c.default.prototype.cjurl = "https://www.igomall.xin/api/v3/", c.default.prototype.mark = "suisui",
-            c.default.prototype.iv = "eq7U4nDJFMsaZFHC", c.default.prototype.key = "5m0hVqp39zNPd9qL", 
-            c.default.prototype.$user_login = !1, c.default.config.productionTip = !1, u.default.mpType = "app", 
+            c.default.prototype.md5 = l.default, c.default.prototype.db = p, c.default.prototype.api = s,
+            c.default.prototype.cjurl = "http://localhost:8180/api/v3/", c.default.prototype.mark = "suisui",
+            c.default.prototype.iv = "eq7U4nDJFMsaZFHC", c.default.prototype.key = "5m0hVqp39zNPd9qL",
+            c.default.prototype.$user_login = !1, c.default.config.productionTip = !1, u.default.mpType = "app",
             t(new c.default(function(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var o = null != arguments[t] ? arguments[t] : {};

@@ -21,12 +21,13 @@ public class ETingShuUtils {
     private static final String preUrl="https://www.etingshu.com/";
 
     public static Novel detail(Long id){
+        System.out.println("开始====================="+id);
         String url = preUrl+"show/"+id+".html";
         String s = WebUtils.get(url, null);
         Document parse = Jsoup.parse(s);
         Element contentright = parse.getElementsByClass("contentright").first();
         if(contentright==null){
-            System.out.println("无==========="+id);
+            System.out.println("结束====================="+id);
             return null;
         }
         Novel novel = new Novel();
@@ -83,7 +84,7 @@ public class ETingShuUtils {
         }
         novel.setNovelItems(items(contentright));
         novel.setItemCount(novel.getNovelItems().size());
-        System.out.println("ok================================================"+id);
+        System.out.println("结束====================="+id);
         return novel;
     }
 

@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_music/components/dialog/loading_dialog.dart';
+import 'package:flutter_music/components/dialog/my_dialog.dart';
 import 'package:flutter_music/constant/MyColor.dart';
 import 'package:flutter_music/pages/collect/collect.dart';
 import 'package:flutter_music/pages/home/home.dart';
@@ -72,6 +76,21 @@ class _IndexState extends State<Index> {
             label: '我的',
           ),
         ],
+      ),
+      floatingActionButtonLocation:FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          LoadingDialog.show(context);
+          Timer.periodic(Duration(seconds: 5), (timer) {
+            LoadingDialog.hide(context);
+            timer.cancel();
+          });
+        },
+        tooltip: 'Increment',
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
     );
   }

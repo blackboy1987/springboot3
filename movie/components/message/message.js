@@ -40,7 +40,7 @@
                 props: {},
                 methods: {
                     tab: function() {
-                        this.checked ? (this.checked = !1, this.userLogin = this.$user_login, this.userLogin && 0 == this.sendNum && this.getSendNum(), 
+                        this.checked ? (this.checked = !1, this.userLogin = this.$user_login, this.userLogin && 0 == this.sendNum && this.getSendNum(),
                         this.$refs.sendView.open()) : (this.$refs.sendView.close(), this.checked = !0);
                     },
                     onGotUserInfo: function(n) {
@@ -59,7 +59,7 @@
                         var n = this;
                         if (0 != t.$config.site.message.hasOwnProperty("tmpIds")) {
                             var s = t.$config.site.message.tmpIds.split(",");
-                            console.log("=-=====",t.$config.site.message);
+                            console.log(s,"ssssssssssssss");
                             e.requestSubscribeMessage ? e.requestSubscribeMessage({
                                 tmplIds: s,
                                 success: function(e) {
@@ -99,7 +99,7 @@
                             var globalData = getApp().globalData;
                             var t = e.getStorageSync("$voddata"), s = this.sendNum, i = e.getStorageSync("$userInfo").user_openid_weixin, o = e.getStorageSync("$userInfo").user_id, a = this.md5(this.mark + i + "App.Ulog.SetSubscribe" + t.type_id + s + o + t.vod_id), c = this.cjurl + "wxApi/public/?service=App.Ulog.SetSubscribe&vod_id=" + t.vod_id  +"&tmpIds="+globalData.$config.site.message.tmpIds + "&type_id=" + t.type_id + "&ulog_nid=" + s + "&user_id=" + o + "&mark=" + this.mark + "&openid=" + i + "&sign=" + a;
                             this.api.apiRequest(c).then(function(t) {
-                                e.hideLoading(), 200 == t.Code && 200 == t.Data.code && (n.sendNum = t.Data.send_num, 
+                                e.hideLoading(), 200 == t.Code && 200 == t.Data.code && (n.sendNum = t.Data.send_num,
                                 n.getNum = t.Data.send_num, e.showToast({
                                     title: t.Data.msg,
                                     icon: "none",

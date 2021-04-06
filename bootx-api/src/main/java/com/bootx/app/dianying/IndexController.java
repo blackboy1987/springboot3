@@ -1,31 +1,32 @@
 package com.bootx.app.dianying;
 
+import com.bootx.app.dianying.entity.Movie;
 import com.bootx.app.dianying.pojo.Demo;
+import com.bootx.app.dianying.pojo.getOnlineMvById.GetOnlineMvById;
+import com.bootx.app.dianying.pojo.getOnlineMvById.Items;
 import com.bootx.entity.*;
 import com.bootx.member.entity.Member;
 import com.bootx.member.service.MemberService;
 import com.bootx.service.AppService;
+import com.bootx.service.RedisService;
 import com.bootx.service.SubscriptionRecordService;
 import com.bootx.service.SubscriptionTemplateService;
-import com.bootx.util.JWTUtils;
-import com.bootx.util.JsonUtils;
-import com.bootx.util.WebUtils;
+import com.bootx.util.*;
+import com.bootx.util.wechat.BaseResponse;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController("apiV3IndexController")
 @RequestMapping("/api/v3")
@@ -42,6 +43,9 @@ public class IndexController {
 
     @Resource
     private SubscriptionRecordService subscriptionRecordService;
+
+    @Resource
+    private RedisService redisService;
 
     private static final String[] otherService = {
             "App.Art.GetArtId",
@@ -105,21 +109,11 @@ public class IndexController {
         return parseResult(result,service,app);
     }
 
-
     /**
-     * 订阅
-     * vod_id: 214164
-     * type_id: 1
-     * ulog_nid: 1
-     * user_id: 3
-     * mark: suisui
-     * openid: undefined
-     * sign: d7c458832c4ed7f51aac87090d2b2ebb
-     * token: eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzIiwic3ViIjoi5bCP55m9IiwiaWF0IjoxNjE0Njc0Njk5LCJleHAiOjE2MTYxNDU5MjgsImFtb3VudCI6MEUtMTIsImlzQXV0aCI6ZmFsc2UsImJhbGFuY2UiOjBFLTEyLCJhdmF0YXJVcmwiOiJodHRwczovL3RoaXJkd3gucWxvZ28uY24vbW1vcGVuL3ZpXzMyL1EwajRUd0dUZlRKaWJWZXViNUhubFMzT1JrOFM0cVZ1QmFpY2YxU09IZk9URlJOVVVmOWNrN0lMUldyTHVYTG1kQkxKMk5nZVlpYUlhYnRLaWFPOUszaWJuancvMTMyIiwidXNlcl9pZCI6Mywibmlja05hbWUiOiLkuIDmnprluIXlk6UiLCJyYW5rTmFtZSI6IuaZrumAmuS8muWRmCIsImlkIjozLCJwb2ludCI6MH0.Zl5cA4FziIalOHSUvNAF3Ag6QrnMcv9UEXOPMkvHx3c
-     * appCode: IEC4OARSJZAB4SG3TA
-     * appToken: fcb1123588b8c311c661e2e2f6bff63195fb1932809403507e67044dfadgg755
+     * 消息订阅
      * @param request
      * @param app
+     * @return
      */
     private String setSubscribes(HttpServletRequest request, App app) {
         // 视频id
@@ -140,16 +134,28 @@ public class IndexController {
             for (SubscriptionTemplate subscriptionTemplate:subscriptionTemplates) {
                 // 判断当天该模板该用户订阅的次数
                 count = subscriptionRecordService.count(app,member,subscriptionTemplate);
-                if(count>=3){
+                if(count>=90){
                     continue;
                 }
                 SubscriptionRecord subscriptionRecord = new SubscriptionRecord();
                 subscriptionRecord.setApp(app);
                 subscriptionRecord.setStatus(0);
                 subscriptionRecord.setMember(member);
+                subscriptionRecord.setPage("/pages/detail/detail?id="+vod_id);
                 subscriptionRecord.setSubscriptionTemplate(subscriptionTemplate);
-                subscriptionRecord.getParam().put("vod_id",vod_id);
-                subscriptionRecord.getParam().put("type_id",type_id);
+                Map<String, SubscriptionTemplate.Value> param = subscriptionTemplate.getParam();
+                Map<String, SubscriptionTemplate.Value> param1 = new HashMap<>();
+                for (String key: param.keySet()) {
+                    SubscriptionTemplate.Value value = param.get(key);
+                    String s = redisService.get("movie_" + vod_id);
+                    Items items = JsonUtils.toObject(s, Items.class);
+                    if(StringUtils.equals(value.getValue(),"type_id")){
+                        param1.put(key,new SubscriptionTemplate.Value(items.getVod_class()));
+                    }else if(StringUtils.equals(value.getValue(),"vod_id")){
+                        param1.put(key,new SubscriptionTemplate.Value(items.getVod_name()));
+                    }
+                }
+                subscriptionRecord.setParam(param1);
                 subscriptionRecordService.save(subscriptionRecord);
                 count = count+1;
             }
@@ -161,7 +167,6 @@ public class IndexController {
         map.put("send_num",count);
         return JsonUtils.toJson(Result.success(map));
     }
-
 
     /**
      * 登录
@@ -193,8 +198,13 @@ public class IndexController {
         if(StringUtils.equalsAnyIgnoreCase("App.Mov.GetConfig",service)){
             return getConfig(result,app);
         }
-
-        // App.User.WxRegister&user
+        if(StringUtils.equalsAnyIgnoreCase("App.Mov.GetOnlineMvById",service)){
+            GetOnlineMvById getOnlineMvById = JsonUtils.toObject(result, GetOnlineMvById.class);
+            if(getOnlineMvById.getData()!=null&&getOnlineMvById.getData().getItems()!=null&&getOnlineMvById.getData().getItems().size()>0){
+                Items items = getOnlineMvById.getData().getItems().get(0);
+                redisService.set("movie_"+items.getVod_id(),JsonUtils.toJson(items));
+            }
+        }
 
         return result;
     }
@@ -250,10 +260,71 @@ public class IndexController {
         // demo.getData().getOther().getWxAdId().setSpqtId("adunit-03083c87b390182a");
         demo.getData().getSite().getKefu().setUrl(app.getLogo());
         demo.getData().setWxverify(app.getStatus()==2);
-        demo.getData().getSite().getMessage().setTmpIds("AIUmDyqInlZT2qtC2hqFAzTB6MJ-YTeKSlNcF02OVP0");
+
+        List<SubscriptionTemplate> subscriptionTemplates = subscriptionTemplateService.findListByAppAndSubscriptionTemplateIds(app,null);
+        if(subscriptionTemplates!=null&&subscriptionTemplates.size()>0){
+            Iterator<SubscriptionTemplate> iterator = subscriptionTemplates.iterator();
+            SubscriptionTemplate next = iterator.next();
+            demo.getData().getSite().getMessage().setTmpIds(next.getTemplateId());
+        }
         return JsonUtils.toJson(demo);
     }
 
+    @GetMapping("/movie/{douBanId}/photos")
+    public Result photos(@PathVariable Long douBanId, Integer start, Integer count, HttpServletRequest request){
+
+        String s = redisService.get("photos_" + douBanId);
+        try {
+            List<String> list = JsonUtils.toObject(s, new TypeReference<List<String>>() {
+            });
+
+            Map<String,Object> data = new HashMap<>();
+            List<PhotoImage> photos = new ArrayList<>();
+            list.stream().forEach(item->{
+                PhotoImage photoImage = new PhotoImage();
+                photoImage.getLarge().setUrl(item);
+                photoImage.getSmall().setUrl(item);
+                photos.add(photoImage);
+            });
+            data.put("photos",photos);
+            return Result.success(data);
+        }catch (Exception e){
+            List<String> photo = DouBanUtils.photo(douBanId);
+            redisService.set("photos_" + douBanId,JsonUtils.toJson(photo));
+            return Result.success(photo);
+        }
+    }
+
+
+    @GetMapping("/info/{douBanId}")
+    public Map<String,Object> movie(@PathVariable Long douBanId, Integer start, Integer couSetSubscribent, HttpServletRequest request){
+        Map<String,Object> data= new HashMap<>();
+        Movie movie;
+        String s = redisService.get("douBan_" + douBanId);
+        try {
+            movie = JsonUtils.toObject(s, Movie.class);
+        }catch (Exception e){
+            movie = DouBanUtils.movie(douBanId);
+            redisService.set("douBan_" + douBanId,JsonUtils.toJson(movie));
+        }
+
+        Map<String,Object> rating = new HashMap<>();
+        rating.put("value",movie.getScore());
+        data.put("rating",rating);
+
+
+        Map<String,Object> pic = new HashMap<>();
+        pic.put("normal",movie.getImage());
+        data.put("pic",pic);
+
+        List<String> durations = new ArrayList<>();
+        durations.add(movie.getTimeLength());
+        data.put("durations",durations);
+
+        data.put("genres",movie.getCategories());
+
+        return data;
+    }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Result implements Serializable {

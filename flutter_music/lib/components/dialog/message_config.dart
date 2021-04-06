@@ -1,5 +1,5 @@
 
-enum Type { success, error,waring }
+enum Type { success, error,waring,loading }
 
 class MessageConfig {
 

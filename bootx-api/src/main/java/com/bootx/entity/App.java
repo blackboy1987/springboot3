@@ -7,6 +7,8 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -69,11 +71,15 @@ public class App extends BaseEntity<Long>{
     @Column(nullable = false)
     private Date expireDate;
 
-    @OneToOne(mappedBy = "app", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "app", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private AppAd AppAd;
 
-    @OneToOne(mappedBy = "app", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "app", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private AppConfig appConfig;
+
+    @OneToMany(mappedBy = "app",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<SubscriptionTemplate> subscriptionTemplates = new HashSet<>();
 
     public String getAppId() {
         return appId;
@@ -172,4 +178,11 @@ public class App extends BaseEntity<Long>{
         this.appConfig = appConfig;
     }
 
+    public Set<SubscriptionTemplate> getSubscriptionTemplates() {
+        return subscriptionTemplates;
+    }
+
+    public void setSubscriptionTemplates(Set<SubscriptionTemplate> subscriptionTemplates) {
+        this.subscriptionTemplates = subscriptionTemplates;
+    }
 }

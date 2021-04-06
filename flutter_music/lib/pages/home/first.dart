@@ -1,101 +1,75 @@
-import 'package:dio/dio.dart';
+import 'dart:math';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_music/pages/home/center_category.dart';
-import 'package:flutter_music/pages/home/component/index_swiper_component.dart';
-import 'package:flutter_music/pages/home/component/new_list.dart';
-import 'package:flutter_music/pages/home/component/swiper_component.dart';
+import 'package:flutter_music/components/dialog/loading_dialog.dart';
+import 'package:flutter_music/pages/home/item.dart';
+import 'package:flutter_music/pages/model/Movie.dart';
 import 'package:flutter_music/util/http.dart';
 
 class First extends StatefulWidget {
+
+  Map category;
+
+  First(this.category,{Key key}):super(key: key);
+
   @override
   _FirstState createState() => _FirstState();
 }
 
 class _FirstState extends State<First> {
 
-  Map<String,Object> data = {};
+  bool loading = false;
+
+  int page = 1;
+
+  List list = [];
+
+  ScrollController _scrollController = ScrollController();
+
+  void load() async {
+    Http.get("list?categoryId=${widget.category['id']}&pageNumber=$page", (data){
+      setState(() {
+        if(page==1){
+          list = data["data"];
+        }else{
+          list.addAll(data["data"]);
+        }
+        page = page+1;
+      });
+    });
+  }
 
   @override
   void initState() {
-    Http.get("index", (result) {
-      setState(() {
-        data = result["data"];
-      });
+    load();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+        load();
+      }
     });
     super.initState();
   }
 
+  Future<void> _onRefresh() async{
+    load();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: 180,
-              margin: EdgeInsets.only(
-                bottom: 30,
-              ),
-              child: SwiperComponent(),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                CenterCategory(
-                  Icons.ac_unit,
-                  bgColor: Color(0xffb69ef4),
-                  title: '免费专区',
-                ),
-                CenterCategory(
-                  Icons.ac_unit,
-                  bgColor: Color(0xff6ac5fa),
-                  title: '完本精品',
-                ),
-                CenterCategory(
-                  Icons.ac_unit,
-                  bgColor: Color(0xfff5d34d),
-                  title: '女频精选',
-                ),
-                CenterCategory(
-                  Icons.ac_unit,
-                  bgColor: Color(0xff7be6d4),
-                  title: '男频热门',
-                ),
-              ],
-            ),
-            ...render(data["list"]??[]),
-            Container(
-              margin: EdgeInsets.only(
-                top: 30,
-              ),
-              padding: EdgeInsets.only(
-                left: 20,
-              ),
-              child: NewList('最近更新',this.data["news"]),
-            )
-          ],
+    return Container(
+      margin:EdgeInsets.only(left: 16.0,right: 16.0,top:16.0,),
+      child: RefreshIndicator(
+        onRefresh: _onRefresh,
+        child: ListView.separated(
+          controller: _scrollController,
+          itemBuilder: (BuildContext context, int index)=>Item(list[index]),
+          separatorBuilder: (BuildContext context, int index)=>Divider(
+            color: Colors.red,
+          ),
+          itemCount: list.length,
         ),
       ),
     );
-  }
-
-  List<Widget> render(List list) {
-    List<Widget> widgets = [];
-    list.forEach((item) {
-      widgets.add(
-          Container(
-            margin: EdgeInsets.only(
-              top: 30,
-            ),
-            padding: EdgeInsets.only(
-              left: 20,
-            ),
-            child: IndexSwiperComponent(item["title"],item["list"]),
-          )
-      );
-    });
-    return widgets;
   }
 }

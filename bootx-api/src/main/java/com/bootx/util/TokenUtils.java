@@ -11,7 +11,6 @@ public final class TokenUtils {
 
     private static final SymmetricCrypto SM4 = new SymmetricCrypto("SM4");
 
-
     private TokenUtils(){}
 
     /**

@@ -156,7 +156,7 @@ public class IndexController {
     @GetMapping("/detail")
     private Result detail(Long id){
         Map<String,Object> data = jdbcTemplate.queryForMap("select title,img,title,content,memo from novel where id=?",id);
-        data.put("items", jdbcTemplate.queryForList("select id,title,orders from novelItem where novel_id=? order by orders asc ",id));
+        data.put("items", jdbcTemplate.queryForList("select id,title,orders,resourceUrl from novelItem where novel_id=? order by orders asc ",id));
         return Result.success(data);
     }
 

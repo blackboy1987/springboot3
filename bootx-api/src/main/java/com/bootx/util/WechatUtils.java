@@ -43,7 +43,6 @@ public final class WechatUtils {
         url = url.replace("APPID", app.getAppId()).replace("APPSECRET", app.getAppSecret());
 
         String result = WebUtils.get(url, null);
-        System.out.println("===========================================================================");
         accessToken = JsonUtils.toObject(result, AccessToken.class);
         if (accessToken.getErrCode() == null) {
             accessToken.setCreateDate(System.currentTimeMillis());
@@ -107,8 +106,9 @@ public final class WechatUtils {
         url = url.replace("ACCESS_TOKEN",getAccessToken(app));
         params.put("touser",openId);
         params.put("template_id",templateId);
-        System.out.println(params);
         String result = doWXPost1(url,params);
+        System.out.println(JsonUtils.toJson(params));
+        System.out.println(result);
         return JsonUtils.toObject(result, BaseResponse.class);
     }
 

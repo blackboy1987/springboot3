@@ -51,8 +51,8 @@
             <view class="{{['vod_content_title cuIcon  data-v-4496cd9e',theme+'-title-color']}}">  精彩剧照</view>
             <view class="functionaryJob data-v-4496cd9e" style="height:340rpx;display:flex;overflow:auto;">
                 <view class="directors data-v-4496cd9e" style="display:flex;width:auto;" wx:for="{{photos}}" wx:key="index">
-                    <view class="data-v-4496cd9e" style="width:430rpx;height:272rpx;position:relative;margin-right:20rpx;">
-                        <image bindtap="__e" class="data-v-4496cd9e" data-event-opts="{{[ [ 'tap',[ [ 'showPhotos',[index] ] ] ] ]}}" lazyLoad="{{true}}" src="{{item}}" style="width:430rpx;height:272rpx;border-radius:10rpx;" webp="{{true}}"></image>
+                    <view class="data-v-4496cd9e" style="max-width:430rpx;height:272rpx;position:relative;margin-right:20rpx;">
+                        <image bindtap="__e" class="data-v-4496cd9e" data-event-opts="{{[ [ 'tap',[ [ 'showPhotos',[index] ] ] ] ]}}" lazyLoad="{{true}}" src="{{item}}" style="max-width:430rpx;height:272rpx;border-radius:10rpx;" webp="{{true}}"></image>
                     </view>
                 </view>
             </view>

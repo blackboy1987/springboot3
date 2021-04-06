@@ -6,6 +6,8 @@ import com.bootx.entity.SubscriptionRecord;
 import com.bootx.entity.SubscriptionTemplate;
 import com.bootx.member.entity.Member;
 
+import java.util.List;
+
 /**
  * Service - 插件
  * 
@@ -16,4 +18,5 @@ public interface SubscriptionRecordService extends BaseService<SubscriptionRecor
 
     Long count(App app, Member member, SubscriptionTemplate subscriptionTemplate);
 
+    List<SubscriptionRecord> findListByStatus(Integer status);
 }

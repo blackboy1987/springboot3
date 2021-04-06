@@ -4,6 +4,7 @@ import com.bootx.entity.*;
 import com.bootx.service.AppService;
 import com.bootx.service.SubscriptionRecordService;
 import com.bootx.service.SubscriptionTemplateService;
+import com.bootx.util.JsonUtils;
 import com.bootx.util.WechatUtils;
 import com.bootx.util.wechat.BaseResponse;
 import org.apache.commons.lang3.StringUtils;
@@ -152,20 +153,19 @@ public class InitController {
 
 
     @GetMapping("/send")
-    public void send(){
-        List<SubscriptionRecord> subscriptionRecords = subscriptionRecordService.findList(2L);
+    public void send(Long[] ids){
+        List<SubscriptionRecord> subscriptionRecords = subscriptionRecordService.findList(ids);
         for (SubscriptionRecord subscriptionRecord:subscriptionRecords) {
-            Map<String, SubscriptionTemplate.Value> param = subscriptionRecord.getSubscriptionTemplate().getParam();
             Map<String, Object> param1 = new HashMap<>();
-            for (String key:param.keySet()) {
+            /*for (String key:param.keySet()) {
                 if(StringUtils.equalsAnyIgnoreCase("thing1",key)){
                     param.put(key,new SubscriptionTemplate.Value("更新内容: 标题"));
                 }else if(StringUtils.equalsAnyIgnoreCase("thing2",key)){
                     param.put(key,new SubscriptionTemplate.Value("更新栏目:标题"));
                 }
-            }
-            param1.put("page","pages/detail/detail?id="+subscriptionRecord.getParam().get("vod_id"));
-            param1.put("data",param);
+            }*/
+            param1.put("page",subscriptionRecord.getPage());
+            param1.put("data",subscriptionRecord.getParam());
             BaseResponse baseResponse = WechatUtils.subscribeSend(subscriptionRecord.getApp(),subscriptionRecord.getSubscriptionTemplate().getTemplateId(),subscriptionRecord.getMember().getOpenId(),param1);
             if(baseResponse.getErrCode()==0){
                 // 发送成功
@@ -174,6 +174,7 @@ public class InitController {
                 // 发送失败
                 subscriptionRecord.setStatus(2);
             }
+            subscriptionRecordService.update(subscriptionRecord);
         }
     }
 
