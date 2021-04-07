@@ -2,12 +2,15 @@ package com.bootx.controller;
 
 import com.bootx.common.Result;
 import com.bootx.entity.Novel;
+import com.bootx.entity.NovelCategory;
 import com.bootx.service.NovelCategoryService;
 import com.bootx.service.NovelService;
 import com.bootx.service.RedisService;
 import com.bootx.util.JsonUtils;
 import com.bootx.util.novel.*;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.StandardEnvironment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,16 +28,22 @@ import java.util.concurrent.Executors;
 @RequestMapping("/craw")
 public class CrawlController {
 
-    public static final Map<String,Integer> map = new HashMap<>();
-
     @Resource
     private NovelService novelService;
 
     @Resource
+    private NovelCategoryService novelCategoryService;
+
+    @Resource
     private JdbcTemplate jdbcTemplate;
+
+    public static Map<String,String> map = new HashMap<>();
 
     @GetMapping("/tingchina")
     public Result tingchina() {
+
+
+        Environment environment;
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
         for (Long i = 1L; i < 50000L; i++) {
             Long finalI = i;
@@ -71,7 +80,6 @@ public class CrawlController {
                     }else{
                         System.out.println("数据库存在:"+finalI);
                     }
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -83,7 +91,7 @@ public class CrawlController {
     @GetMapping("/etingshu")
     public Result etingshu() {
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(20);
-        for (Long i = 11917L; i > 1L; i-=1) {
+        for (Long i = 9161L; i > 1L; i-=1) {
             Long finalI = i;
             fixedThreadPool.execute(()->{
                 String url = "https://www.etingshu.com/"+"show/"+finalI+".html";
@@ -92,6 +100,8 @@ public class CrawlController {
                     if(novel!=null){
                         novel.getNovelItems().stream().forEach(item->item.setNovel(novel));
                         System.out.println("charu:"+finalI);
+                        String s = map.get(novel.getCategoryName());
+                        novel.setNovelCategory(novelCategoryService.findByName(s));
                         novelService.save(novel);
                     }
                 }else{
