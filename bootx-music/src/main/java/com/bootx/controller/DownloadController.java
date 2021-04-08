@@ -37,41 +37,41 @@ public class DownloadController {
 
     @Resource
     private RedisService redisService;
+
     @Resource
     private JdbcTemplate jdbcTemplate;
 
     @GetMapping
     public Result index() {
+
+        List<Map<String, Object>> list = jdbcTemplate.queryForList("select id from novel ORDER BY itemCount ASC,id DESC");
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
-        List<Map<String,Object>> list = jdbcTemplate.queryForList("select id,itemCount,url from novel order by itemCount asc, id asc");
-        for (int i=0;i<list.size();i++) {
-            int finalI = i;
-            fixedThreadPool.execute(()->{
-                Novel novel = novelService.find(Long.valueOf(list.get(finalI).get("id")+""));
-                if(novel!=null){
-                    File file = new File("/Volumes/blackboy/有声小说/"+novel.getCategoryName()+"/"+parse(novel.getId())+"_"+novel.getTitle());
-                    if(!file.exists()){
-                        for (NovelItem novelItem:novel.getNovelItems()){
-                            String resourceUrl = novelItem.getResourceUrl();
-                            System.out.println(novel.getId()+":"+resourceUrl);
-                            String path = "/Volumes/blackboy/有声小说/"+novel.getCategoryName()+"/"+parse(novel.getId())+"_"+novel.getTitle()+"_"+novel.getMemo()+"/"+novelItem.getOrder()+"_"+novelItem.getTitle()+"."+ FilenameUtils.getExtension(resourceUrl);
+        for (Integer start = 0;start<list.size();start++) {
+            Novel novel = novelService.find(Long.valueOf(list.get(start).get("id")+""));
+            final boolean[] flag = {true};
+            for (NovelItem novelItem:novel.getNovelItems()){
+                fixedThreadPool.execute(()->{
+                    if(flag[0]){
+                        String resourceUrl = novelItem.getResourceUrl();
+                        if(!redisService.hasKey(novelItem.getId()+"_resource")&&!redisService.hasKey(novelItem.getId()+"_resource_error")){
+                            String path = "F:/有声小说/"+novel.getCategoryName()+"/"+parse(novel.getId())+"_"+novel.getTitle()+"_"+novel.getMemo()+"/"+parse(novelItem.getOrder()+0L)+"_"+novelItem.getTitle()+"."+ FilenameUtils.getExtension(resourceUrl);
+                            long start1 = System.currentTimeMillis();
                             try {
                                 DownloadUtils.download(resourceUrl,path);
+                                redisService.set(novelItem.getId()+"_resource","ok");
+                                System.out.println((System.currentTimeMillis()-start1)/1000+"=="+path+"======完成");
                             }catch (Exception e){
                                 e.printStackTrace();
+                                redisService.set(novelItem.getId()+"_resource_error","ok");
+                                System.out.println((System.currentTimeMillis()-start1)/1000+"=="+path+"======完成=============error");
                                 FileUtils.deleteQuietly(new File(path));
+                                flag[0] = false;
                             }
                         }
-                    }else{
-                        System.out.println(novel.getId()+":已存在！！！");
                     }
-                }
-            });
+                });
+            }
         }
-
-
-
-
         return Result.success("ok");
     }
 
@@ -89,6 +89,5 @@ public class DownloadController {
             return "0"+id;
         }
         return id+"";
-
     }
 }
