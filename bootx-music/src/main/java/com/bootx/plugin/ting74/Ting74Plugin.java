@@ -631,26 +631,31 @@ public class Ting74Plugin extends MusicPlugin {
         String scriptHtml = "";
         Integer position = -1;
         for (int i=0;i<script.size();i++){
+            scriptHtml = script.get(i).data();
+            scriptHtml = scriptHtml.replaceAll("\\n","").replaceAll("; ",";");
             position = script.get(i).data().indexOf("key=");
             if(position>0){
-                scriptHtml = script.get(i).data();
                 break;
             }
         }
+        String[] strs = scriptHtml.split(";");
+        Map<String,String> map = new HashMap<>();
 
 
-        // 解析出来key
-        int i = scriptHtml.indexOf("key=");
-        String[] split = s.substring(i).split("'");
-        String key = split[0];
-        System.out.println("key:"+key);
+        String format = strs[6].replace(" ","");
+        String resource = strs[7].replace(" ","");
+        map.put(format.split("=")[0],format.split("=")[1]);
+        map.put(resource.split("=")[0],resource.split("=")[1]);
 
-
-        for (String ss:split) {
-            System.out.println(ss);
-            System.out.println("=============================================================");
+        String mp3Url = scriptHtml.substring(scriptHtml.indexOf("mp3:"));
+        mp3Url = mp3Url.substring(4,mp3Url.indexOf("}"));
+        for (String key:map.keySet()) {
+            mp3Url = mp3Url.replaceAll(key,map.get(key));
         }
-        return split[split.length-1];
+        mp3Url = mp3Url.replaceAll("'","");
+        mp3Url = mp3Url.replaceAll("\\+","");
+        mp3Url = mp3Url.replaceAll(" ","");
+        return mp3Url;
     }
 
     private Map<String, Object> parseParams(String url) {
@@ -688,12 +693,17 @@ public class Ting74Plugin extends MusicPlugin {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Ting74Plugin ting74Plugin = new Ting74Plugin();
         //List<Category> category = ting74Plugin.getCategory();
         //System.out.println(category);
         //Map<String, Object> data = ting74Plugin.getCategoryList("http://www.ting74.com/top/allvisit.html");
-
-        String mp3 = ting74Plugin.mp3("http://www.ting74.com/tingshu/7692/paly_12353.html");
+        List<String> urls = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            String mp3 = ting74Plugin.mp3("http://www.ting74.com/tingshu/7692/paly_12353.html");
+            urls.add(mp3);
+            Thread.sleep(1000);
+        }
+        System.out.println(urls);
     }
 }
