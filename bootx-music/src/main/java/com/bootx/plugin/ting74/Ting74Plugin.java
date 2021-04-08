@@ -654,7 +654,8 @@ public class Ting74Plugin extends MusicPlugin {
         }
         mp3Url = mp3Url.replaceAll("'","");
         mp3Url = mp3Url.replaceAll("\\+","");
-        mp3Url = mp3Url.replaceAll(" ","");
+        mp3Url = mp3Url.replaceAll("\t","");
+        System.out.println(mp3Url);
         return mp3Url;
     }
 
