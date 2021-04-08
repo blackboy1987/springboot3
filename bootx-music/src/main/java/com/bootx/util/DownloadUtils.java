@@ -6,17 +6,19 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 
 public class DownloadUtils {
 
     public static void download(String url, String path) throws IOException {
-        InputStream inputStream = new URL(url).openStream();
+        URLConnection urlConnection = new URL(url).openConnection();
+        urlConnection.setConnectTimeout(1000);
+        InputStream inputStream = urlConnection.getInputStream();
 
         File file = new File(path);
         if(!file.getParentFile().exists()){
             file.getParentFile().mkdirs();
         }
-
         FileUtils.copyToFile(inputStream,file);
     }
 
