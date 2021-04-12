@@ -1,6 +1,11 @@
 package com.bootx.plugin;
 
-public class Banner {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.io.Serializable;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Banner implements Serializable {
 
     private String img;
 

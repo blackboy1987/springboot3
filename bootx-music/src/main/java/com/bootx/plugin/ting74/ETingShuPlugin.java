@@ -17,15 +17,15 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
-@Component("ting74Plugin")
-public class Ting74Plugin extends MusicPlugin {
+@Component("eTingShuPlugin")
+public class ETingShuPlugin extends MusicPlugin {
 
-    public static final String baseUrl="http://www.ting74.com/";
+    public static final String baseUrl="https://www.etingshu.com/";
 
 
     @Override
     public String getName() {
-        return "74听书网";
+        return "易听书";
     }
 
     @Override
@@ -33,7 +33,7 @@ public class Ting74Plugin extends MusicPlugin {
         List<Category> list = new ArrayList<>();
         String s = WebUtils.get(baseUrl, null);
         Document parse = Jsoup.parse(s);
-        Elements elementsByClass = parse.getElementsByClass("nav-ol").first().getElementsByClass("nav-li");
+        Elements elementsByClass = parse.getElementById("nav").getElementsByClass("li");
         elementsByClass.forEach(item->{
             Category category = new Category();
             category.setName(item.text());
@@ -51,7 +51,7 @@ public class Ting74Plugin extends MusicPlugin {
         if(!url.startsWith("http")){
             url=baseUrl+url;
         }
-        if(StringUtils.equalsAnyIgnoreCase(baseUrl,url)||StringUtils.equalsAnyIgnoreCase(baseUrl,url+"/")){
+        if(StringUtils.equalsAnyIgnoreCase(baseUrl,url)){
             return index(url);
         }
         if(
@@ -139,6 +139,7 @@ public class Ting74Plugin extends MusicPlugin {
             data.put("tags",tags);
         }
 
+
         Elements li = content.getElementsByClass("list-works").first().getElementsByTag("li");
         List<Book> books = new ArrayList<>();
         li.forEach(item->{
@@ -184,27 +185,13 @@ public class Ting74Plugin extends MusicPlugin {
 
     private Map<String, Object> index(String url) {
         Map<String, Object> data = new HashMap<>();
-
         String s = WebUtils.get(url, null);
-
         Document parse = Jsoup.parse(s);
 
-        data.put("banner",banner(parse));
 
-        // 今日热搜
-        data.put("bookTop", bookTop(parse));
-        // 猜你喜欢
-        data.put("like", like(parse));
 
-        // 热门连载
-        data.put("hot",hot(parse,"myTab_Content0","热门连载"));
-        // 经典完结
-        data.put("finish",hot(parse,"myTab_Content1","经典完结"));
-        // 恐怖灵异有声小说 玄幻仙侠有声小说
-        data.put("list",fenLei(parse));
 
-        // 最近更新  最新上架
-        data.putAll(news(parse,1));
+
 
         return data;
 
@@ -655,6 +642,7 @@ public class Ting74Plugin extends MusicPlugin {
         mp3Url = mp3Url.replaceAll("'","");
         mp3Url = mp3Url.replaceAll("\\+","");
         mp3Url = mp3Url.replaceAll("\t","");
+        System.out.println(mp3Url);
         return mp3Url;
     }
 
@@ -694,7 +682,7 @@ public class Ting74Plugin extends MusicPlugin {
 
 
     public static void main(String[] args) throws InterruptedException {
-        Ting74Plugin ting74Plugin = new Ting74Plugin();
+        ETingShuPlugin ting74Plugin = new ETingShuPlugin();
         //List<Category> category = ting74Plugin.getCategory();
         //System.out.println(category);
         //Map<String, Object> data = ting74Plugin.getCategoryList("http://www.ting74.com/top/allvisit.html");

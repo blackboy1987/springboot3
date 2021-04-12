@@ -1,6 +1,11 @@
 package com.bootx.plugin;
 
-public class Tag {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.io.Serializable;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Tag implements Serializable {
 
     private String name;
 

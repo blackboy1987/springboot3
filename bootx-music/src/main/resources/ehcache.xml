@@ -4,10 +4,9 @@
 	<diskStore path="${java.io.tmpdir}/shopxx_cache" />
 
 	<defaultCache maxElementsInMemory="10000" maxElementsOnDisk="0" eternal="true" overflowToDisk="true" diskPersistent="false" timeToIdleSeconds="0" timeToLiveSeconds="0" diskSpoolBufferSizeMB="50" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LFU"/>
-	<cache name="accessToken" maxElementsInMemory="1000" timeToIdleSeconds="3600" timeToLiveSeconds="3600" eternal="false" overflowToDisk="true" />
-	<cache name="accessToken1" maxElementsInMemory="1000" timeToIdleSeconds="3600" timeToLiveSeconds="3600" eternal="false" overflowToDisk="true" />
-	<cache name="wechatUser" maxElementsInMemory="1000" timeToIdleSeconds="3600" timeToLiveSeconds="3600" eternal="false" overflowToDisk="true" />
-	<cache name="novelCategory" maxElementsInMemory="1000" timeToIdleSeconds="3600" timeToLiveSeconds="86400" eternal="false" overflowToDisk="true" />
-	<cache name="novelTag" maxElementsInMemory="1000" timeToIdleSeconds="3600" timeToLiveSeconds="86400" eternal="false" overflowToDisk="true" />
-	<cache name="novel" maxElementsInMemory="1000" timeToIdleSeconds="3600" timeToLiveSeconds="86400" eternal="false" overflowToDisk="true" />
+	<cache name="novelCategory" maxElementsInMemory="1000" timeToIdleSeconds="3600" timeToLiveSeconds="3600" eternal="false" overflowToDisk="true" />
+	<cache name="novelList" maxElementsInMemory="1000" timeToIdleSeconds="3600" timeToLiveSeconds="3600" eternal="false" overflowToDisk="true" />
+	<cache name="novelDetail" maxElementsInMemory="1000" timeToIdleSeconds="3600" timeToLiveSeconds="3600" eternal="false" overflowToDisk="true" />
+	<cache name="novelItems" maxElementsInMemory="1000" timeToIdleSeconds="3600" timeToLiveSeconds="3600" eternal="false" overflowToDisk="true" />
+	<cache name="pluginConfig" maxElementsInMemory="100" eternal="true" overflowToDisk="true" />
 </ehcache>

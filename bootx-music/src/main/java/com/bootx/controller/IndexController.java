@@ -5,9 +5,11 @@ import com.bootx.common.Result;
 import com.bootx.entity.Novel;
 import com.bootx.entity.NovelCategory;
 import com.bootx.entity.NovelItem;
-import com.bootx.service.NovelCategoryService;
-import com.bootx.service.NovelService;
-import com.bootx.service.RedisService;
+import com.bootx.entity.PluginConfig;
+import com.bootx.plugin.Category;
+import com.bootx.plugin.MusicPlugin;
+import com.bootx.service.*;
+import com.bootx.util.EhCacheUtils;
 import com.bootx.util.novel.*;
 import com.bootx.util.JsonUtils;
 import org.apache.commons.lang3.RandomUtils;
@@ -40,6 +42,8 @@ public class IndexController {
 
     @Resource
     private JdbcTemplate jdbcTemplate;
+    @Resource
+    private PluginService pluginService;
 
     static {
         map.put("人物传记","人物传记");
@@ -70,8 +74,15 @@ public class IndexController {
 
 
     @GetMapping("/category")
-    private Result category(){
-        return Result.success(jdbcTemplate.queryForList("select id,name from novelCategory where isShow=true order by orders asc "));
+    private Result category(String pluginId){
+        MusicPlugin musicPlugin = pluginService.getMusicPlugin(pluginId);
+
+        List<Category> category = EhCacheUtils.getNovelCategory(musicPlugin.getId(), List.class);
+        if(category==null||category.isEmpty()){
+            category = musicPlugin.getCategory();
+            EhCacheUtils.setNovelCategory(musicPlugin.getId(),category);
+        }
+        return Result.success(category);
 
     }
 
@@ -116,12 +127,16 @@ public class IndexController {
 
 
     @GetMapping("/list")
-    private Result list(Pageable pageable,Long categoryId){
-        if(categoryId==null){
-            categoryId =0L;
+    private Result list(Pageable pageable,String pluginId,String url){
+        MusicPlugin musicPlugin = pluginService.getMusicPlugin(pluginId);
+
+        Map<String, Object> categoryList = null;
+        if(categoryList==null||categoryList.isEmpty()){
+            categoryList = musicPlugin.getCategoryList(url);
+            EhCacheUtils.setNovelList(musicPlugin.getId()+"_"+url,categoryList);
         }
-        pageable.setPageSize(10);
-        return Result.success(jdbcTemplate.queryForList("select id,title,img,itemCount,content,readCount from novel where novelCategory_id="+categoryId+" or novelCategory_id in (select id from novelcategory where parent_id="+categoryId+") limit "+(pageable.getPageNumber()-1)*pageable.getPageSize()+", "+pageable.getPageSize()));
+
+        return Result.success(categoryList);
     }
 
     @GetMapping("/list1")

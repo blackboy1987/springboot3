@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_music/components/dialog/loading_dialog.dart';
-import 'package:flutter_music/components/dialog/my_dialog.dart';
 import 'package:flutter_music/constant/MyColor.dart';
 import 'package:flutter_music/pages/collect/collect.dart';
 import 'package:flutter_music/pages/home/home.dart';
@@ -25,7 +24,6 @@ class _IndexState extends State<Index> {
     Rank(),
     My(),
   ];
-
 
   @override
   void initState() {
@@ -68,7 +66,9 @@ class _IndexState extends State<Index> {
             label: '收藏',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list,),
+            icon: Icon(
+              Icons.list,
+            ),
             label: '排行',
           ),
           BottomNavigationBarItem(
@@ -77,9 +77,9 @@ class _IndexState extends State<Index> {
           ),
         ],
       ),
-      floatingActionButtonLocation:FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           LoadingDialog.show(context);
           Timer.periodic(Duration(seconds: 5), (timer) {
             LoadingDialog.hide(context);

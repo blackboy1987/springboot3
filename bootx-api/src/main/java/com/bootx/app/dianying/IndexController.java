@@ -273,26 +273,27 @@ public class IndexController {
     @GetMapping("/movie/{douBanId}/photos")
     public Result photos(@PathVariable Long douBanId, Integer start, Integer count, HttpServletRequest request){
 
+        List<String> list;
         String s = redisService.get("photos_" + douBanId);
         try {
-            List<String> list = JsonUtils.toObject(s, new TypeReference<List<String>>() {
+            list = JsonUtils.toObject(s, new TypeReference<List<String>>() {
             });
-
-            Map<String,Object> data = new HashMap<>();
-            List<PhotoImage> photos = new ArrayList<>();
-            list.stream().forEach(item->{
-                PhotoImage photoImage = new PhotoImage();
-                photoImage.getLarge().setUrl(item);
-                photoImage.getSmall().setUrl(item);
-                photos.add(photoImage);
-            });
-            data.put("photos",photos);
-            return Result.success(data);
         }catch (Exception e){
-            List<String> photo = DouBanUtils.photo(douBanId);
-            redisService.set("photos_" + douBanId,JsonUtils.toJson(photo));
-            return Result.success(photo);
+            list = DouBanUtils.photo(douBanId);
+            redisService.set("photos_" + douBanId,JsonUtils.toJson(list));
         }
+        Map<String,Object> data = new HashMap<>();
+        List<PhotoImage> photos = new ArrayList<>();
+        list.stream().forEach(item->{
+            PhotoImage photoImage = new PhotoImage();
+            photoImage.getLarge().setUrl(item);
+            photoImage.getSmall().setUrl(item);
+            photos.add(photoImage);
+        });
+        data.put("photos",photos);
+        return Result.success(data);
+
+
     }
 
 

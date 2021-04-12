@@ -1,36 +1,70 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_music/pages/home/home.dart';
 
 class Index extends StatefulWidget {
+  Index({Key key}) : super(key: key);
+
   @override
   _IndexState createState() => _IndexState();
 }
 
-class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
-  TabController _tabBarController;
+class _IndexState extends State<Index> {
+  int _currentIndex = 0;
+
+  List<Widget> pages = <Widget>[
+    Home(),
+  ];
 
   @override
   void initState() {
-    _tabBarController = new TabController(length: 2, vsync: this);
+    setState(() {
+      _currentIndex = 0;
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'aa',
-      home: Scaffold(
-        appBar: AppBar(
-          elevation: 0.0,
-          bottom: TabBar(controller: _tabBarController, tabs: <Widget>[
-            Text("1"),
-            Text("2"),
-          ]),
-          bottomOpacity: 0.8,
+    return Scaffold(
+      body: pages[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        currentIndex: _currentIndex,
+        selectedLabelStyle: TextStyle(
+          fontWeight: FontWeight.bold,
         ),
-        body: TabBarView(
-            controller: _tabBarController,
-            children: <Widget>[Text('1'), Text('2')]),
+        unselectedLabelStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+        type: BottomNavigationBarType.fixed,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+            ),
+            label: '首页',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.star,
+            ),
+            label: '收藏',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.list,
+            ),
+            label: '排行',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: '我的',
+          ),
+        ],
       ),
     );
   }

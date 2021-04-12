@@ -1,6 +1,11 @@
 package com.bootx.plugin;
 
-public class BookItem {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.io.Serializable;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class BookItem implements Serializable {
 
     private String url;
 

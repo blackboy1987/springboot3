@@ -8,7 +8,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -85,37 +84,43 @@ public abstract class MusicPlugin implements Comparable<MusicPlugin> {
 
     /**
      * 获取分类
+     * @return
+     *  分类列表
      */
     public abstract List<Category> getCategory();
 
 
     /**
-     * 获取分类
+     * 分类也的数据
+     * @param url 地址
+     * @return
+     *  分类数据
      */
     public abstract Map<String,Object> getCategoryList(String url);
 
     /**
      * 搜索
      * @param keywords
+     *      关键字
      */
     public abstract void search(String keywords);
 
 
     /**
      * 获取详情
-     * @param url
+     * @param url 详情地址
      */
     public abstract Map<String,Object> detail(String url);
 
     /**
      * 获取MP3下面的章节信息
-     * @param id
+     * @param id id
      */
     public abstract void items(Long id);
 
     /**
      * 章节信息的播放地址
-     * @param url
+     * @param url 地址
      */
     public abstract String mp3(String url);
 

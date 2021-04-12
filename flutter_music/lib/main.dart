@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_music/pages/index.dart';
 
 void main() => runApp(MyApp());
@@ -36,6 +37,7 @@ class _MyAppState extends State<MyApp> {
           }
         }
       },
+      builder: EasyLoading.init(),
     );
   }
 }

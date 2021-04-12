@@ -1,9 +1,12 @@
 package com.bootx.plugin;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-public class Book {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Book implements Serializable {
 
     private String title;
 
