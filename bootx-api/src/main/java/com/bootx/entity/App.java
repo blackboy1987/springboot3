@@ -29,8 +29,7 @@ public class App extends BaseEntity<Long>{
     private String appToken;
 
     @NotNull
-    @Length(max = 18,min = 18)
-    @Column(length = 18,nullable = false,updatable = false,unique = true)
+    @Column(nullable = false,updatable = false,unique = true)
     private String appCode;
 
     @NotNull

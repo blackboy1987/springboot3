@@ -176,4 +176,40 @@ public class AppController {
         data.put("status", app.getStatus());
         return Result.success(data);
     }
+
+    /**
+     * 修改登录密码
+     * @param request
+     * @param oldPassword
+     * @param password
+     * @param rePassword
+     * @return
+     */
+    @PostMapping("/updatePassword")
+    public Result updatePassword(HttpServletRequest request,String oldPassword,String password,String rePassword){
+        Admin admin = adminService.get(request);
+        if(admin==null){
+            return Result.error("非法访问");
+        }
+        App app = admin.getApp();
+        if(app==null){
+            return Result.error("非法访问");
+        }
+        if(StringUtils.isBlank(oldPassword)){
+            return Result.error("请输入原始密码");
+        }
+        if(StringUtils.isBlank(password)){
+            return Result.error("请输入新密码");
+        }
+        if(!StringUtils.equals(password,rePassword)){
+            return Result.error("两次输入的密码不一致");
+        }
+        if(admin.isValidCredentials(password)){
+            return Result.error("原始密码输入不正确");
+        }
+        admin.setPassword(password);
+        adminService.update(admin);
+
+        return Result.success("操作成功");
+    }
 }

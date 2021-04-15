@@ -52,6 +52,10 @@ public class Admin extends BaseEntity<Long> {
 	@Column(nullable = false)
 	private Integer status;
 
+	@NotNull
+	@Column(nullable = false)
+	private Boolean isAdmin;
+
 
 	public String getOpenId() {
 		return openId;
@@ -124,6 +128,14 @@ public class Admin extends BaseEntity<Long> {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	@Transient

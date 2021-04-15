@@ -272,7 +272,6 @@ public class IndexController {
 
     @GetMapping("/movie/{douBanId}/photos")
     public Result photos(@PathVariable Long douBanId, Integer start, Integer count, HttpServletRequest request){
-
         List<String> list;
         String s = redisService.get("photos_" + douBanId);
         try {

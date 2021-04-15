@@ -51,8 +51,8 @@ var _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator 
                         url: e,
                         data:{
                             token:t.getStorageSync("token"),
-                            appCode:"AEC4OARSJZAB4SG3TA",
-                            appToken:"bdb1123588b8c311c661e2e2f6bff63195fb1932809403507e67044dfadgg755",
+                            appCode:"IEC4OARSJZAB4SG3TA",
+                            appToken:"fcb1123588b8c311c661e2e2f6bff63195fb1932809403507e67044dfadgg755",
                         },
                         dataType: "json",
                         success: function(t) {

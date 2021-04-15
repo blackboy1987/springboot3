@@ -37,6 +37,9 @@ public class IndexController extends BaseController {
             data.put("username",admin.getUsername());
             data.put("appName", app.getAppName());
             data.put("logo", app.getLogo());
+            if(admin.getIsAdmin()){
+                data.put("access","admin");
+            }
         }else{
             data.put("id",0);
             data.put("appName", "未申请");

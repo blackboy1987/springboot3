@@ -3,16 +3,24 @@ package com.bootx.controller;
 import com.bootx.common.Result;
 import com.bootx.entity.App;
 import com.bootx.entity.AppConfig;
+import com.bootx.entity.Area;
 import com.bootx.entity.RewardType;
 import com.bootx.member.entity.Member;
 import com.bootx.member.entity.PointLog;
 import com.bootx.member.service.MemberService;
 import com.bootx.service.AppService;
+import com.bootx.service.AreaService;
+import com.bootx.util.AreaUtils;
 import com.bootx.util.JWTUtils;
 import com.bootx.util.JsonUtils;
 import com.bootx.util.WebUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController("cmsController")
@@ -29,10 +38,22 @@ import java.util.Map;
 public class CmsController {
 
     @Resource
+    private AreaService areaService;
+    @Resource
     private AppService appService;
-
     @Resource
     private MemberService memberService;
+
+    @GetMapping("/a")
+    public Result a(){
+        List<Area> aa = AreaUtils.aa();
+        for (int i = 0; i < aa.size(); i++) {
+            aa.get(i).setOrder(i+1);
+            areaService.save(aa.get(i));
+        }
+        return Result.success("ok");
+    }
+
 
     /**
      * 登录(进入小程序就会调用该方法)

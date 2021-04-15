@@ -37,7 +37,6 @@ public class DouBanUtils {
         headers.put("Host","movie.douban.com");
         headers.put("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36");
         String s = WebUtils.get(url, headers, null);
-
         Document parse = Jsoup.parse(s);
         Element content = parse.getElementById("content");
 
