@@ -1,9 +1,12 @@
 
 package com.bootx.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 
 /**
@@ -18,15 +21,26 @@ public class Order extends BaseEntity<Long> {
 
 	@NotEmpty
 	@Column(nullable = false,updatable = false,unique = true)
+	@JsonView({PageView.class,EditView.class})
 	private String orderSn;
 
 	private Long appId;
 
 	private Long adminId;
 
+	@JsonView({PageView.class})
 	private Integer days;
 
+	@JsonView({PageView.class})
 	private Boolean isUsed;
+
+	@Transient
+	@JsonView({PageView.class})
+	private String username;
+
+	@Transient
+	@JsonView({PageView.class})
+	private String appName;
 
 	public String getOrderSn() {
 		return orderSn;
@@ -66,5 +80,21 @@ public class Order extends BaseEntity<Long> {
 
 	public void setIsUsed(Boolean isUsed) {
 		this.isUsed = isUsed;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getAppName() {
+		return appName;
+	}
+
+	public void setAppName(String appName) {
+		this.appName = appName;
 	}
 }

@@ -4,6 +4,7 @@ package com.bootx.service;
 import com.bootx.controller.wechat.WeChatUser;
 import com.bootx.entity.Admin;
 import com.bootx.entity.App;
+import com.bootx.entity.Order;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -20,9 +21,13 @@ public interface AdminService extends BaseService<Admin, Long> {
 
     Admin findByUsername(String username);
 
+    boolean usernameExist(String username);
+
     Admin create(WeChatUser weChatUser);
 
     Admin get(HttpServletRequest request);
 
     Map<String, Object> getData(Admin admin);
+
+    Admin create(String orderSn,String password);
 }

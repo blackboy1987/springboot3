@@ -29,8 +29,8 @@ var e = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? func
                     $theme: "black",
                     systemInfo: [],
                     $platform: "android",
-                    appCode:"IEC4OARSJZAB4SG3TA",
-                    appToken:"fcb1123588b8c311c661e2e2f6bff63195fb1932809403507e67044dfadgg755",
+                    appCode:"BEC4OARSJZAB4SG3TA",
+                    appToken:"fcb1123588b8c311c661e2e2f6bff63195fb1932809403507e67044dfadgg635",
                     baseUrl:"https://www.igomall.xin/api/v3/",
                 },
                 onLaunch: function() {

@@ -4,10 +4,11 @@ package com.bootx.service.impl;
 import com.bootx.common.Page;
 import com.bootx.common.Pageable;
 import com.bootx.dao.AppDao;
-import com.bootx.entity.App;
+import com.bootx.entity.*;
 import com.bootx.member.entity.Member;
 import com.bootx.service.AppService;
 import com.bootx.service.RedisService;
+import com.bootx.util.DateUtils;
 import com.bootx.util.JWTUtils;
 import com.bootx.util.JsonUtils;
 import io.jsonwebtoken.Claims;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -112,6 +114,24 @@ public class AppServiceImpl extends BaseServiceImpl<App, Long> implements AppSer
     @Transactional(readOnly = true)
     public boolean appTokenExists(String appToken) {
         return appDao.exists("appToken",appToken);
+    }
+
+    @Override
+    public App create(Admin admin, Order order) {
+        App app = new App();
+        app.setAdmin(admin);
+        app.setAppId("临时appId_"+admin.getUsername());
+        app.setAppSecret("临时appSecret_"+admin.getUsername());
+        app.setAppCode("临时appCode_"+admin.getUsername());
+        app.setAppToken("临时appToken_"+admin.getUsername());
+        app.setAppName("临时appName_"+admin.getUsername());
+        app.setExpireDate(DateUtils.getNextDay(new Date(),order.getDays()));
+        app.setStatus(0);
+        app.setAppAd(new AppAd(app));
+        app.setType(1);
+        app.setAppConfig(new AppConfig(app));
+        admin.setApp(app);
+        return super.save(app);
     }
 
     @Override

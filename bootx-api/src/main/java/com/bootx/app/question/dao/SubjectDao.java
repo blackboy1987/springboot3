@@ -2,7 +2,6 @@
 package com.bootx.app.question.dao;
 
 import com.bootx.app.question.entity.Subject;
-import com.bootx.app.yunxiaocha.entity.Order;
 import com.bootx.dao.BaseDao;
 
 /**

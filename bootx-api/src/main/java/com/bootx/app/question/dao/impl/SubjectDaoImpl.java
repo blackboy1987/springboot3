@@ -3,8 +3,6 @@ package com.bootx.app.question.dao.impl;
 
 import com.bootx.app.question.dao.SubjectDao;
 import com.bootx.app.question.entity.Subject;
-import com.bootx.app.yunxiaocha.dao.OrderDao;
-import com.bootx.app.yunxiaocha.entity.Order;
 import com.bootx.dao.impl.BaseDaoImpl;
 import org.springframework.stereotype.Repository;
 

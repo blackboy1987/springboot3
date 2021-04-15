@@ -5,8 +5,10 @@ import com.bootx.controller.wechat.WeChatUser;
 import com.bootx.dao.AdminDao;
 import com.bootx.entity.Admin;
 import com.bootx.entity.App;
+import com.bootx.entity.Order;
 import com.bootx.member.entity.PointLog;
 import com.bootx.service.AdminService;
+import com.bootx.util.CodeUtils;
 import com.bootx.util.JWTUtils;
 import io.jsonwebtoken.Claims;
 import org.apache.commons.lang3.StringUtils;
@@ -39,6 +41,11 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
     @Override
     public Admin findByUsername(String username) {
         return adminDao.find("username",username);
+    }
+
+    @Override
+    public boolean usernameExist(String username) {
+        return adminDao.exists("username",username);
     }
 
     @Override
@@ -77,5 +84,21 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
         data.put("username",admin.getUsername());
 
         return data;
+    }
+
+    @Override
+    public Admin create(String orderSn,String password) {
+        Admin admin = new Admin();
+        admin.setIsAdmin(false);
+        admin.setOpenId(orderSn);
+        admin.setStatus(1);
+        admin.setPassword(password);
+        String username = CodeUtils.getCode1(8);
+        while (usernameExist(username)){
+            username = CodeUtils.getCode1(8);
+        }
+        admin.setUsername(username);
+        admin = super.save(admin);
+        return admin;
     }
 }

@@ -27,6 +27,13 @@ public class AppConfig extends BaseEntity<Long>{
     @Column(length = 3000,nullable = false)
     private Map<String,String> config = new HashMap<>();
 
+    public AppConfig(@NotNull App app) {
+        this.app = app;
+    }
+
+    public AppConfig() {
+    }
+
     public App getApp() {
         return app;
     }

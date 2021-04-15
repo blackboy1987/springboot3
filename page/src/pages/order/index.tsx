@@ -1,58 +1,89 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
-import React, { useRef } from 'react';
+import {Button, message} from 'antd';
+import React, {useRef, useState} from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import { rule } from '@/services/ant-design-pro/api';
+import {list,save} from "@/pages/order/service";
+import {ModalForm, ProFormText} from "@ant-design/pro-form";
 
 const TableList: React.FC = () => {
+  const [createModalVisible, handleModalVisible] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
 
-  const columns: ProColumns<API.RuleListItem>[] = [
+  const columns: ProColumns<API.OrderListItem>[] = [
     {
       title: '订单编号',
-      dataIndex: 'name',
-      tip: '规则名称是唯一的 key',
+      dataIndex: 'orderSn',
     },
     {
-      title: '操作',
-      dataIndex: 'option',
-      valueType: 'option',
-      render: (_, record) => [
-        <a
-          key="config"
-        >
-          修改
-        </a>,
-        <a key="subscribeAlert" href="https://procomponents.ant.design/">
-          删除
-        </a>,
-      ],
+      title: '小程序',
+      dataIndex: 'appName',
+    },
+    {
+      title: '用户名',
+      dataIndex: 'username',
     },
   ];
 
   return (
     <PageContainer>
-      <ProTable<API.RuleListItem, API.PageParams>
+      <ProTable<API.OrderListItem, API.PageParams>
+        bordered
+        size='small'
         headerTitle='订单列表'
         actionRef={actionRef}
-        rowKey="key"
-        search={{
-          labelWidth: 120,
-        }}
+        rowKey="id"
+        search={false}
         toolBarRender={() => [
           <Button
             type="primary"
             key="primary"
+            onClick={() => {
+              handleModalVisible(true);
+            }}
           >
             <PlusOutlined /> 新建
           </Button>,
         ]}
-        request={rule}
+        request={list}
         columns={columns}
       />
+
+
+      <ModalForm
+        title='添加订单'
+        width="400px"
+        visible={createModalVisible}
+        onVisibleChange={handleModalVisible}
+        onFinish={async (value) => {
+          const result  = await save(value as API.OrderListItem);
+          if (result.code===0) {
+            handleModalVisible(false);
+            message.success('添加成功');
+            if (actionRef.current) {
+              actionRef.current.reload();
+            }
+          }else{
+            message.error(result.msg);
+          }
+        }}
+      >
+        <ProFormText
+          placeholder='请输入订单编号'
+          labelCol={{span: 6}}
+          wrapperCol={{span: 18}}
+          label='订单编号'
+          name='orderSn'
+          rules={[
+            {
+              required: true,
+              message: '规则名称为必填项',
+            },
+          ]}
+        />
+      </ModalForm>
     </PageContainer>
   );
 };

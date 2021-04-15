@@ -8,9 +8,10 @@ import { Alert, message, Tabs, Space, Tooltip, Button, Modal, Form, Input } from
 import React, { useState } from 'react';
 import ProForm, { ProFormText } from '@ant-design/pro-form';
 import { useIntl, Link, history, FormattedMessage, SelectLang, useModel } from 'umi';
-import { login } from '@/services/ant-design-pro/api';
+import { login,register } from '@/services/ant-design-pro/api';
 
 import styles from './index.less';
+import moment from "moment";
 
 const LoginMessage: React.FC<{
   content: string;
@@ -40,6 +41,10 @@ const Login: React.FC = () => {
   const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
+  const [visible,setVisible] = useState<boolean>(false);
+  const [loading,setLoading] = useState<boolean>(false);
+  const [visible1,setVisible1] = useState<boolean>(false);
+  const [data,setData] = useState<{username?: string,password?: string,expireDate?: Date}>({});
 
   const [form] = Form.useForm();
 
@@ -189,7 +194,7 @@ const Login: React.FC = () => {
             )}
           </ProForm>
           <div style={{marginTop:24}}>
-            <Button block size='large' type='primary' danger>申请</Button>
+            <Button block size='large' type='primary' danger onClick={()=>setVisible(true)}>申请</Button>
           </div>
           <Space className={styles.other}>
             负责人联系方式
@@ -202,17 +207,42 @@ const Login: React.FC = () => {
           </Space>
         </div>
       </div>
-      <Modal title='请输入拼多多订单号' visible={false} closable={false} okText='确定' cancelText='关闭' onOk={()=>{
-        form.validateFields().then(values=>{
-          console.log(values);
+      <Modal title='请输入拼多多订单号' visible={visible} closable={false} okText='确定' cancelText='关闭' onOk={()=>{
+        setLoading(true);
+        form.validateFields().then(async values=>{
+          const result = await register(values);
+          if(result.code===0){
+            setVisible(false);
+            setData(result.data);
+            setVisible1(true);
+          }else{
+            message.error(result.msg);
+          }
+          setLoading(false);
         }).catch(error=>{
           console.log(error);
           message.error("请输入拼多多订单号");
+          setLoading(false);
         });
-      }}>
+      }} onCancel={()=>setVisible(false)} confirmLoading={loading} destroyOnClose maskClosable={false}>
         <Form form={form}>
           <Form.Item name='orderSn' rules={[{required:true,message:'请输入拼多多订单号'}]}>
             <Input placeholder='请输入拼多多订单号' />
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      <Modal title='登陆账号' visible={visible1} footer={null} destroyOnClose maskClosable={false} onCancel={()=>setVisible1(false)}>
+        <Alert message='请牢记您的登陆用户名和密码' showIcon type='warning' style={{marginBottom:24}} />
+        <Form form={form}>
+          <Form.Item label='登陆用户名'>
+            <span className='ant-form-text'>{data.username}</span>
+          </Form.Item>
+          <Form.Item label='登 陆 密 码'>
+            <span className='ant-form-text'>{data.password}</span>
+          </Form.Item>
+          <Form.Item label='到期时间'>
+            <span className='ant-form-text'>{moment(data.expireDate).format("YYYY-MM-DD HH:mm:ss")}</span>
           </Form.Item>
         </Form>
       </Modal>

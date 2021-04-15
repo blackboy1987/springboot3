@@ -6,6 +6,8 @@ import com.bootx.entity.Order;
 import com.bootx.service.OrderService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * Service - 素材目录
  * 
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements OrderService {
 
+    @Resource
     private OrderDao orderDao;
 
     @Override

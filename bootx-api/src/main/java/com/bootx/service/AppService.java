@@ -1,7 +1,9 @@
 
 package com.bootx.service;
 
+import com.bootx.entity.Admin;
 import com.bootx.entity.App;
+import com.bootx.entity.Order;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -74,4 +76,6 @@ public interface AppService extends BaseService<App,Long> {
      * @return 用户名是否存在
      */
     boolean appTokenExists(String appToken);
+
+    App create(Admin admin, Order order);
 }

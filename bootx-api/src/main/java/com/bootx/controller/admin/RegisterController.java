@@ -2,15 +2,13 @@ package com.bootx.controller.admin;
 
 import com.bootx.common.Result;
 import com.bootx.controller.BaseController;
-import com.bootx.entity.Admin;
-import com.bootx.entity.App;
-import com.bootx.entity.BaseEntity;
-import com.bootx.entity.RewardType;
+import com.bootx.entity.*;
 import com.bootx.member.entity.Member;
 import com.bootx.member.entity.PointLog;
 import com.bootx.member.service.MemberService;
 import com.bootx.service.AdminService;
 import com.bootx.service.AppService;
+import com.bootx.service.OrderService;
 import com.bootx.util.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.commons.lang3.StringUtils;
@@ -26,13 +24,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController("apiRegisterController")
-@RequestMapping("/register")
+@RequestMapping("/admin/api/register")
 public class RegisterController extends BaseController {
 
     @Resource
     private AppService appService;
     @Resource
     private AdminService adminService;
+    @Resource
+    private OrderService orderService;
 
     @PostMapping("/checkUsername")
     public Result checkUsername(String username){
@@ -56,8 +56,8 @@ public class RegisterController extends BaseController {
     }
 
 
-    @PostMapping("/submit")
-    public Result login(String appId,String appSecret,String appName,String username,String password,HttpServletRequest request) {
+    @PostMapping("/submit1")
+    public Result submit1(String appId,String appSecret,String appName,String username,String password,HttpServletRequest request) {
         if (!isValid(Member.class, "password", password, BaseEntity.Save.class)
                 || !isValid(Member.class, "appId", appId, BaseEntity.Save.class)
                 || !isValid(Member.class, "appSecret", appSecret, BaseEntity.Save.class)
@@ -105,6 +105,30 @@ public class RegisterController extends BaseController {
         return Result.success("ok");
     }
 
+    @PostMapping("/submit")
+    public Result submit(String orderSn) {
+        Map<String,Object> data = new HashMap<>();
+        if (StringUtils.isBlank(orderSn)) {
+            return Result.error("请输入订单号");
+        }
+        Order order = orderService.findByOrderSn(orderSn);
+        if(order==null||order.getIsUsed()){
+            return Result.error("订单不存在或已被使用");
+        }
+        // 创建admin
+        String password = CodeUtils.getCode2(10);
+        Admin admin = adminService.create(orderSn,password);
+        // 创建app
+        App app = appService.create(admin,order);
+        order.setAppId(app.getId());
+        order.setAdminId(admin.getId());
+        order.setIsUsed(true);
+        orderService.update(order);
+        data.put("username",admin.getUsername());
+        data.put("password",admin.getPassword());
+        data.put("expireDate",app.getExpireDate());
+        return Result.success(data);
+    }
 
 
 }

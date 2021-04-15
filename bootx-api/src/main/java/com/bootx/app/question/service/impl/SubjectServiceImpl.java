@@ -4,8 +4,6 @@ package com.bootx.app.question.service.impl;
 import com.bootx.app.question.dao.SubjectDao;
 import com.bootx.app.question.entity.Subject;
 import com.bootx.app.question.service.SubjectService;
-import com.bootx.app.yunxiaocha.entity.Order;
-import com.bootx.app.yunxiaocha.service.OrderService;
 import com.bootx.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
