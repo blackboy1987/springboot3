@@ -48,18 +48,18 @@ import java.util.Map;
 @Service
 public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements MemberService {
 
-	@Autowired
+	@Resource
 	private MemberDao memberDao;
-	@Autowired
+	@Resource
 	private MemberRankService memberRankService;
 
-	@Autowired
+	@Resource
 	private MemberDepositLogDao memberDepositLogDao;
-	@Autowired
+	@Resource
 	private PointLogDao pointLogDao;
-	@Autowired
+	@Resource
 	private MemberRankDao memberRankDao;
-	@Autowired
+	@Resource
 	private JdbcTemplate jdbcTemplate;
 	@Resource
 	private AppService appService;
@@ -70,7 +70,7 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements 
 	}
 
 	@Override
-	public Member create(Map<String,String> map, App app,Long scene) {
+	public Member create(Map<String,String> map, App app,Long scene,Map<String,String> config) {
 		AppConfig appConfig = app.getAppConfig();
 		String openId = map.get("openid");
 		String unionid = map.get("unionid");
@@ -85,9 +85,9 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements 
 		Member member = memberDao.find("openId",openId);
 		if(member==null){
 			Member parent = findByAppAndId(app,scene);
-			System.out.println(JsonUtils.toJson(app));
 			member = new Member();
 			member.setLevel(0);
+			member.setRank(1);
 			member.setOpenId(openId);
 			member.setUnionid(unionid);
 			member.setSessionKey(sessionKey);
@@ -99,11 +99,13 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements 
 			member.setParent(null);
 			member.setGrade(1);
 			member.setParent(parent);
+			member.setTicket(0);
+			member.setGold(0);
 			member.setMemberRank(memberRankService.findDefault(app));
 
 			try {
 				if(appConfig.get("registerRewardPoint")!=null){
-					Long point = Long.valueOf(appConfig.get("registerRewardPoint"));
+					Long point = Long.valueOf(appConfig.get("registerRewardPoint")+"");
 					member.setPoint(point);
 				}
 			}catch (Exception ignored){
@@ -111,11 +113,15 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements 
 			}
 			try {
 				if(appConfig.get("registerRewardBalance")!=null){
-					member.setBalance(new BigDecimal(appConfig.get("registerRewardBalance")));
+					member.setBalance(new BigDecimal(appConfig.get("registerRewardBalance")+""));
 				}
 			}catch (Exception ignored){
 
 			}
+			if(config==null){
+				config = new HashMap<>();
+			}
+			member.setConfig(config);
 			member = super.save(member);
 		}
 		member.setNickName(map.get("name"));
@@ -124,7 +130,7 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements 
 	}
 
 	@Transactional(readOnly = true)
-	private Member findByAppAndId(App app, Long id) {
+	Member findByAppAndId(App app, Long id) {
 		Member member = find(id);
 		if(member!=null&& member.getAppId().equals(app.getId())){
 			return member;

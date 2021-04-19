@@ -83,7 +83,7 @@ public class IndexController {
             return Result.error("非法访问");
         }
         AppConfig appConfig = app.getAppConfig();
-        String levelPoint = appConfig.get("levelPoint");
+        String levelPoint = appConfig.get("levelPoint")+"";
         if(StringUtil.isBlank(levelPoint)){
             levelPoint = "100";
         }
@@ -118,7 +118,7 @@ public class IndexController {
     private Map<Integer,RedPackageConfig> parseRedPackageConfig(App app){
         Map<Integer,RedPackageConfig> map = new HashMap<>();
         AppConfig appConfig = app.getAppConfig();
-        String redPackage = appConfig.get("redPackage");
+        String redPackage = appConfig.get("redPackage")+"";
         if(!StringUtil.isBlank(redPackage)){
             //  解析红包配置数据
             String[] redPackageConfigStrs = redPackage.split(";");

@@ -55,8 +55,8 @@ public class IndexController {
         params.put("js_code",code);
         params.put("grant_type","authorization_code");
         Map<String,String> result = JsonUtils.toObject(WebUtils.get1(url, params), new TypeReference<Map<String, String>>() {});
-
-        Member member = memberService.create(result,app,scene);
+        Map<String,String> config = new HashMap<>();
+        Member member = memberService.create(result,app,scene,config);
         Map<String,Object> data1 = memberService.getData(member);
         data.put("userInfo",data1);
         data.put("code",200);
@@ -76,9 +76,6 @@ public class IndexController {
         if(app==null){
             return Result.error("非法请求");
         }
-
-        //WechatUtils.createQRCode(app, QRCodeParam.create("123"));
-
 
         Map<String,Object> data = new HashMap<>();
         data.put("name",app.getAppName());
@@ -152,7 +149,7 @@ public class IndexController {
                 return Result.error("今日已签到，明日再来吧");
             }
             //签到
-            String signPoint = appConfig.get("signPoint");
+            String signPoint = appConfig.get("signPoint")+"";
             if(StringUtils.isBlank(signPoint)){
                 signPoint = "300";
             }try {
@@ -162,7 +159,7 @@ public class IndexController {
             }
         }else if(RewardType.reviewRewardedVideoAd==type){
             // 浏览视频广告
-            String perVideoGold = appConfig.get("perVideoGold");
+            String perVideoGold = appConfig.get("perVideoGold")+"";
             if(StringUtils.isBlank(perVideoGold)){
                 perVideoGold = "2000";
             }try {

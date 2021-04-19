@@ -1,5 +1,6 @@
 package com.bootx.config;
 
+import com.bootx.app.zhaocha.interceptor.ZhaoChaInterceptor;
 import com.bootx.interceptor.CorsInterceptor;
 import com.bootx.interceptor.ValidateInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,13 @@ public class WebConfig implements WebMvcConfigurer {
     public CorsInterceptor corsInterceptor() {
         return new CorsInterceptor();
     }
+
+
+    @Bean
+    public ZhaoChaInterceptor zhaoChaInterceptor() {
+        return new ZhaoChaInterceptor();
+    }
+
     @Bean
     public ValidateInterceptor validateInterceptor() {
         return new ValidateInterceptor();
@@ -25,6 +33,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**");
         registry.addInterceptor(validateInterceptor())
                 .addPathPatterns("/api/**");
+        registry.addInterceptor(zhaoChaInterceptor())
+                .addPathPatterns("/api/zhaocha","/api/zhacha/**");
 
     }
 

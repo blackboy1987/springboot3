@@ -30,7 +30,6 @@
       "outputPath": ""
     },
     "enableEngineNative": false,
-    "bundle": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
@@ -41,7 +40,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.15.0",
-  "appid": "wx1f88ef6f6eebb2f0",
+  "appid": "wx703a1c6f787aaa11",
   "projectname": "movie",
   "debugOptions": {
     "hidedInDevtools": []

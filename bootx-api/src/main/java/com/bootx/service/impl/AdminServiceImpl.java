@@ -87,17 +87,17 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
     }
 
     @Override
-    public Admin create(String orderSn,String password) {
+    public Admin create(String orderSn) {
         Admin admin = new Admin();
         admin.setIsAdmin(false);
         admin.setOpenId(orderSn);
         admin.setStatus(1);
-        admin.setPassword(password);
         String username = CodeUtils.getCode1(8);
         while (usernameExist(username)){
             username = CodeUtils.getCode1(8);
         }
         admin.setUsername(username);
+        admin.setPassword(username);
         admin = super.save(admin);
         return admin;
     }

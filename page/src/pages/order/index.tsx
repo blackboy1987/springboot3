@@ -5,7 +5,7 @@ import { PageContainer } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {list,save} from "@/pages/order/service";
-import {ModalForm, ProFormText} from "@ant-design/pro-form";
+import { ModalForm, ProFormDigit, ProFormText } from '@ant-design/pro-form';
 
 const TableList: React.FC = () => {
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
@@ -76,6 +76,34 @@ const TableList: React.FC = () => {
           wrapperCol={{span: 18}}
           label='订单编号'
           name='orderSn'
+          rules={[
+            {
+              required: true,
+              message: '规则名称为必填项',
+            },
+          ]}
+        />
+        <ProFormDigit
+          placeholder='使用天数'
+          labelCol={{span: 6}}
+          wrapperCol={{span: 18}}
+          label='使用天数'
+          name='days'
+          min={0}
+          fieldProps={{ precision: 0,step:1 }}
+          rules={[
+            {
+              required: true,
+              message: '规则名称为必填项',
+            },
+          ]}
+        />
+        <ProFormText
+          placeholder='订单用户'
+          labelCol={{span: 6}}
+          wrapperCol={{span: 18}}
+          label='订单用户'
+          name='days'
           rules={[
             {
               required: true,

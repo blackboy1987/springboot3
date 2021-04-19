@@ -29,5 +29,5 @@ public interface AdminService extends BaseService<Admin, Long> {
 
     Map<String, Object> getData(Admin admin);
 
-    Admin create(String orderSn,String password);
+    Admin create(String orderSn);
 }

@@ -50,7 +50,6 @@ public class LoginController {
                 data.put("code",1);
             }else{
                 // 获取到用户
-                System.out.println("result:"+ JsonUtils.toJson(weChatUser));
                 Admin member = adminService.findByOpenId(weChatUser.getOpenId());
                 if(member==null){
                     // TODO 创建新的用户并登录

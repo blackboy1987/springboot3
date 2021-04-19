@@ -100,8 +100,8 @@ const TableList: React.FC = () => {
             }
           ]}>
             <Select>
-              <Select.Option value={1}>审核中</Select.Option>
-              <Select.Option value={2}>已通过</Select.Option>
+              <Select.Option value={1}>小程序审核中</Select.Option>
+              <Select.Option value={2}>小程序审核通过</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item {...tailLayout}>

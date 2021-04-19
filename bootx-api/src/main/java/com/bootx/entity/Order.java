@@ -7,7 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * Entity - 管理员
@@ -29,9 +31,14 @@ public class Order extends BaseEntity<Long> {
 	private Long adminId;
 
 	@JsonView({PageView.class})
+	@NotNull
+	@Min(0)
+	@Column(nullable = false)
 	private Integer days;
 
 	@JsonView({PageView.class})
+	@NotNull
+	@Column(nullable = false)
 	private Boolean isUsed;
 
 	@Transient
@@ -41,6 +48,9 @@ public class Order extends BaseEntity<Long> {
 	@Transient
 	@JsonView({PageView.class})
 	private String appName;
+
+	@JsonView({PageView.class})
+	private String orderName;
 
 	public String getOrderSn() {
 		return orderSn;
@@ -96,5 +106,13 @@ public class Order extends BaseEntity<Long> {
 
 	public void setAppName(String appName) {
 		this.appName = appName;
+	}
+
+	public String getOrderName() {
+		return orderName;
+	}
+
+	public void setOrderName(String orderName) {
+		this.orderName = orderName;
 	}
 }

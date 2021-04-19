@@ -53,7 +53,6 @@ public final class JsonUtils {
 		try {
 			return OBJECT_MAPPER.writeValueAsString(value);
 		} catch (JsonProcessingException e) {
-			System.out.println(value);
 			throw new RuntimeException(e.getMessage(), e);
 		}
 	}

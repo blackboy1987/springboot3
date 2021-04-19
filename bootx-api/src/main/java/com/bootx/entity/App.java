@@ -17,7 +17,7 @@ public class App extends BaseEntity<Long>{
     public static final String CACHE_PREFIX = "app_";
 
     @NotNull
-    @Column(nullable = false,updatable = false,unique = true)
+    @Column(nullable = false,unique = true)
     public String appId;
 
     @NotNull
@@ -25,11 +25,11 @@ public class App extends BaseEntity<Long>{
     private String appSecret;
 
     @NotNull
-    @Column(nullable = false,updatable = false,unique = true)
+    @Column(nullable = false,unique = true)
     private String appToken;
 
     @NotNull
-    @Column(nullable = false,updatable = false,unique = true)
+    @Column(nullable = false,unique = true)
     private String appCode;
 
     @NotNull
@@ -37,9 +37,10 @@ public class App extends BaseEntity<Long>{
     private String appName;
 
     /**
-     * 0: 微信待审核
-     * 1：微信审核通过
-     * 2：已禁用
+     * 0: 账号刚创建，没有完善信息
+     * 1：审核中
+     * 2：已审核
+     * 3：已禁用
      */
     @NotNull
     @Column(nullable = false)

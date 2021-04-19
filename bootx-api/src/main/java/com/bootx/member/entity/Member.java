@@ -83,6 +83,21 @@ public class Member extends BaseEntity<Long> {
     @Column(nullable = false)
     private Integer level;
 
+    @Min(1)
+    @NotNull
+    @Column(nullable = false)
+    private Integer rank;
+
+    @Min(0)
+    @NotNull
+    @Column(nullable = false)
+    private Integer gold;
+
+    @Min(0)
+    @NotNull
+    @Column(nullable = false)
+    private Integer ticket;
+
     @NotNull
     @Convert(converter = ConfigConfigConvert.class)
     @Column(length = 3000,nullable = false)
@@ -242,6 +257,30 @@ public class Member extends BaseEntity<Long> {
 
     public void setLevel(Integer level) {
         this.level = level;
+    }
+
+    public Integer getRank() {
+        return rank;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
+    }
+
+    public Integer getGold() {
+        return gold;
+    }
+
+    public void setGold(Integer gold) {
+        this.gold = gold;
+    }
+
+    public Integer getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Integer ticket) {
+        this.ticket = ticket;
     }
 
     public void setGrade(Integer grade) {

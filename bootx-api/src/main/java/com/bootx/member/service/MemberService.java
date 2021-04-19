@@ -24,7 +24,7 @@ public interface MemberService extends BaseService<Member,Long> {
 
     Member find(String openId, App app);
 
-    Member create(Map<String,String > map, App app,Long scene);
+    Member create(Map<String,String > map, App app,Long scene,Map<String,String> config);
 
     Member findByUserTokenAndApp(String userToken, App app);
 

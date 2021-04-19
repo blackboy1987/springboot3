@@ -126,7 +126,7 @@ public class AppServiceImpl extends BaseServiceImpl<App, Long> implements AppSer
         app.setAppToken("临时appToken_"+admin.getUsername());
         app.setAppName("临时appName_"+admin.getUsername());
         app.setExpireDate(DateUtils.getNextDay(new Date(),order.getDays()));
-        app.setStatus(0);
+        app.setStatus(1);
         app.setAppAd(new AppAd(app));
         app.setType(1);
         app.setAppConfig(new AppConfig(app));
@@ -174,6 +174,13 @@ public class AppServiceImpl extends BaseServiceImpl<App, Long> implements AppSer
         }
         return null;
 
+    }
+
+    @Override
+    public App save(App app) {
+        String cacheKey = App.CACHE_PREFIX + app.getAppCode();
+        redisService.set(cacheKey, JsonUtils.toJson(app));
+        return super.save(app);
     }
 
     @Override

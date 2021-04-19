@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Card, Typography } from 'antd';
+import moment from 'moment';
+import { Card, Tooltip, Typography } from 'antd';
 import styles from './Welcome.less';
 import { info } from '@/services/ant-design-pro/api';
 
@@ -18,6 +19,7 @@ type App = {
   appCode?: string;
   appToken?: string;
   status?: number;
+  expireDate?: Date;
 }
 
 export default (): React.ReactNode => {
@@ -45,19 +47,16 @@ export default (): React.ReactNode => {
         <CodePreview>{app.appToken}</CodePreview>
         <Typography.Text strong>
           小程序名称
+          <Tooltip title='到期时间'>
+            <span style={{marginLeft:24,fontSize:18,color:'#f50'}}>{moment(app.expireDate).format("YYYY-MM-DD HH:mm:ss")}</span>
+          </Tooltip>
         </Typography.Text>
         <CodePreview>{app.appName}</CodePreview>
+
         <Typography.Text strong>
           小程序状态
         </Typography.Text>
         <CodePreview>{app.status===2?'运行中':'审核中'}</CodePreview>
-        <Typography.Text strong>
-          程序下载
-        </Typography.Text>
-        <CodePreview>
-          https://pan.baidu.com/s/15EaQSo1UB2BX7vyflkg-uA
-          提取码：iu1b
-        </CodePreview>
       </Card>
     </PageContainer>
   );

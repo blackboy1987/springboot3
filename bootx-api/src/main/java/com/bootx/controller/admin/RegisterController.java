@@ -116,8 +116,7 @@ public class RegisterController extends BaseController {
             return Result.error("订单不存在或已被使用");
         }
         // 创建admin
-        String password = CodeUtils.getCode2(10);
-        Admin admin = adminService.create(orderSn,password);
+        Admin admin = adminService.create(orderSn);
         // 创建app
         App app = appService.create(admin,order);
         order.setAppId(app.getId());
@@ -125,7 +124,7 @@ public class RegisterController extends BaseController {
         order.setIsUsed(true);
         orderService.update(order);
         data.put("username",admin.getUsername());
-        data.put("password",admin.getPassword());
+        data.put("password",admin.getUsername());
         data.put("expireDate",app.getExpireDate());
         return Result.success(data);
     }

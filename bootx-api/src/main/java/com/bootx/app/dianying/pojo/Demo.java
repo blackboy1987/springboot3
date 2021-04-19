@@ -1,7 +1,9 @@
 package com.bootx.app.dianying.pojo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -814,6 +816,10 @@ public class Demo {
             @JsonProperty("vodPlayer")
             private VodPlayerDTO vodPlayer;
 
+            @JsonInclude(JsonInclude.Include.NON_NULL)
+            @JsonProperty("danmuList")
+            private List<DanMu> danmuList = new ArrayList();
+
             public String getIsPoints() {
                 return isPoints;
             }
@@ -884,6 +890,14 @@ public class Demo {
 
             public void setVodPlayer(VodPlayerDTO vodPlayer) {
                 this.vodPlayer = vodPlayer;
+            }
+
+            public List<DanMu> getDanmuList() {
+                return danmuList;
+            }
+
+            public void setDanmuList(List<DanMu> danmuList) {
+                this.danmuList = danmuList;
             }
 
             public static class AdMsgDTO {
@@ -1020,6 +1034,36 @@ public class Demo {
 
                 public void setTitle(List<String> title) {
                     this.title = title;
+                }
+            }
+
+            public static class DanMu {
+                private String text;
+                private String color;
+                private Integer time;
+
+                public String getText() {
+                    return text;
+                }
+
+                public void setText(String text) {
+                    this.text = text;
+                }
+
+                public String getColor() {
+                    return color;
+                }
+
+                public void setColor(String color) {
+                    this.color = color;
+                }
+
+                public Integer getTime() {
+                    return time;
+                }
+
+                public void setTime(Integer time) {
+                    this.time = time;
                 }
             }
         }

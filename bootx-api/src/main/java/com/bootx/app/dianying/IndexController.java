@@ -185,7 +185,8 @@ public class IndexController {
         Map<String,String> result = JsonUtils.toObject(WebUtils.get1(url, params), new TypeReference<Map<String, String>>() {});
         result.putAll(params1);
 
-        Member member = memberService.create(result,app,null);
+        Map<String,String> config = new HashMap<>();
+        Member member = memberService.create(result,app,null,config);
         Map<String,Object> data1 = new HashMap<>(result);
         data1 = memberService.getData(member);
         data.put("userInfo",data1);
@@ -211,6 +212,7 @@ public class IndexController {
 
     private String getConfig(String result,App app) {
         AppAd appAd = app.getAppAd();
+        String danMu = app.getAppConfig().getConfig().get("danMu")+"";
         Demo demo = JsonUtils.toObject(result,Demo.class);
         demo.getData().setAdmin(app.getAppName());
         AdConfig indexAdConfig = appAd.get("index");
@@ -243,6 +245,19 @@ public class IndexController {
             demo.getData().getPlay().getWxAdId().setCpId(playAdConfig.getInterstitialAdId());
             demo.getData().getPlay().getWxAdId().setJlspId(playAdConfig.getRewardedVideoAdId());
             demo.getData().getPlay().getWxAdId().setSpqtId(playAdConfig.getVideoFrontAdId());
+        }
+        try{
+            demo.getData().getPlay().setDanmuList(JsonUtils.toObject(danMu, new TypeReference<List<Demo.DataDTO.PlayDTO.DanMu>>() {
+            }));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if(demo.getData().getPlay().getDanmuList()==null||demo.getData().getPlay().getDanmuList().isEmpty()){
+            String danMuList = "[{\"text\":\"请勿相信视频内广告\",\"color\":\"#ff0000\",\"time\":1},{\"text\":\"本软件永久免费,为避免小程序被封,请联系客服!\",\"color\":\"#ff00ff\",\"time\":3}]";
+            List<Demo.DataDTO.PlayDTO.DanMu> danMus = JsonUtils.toObject(danMuList, new TypeReference<List<Demo.DataDTO.PlayDTO.DanMu>>() {
+            });
+            demo.getData().getPlay().setDanmuList(danMus);
+            app.getAppConfig().getConfig().put("danMu",JsonUtils.toJson(danMus));
         }
         AdConfig woDeAdConfig = appAd.get("woDe");
         if(woDeAdConfig!=null){

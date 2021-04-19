@@ -82,7 +82,7 @@ public class IndexController {
                 return Result.error("今日已签到，明日再来吧");
             }
             //签到
-            String signPoint = appConfig.get("signPoint");
+            String signPoint = appConfig.get("signPoint")+"";
             if(StringUtils.isBlank(signPoint)){
                 signPoint = "100";
             }try {
