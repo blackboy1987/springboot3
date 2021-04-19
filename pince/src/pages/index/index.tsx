@@ -9,6 +9,7 @@ import MyAd from "@/component/myAd";
 export default () => {
     const [indexAd,setIndexAd] = useState<{[key: string]: any}>({});
     usePageEvent("onLoad",()=>{
+        console.log(wx.getSystemInfoSync());
         request({
             url:Constants.baseUrl+"config",
             method:'POST',

@@ -55,7 +55,7 @@ export default () => {
     const rewardedVideoAdCreate = () =>{
         const detailAd = getStorageSync("appConfig").detailAd;
         if(detailAd.rewardedVideoAdId&&!rewardedVideoAd){
-            const rewardedVideoAd1 = createRewardedVideoAd({ adUnitId: 'xxxx' })
+            const rewardedVideoAd1 = createRewardedVideoAd({ adUnitId: rewardedVideoAd })
             rewardedVideoAd1.onLoad(() => {
                 console.log('onLoad event emit')
             })
@@ -125,41 +125,42 @@ export default () => {
           {
               infoData.length>0? (
                   <>
+                      <View className="title">
+                          <View className="ico_change" onClick={()=>setChangexzModal(true)} />
+                          <View onClick={()=>setChangexzModal(true)} >切换星座</View>
+                          <Popup position='bottom' open={changexzModal} style={{background:'rgba(0,0,0,0)'}} onClose={() => {
+                              setChangexzModal(false);
+                          }}>
+                              <View className="float_box">
+                                  <View className="f_title">
+                                      <Image className="f_titleimg" src="https://api.xzw.com/static/image/xcx/s_xz.png" />
+                                  </View>
+                                  <View className="f_main">
+                                      <View className="f_ul clear">
+                                          {
+                                              data.map((item,index)=>(
+                                                  <View className="f_li" key={index} onClick={()=>changexz(index+1,item.name)}>
+                                                      <View className="f_libg">
+                                                          <Image className="f_liimg" mode="widthFix" src={`https://bootx-xiaochengxu.oss-cn-hangzhou.aliyuncs.com/pince/item/${index+1}.png`} />
+                                                      </View>
+                                                      <View className="f_litxt">{item.name}</View>
+                                                  </View>
+                                              ))
+                                          }
+                                      </View>
+                                  </View>
+                              </View>
+                          </Popup>
+                      </View>
                       {
                           infoData.map((currentInfoData,index)=>(
-                              <View className="swiper-box" style={{height:(systeInfo.hei-31)*2,display:currentTab===index?'':'none'}} key={index}>
+                              <View className="swiper-box" key={index}>
                                   {
                                       currentTab===index?(
-                                          <ScrollView className="bg1" scrollY style={{height:(systeInfo.hei)*2}}>
+                                          <ScrollView className="bg1" scrollY style={{height:(systeInfo.hei+60)*3}}>
                                                   <View className="bg_t" />
                                                   <View className="inner">
-                                                      <View className="title">
-                                                          <View className="ico_change" onClick={()=>setChangexzModal(true)} />
-                                                          <View onClick={()=>setChangexzModal(true)} >切换星座</View>
-                                                          <Popup position='bottom' open={changexzModal} style={{background:'rgba(0,0,0,0)'}} onClose={() => {
-                                                              setChangexzModal(false);
-                                                          }}>
-                                                              <View className="float_box">
-                                                                  <View className="f_title">
-                                                                      <Image className="f_titleimg" src="https://api.xzw.com/static/image/xcx/s_xz.png" />
-                                                                  </View>
-                                                                  <View className="f_main">
-                                                                      <View className="f_ul clear">
-                                                                          {
-                                                                              data.map((item,index)=>(
-                                                                                  <View className="f_li" key={index} onClick={()=>changexz(index+1,item.name)}>
-                                                                                      <View className="f_libg">
-                                                                                          <Image className="f_liimg" mode="widthFix" src={`https://bootx-xiaochengxu.oss-cn-hangzhou.aliyuncs.com/pince/item/${index+1}.png`} />
-                                                                                      </View>
-                                                                                      <View className="f_litxt">{item.name}</View>
-                                                                                  </View>
-                                                                              ))
-                                                                          }
-                                                                      </View>
-                                                                  </View>
-                                                              </View>
-                                                          </Popup>
-                                                      </View>
+
                                                       <View className="box">
                                                           <View className="box_t clear">
                                                               <View className="dt">
