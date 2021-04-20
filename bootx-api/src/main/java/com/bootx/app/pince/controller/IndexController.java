@@ -5,8 +5,11 @@ import com.bootx.entity.AdConfig;
 import com.bootx.entity.App;
 import com.bootx.entity.AppAd;
 import com.bootx.service.AppService;
+import com.bootx.service.RedisService;
+import com.bootx.util.DateUtils;
 import com.bootx.util.JsonUtils;
 import com.bootx.util.WebUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +30,8 @@ public class IndexController {
 
     @Resource
     private AppService appService;
+    @Resource
+    private RedisService redisService;
 
     @PostMapping("/config")
     public Result category(HttpServletRequest request){
@@ -66,11 +72,20 @@ public class IndexController {
 
     @GetMapping("/fortune")
     public Object fortune(HttpServletRequest request,Integer id){
+        String cacheKey = "pince_" + id + "_" + DateUtils.formatDateToString(new Date(), "yyyyMMdd");
         App app = appService.get(request);
-        if(app==null){
             return Result.error("非法访问");
         }
-        String s = WebUtils.get(url+"fortune?id="+id+"&ld=-1&vc=xcx&token=Mh8tGmSoW3fyH642Y+Eb3E", null);
-        return s;
+        String result = redisService.get(cacheKey);
+        if(StringUtils.isBlank(result)){
+            System.out.println(id+"=============================================未命中缓存");
+            result = WebUtils.get(url+"fortune?id="+id+"&ld=-1&vc=xcx&token=Mh8tGmSoW3fyH642Y+Eb3E", null);
+            redisService.set(cacheKey,result);
+        }else{
+            System.out.println(id+"命中缓存");
+        }
+
+
+        return result;
     }
 }

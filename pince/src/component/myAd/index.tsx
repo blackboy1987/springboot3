@@ -25,7 +25,7 @@ const MyAd:React.FC<MyAdProps> = ({adConfig}) =>{
                     <>
                         {
                             adConfig.bannerId ? (
-                                <Ad unitId={adConfig.bannerId} />
+                                <Ad unitId={adConfig.bannerId} adTheme='black' />
                             ) : null
                         }
                     </>
@@ -36,18 +36,7 @@ const MyAd:React.FC<MyAdProps> = ({adConfig}) =>{
                     <>
                         {
                             adConfig.gridAdId ? (
-                                <Ad unitId={adConfig.gridAdId} adType='grid' />
-                            ) : null
-                        }
-                    </>
-                ) : null
-            }
-            {
-                random === 2 ? (
-                    <>
-                        {
-                            adConfig.videoAdId ? (
-                                <Ad unitId={adConfig.videoAdId} adType='video' />
+                                <Ad unitId={adConfig.gridAdId} adType='grid' adTheme='black' />
                             ) : null
                         }
                     </>

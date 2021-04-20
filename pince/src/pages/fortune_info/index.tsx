@@ -16,6 +16,7 @@ import './index.css';
 import {useState} from "react";
 import {Loading, Popup} from "annar";
 import {Constants, data} from "@/util/constant";
+import MyAd from "@/component/myAd";
 
 type InfoData = {
     desc: string;
@@ -25,23 +26,55 @@ type InfoData = {
     url?: string;
 }
 
+
+type SystemInfo={
+    /** 手机品牌 */
+    brand: string;
+    /** 手机型号 */
+    model: string;
+    /** 设备像素比 */
+    pixelRatio: number;
+    /** 屏幕宽度 */
+    screenWidth: number;
+    /** 屏幕高度 */
+    screenHeight: number;
+    /** 窗口宽度 */
+    windowWidth: number;
+    /** 窗口高度 */
+    windowHeight: number;
+    /** 状态栏的高度 */
+    statusBarHeight: number;
+    /** 微信设置的语言 */
+    language: string;
+    /** 微信版本号 */
+    version: string;
+    /** 操作系统版本 */
+    system: string;
+    /** 客户端平台 */
+    platform: string;
+    /** 用户字体大小设置。以“我-设置-通用-字体大小”中的设置为准，单位 px。 */
+    fontSizeSetting: number;
+    /** 客户端基础库版本 */
+    SDKVersion: string;
+}
+
 const tabs = [ "今日", "明日", "本周", "本月", "今年", "爱情" ];
 
 export default () => {
 
-    const [systeInfo,setSystemInfo] = useState({
-        swidth: wx.getSystemInfoSync().windowWidth,
-        hei: wx.getSystemInfoSync().windowHeight,
-    });
+    const [systemInfo,setSystemInfo] = useState<SystemInfo>(wx.getSystemInfoSync());
 
     const [infoData,setInfoData] = useState<InfoData[]>([]);
     const [id,setId] = useState<number>(1);
     const [name,setName] = useState<string>("金牛座");
     const [changexzModal,setChangexzModal] = useState<boolean>(false);
     const [rewardedVideoAd,setRewardedVideoAd] = useState(null);
+    const [adConfig,setAdConfig] = useState<{[key: string]: string}>({});
+
+
     const load = (xzId: number) =>{
         request({
-            url:Constants.baseUrl+"fortune/?id="+xzId+"&ld=-1&vc=xcx&token=Mh8tGmSoW3fyH642Y+Eb3E",
+            url:Constants.baseUrl+"fortune/?id="+xzId,
             method:'GET',
             header:{
                 'appCode':Constants.appCode,
@@ -52,10 +85,9 @@ export default () => {
         });
     }
 
-    const rewardedVideoAdCreate = () =>{
-        const detailAd = getStorageSync("appConfig").detailAd;
+    const rewardedVideoAdCreate = (detailAd:{[key: string]: any}) =>{
         if(detailAd.rewardedVideoAdId&&!rewardedVideoAd){
-            const rewardedVideoAd1 = createRewardedVideoAd({ adUnitId: rewardedVideoAd })
+            const rewardedVideoAd1 = createRewardedVideoAd({ adUnitId: detailAd.rewardedVideoAdId })
             rewardedVideoAd1.onLoad(() => {
                 console.log('onLoad event emit')
             })
@@ -63,7 +95,9 @@ export default () => {
                 console.log('onError event emit', err)
             })
             rewardedVideoAd1.onClose((res) => {
-                console.log('onClose event emit', res)
+                if(res.isEnded){
+
+                }
             })
             setRewardedVideoAd(rewardedVideoAd1);
         }
@@ -71,13 +105,16 @@ export default () => {
     }
 
     usePageEvent("onLoad",(e)=>{
+        setSystemInfo(wx.getSystemInfoSync);
+        wx.setNavigationBarTitle(data[e.id-1].name+" 星运解析");
+        const detailAd = getStorageSync("appConfig").detailAd;
+        setAdConfig(detailAd);
         setId(e.id);
         setName(data[e.id-1].name);
         load(e.id);
         if(!rewardedVideoAd){
-            rewardedVideoAdCreate();
+            rewardedVideoAdCreate(detailAd);
         }
-
         const interstitialAd = createInterstitialAd({
             adUnitId:getStorageSync("appConfig").detailAd.interstitialAdId
         });
@@ -88,9 +125,11 @@ export default () => {
             console.log("222222222222222222");})
         interstitialAd.onClose(() => {
             console.log("3333333333333333");})
-        interstitialAd.show().catch((err) => {
-            console.error(err)
-        })
+        setTimeout(()=>{
+            interstitialAd.show().catch((err) => {
+                console.error(err)
+            })
+        },15e3);
 
     });
 
@@ -99,13 +138,7 @@ export default () => {
     })
 
     const [currentTab,setCurrentTab] = useState<number>(0);
-
-    const switchNav = (index: number) =>{
-        setCurrentTab(index);
-    }
-
-    const changexz=(index: number,name: string)=>{
-        console.log(rewardedVideoAd,"rewardedVideoAd");
+    const playVideoAd = () =>{
         rewardedVideoAd && rewardedVideoAd.show()
             .catch(() => {
                 rewardedVideoAd.load()
@@ -114,12 +147,23 @@ export default () => {
                         console.log('激励视频 广告显示失败')
                     })
             })
+    }
+
+    const switchNav = (index: number) =>{
+        if(index%2==0){
+            playVideoAd();
+        }
+        setCurrentTab(index);
+    }
+
+
+
+    const changexz=(index: number,name: string)=>{
         setId(index);
         setName(name);
         load(index);
         setChangexzModal(false);
     }
-
   return (
       <>
           {
@@ -153,65 +197,61 @@ export default () => {
                           </Popup>
                       </View>
                       {
-                          infoData.map((currentInfoData,index)=>(
+                          infoData.filter((item,index)=>index===currentTab).map((currentInfoData,index)=>(
                               <View className="swiper-box" key={index}>
-                                  {
-                                      currentTab===index?(
-                                          <ScrollView className="bg1" scrollY style={{height:(systeInfo.hei+60)*3}}>
-                                                  <View className="bg_t" />
-                                                  <View className="inner">
-
-                                                      <View className="box">
-                                                          <View className="box_t clear">
-                                                              <View className="dt">
-                                                                  <Image className="dt_img" mode="widthFix" src={`https://bootx-xiaochengxu.oss-cn-hangzhou.aliyuncs.com/pince/item/${id}.png`} />
-                                                                  <Text className="dt_title">{name}</Text>
-                                                              </View>
-                                                              <View className="dd">
-                                                                  <Text className="dd_title">{tabs[currentTab]}运势({currentInfoData.vdate})</Text>
-                                                                  <View className="star1">
-                                                                      <View className="star_on" style={{width:`${(currentInfoData.index[0].s||0)*20}%`}} />
-                                                                  </View>
-                                                                  <Text className="dd_text">{currentInfoData.desc}</Text>
-                                                              </View>
-                                                          </View>
-                                                          <View className="ul">
-                                                              {
-                                                                  currentInfoData.index.filter((item,index)=>index>0).map((item,index)=>(
-                                                                      <View className="li" key={index}>
-                                                                          <Text className="li_title">{item.t}</Text>
-                                                                          {
-                                                                              item.s ? (
-                                                                                  <View className="star2">
-                                                                                      <View className="star_on" style={{width:`${(item.s)*20}%`}} />
-                                                                                  </View>
-                                                                              ) : null
-                                                                          }
-                                                                          {
-                                                                              item.v ? (<Text className="li_text" >{item.v}</Text>) : null
-                                                                          }
-                                                                      </View>
-                                                                  ))
-                                                              }
-                                                          </View>
-                                                          <View className="content">
-                                                              {
-                                                                  currentInfoData.content.map((item,index)=>(
-                                                                      <View key={index}>
-                                                                          <Text className="c_title">{item.t}</Text>
-                                                                          <Text className="c_info">{item.v}</Text>
-                                                                      </View>
-                                                                  ))
-                                                              }
-                                                          </View>
-                                                          <Button className="sharebtn" openType='share' >
-                                                              <View className="ys">炫耀结果</View>
-                                                          </Button>
-                                                      </View>
+                                  <View className="bg1">
+                                      <View className="bg_t" />
+                                      <View className="inner">
+                                          <View className="box">
+                                              <View className="box_t clear">
+                                                  <View className="dt">
+                                                      <Image className="dt_img" mode="widthFix" src={`https://bootx-xiaochengxu.oss-cn-hangzhou.aliyuncs.com/pince/item/${id}.png`} />
+                                                      <Text className="dt_title">{name}</Text>
                                                   </View>
-                                              </ScrollView>
-                                      ): null
-                                  }
+                                                  <View className="dd">
+                                                      <Text className="dd_title">{tabs[currentTab]}运势({currentInfoData.vdate})</Text>
+                                                      <View className="star1">
+                                                          <View className="star_on" style={{width:`${(currentInfoData.index[0].s||0)*20}%`}} />
+                                                      </View>
+                                                      <Text className="dd_text">{currentInfoData.desc}</Text>
+                                                  </View>
+                                              </View>
+                                              <View className="ul">
+                                                  {
+                                                      currentInfoData.index.filter((item,index)=>index>0).map((item,index)=>(
+                                                          <View className="li" key={index}>
+                                                              <Text className="li_title">{item.t}</Text>
+                                                              {
+                                                                  item.s ? (
+                                                                      <View className="star2">
+                                                                          <View className="star_on" style={{width:`${(item.s)*20}%`}} />
+                                                                      </View>
+                                                                  ) : null
+                                                              }
+                                                              {
+                                                                  item.v ? (<Text className="li_text" >{item.v}</Text>) : null
+                                                              }
+                                                          </View>
+                                                      ))
+                                                  }
+                                              </View>
+                                              <MyAd adConfig={adConfig} />
+                                              <View className="content">
+                                                  {
+                                                      currentInfoData.content.map((item,index)=>(
+                                                          <View key={index}>
+                                                              <Text className="c_title">{item.t}</Text>
+                                                              <Text className="c_info">{item.v}</Text>
+                                                          </View>
+                                                      ))
+                                                  }
+                                              </View>
+                                              <Button className="sharebtn" openType='share' >
+                                                  <View className="ys">炫耀结果</View>
+                                              </Button>
+                                          </View>
+                                      </View>
+                                  </View>
                               </View>
                           ))
                       }

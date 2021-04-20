@@ -9,7 +9,6 @@ import MyAd from "@/component/myAd";
 export default () => {
     const [indexAd,setIndexAd] = useState<{[key: string]: any}>({});
     usePageEvent("onLoad",()=>{
-        console.log(wx.getSystemInfoSync());
         request({
             url:Constants.baseUrl+"config",
             method:'POST',
@@ -23,16 +22,11 @@ export default () => {
             const interstitialAd = createInterstitialAd({
                 adUnitId:response.data.data.indexAd.interstitialAdId
             });
-            interstitialAd.onLoad(() => {
-                console.log("11111111111111");
-            })
-            interstitialAd.onError((err) => {
-                console.log("222222222222222222");})
-            interstitialAd.onClose(() => {
-                console.log("3333333333333333");})
-            interstitialAd.show().catch((err) => {
-                console.error(err)
-            })
+            setTimeout(()=>{
+                interstitialAd.show().catch((err) => {
+                    console.error(err)
+                })
+            },15e3);
         });
     });
 
@@ -48,7 +42,7 @@ export default () => {
                         url:'/pages/fortune_info/index?id='+(index+1)
                     })
                 }} key={index}>
-                  <Image className="li_img" mode="widthFix" src={`https://bootx-xiaochengxu.oss-cn-hangzhou.aliyuncs.com/pince/item-circle/${index+1}.png`} />
+                  <Image className="li_img" mode="widthFix" src={`/images/item-circle/${index+1}.png`} />
                   <View className="name">{item.name}</View>
                   <View className="date">{item.date}</View>
                 </View>
