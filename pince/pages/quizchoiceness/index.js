@@ -214,7 +214,7 @@ var e = null;
                     (0, n.initChannel)(t), f.default.Page.init(),
                     this.onload = 1;
                     var a = this;
-                    a.id = t.id, "undefined" != t.title && (console.log("setNavigationBarTitle", t.title),
+                    a.id = t.id, "undefined" != t.title && (
                     a.sharetitle = t.title, e.setNavigationBarTitle({
                         title: a.sharetitle
                     }));
@@ -243,17 +243,12 @@ var e = null;
                 },
                 onShareAppMessage: function() {
                     var e, t = this;
-                    console.log("id=" + this.id + "&title=" + this.sharetitle + "&ispush=1"), e = this.shareqzonetitle ? this.shareqzonetitle : this.sharetitle,
+                    e = this.shareqzonetitle ? this.shareqzonetitle : this.sharetitle,
                     this.showdingyue && 3 == this.subscribe_status && setTimeout(function() {
                         t.addDingYue();
                     }, 5e3);
                     var a = "/pages/home/index?id=" + this.id + "&title=" + this.sharetitle + "&ispush=1";
-                    return this.share_ecodeid && (a = "/pages/home/index?q=".concat(this.share_ecodeid)),
-                    console.log(a), {
-                        title: e,
-                        imageUrl: this.shareAppImage,
-                        path: a
-                    };
+                    return this.share_ecodeid && (a = "/pages/home/index?q=".concat(this.share_ecodeid));
                 },
                 onReady: function() {
                     this.audio = e.createInnerAudioContext("audio"), this.playing = 0, this.nosave = !0,
@@ -323,9 +318,9 @@ var e = null;
                                 a.subscribe_content = i.subscribe_content, a.adBox_style_type = i.adBox_style_type ? i.adBox_style_type : 1,
                                 a.showVideoModel = null != i.show_video_model ? i.show_video_model : 1, a.resultsofvideo = 1 == i.ad_model,
                                 a.showAdmodelClose = 1 == i.ad_model_close, a.AdmodelContent = i.ad_model_content ? i.ad_model_content.split("##") : [ "你的测试结果已生成", "看一个小视频,即可查看详情" ],
-                                "1109659848" == b.globalData.appid ? (i.video_ad_utilid && i.video_ad_utilid, console.log(i.video_ad_select),
+                                "1109659848" == b.globalData.appid ? (i.video_ad_utilid && i.video_ad_utilid,
                                 a.forcebutton = 1 != i.video_ad_select) : "1109802828" == b.globalData.appid ? (i.video_ad_utilid,
-                                a.forcebutton = !0) : "wx" == b.globalData.apptype ? (i.video_ad_utilid, console.log(i.video_ad_select),
+                                a.forcebutton = !0) : "wx" == b.globalData.apptype ? (i.video_ad_utilid,
                                 a.forcebutton = 1 != i.video_ad_select) : (b.globalData.appid = "1109743918") && (i.video_ad_utilid && i.video_ad_utilid,
                                 a.forcebutton = 1 != i.video_ad_select);
                                 try {
@@ -341,7 +336,7 @@ var e = null;
                                     title: i.title
                                 })), i.sharetitle && (a.shareqzonetitle = i.sharetitle), !e.getStorageSync("user_top") && i.settop && (a.settop = i.settop,
                                 a.settop.img = o.static_host + s.data.settop.img, a.cancalSettop()), a.special_config && 0 == a.hasUserinfo && (a.needlogin = !0),
-                                console.log(a.needlogin), a.modelContent = i.adBox_desc;
+                                a.modelContent = i.adBox_desc;
                                 var n = JSON.parse(i.question);
                                 n = n.map(function(e, t) {
                                     var a = [], s = [];
@@ -366,7 +361,7 @@ var e = null;
                         });
                     },
                     sharefriend: function(e) {
-                        console.log(e), 2 == e ? f.default.Event.stat("sharestatistics", {
+                        2 == e ? f.default.Event.stat("sharestatistics", {
                             sharetype: 2,
                             gid: this.id
                         }) : this.saveImageSmall ? f.default.Event.stat("sharestatistics", {
@@ -909,7 +904,7 @@ var e = null;
                                 e.setStorageSync("user", b.globalData.user), t();
                             },
                             fail: function(e) {
-                                console.log(e), t();
+                                t();
                             }
                         });
                     },
@@ -955,7 +950,7 @@ var e = null;
                         this.canvasHW = {
                             width: a.result.width,
                             height: a.result.height
-                        }, console.log(this.canvasHW);
+                        };
                         var o = e.createCanvasContext("canvas"), n = this.special_config, r = JSON.parse(t.content).threshold;
                         if (n && n.headimg_config) {
                             var l = JSON.parse(n.headimg_config);
@@ -990,7 +985,6 @@ var e = null;
                     },
                     postResult: function() {
                         var t = this.videoEnded ? this.bannerNumber : 0;
-                        console.log(t);
                         var a = this;
                         if (a.resultTjFlag) {
                             var s;

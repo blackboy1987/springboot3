@@ -202,7 +202,6 @@ var t = null;
                             sizeType: [ "original", "compressed" ],
                             sourceType: [ "album", "camera" ],
                             success: function(t) {
-                                console.log(t);
                                 var a = t.tempFilePaths[0];
                                 e.tempFilePath = a;
                             }
@@ -241,7 +240,6 @@ var t = null;
                         o[l].lx = t.touches[0].clientX, o[l].ly = t.touches[0].clientY, this.itemList = [].concat(o);
                     },
                     oTouchStart: function(t) {
-                        console.log(t);
                         for (var e = 0; e < o.length; e++) o[e].active = !1, t.currentTarget.dataset.id == o[e].id && (console.log("e.currentTarget.dataset.id", t.currentTarget.dataset.id),
                         o[l = e].active = !0);
                         o[l].tx = t.touches[0].clientX - this.starticon.x, o[l].ty = t.touches[0].clientY - this.starticon.y,

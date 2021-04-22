@@ -191,7 +191,7 @@
                                 src: u.globalData.src
                             },
                             success: function(e) {
-                                console.log(e), t.backgroundColor = e.data.data.attr.background, a.setBackgroundColor({
+                                t.backgroundColor = e.data.data.attr.background, a.setBackgroundColor({
                                     backgroundColor: e.data.data.attr.background
                                 }), t.card_image = e.data.data.card.img_url, t.card_name = e.data.data.card.name, 
                                 t.card_positive = e.data.data.card.positive, t.canvas_data.result_url = e.data.data.card.result_url, 

@@ -24,7 +24,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController("pingceXingZuoController")
+@RestController("apiXingZuoController")
 @RequestMapping("/api/xingzuo")
 public class IndexController {
 

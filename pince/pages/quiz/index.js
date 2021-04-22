@@ -2,9 +2,9 @@ var e = null;
 const app = getApp();
 
 const appConfig = wx.getStorageSync("appConfig");
-
+const indexAd = appConfig.indexAd || {};
 wx.createInterstitialAd && ((e = wx.createInterstitialAd({
-    adUnitId: appConfig.indexAd.interstitialAdId
+    adUnitId: indexAd.interstitialAdId
 })).onLoad(function() {}), e.onError(function(e) {}), e.onClose(function() {})), function() {
     var e = null;
     (global.webpackJsonp = global.webpackJsonp || []).push([ [ "pages/quiz/index" ], {
@@ -159,10 +159,10 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                         wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                             adUnitId: appConfig1.indexAd.interstitialAdId
                         })).onLoad(function() {}), e.onError(function(e) {}), e.onClose(function() {})),
-                        (0, l.initChannel)(a), console.log(y.globalData.from_gid), v.default.Page.init(),
+                        (0, l.initChannel)(a), v.default.Page.init(),
                         this.onload = 1;
                         var s = this;
-                        s.id = a.id, "undefined" != a.title && (console.log("setNavigationBarTitle", a.title),
+                        s.id = a.id, "undefined" != a.title && (
                         s.sharetitle = a.title, t.setNavigationBarTitle({
                             title: s.sharetitle
                         }));
@@ -187,22 +187,16 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                         });
                     },
                     onUnload: function() {
-                        console.log("close"), this.onload = 0;
+                        this.onload = 0;
                     },
                     onShareAppMessage: function() {
                         var e = this;
-                        console.log("id=" + this.id + "&title=" + this.sharetitle + "&ispush=1");
                         var t;
                         t = this.shareqzonetitle ? this.shareqzonetitle : this.sharetitle, this.showdingyue && 3 == this.subscribe_status && setTimeout(function() {
                             e.addDingYue();
                         }, 5e3);
                         var a = "/pages/home/index?id=" + this.id + "&title=" + this.sharetitle + "&ispush=1";
-                        return this.share_ecodeid && (a = "/pages/home/index?q=".concat(this.share_ecodeid)),
-                        console.log(a), {
-                            title: t,
-                            imageUrl: this.shareAppImage,
-                            path: a
-                        };
+                        return this.share_ecodeid && (a = "/pages/home/index?q=".concat(this.share_ecodeid));
                     },
                     computed: {
                         modelList: function() {
@@ -233,6 +227,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                         initQuestion: function(e) {
                             var a = this;
                             this.adtime = t.getStorageSync("ad_video");
+                            const appConfig = t.getStorageSync("appConfig");
                             var s = {
                                 appid: y.globalData.appid,
                                 ver: y.globalData.ver,
@@ -264,13 +259,15 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                                     a.adBox_video_btn = i.adBox_video_btn, a.banner_ad_style = i.banner_ad_style, a.subscribe_status = i.subscribe_status ? i.subscribe_status : 0,
                                     a.subscribe_content = i.subscribe_content, a.adBox_style_type = i.adBox_style_type ? i.adBox_style_type : 1,
                                     a.showVideoModel = null != i.show_video_model ? i.show_video_model : 1, "1109659848" == y.globalData.appid ? (i.video_ad_utilid && i.video_ad_utilid,
-                                    console.log(i.video_ad_select), a.forcebutton = 1 != i.video_ad_select) : "1109802828" == y.globalData.appid ? (i.video_ad_utilid,
-                                    a.forcebutton = !0) : "wx" == y.globalData.apptype ? (i.video_ad_utilid, console.log(i.video_ad_select),
+                                    a.forcebutton = 1 != i.video_ad_select) : "1109802828" == y.globalData.appid ? (i.video_ad_utilid,
+                                    a.forcebutton = !0) : "wx" == y.globalData.apptype ? (i.video_ad_utilid,
                                     a.forcebutton = 1 != i.video_ad_select) : (y.globalData.appid = "1109743918") && (i.video_ad_utilid && i.video_ad_utilid,
                                     a.forcebutton = 1 != i.video_ad_select);
+
                                     try {
+                                        const indexAd = appConfig.indexAd||{};
                                         a.videoAd = wx.createRewardedVideoAd({
-                                            adUnitId: "adunit-de18ac500113c55b"
+                                            adUnitId: indexAd.rewardedVideoAdId
                                         });
                                     } catch (e) {}
                                     a.videoAd && a.videoAd.onError(function(e) {
@@ -281,7 +278,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                                         title: i.title
                                     })), i.sharetitle && (a.shareqzonetitle = i.sharetitle), !t.getStorageSync("user_top") && i.settop && (a.settop = i.settop,
                                     a.settop.img = r.static_host + s.data.settop.img, a.cancalSettop()), a.special_config && 0 == a.hasUserinfo && (a.needlogin = !0),
-                                    console.log(a.needlogin), a.modelContent = i.adBox_desc, a.question = JSON.parse(i.question),
+                                    a.modelContent = i.adBox_desc, a.question = JSON.parse(i.question),
                                     a.options = a.question.map(function() {
                                         return 0;
                                     }), i.logo && a.add("AuthorBox", a.setObj({
@@ -298,7 +295,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                             });
                         },
                         sharefriend: function(e) {
-                            console.log(e), 2 == e ? v.default.Event.stat("sharestatistics", {
+                            2 == e ? v.default.Event.stat("sharestatistics", {
                                 sharetype: 2,
                                 gid: this.id
                             }) : this.saveImageSmall ? v.default.Event.stat("sharestatistics", {
@@ -312,11 +309,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                         formSubmit: function(e) {},
                         userCaptureScreen: function() {
                             var e = this.ceshiprogress ? 1 : 0;
-                            console.log({
-                                imagetype: this.CaptureImage,
-                                progress: e,
-                                gid: this.id
-                            }), v.default.Event.stat("captureScreen", {
+                            v.default.Event.stat("captureScreen", {
                                 gid: this.id,
                                 capturetype: this.CaptureImage
                             }), t.request({
@@ -479,7 +472,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                                 }) : v.default.Event.stat("showvideomodel", {
                                     videotype: e.adBox_style_type + "_" + y.globalData.ver,
                                     gid: e.id
-                                }), console.log(!0), e.showmodel = !0;
+                                }), e.showmodel = !0;
                             }, 1e3) : 2 == this.subscribe_status ? this.showSubscribe(function() {
                                 e.scrollToView = e.scrollId, e.scrollTop = 1e3 * e.count, e.analyzeResult(), 1 == e.hasbannerad && (e.showmodel = !0,
                                 setTimeout(function() {
@@ -542,7 +535,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                         },
                         getUserInfo: function(e) {
                             var a = this, s = this;
-                            this.showbannerad = this.showAds && this.videoAd, e.detail && e.detail.userInfo ? (console.log("analyzeResult111111111111"),
+                            this.showbannerad = this.showAds && this.videoAd, e.detail && e.detail.userInfo ? (
                             this.hasUserinfo = !0, this.authorButton = !1, this.margin = !1, y.globalData.user = {
                                 nickName: e.detail.userInfo.nickName,
                                 avatarUrl: e.detail.userInfo.avatarUrl,
@@ -551,7 +544,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                                 nickName: e.detail.userInfo.nickName,
                                 avatarUrl: e.detail.userInfo.avatarUrl
                             }), this.scrollToView = this.scrollId, this.scrollTop = 1e3 * this.count, s.authorButton = !1,
-                            s.margin = !1, s.showAds && s.videoAd ? (console.log("analyzeResult11222221"), 0 == this.showVideoModel ? (console.log("analyzeResul33333333333"),
+                            s.margin = !1, s.showAds && s.videoAd ? (0 == this.showVideoModel ? (
                             setTimeout(function() {
                                 a.makeResult();
                             }, 500)) : (1 == this.adBox_style_type ? v.default.Event.stat("showvideomodel", {
@@ -560,10 +553,10 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                             }) : v.default.Event.stat("showvideomodel", {
                                 videotype: this.adBox_style_type + "_" + y.globalData.ver + "_" + this.videoWatchNumber,
                                 gid: this.id
-                            }), console.log("analyzeResul4444444"), s.showmodel = !0)) : (console.log("analyzeResult"),
+                            }), s.showmodel = !0)) : (
                             s.analyzeResult(), 1 == s.hasbannerad && (s.showmodel = !0, setTimeout(function() {
                                 s.modelProgress();
-                            }, 1e3)))) : (console.log("授权失败"), this.authorButton = !1, this.margin = !1, y.globalData.user = {
+                            }, 1e3)))) : (this.authorButton = !1, this.margin = !1, y.globalData.user = {
                                 nickName: "爱测试",
                                 avatarUrl: r.ssl_static_host + "quce/1562666285IKXQK.png"
                             }, this.resimg.avatar = r.ssl_static_host + "quce/1562666285IKXQK.png", this.scrollToView = this.scrollId,
@@ -581,11 +574,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                             }, 1e3))));
                         },
                         gohome: function() {
-                            console.log("cancal_video", {
-                                gid: this.id,
-                                cancaltype: "3_" + y.globalData.ver + "_" + this.videoWatchNumber,
-                                adstyletype: this.adBox_style_type
-                            }), v.default.Event.stat("cancal_video", {
+                            v.default.Event.stat("cancal_video", {
                                 gid: this.id,
                                 cancaltype: "3_" + y.globalData.ver + "_" + this.videoWatchNumber,
                                 adstyletype: this.adBox_style_type
@@ -618,22 +607,18 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                         },
                         makeResult: function() {
                             var e = this;
-                            console.log(this.videoAd);
                             var a = this;
                             this.showAds && this.videoAd && !this.videoErr ? (a.makeRes = 1, this.videoWatchNumber += 1,
                             1 == this.adBox_style_type ? v.default.Event.stat("show_video", {
                                 showtype: "3_" + y.globalData.ver,
                                 gid: this.id
-                            }) : (console.log("show_video", {
-                                showtype: this.adBox_style_type + "_" + y.globalData.ver + "_" + this.videoWatchNumber,
-                                gid: this.id
-                            }), v.default.Event.stat("show_video", {
+                            }) : (v.default.Event.stat("show_video", {
                                 showtype: this.adBox_style_type + "_" + y.globalData.ver + "_" + this.videoWatchNumber,
                                 gid: this.id
                             })), this.videoAd.load().then(function() {
-                                console.log("load sucess"), e.videoAd.show().catch(function() {
+                                e.videoAd.show().catch(function() {
                                     a.analyzeResult();
-                                }), console.log("show"), e.videoAd.show(), e.videoAd.onClose(function(e) {
+                                }), e.videoAd.show(), e.videoAd.onClose(function(e) {
                                     if (a.makeRes && !a.videoErr) {
                                         a.videoEnded = e.isEnded;
                                         var s = e.isEnded ? 1 : 0;
@@ -662,19 +647,12 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                                                 }
                                             });
                                         }, 500), e.isEnded ? setTimeout(function() {
-                                            console.log({
-                                                playedtype: a.adBox_style_type + "_" + y.globalData.ver + "_" + a.videoWatchNumber,
-                                                gid: a.id
-                                            }), v.default.Event.stat("video_played", {
+                                            v.default.Event.stat("video_played", {
                                                 playedtype: a.adBox_style_type + "_" + y.globalData.ver + "_" + a.videoWatchNumber,
                                                 gid: a.id
                                             }), a.analyzeResult();
                                         }, 500) : "1109659848" == y.globalData.appid || "1109743918" == y.globalData.appid || "wx" == y.globalData.apptype ? (setTimeout(function() {
-                                            console.log("cancal_video", {
-                                                gid: a.id,
-                                                cancaltype: "2_" + y.globalData.ver + "_" + a.videoWatchNumber,
-                                                adstyletype: a.adBox_style_type
-                                            }), v.default.Event.stat("cancal_video", {
+                                            v.default.Event.stat("cancal_video", {
                                                 gid: a.id,
                                                 cancaltype: "2_" + y.globalData.ver + "_" + a.videoWatchNumber,
                                                 adstyletype: a.adBox_style_type + "_" + y.globalData.ver
@@ -689,7 +667,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                                         }, 500)), a.makeRes = 0;
                                     }
                                 }), e.videoAd.onError(function(e) {
-                                    console.log(e), t.request({
+                                    t.request({
                                         url: y.globalData.host + "/index.php/App/Index/incQQAdsProgress",
                                         data: {
                                             progress: 2,
@@ -714,8 +692,8 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                                     }), a.videoErr = !0, a.makeButton = !1, a.margin = !1, a.analyzeResult();
                                 });
                             }).catch(function() {
-                                console.log("load fail"), a.makeButton = !1, a.margin = !1, a.analyzeResult();
-                            })) : (console.log(1111111111111), a.makeButton = !1, a.margin = !1, a.analyzeResult());
+                                a.makeButton = !1, a.margin = !1, a.analyzeResult();
+                            })) : (a.makeButton = !1, a.margin = !1, a.analyzeResult());
                         },
                         analyzeResult: function() {
                             var e = this;
@@ -860,7 +838,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                                     nickName: y.globalData.user.nickName
                                 },
                                 success: function(a) {
-                                    console.log(a), 0 == a.data.avatar_status && (y.globalData.user.avatarUrl = a.data.url),
+                                    0 == a.data.avatar_status && (y.globalData.user.avatarUrl = a.data.url),
                                     0 == a.data.name_status && (y.globalData.user.nickName = a.data.name), y.globalData.user.verify = 1,
                                     t.setStorageSync("user", y.globalData.user), e();
                                 },
@@ -911,7 +889,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                             this.canvasHW = {
                                 width: a.result.width,
                                 height: a.result.height
-                            }, console.log(this.canvasHW);
+                            };
                             var o = t.createCanvasContext("canvas"), n = this.special_config, r = JSON.parse(e.content).threshold;
                             if (n && n.headimg_config) {
                                 var l = JSON.parse(n.headimg_config);
@@ -984,7 +962,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                             }
                         },
                         incImageSave: function(e, a) {
-                            console.log("dst:" + a), t.request({
+                            t.request({
                                 url: y.globalData.host + "/index.php/App/Index/commonLongtap",
                                 method: "POST",
                                 data: {
@@ -1017,7 +995,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                                             t.showToast({
                                                 title: "图片保存成功"
                                             }), s.showdingyue && 4 == s.subscribe_status && s.addDingYue(s.subscribe_status),
-                                            console.log("save success"), s.saveImageSmall ? (v.default.Event.stat("saveresultimage", {
+                                            s.saveImageSmall ? (v.default.Event.stat("saveresultimage", {
                                                 gid: s.id,
                                                 savetype: 1
                                             }), s.inlongSmall && (s.incImageSave(1, 2), s.inlongSmall = !1)) : (v.default.Event.stat("saveresultimage", {
@@ -1031,7 +1009,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                                             t.showToast({
                                                 title: "图片保存成功"
                                             }), s.showdingyue && 4 == s.subscribe_status && s.addDingYue(s.subscribe_status),
-                                            console.log("save success"), s.saveImageSmall ? (v.default.Event.stat("saveresultimage", {
+                                            s.saveImageSmall ? (v.default.Event.stat("saveresultimage", {
                                                 gid: s.id,
                                                 savetype: 1
                                             }), s.inlongSmall && (s.incImageSave(1, 2), s.inlongSmall = !1)) : (v.default.Event.stat("saveresultimage", {
@@ -1097,7 +1075,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                                     }
                                 },
                                 fail: function(a) {
-                                    switch (console.log("----subscribeAppMsg----fail", a), "subscribeAppMsg:fail no permission" == a.errMsg && t.setStorageSync("subscribe", 2),
+                                    switch ("subscribeAppMsg:fail no permission" == a.errMsg && t.setStorageSync("subscribe", 2),
                                     v.default.Event.stat("addSubscribe", {
                                         subscribetype: y.globalData.ver + "_" + e.subscribe_status + "_2"
                                     }), e.subscribe_status) {

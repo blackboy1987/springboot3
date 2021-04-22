@@ -475,7 +475,6 @@ n = "function" == typeof Symbol && "symbol" == e(Symbol.iterator) ? function(t) 
                         });
                     },
                     drawcanvas2: function(t) {
-                        console.log(t);
                         var o = this, s = o.gameconfig.drawconfig.head_image, i = o.gameconfig.drawconfig.nickname, a = o.gameconfig.drawconfig.qrcode, r = e.createCanvasContext("myCanvas");
                         1 == s.status && r.drawImage(t.header.path, s.x, s.y, parseInt(s.width), parseInt(s.width)),
                         r.drawImage(t.bg.path, 0, 0), 1 == a.status && "" != a.path && r.drawImage(t.qrcode.path, parseInt(a.x), parseInt(a.y), parseInt(a.width), parseInt(a.width)),

@@ -11,14 +11,12 @@ import com.bootx.util.JsonUtils;
 import com.bootx.util.WebUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +24,7 @@ import java.util.Map;
 @RequestMapping("/api/pince")
 public class IndexController {
 
-    private static final String url="https://api.xzw.com/com/json/";
+    private static final String apiUrl="https://pingtas.qq.com/pingd";
 
     @Resource
     private AppService appService;
@@ -70,23 +68,16 @@ public class IndexController {
         return Result.success(data);
     }
 
-    @GetMapping("/fortune")
-    public Object fortune(HttpServletRequest request,Integer id){
-        String cacheKey = "pince_" + id + "_" + DateUtils.formatDateToString(new Date(), "yyyyMMdd");
-        App app = appService.get(request);
-        if(app==null){
-            return Result.error("非法访问");
-        }
-        String result = redisService.get(cacheKey);
-        if(StringUtils.isBlank(result)){
-            System.out.println(id+"=============================================未命中缓存");
-            result = WebUtils.get(url+"fortune?id="+id+"&ld=-1&vc=xcx&token=Mh8tGmSoW3fyH642Y+Eb3E", null);
-            redisService.set(cacheKey,result);
-        }else{
-            System.out.println(id+"命中缓存");
+    @GetMapping("/index.php/App/Index/{method}")
+    public Object fortune(HttpServletRequest request,@PathVariable String method){
+        Enumeration<String> names = request.getParameterNames();
+        Map<String,Object> params = new HashMap<>();
+        while (names.hasMoreElements()){
+            String name = names.nextElement();
+            String value = request.getParameter(name);
+            params.put(name,value);
         }
 
-
-        return result;
+        return WebUtils.get(apiUrl+"/index.php/App/Index/"+method,params);
     }
 }

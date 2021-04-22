@@ -159,7 +159,7 @@ var t = null;
                     (0, o.initChannel)(e), console.log(c.globalData.from_gid), n.default.Page.init(),
                     this.onload = 1;
                     var a = this;
-                    a.id = e.id, "undefined" != e.title && (console.log("setNavigationBarTitle", e.title),
+                    a.id = e.id, "undefined" != e.title && (
                     a.sharetitle = e.title, t.setNavigationBarTitle({
                         title: a.sharetitle
                     }));
@@ -206,7 +206,7 @@ var t = null;
                 },
                 onShareAppMessage: function() {
                     var t, e = this;
-                    console.log("id=" + this.id + "&title=" + this.sharetitle + "&ispush=1"), t = this.shareqzonetitle ? this.shareqzonetitle : this.sharetitle,
+                    t = this.shareqzonetitle ? this.shareqzonetitle : this.sharetitle,
                     this.showdingyue && 3 == this.subscribe_status && setTimeout(function() {
                         e.addDingYue();
                     }, 5e3);
@@ -468,7 +468,7 @@ var t = null;
                         var t = this;
                         this.nosave = !1, qq.getSetting({
                             success: function(e) {
-                                console.log(e), e.authSetting["scope.writePhotosAlbum"] ? qq.saveImageToPhotosAlbum({
+                                e.authSetting["scope.writePhotosAlbum"] ? qq.saveImageToPhotosAlbum({
                                     filePath: t.resultimg,
                                     success: function() {
                                         qq.showToast({
@@ -481,7 +481,7 @@ var t = null;
                                         }, 1e3);
                                     },
                                     fail: function(t) {
-                                        console.log(e), qq.showModal({
+                                        qq.showModal({
                                             title: "保存失败",
                                             content: "保存图片到相册功能需要开启相册授权！",
                                             showCancel: !1,
@@ -722,7 +722,7 @@ var t = null;
                                 }, 200))), d = 0;
                             }
                         }), this.videoAd.onError(function(e) {
-                            console.log(e), qq.request({
+                            qq.request({
                                 url: c.globalData.host + "/index.php/App/Index/incQQAdsProgress",
                                 data: {
                                     progress: 2,
@@ -823,7 +823,6 @@ var t = null;
                     },
                     showResult: function(t) {
                         var e = this;
-                        console.log(t);
                         var s = !1;
                         console.log(this.videoAd, this.question.showAds, this.resultsofvideo), this.videoAd && this.question.showAds && this.resultsofvideo && (s = !0,
                         n.default.Event.stat("resultvideoshow", {})), this.resultimg = t, qq.hideLoading();

@@ -3482,7 +3482,7 @@ e = "function" == typeof Symbol && "symbol" == t(Symbol.iterator) ? function(e) 
                                 }), t && t();
                             },
                             fail: function(e) {
-                                console.log(e), t && t(), "saveImageToPhotosAlbum:fail:auth denied" !== e.errMsg && "saveImageToPhotosAlbum:fail auth deny" !== e.errMsg && "saveImageToPhotosAlbum:fail authorize no response" !== e.errMsg || wx.showModal({
+                                t && t(), "saveImageToPhotosAlbum:fail:auth denied" !== e.errMsg && "saveImageToPhotosAlbum:fail auth deny" !== e.errMsg && "saveImageToPhotosAlbum:fail authorize no response" !== e.errMsg || wx.showModal({
                                     title: "开启相册权限",
                                     content: "开启相册使用权限，保存图片致本地",
                                     success: function(e) {
@@ -3767,7 +3767,6 @@ e = "function" == typeof Symbol && "symbol" == t(Symbol.iterator) ? function(e) 
                 return r;
             }, t.playGame = function(t) {
                 var n = getApp();
-                console.log(t);
                 var r = t.gid ? t.gid : t.id, o = t.title, i = (t.original, "/pages/quiz/index?id=" + r + "&title=" + o + "&src=" + n.globalData.source);
                 2 == n.globalData.template && (i = "/pages/quizchoiceness/index?id=" + r + "&title=" + o + "&src=" + n.globalData.source),
                 "1" == t.jump_type ? i = t.path : "2" == t.jump_type ? i = "/pages/tanmegame/game?id=" + r : "3" == t.jump_type && (i = "/pages/tarotmark/item?id=" + r);
