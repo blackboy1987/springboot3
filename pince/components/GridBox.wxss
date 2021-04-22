@@ -1,0 +1,112 @@
+.grid-box.data-v-6ec0f32e {
+    width: 100%;
+    padding: 20px 17.5px;
+    border-bottom: 7.5px solid #f6f6f6;
+}
+
+.grid-box .grid-top.data-v-6ec0f32e {
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.grid-box .grid-top .grid-title.data-v-6ec0f32e {
+    font-size: 18px;
+    height: 21px;
+    font-weight: 700;
+    color: #323232;
+    position: relative;
+}
+
+.grid-box .grid-top .grid-title.data-v-6ec0f32e:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 35px;
+    height: 4px;
+    background: #f9a176;
+}
+
+.grid-box .grid-top .grid-attach.data-v-6ec0f32e {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 16px;
+    color: #878787;
+    cursor: pointer;
+}
+
+.grid-box .grid-top .grid-attach .icon.data-v-6ec0f32e {
+    display: block;
+    width: 14px;
+    height: auto;
+    color: #fff;
+    margin-left: 4px;
+}
+
+.grid-box .grid-content.data-v-6ec0f32e {
+    -webkit-box-orient: vertical;
+    flex-direction: column;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    width: 90%;
+}
+
+.grid-box .grid-content.data-v-6ec0f32e,.grid-box .grid-content .row.data-v-6ec0f32e {
+    display: flex;
+    -webkit-box-direction: normal;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.grid-box .grid-content .row.data-v-6ec0f32e {
+    -webkit-box-orient: horizontal;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.grid-box .grid-content .row.data-v-6ec0f32e:first-child {
+    margin-bottom: 15px;
+}
+
+.grid-box .grid-content .row .grid-item.data-v-6ec0f32e {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.grid-box .grid-content .row .grid-item .item-picture.data-v-6ec0f32e {
+    display: block;
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    margin-bottom: 2px;
+}
+
+.grid-box .grid-content .row .grid-item .item-title.data-v-6ec0f32e {
+    font-size: 14px;
+    width: 70px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #323232;
+    margin-top: 6px;
+}

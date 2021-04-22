@@ -44,23 +44,23 @@ public class IndexController {
         AppAd appAd = new AppAd();
         Map<String, AdConfig> ads = new HashMap<>();
         AdConfig adConfig = new AdConfig();
-        adConfig.setBannerId("adunit-4813ca1eefbf6332");
-        adConfig.setGridAdId("adunit-a85526b59a3e4fc6");
-        adConfig.setInterstitialAdId("adunit-aaaa125d434975d9");
-        adConfig.setNativeAdId("adunit-670041da19853877");
-        adConfig.setRewardedVideoAdId("adunit-2b255eac86508a8a");
-        adConfig.setVideoAdId("adunit-4305a9dcb9e86fd4");
-        adConfig.setVideoFrontAdId("adunit-f16e0fcee13d3f3a");
+        adConfig.setBannerId("adunit-090ca0df5b0c4b32");
+        adConfig.setRewardedVideoAdId("adunit-371bd79d00078a90");
+        adConfig.setInterstitialAdId("adunit-bd3d4cbec78fdf97");
+        adConfig.setVideoAdId("adunit-33c30621be64ff71");
+        adConfig.setVideoFrontAdId("adunit-ef4637cc787de087");
+        adConfig.setGridAdId("adunit-f26ade6249502c6a");
+        adConfig.setNativeAdId("adunit-e93eada4f72d2341");
         ads.put("index",adConfig);
 
         AdConfig adConfig1 = new AdConfig();
-        adConfig1.setBannerId("adunit-4813ca1eefbf6332");
-        adConfig1.setGridAdId("adunit-a85526b59a3e4fc6");
-        adConfig1.setInterstitialAdId("adunit-aaaa125d434975d9");
-        adConfig1.setNativeAdId("adunit-670041da19853877");
-        adConfig1.setRewardedVideoAdId("adunit-2b255eac86508a8a");
-        adConfig1.setVideoAdId("adunit-4305a9dcb9e86fd4");
-        adConfig1.setVideoFrontAdId("adunit-f16e0fcee13d3f3a");
+        adConfig1.setBannerId("adunit-090ca0df5b0c4b32");
+        adConfig1.setRewardedVideoAdId("adunit-371bd79d00078a90");
+        adConfig1.setInterstitialAdId("adunit-bd3d4cbec78fdf97");
+        adConfig1.setVideoAdId("adunit-33c30621be64ff71");
+        adConfig1.setVideoFrontAdId("adunit-ef4637cc787de087");
+        adConfig1.setGridAdId("adunit-f26ade6249502c6a");
+        adConfig1.setNativeAdId("adunit-e93eada4f72d2341");
         ads.put("detail",adConfig1);
 
         appAd.setAds(ads);
@@ -74,6 +74,7 @@ public class IndexController {
     public Object fortune(HttpServletRequest request,Integer id){
         String cacheKey = "pince_" + id + "_" + DateUtils.formatDateToString(new Date(), "yyyyMMdd");
         App app = appService.get(request);
+        if(app==null){
             return Result.error("非法访问");
         }
         String result = redisService.get(cacheKey);

@@ -1,0 +1,82 @@
+button {
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+    line-height: 1;
+}
+
+.button-hover,button,button::hover,button:after {
+    background-color: initial;
+}
+
+button:after {
+    border: none;
+    padding: 0;
+}
+
+:not(not) {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    -webkit-overflow-scrolling: touch;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+input:focus {
+    outline: none;
+}
+
+@-webkit-keyframes circle {
+    to {
+        transform: rotate(0deg);
+    }
+
+    0% {
+        transform: rotate(1turn);
+    }
+}
+
+@keyframes circle {
+    to {
+        transform: rotate(0deg);
+    }
+
+    0% {
+        transform: rotate(1turn);
+    }
+}
+
+page::after {
+    position: fixed;
+    content: "";
+    left: -1000px;
+    top: -1000px;
+    animation: shadow-preload .1s;
+    animation-delay: 3s;
+}
+
+@-webkit-keyframes shadow-preload {
+    0% {
+        background-image: url(https://cdn.dcloud.net.cn/img/shadow-grey.png);
+    }
+
+    100% {
+        background-image: url(https://cdn.dcloud.net.cn/img/shadow-grey.png);
+    }
+}
+
+@keyframes shadow-preload {
+    0% {
+        background-image: url(https://cdn.dcloud.net.cn/img/shadow-grey.png);
+    }
+
+    100% {
+        background-image: url(https://cdn.dcloud.net.cn/img/shadow-grey.png);
+    }
+}

@@ -1,0 +1,133 @@
+.page{
+
+}
+.cover {
+    padding: 16px;
+    background: #f2f2f2;
+}
+.cover .bookview {
+    padding-left: 21px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+.cover .side {
+    width: 240px;
+    background: #eee no-repeat center;
+}
+.cover .side image {
+    width: 100%;
+}
+.cover .icon_tag {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    padding: 8px;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    background: rgba(231,86,74,.85);
+    z-index: 2;
+}
+.cover .main {
+    margin-left: 16px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.cover .main view:first-child {
+    margin-top: 16px;
+    line-height: 1.2;
+    font-size: 30px;
+    font-weight: 700;
+    color: #333;
+}
+
+.z_ellipsis2 {
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+}
+.cover .bk_author {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 28px;
+    color: #666;
+}
+.z_ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.cover .author:not(:last-of-type):after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: .83333vw;
+    vertical-align: middle;
+    border-radius: 50%;
+    border: 1px solid #333;
+}
+.stars {
+    width: 18.33333vw;
+    height: 5vw;
+    background: url(//staticm.idejian.com/wap/detail/static/i/star_default_1886355.png) repeat-x;
+    background-position: 0 0;
+    background-size: 18.33333vw 3.33333vw;
+    position: relative;
+    display: inline-block;
+    vertical-align: bottom;
+}
+.stars .cur.r9 {
+    width: 16.5vw;
+}
+.stars .cur {
+    width: 0;
+    height: 3.33333vw;
+    background: url(//staticm.idejian.com/wap/detail/static/i/star_yellow_9f86e50.png) repeat-x;
+    background-position: 0 0;
+    background-size: 18.33333vw 3.33333vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.cover .gray {
+    font-size: 24px;
+    color: #999;
+}
+.cover .other {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 26px;
+}
+.cover .other .right {
+    margin-top: 5px;
+    height: 36px;
+    float: right;
+    color: #999;
+    font-size: 20px;
+    line-height: 36px;
+}
+.cover .other .right .count {
+    display: inline-block;
+    width: 130px;
+    height: 36px;
+    line-height: 36px;
+    color: #e8554d;
+    font-size: 24px;
+    border: 1px solid #e8554d;
+    border-radius: 16px;
+    position: relative;
+    bottom: 6px;
+    text-align: center;
+}
+.cover .other .font_num {
+    font-size: 24px;
+    color: #666;
+}

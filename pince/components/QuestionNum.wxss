@@ -1,0 +1,18 @@
+.num-box.data-v-d2b10254 {
+    width: 100%;
+    margin-bottom: 15px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    height: auto;
+}
+
+.num-box .num-content.data-v-d2b10254 {
+    padding: 6px 10px;
+    font-size: 14px;
+    color: #989797;
+    background: #ebebeb;
+    border-radius: 4px;
+}

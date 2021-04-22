@@ -1,0 +1,189 @@
+.list-box.data-v-4f8fd974 {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 40rpx 40rpx;
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: 0rpx 0rpx 27rpx 2rpx hsla(0,0%,51.8%,.18);
+    border-radius: 20rpx;
+    text-align: center;
+}
+
+.list-box .titletext.data-v-4f8fd974 {
+    margin-top: 22rpx;
+    font-size: 38rpx;
+    line-height: 36rpx;
+    letter-spacing: 0rpx;
+    color: #ff7474;
+}
+
+.list-box .sanjiao.data-v-4f8fd974 {
+    margin-top: 9rpx;
+    width: 0;
+    height: 0;
+    border-right: 15rpx solid transparent;
+    border-left: 15rpx solid transparent;
+    border-top: 15rpx solid #ff7474;
+    animation: down-data-v-4f8fd974 .5s ease-in .5s infinite alternate;
+}
+
+@-webkit-keyframes down-data-v-4f8fd974 {
+    0% {
+        transform: translate(0);
+    }
+
+    to {
+        transform: translateY(10rpx);
+    }
+}
+
+@keyframes down-data-v-4f8fd974 {
+    0% {
+        transform: translate(0);
+    }
+
+    to {
+        transform: translateY(10rpx);
+    }
+}
+
+.list-box .swiper-ad.data-v-4f8fd974 {
+    width: 97.9%;
+    padding: 15px 0;
+    margin-left: 2.5px;
+}
+
+.list-box .ad-bottom.data-v-4f8fd974 {
+    height: 1px;
+    width: 100%;
+    margin: 0 auto;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.list-box .list-item.data-v-4f8fd974 {
+    position: relative;
+    width: 100%;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    background: #FFFFFFF;
+    padding: 24rpx 0;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.list-box .list-item .item-picture.data-v-4f8fd974 {
+    display: block;
+    width: 106rpx;
+    height: 106rpx;
+    margin-right: 20rpx;
+    border-radius: 12px;
+    -webkit-box-flex: 0;
+    flex: 0 0 106rpx;
+}
+
+.list-box .list-item .item-detail.data-v-4f8fd974 {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+    width: calc(100% - 136rpx);
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.list-box .list-item .item-detail .title.data-v-4f8fd974 {
+    width: 100%;
+    margin-bottom: 26rpx;
+    height: 36rpx;
+}
+
+.list-box .list-item .item-detail .title .title_content.data-v-4f8fd974 {
+    display: inline-block;
+    max-width: 65%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 700;
+    font-size: 33rpx;
+    color: #323232;
+}
+
+.list-box .list-item .item-detail .title .original.data-v-4f8fd974 {
+    display: inline-block;
+    line-height: 1.1;
+    color: #fff;
+    font-size: 11px;
+    padding: 1rpx 2px;
+    border-radius: 4px;
+    background: #fa8;
+    margin-left: 4px;
+    height: 28rpx;
+    transform: translateY(-6rpx);
+}
+
+.list-box .list-item .item-detail .title .hoticon.data-v-4f8fd974 {
+    display: inline-block;
+    width: 22rpx;
+    height: 27rpx;
+    margin-left: 10rpx;
+    vertical-align: middle;
+    margin-top: -15rpx;
+}
+
+.list-box .list-item .item-detail .title .jumplist.data-v-4f8fd974 {
+    float: right;
+    width: 115rpx;
+}
+
+.list-box .list-item .item-detail .desc.data-v-4f8fd974 {
+    max-width: 100%;
+    font-size: 27rpx;
+    color: grey;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.list-box .list-item .item-detail .space.data-v-4f8fd974 {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+}
+
+.list-box .list-item .item-detail .line.data-v-4f8fd974 {
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.list-box .list-item .item-detail .line .view.data-v-4f8fd974 {
+    font-size: 12px;
+    color: grey;
+}

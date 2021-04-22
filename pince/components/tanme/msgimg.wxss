@@ -1,0 +1,36 @@
+.xb_conversation_item.data-v-7c1f000d {
+    padding: 8px 10px;
+    margin: 0;
+}
+
+.xb_conv_wrap_left.data-v-7c1f000d {
+    display: flex;
+}
+
+.xb_avatar_left.data-v-7c1f000d {
+    width: 40px;
+    height: 40px;
+}
+
+.xb_box.data-v-7c1f000d {
+    margin: 14px 0 0;
+    display: inline-block;
+}
+
+.xb_tri_left.data-v-7c1f000d {
+    border: 6px solid transparent;
+    border-right-color: #fff;
+}
+
+.xb_conv_left.data-v-7c1f000d {
+    border-radius: 5px;
+    background: #fff;
+    padding: 9px;
+    width: 170px;
+    height: 170px;
+}
+
+.m-img.data-v-7c1f000d {
+    width: 100%;
+    height: 100%;
+}

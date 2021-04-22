@@ -1,0 +1,40 @@
+.xb_conversation_item.data-v-d8fb415c {
+    padding: 8px 10px;
+    margin: 0;
+}
+
+.xb_conv_wrap_right.data-v-d8fb415c {
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    flex-flow: row-reverse;
+}
+
+.xb_avatar_right.data-v-d8fb415c {
+    width: 40px;
+    height: 40px;
+}
+
+.xb_box.data-v-d8fb415c {
+    margin: 14px 0 0;
+    display: inline-block;
+}
+
+.xb_tri_right.data-v-d8fb415c {
+    border: 6px solid transparent;
+    border-left-color: #a0e75a;
+}
+
+.xb_conv_right.data-v-d8fb415c {
+    border-radius: 5px;
+    padding: 9px;
+    font-size: 15px;
+    line-height: 20px;
+    max-width: 235px;
+    word-break: break-all;
+    word-wrap: break-word;
+    background: #a0e75a;
+    color: #333;
+    min-height: 20px;
+    max-width: 220px;
+}

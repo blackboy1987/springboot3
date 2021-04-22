@@ -1,0 +1,26 @@
+{
+  "name": "xiaoshuo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Remax Project With TypeScript",
+  "main": "index.js",
+  "keywords": [],
+  "author": "1169794338@qq.com <Liziyi521521>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "remax build -t wechat -w",
+    "build": "cross-env NODE_ENV=production remax build -t wechat"
+  },
+  "dependencies": {
+    "anna-remax-ui": "^1.9.3",
+    "annar": "^2.0.9",
+    "classnames": "^2.3.1",
+    "react": "^16.14.0",
+    "remax": "^2.13.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "@types/react": "^16.14.2",
+    "typescript": "^4.1.2"
+  }
+}

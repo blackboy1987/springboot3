@@ -1,0 +1,241 @@
+.data-v-000271f2:not(not) {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+}
+
+image.data-v-000271f2 {
+    height: auto;
+}
+
+.content.data-v-000271f2 {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    padding: 220rpx 0 0;
+    background-image: url(https://ssl-uploads-admin.cdn.itwlw.com/quce/1576896244NW0M0.png);
+    background-size: 100%;
+    background-repeat: repeat-y;
+}
+
+.content .christmas_icon.data-v-000271f2 {
+    position: fixed;
+    width: 260rpx;
+    top: 80rpx;
+    left: 20rpx;
+}
+
+.content .shapeselect.data-v-000271f2 {
+    width: 416rpx;
+    height: 62rpx;
+    margin: 0 auto 78rpx;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+}
+
+.content .shapeselect view.data-v-000271f2 {
+    width: 208rpx;
+    height: 100%;
+}
+
+.content .login.data-v-000271f2 {
+    width: 100%;
+    height: 256px;
+    margin: 0 auto;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.content .login .logintext.data-v-000271f2 {
+    width: 100%;
+    text-align: center;
+    color: #ffd58a;
+    font-size: 29rpx;
+    line-height: 1;
+    margin-bottom: 37rpx;
+}
+
+.content .login .loginbtn.data-v-000271f2 {
+    width: 503rpx;
+    margin: 0 auto;
+}
+
+.content .login .loginbtn image.data-v-000271f2 {
+    width: 503rpx;
+}
+
+.content .actionbox.data-v-000271f2 {
+    position: relative;
+    width: 256px;
+    height: 256px;
+    margin: 0 auto;
+}
+
+.content .actionbox .action.data-v-000271f2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+
+.content .actionbox .action .showimg.data-v-000271f2 {
+    width: 256px;
+    max-height: 256px;
+}
+
+.content .actionbox .action .touchWrap.data-v-000271f2 {
+    transform-origin: center;
+    position: absolute;
+    z-index: 100;
+}
+
+.content .actionbox .action .imgWrap.data-v-000271f2 {
+    box-sizing: border-box;
+    width: 100%;
+    transform-origin: center;
+    float: left;
+    border: 5rpx dashed transparent;
+}
+
+.content .actionbox .action .imgWrap image.data-v-000271f2 {
+    float: left;
+}
+
+.content .actionbox .action .touchActive .o.data-v-000271f2,.content .actionbox .action .touchActive .x.data-v-000271f2 {
+    display: block;
+}
+
+.content .actionbox .action .x.data-v-000271f2 {
+    top: -25rpx;
+    left: -25rpx;
+    z-index: 500;
+}
+
+.content .actionbox .action .o.data-v-000271f2,.content .actionbox .action .x.data-v-000271f2 {
+    position: absolute;
+    display: none;
+    width: 50rpx;
+    height: 50rpx;
+    overflow: hidden;
+    font-weight: 700;
+    color: #d1e3f1;
+}
+
+.content .actionbox .action .o.data-v-000271f2 {
+    bottom: -25rpx;
+    right: -25rpx;
+    text-align: center;
+}
+
+.content .actionbox .action .active.data-v-000271f2 {
+    background-color: #4e7297;
+}
+
+.content .actionbox .action .active view.data-v-000271f2 {
+    border: none;
+}
+
+.content .actionbox .action .touchActive.data-v-000271f2 {
+    z-index: 400;
+}
+
+.content .caplistBox.data-v-000271f2 {
+    margin-top: 20rpx;
+    width: 100%;
+}
+
+.content .caplistBox .caplisttop.data-v-000271f2 {
+    width: 100%;
+    height: 114rpx;
+    background-image: url(https://ssl-uploads-admin.cdn.itwlw.com/quce/15768989591F3j4.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.content .caplistBox .caplistcontent.data-v-000271f2 {
+    width: 100%;
+    height: 200rpx;
+    overflow-x: scroll;
+    background-color: #fff;
+    padding: 20rpx 0;
+}
+
+.content .caplistBox .caplistcontent .hat.data-v-000271f2 {
+    display: inline-block;
+    position: relative;
+    width: 160rpx;
+    height: 160rpx;
+    padding: 20rpx;
+    margin-right: 25rpx;
+}
+
+.content .caplistBox .caplistcontent .hat .hatimg.data-v-000271f2 {
+    width: 120rpx;
+    height: 120rpx;
+}
+
+.content .caplistBox .caplistcontent .hat .locktop.data-v-000271f2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.27);
+    border-radius: 50%;
+}
+
+.content .caplistBox .caplistcontent .hat .locktop .lockicon.data-v-000271f2 {
+    position: absolute;
+    width: 42rpx;
+    height: 42rpx;
+    top: 0;
+    right: 0;
+}
+
+.content .caplistBox .caplistbottom.data-v-000271f2 {
+    width: 100%;
+    height: 21rpx;
+    background-image: url(https://ssl-uploads-admin.cdn.itwlw.com/quce/1576898972t2eDz.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.content .btnBox.data-v-000271f2 {
+    width: 100%;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 0 30rpx;
+    margin-top: 15rpx;
+}
+
+.content .btnBox image.data-v-000271f2 {
+    width: 345rpx;
+}
+
+.content .canvas.data-v-000271f2 {
+    display: flex;
+    top: 3000rpx;
+    left: 3000rpx;
+    width: 640px;
+    height: 640px;
+}
+
+.content .canvassmall.data-v-000271f2 {
+    display: flex;
+    top: 3000rpx;
+    left: 3000rpx;
+    width: 320px;
+    height: 320px;
+}

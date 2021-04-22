@@ -1,0 +1,26 @@
+<view class="container basecolor">
+    <view class="adv">
+        <view class="item">
+            <ad-custom unitId="adunit-2c514766d6a2eaff"></ad-custom>
+        </view>
+    </view>
+    <view class="lst">
+        <view bindtap="bindtapOnItemTap" class="item" data-index="{{index}}" wx:for="{{dataList}}">
+            <view class="upper">
+                <image mode="aspectFill" src="{{item.thumb}}"></image>
+            </view>
+            <view class="lower">
+                <view class="left">
+                    <view class="title">{{item.title}}</view>
+                    <view class="desc">{{item.desc}}</view>
+                </view>
+                <view class="right">
+                    <view>立即测试</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <button bindcontact="handleContact" class="feedback" openType="contact">
+        <text>意见反馈</text>
+    </button>
+</view>

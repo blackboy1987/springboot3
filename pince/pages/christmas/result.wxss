@@ -1,0 +1,127 @@
+.data-v-50a506af:not(not) {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+}
+
+image.data-v-50a506af {
+    height: auto;
+}
+
+.content.data-v-50a506af {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background-image: url(https://ssl-uploads-admin.cdn.itwlw.com/quce/1576896244NW0M0.png);
+    background-size: 100%;
+    padding-top: 162rpx;
+    background-repeat: no-repeat;
+}
+
+.content .actionbox.data-v-50a506af {
+    position: relative;
+    width: 445rpx;
+    height: 445rpx;
+    margin: 0 auto 40rpx;
+}
+
+.content .actionbox .action.data-v-50a506af {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    overflow: hidden;
+}
+
+.content .actionbox .action .showimg.data-v-50a506af {
+    width: 445rpx;
+    max-height: 445rpx;
+}
+
+.content .newHideimg.data-v-50a506af {
+    width: 700rpx;
+    margin: 0 auto;
+}
+
+.content .newHideimg image.data-v-50a506af {
+    width: 100%;
+}
+
+.content .btnBox.data-v-50a506af {
+    width: 700rpx;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin: 15rpx auto 0;
+}
+
+.content .btnBox .save.data-v-50a506af,.content .btnBox .share.data-v-50a506af,.content .btnBox .share image.data-v-50a506af {
+    width: 345rpx;
+}
+
+.content .model.data-v-50a506af {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: rgba(0,0,0,.6);
+}
+
+.content .model .modelbg.data-v-50a506af {
+    width: 552rpx;
+    background-color: #fff;
+    border-radius: 30rpx;
+    padding: 70rpx 0 45rpx;
+    text-align: center;
+    position: relative;
+}
+
+.content .model .modelbg .modeltext.data-v-50a506af {
+    width: 100%;
+    margin-bottom: 47rpx;
+}
+
+.content .model .modelbg .modeltext view.data-v-50a506af {
+    width: 100%;
+    text-align: center;
+    font-size: 36rpx;
+    letter-spacing: 3rpx;
+    color: #4c4c4c;
+    line-height: 1;
+}
+
+.content .model .modelbg .modeltext view.data-v-50a506af:first-child {
+    margin-bottom: 25rpx;
+}
+
+.content .model .modelbg .watchvideo.data-v-50a506af {
+    width: 435rpx;
+}
+
+.content .model .modelbg .closemodel.data-v-50a506af {
+    position: absolute;
+    width: 48rpx;
+    height: 48rpx;
+    top: -88rpx;
+    right: 0;
+}
+
+.content .canvas.data-v-50a506af {
+    position: fixed;
+    top: 0;
+    left: 5000rpx;
+    width: 750px;
+    height: 1200px;
+}

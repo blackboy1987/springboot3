@@ -1,0 +1,187 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    height: 64px;
+    font-size: 28px;
+    line-height: 64px;
+    padding:0 16px;
+    margin: 24px 0;
+}
+.header .title {
+    margin-top: 16px;
+    font-weight: 700;
+    height: 32px;
+    line-height: 32px;
+    color: #333;
+    padding-left: 12px;
+    border-left: 10px solid #E8554D;
+}
+.todayBookList{
+    padding:0 16px;
+}
+.todayBookList .listItem{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 36px;
+}
+.todayBookList .listItem .bookImg{
+    width: 120px;
+    margin-right: 13px;
+}
+.todayBookList .listItem .bookImg image{
+    width: 120px;
+}
+.todayBookList .listItem .itemInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.todayBookList .listItem .itemInfo .bookName{
+    font-size: 28px;
+}
+.todayBookList .listItem .itemInfo .ellipsis{
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    align-content: center;
+}
+.todayBookList .listItem .itemInfo .bookInfo{
+    font-size: 24px;
+    color: #999;
+}
+.todayBookList .listItem .itemInfo .ellipsis2{
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    align-content: center;
+}
+
+.todayBookList .listItem .itemInfo .infoWrap {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #999;
+}
+.todayBookList .listItem .itemInfo .infoWrap .bookAuthor {
+    font-size: 25px;
+    margin-right: 22px;
+}
+
+.todayBookList .listItem:not(:first-of-type) {
+    width: 344px;
+    margin-right: 10px;
+    float: left;
+}
+
+
+.hList{
+    padding:0 16px;
+}
+.hList .listItem{
+    margin-bottom: 36px;
+    display: inline-block;
+    cursor: pointer;
+    width: 230px;
+    margin-right: 1%;
+    box-sizing: border-box;
+}
+.hList .listItem .bookImg{
+    width: 100%;
+    height: 306px;
+}
+.hList .listItem .bookImg image{
+    width: 100%;
+}
+
+.hList .listItem .bookName{
+    font-size: 26px;
+    height: 36px;
+    line-height: 36px;
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    align-content: center;
+}
+
+.hList .listItem .bookInfo{
+    font-size: 24px;
+    color: #999;
+}
+
+
+
+
+
+.vList{
+    padding:0 16px;
+}
+.vList .listItem{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 36px;
+    color:#666;
+}
+.vList .listItem .bookImg{
+    width: 182px;
+    height: 245px;
+    margin-right: 21px;
+    position: relative;
+}
+.vList .listItem .bookImg image{
+    width: 182px;
+    height: 245px;
+}
+.vList .listItem .itemInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.vList .listItem .itemInfo .bookName{
+    font-size: 28px;
+}
+.vList .listItem .itemInfo .ellipsis{
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    align-content: center;
+}
+.vList .listItem .itemInfo .bookInfo{
+    font-size: 24px;
+    color: #999;
+}
+.vList .listItem .itemInfo .ellipsis2{
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    align-content: center;
+}
+
+.vList .listItem .itemInfo .infoWrap {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #999;
+}
+.vList .listItem .itemInfo .infoWrap .bookAuthor {
+    font-size: 25px;
+    margin-right: 22px;
+}

@@ -58,6 +58,17 @@ public class AdConfig implements Serializable {
         this.rewardedVideoAdId = rewardedVideoAdId;
     }
 
+    /**
+     * bannerId: "adunit-090ca0df5b0c4b32"
+     * gridAdId: "adunit-f26ade6249502c6a"
+     * interstitialAdId: "adunit-bd3d4cbec78fdf97"
+     * nativeAdId: "adunit-e93eada4f72d2341"
+     * rewardedVideoAdId: "adunit-371bd79d00078a90"
+     * videoAdId: "adunit-33c30621be64ff71"
+     * videoFrontAdId: "adunit-ef4637cc787de087"
+     * @return
+     */
+
     public String getInterstitialAdId() {
         return interstitialAdId;
     }

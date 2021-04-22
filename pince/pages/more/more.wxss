@@ -1,0 +1,124 @@
+page {
+    background-color: #efc3d0;
+}
+
+.top,.top image {
+    width: 100%;
+    height: 311rpx;
+}
+
+.adv {
+    padding: 30rpx 30rpx 0;
+    box-sizing: border-box;
+    background-color: #efc3d0;
+}
+
+.adv,.adv .item {
+    width: 100%;
+    height: auto;
+}
+
+.adv .item {
+    border-radius: 10rpx;
+}
+
+.lst {
+    width: 100%;
+    height: auto;
+    padding: 30rpx;
+    box-sizing: border-box;
+    background-color: #efc3d0;
+}
+
+.lst .item {
+    width: 100%;
+    height: 390rpx;
+    border-radius: 10rpx;
+    margin-bottom: 30rpx;
+}
+
+.lst .item .upper {
+    background-color: #3441ce;
+}
+
+.lst .item .upper,.lst .item .upper image {
+    width: 100%;
+    height: 260rpx;
+    border-top-left-radius: 10rpx;
+    border-top-right-radius: 10rpx;
+}
+
+.lst .item .lower {
+    width: 100%;
+    height: 130rpx;
+    background-color: #fff;
+    border-bottom-left-radius: 10rpx;
+    border-bottom-right-radius: 10rpx;
+    padding: 20rpx 30rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+}
+
+.lst .item .lower .left {
+    flex: 3;
+}
+
+.lst .item .lower .left .title {
+    height: 65rpx;
+    line-height: 65rpx;
+    color: #ea4e73;
+    font-size: 28rpx;
+}
+
+.lst .item .lower .left .desc {
+    color: #c3c3c3;
+    font-size: 22rpx;
+}
+
+.lst .item .lower .right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lst .item .lower .right view {
+    text-align: center;
+    font-size: 22rpx;
+    padding: 6rpx 24rpx;
+    border-radius: 30rpx;
+    background-color: #ea4e73;
+    color: #fff;
+}
+
+.lst .item .lower image {
+    width: 100%;
+    height: 120rpx;
+    border-bottom-left-radius: 10rpx;
+    border-bottom-right-radius: 10rpx;
+}
+
+.feedback {
+    top: 10rpx;
+    background: #3441ce;
+}
+
+.feedback,.recommend {
+    position: fixed;
+    right: 0;
+    width: 112rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    box-sizing: border-box;
+    padding: 0 8rpx;
+    text-align: center;
+    border-radius: 10px 0 0 10px;
+    font-size: 24rpx;
+    color: #fff;
+}
+
+.recommend {
+    top: 80rpx;
+    background: #d81e06;
+}

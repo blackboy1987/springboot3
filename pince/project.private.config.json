@@ -1,0 +1,36 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/christmas/result",
+          "pathName": "pages/christmas/result",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/question/index",
+          "pathName": "pages/question/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/quizchoiceness/index",
+          "pathName": "pages/quizchoiceness/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}
