@@ -33,7 +33,7 @@ public class AppConfig extends BaseEntity<Long>{
 
     public AppConfig(@NotNull App app) {
         if(app.getType()==1){
-            String danMu = "[{text:\"请勿相信视频内广告\",color:\"#ff0000\",time:1},{text:\"本软件永久免费,为避免小程序被封,请联系客服!\",color:\"#ff00ff\",time:3}]";
+            String danMu = "[{\"text\":\"请勿相信视频内广告\",\"color\":\"#ff0000\",\"time\":1},{\"text\":\"本软件永久免费,为避免小程序被封,请联系客服!\",\"color\":\"#ff00ff\",\"time\":3}]";
             getConfig().put("danMu", JsonUtils.toJson(JsonUtils.toObject(danMu, new TypeReference<List<Demo.DataDTO.PlayDTO.DanMu>>() {
             })));
         }

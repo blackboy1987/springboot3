@@ -60,11 +60,16 @@
                                 });
                             }
                         }) : t.request({
-                            url: u.globalData.host + "/index.php/App/Index/search",
+                            url: u.globalData.baseUrl + "/index.php/App/Index/search",
+                            header:{
+                                appCode: u.globalData.appCode,
+                                appToken:u.globalData.appToken,
+                            },
                             data: {
                                 q: n
                             },
                             success: function(t) {
+                                console.log("u.globalData.host",u.globalData.host);
                                 t.data.rcmd ? e.tips = "未搜到，来试试这些" : e.tips = "与 ".concat(n, " 相关的测试"),
                                 e.search_list = (t.data.content||[]).map(function(t, e) {
                                     return t.img = c.static_host + t.img, t;

@@ -1,5 +1,5 @@
 {
-    "navigationBarTitleText": "爱测试",
+    "navigationBarTitleText": "大鼻孔测一测",
     "usingComponents": {
         "search-box": "/components/SearchBox",
         "swiper-box": "/components/SwiperBox",

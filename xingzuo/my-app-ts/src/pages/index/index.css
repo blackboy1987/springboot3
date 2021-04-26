@@ -1,0 +1,25 @@
+.fortune .li {
+    display: inline-block;
+    width: 165px;
+    height: 200px;
+    margin: 40px 40px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.fortune .li .li_img {
+    height: 170px;
+    width: 170px;
+}
+
+.fortune .li .name {
+    margin-top: -13px;
+    font-size: 30px;
+    color: #e7e3ff;
+}
+
+.fortune .li .date {
+    font-size: 26px;
+    color: #a0cfff;
+    margin-top: -2px;
+}

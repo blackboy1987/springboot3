@@ -34,6 +34,9 @@ dependencies {
     compile group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.66'
     compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 
+
+    implementation group: 'com.kcthota', name: 'emoji4j', version: '5.0'
+
     implementation group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.6'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version: '2.4.3'
 

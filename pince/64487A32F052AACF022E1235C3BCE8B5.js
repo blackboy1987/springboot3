@@ -28,15 +28,16 @@ e = "function" == typeof Symbol && "symbol" == t(Symbol.iterator) ? function(e) 
         e.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAzCAIAAABwsT3sAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAx9pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NThCMTNFQkExN0JFMTFFOEEzQTU4Qzg4Q0RCMTU2MzciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NThCMTNFQkIxN0JFMTFFOEEzQTU4Qzg4Q0RCMTU2MzciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1OEIxM0VCODE3QkUxMUU4QTNBNThDODhDREIxNTYzNyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1OEIxM0VCOTE3QkUxMUU4QTNBNThDODhDREIxNTYzNyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pho+L+kAAAQ6SURBVHjavFi5L21bHL62OeZ5eOYxKAgRFCJBIZEoREGhIRToFMI/IJpXGZJTkFCIRDQiUSAcDSFCQcxjzPM8e+9757zsd6xvXdnH3ff9qnO+vdb61vrNa/34Sye5v783Go1fj7H7oZMYDIb9/X1QFhQU/GyMogtTW1sbmPBjdHR0enr6d5FBOWDa3t5Wkf7+/r29Pf3Jnp+fm5ubLZlUlb6/v+tMpihKQEAA409PTz09PTqT2dvbV1ZWJiQk8KfFxcWlpSX9HaSiosLb25vx3t5eWFR/b6yurpYqc2Rk5Ptkt7e3m5ubjPv4+BQVFTEOMjjRN8na29s7OjoODw/5U3Z2tr+/vwB+fHyMj49/hwzxdHZ2Zv5huV9VSktLGZycnASldWSWkQumrq4uHhMaGhoZGcmxuLCwoJXs+vq6paVFiNyNjY2ZmRkeXFhYyODU1JRWMijBrD1BBgYGXl9fBTA8PJzDHD51d3eniczLy6upqYnxt7e3sbExxrOysqQxrtVm4JMaf2Jigg+XnJzMI9fW1qxwkLS0tLCwMAEEk2p8VVxdXXmk2eQSssfHx4eHB8aLi4sZnJubYzAuLo697Pz8XEL2p0kY/8MkAri+vo60JIB8MsjBwYHC8XR1dYWNoObyhPT0dC6eXM8CAwN57unp6Sey1tZWdebw8DCnCdYPhOuyp6enm5ubAOIMiuWZdnZ2vraHn5+fu7s7b1lAbGxswMdJXOFspMrKygqfg2MWq/AwFxcXAXl5ebGDeVDChTOZ5eLiQssq0qSMIs7DFGQBKZN5L1pWQSqRtie8mpKbm4uEJiVzcHBgkFOGnZ2dNKPyaoqHh0ddXV1ERARPkHYW6HkFxNHRUcueMOzfw9bW1jJffHw8r3J8fCwg7J/SPf1zMvUP+AR9pqamspff3NxwPHCkI6oEEJH3yYyW+sT9gPWzurrKhwgJCeH45XhA6RB9BufzNEleXh6vy9UZ8cv6Pzo64rm+vr4SR6qvr2dfguybRABjYmKcnJwEcHd3l6cHBwdLyHiy2gcwyHaVahs+j95Sa/GcnZ3l/SLAU1JSBBDtBo80q1oTGfJWX18f4zk5ORzR8/PzPDI2NlYT2eXlJS5hjIMG2eeLxs1SkpKSNJEhy8GRpF0C50mkWY76qKgoNCaayGDbhoYGwb+jo6O5akOGhoYYzMzMtK79tsxnCHbcyXgM/GJra4t9W23urLhYgM+sT/yQFgSpE+F2o5Yb695BampqkB6DgoL4k9FoPDk5YXvDY//zKavI3EzCOHrCwcFBxvPz8y0TrD7XXIPBIM1EINP5Tt3Z2SntVsrKypCmP4Xmr9CgHHd3dy8vL0ujODExUc+nCRQHDmGIs7NzeXm5zo8uMH5jYyPXs6qqKltbW/0fymAVoX8pKSnB5fo3PgGCz3zBQX3PyMj46g3vf3tJ/VuAAQB9ArVT6P7oawAAAABJRU5ErkJggg==";
     },
     2491: function(e, t, n) {
+        const appConfig = wx.getStorageSync("appConfig");
         Object.defineProperty(t, "__esModule", {
             value: !0
         }), t.default = void 0, t.default = {
             pages: {
                 "pages/home/index": {
-                    navigationBarTitleText: "爱测试"
+                    navigationBarTitleText: appConfig.name
                 },
                 "p/i": {
-                    navigationBarTitleText: "爱测试"
+                    navigationBarTitleText: appConfig.name
                 },
                 "pages/Category/Category": {
                     navigationBarTitleText: "分类",
@@ -2030,7 +2031,6 @@ e = "function" == typeof Symbol && "symbol" == t(Symbol.iterator) ? function(e) 
                         BASE_URL: "/"
                     }).VUE_APP_DEBUG) {
                         var t = e.$scope;
-                        console.log("[" + +new Date() + "][" + (t.is || t.route) + "][" + e._uid + "]:flushCallbacks[" + e.__next_tick_callbacks.length + "]");
                     }
                     var n = e.__next_tick_callbacks.slice(0);
                     e.__next_tick_callbacks.length = 0;
@@ -2049,7 +2049,6 @@ e = "function" == typeof Symbol && "symbol" == t(Symbol.iterator) ? function(e) 
                         BASE_URL: "/"
                     }).VUE_APP_DEBUG) {
                         var n = e.$scope;
-                        console.log("[" + +new Date() + "][" + (n.is || n.route) + "][" + e._uid + "]:nextVueTick");
                     }
                     return _(t, e);
                 }
@@ -2059,7 +2058,6 @@ e = "function" == typeof Symbol && "symbol" == t(Symbol.iterator) ? function(e) 
                     BASE_URL: "/"
                 }).VUE_APP_DEBUG) {
                     var r = e.$scope;
-                    console.log("[" + +new Date() + "][" + (r.is || r.route) + "][" + e._uid + "]:nextMPTick");
                 }
                 var o;
                 if (e.__next_tick_callbacks || (e.__next_tick_callbacks = []), e.__next_tick_callbacks.push(function() {
@@ -3450,7 +3448,7 @@ e = "function" == typeof Symbol && "symbol" == t(Symbol.iterator) ? function(e) 
                         var t = 1;
                         return new Promise(function(n, r) {
                             e.load().then(function() {
-                                console.log("load sucess"), e.show().catch(function() {
+                                e.show().catch(function() {
                                     r({
                                         msg: "show fail"
                                     });

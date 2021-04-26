@@ -35,6 +35,11 @@
                 </view>
                 <scroll-view scrollWithAnimation scrollY bindscrolltolower="__e" class="data-v-b9462a96" data-event-opts="{{[ [ 'scrolltolower',[ ['getPagedata'] ] ] ]}}" style="{{'height:calc(100% - 43px);background-size:100%;background-repeat:no-repeat;'+(cid==16&&'background-image: url(http://uploads-admin.cdn.woquhudong.cn/quce/1577178107sAkJ5.png);padding-top:111rpx')}}">
                     <view class="list-box data-v-b9462a97" wx:if="{{cid!=16}}">
+                        <view class="list-item data-v-b9462a96">
+                            <ad ad-type="grid" unit-id="{{ads.gridAdId}}" wx:if="{{ads.gridAdId&&cid%3===0}}" />
+                            <ad-custom unit-id="{{ads.nativeAdId}}" wx:if="{{ads.nativeAdId&&cid%3===1}}" />
+                            <ad unit-id="{{ads.bannerId}}" wx:if="{{ads.bannerId&&cid%3===2}}" />
+                        </view>
                         <view bindtap="__e" class="list-item data-v-b9462a96" data-event-opts="{{[ [ 'tap',[ [ 'toQuestion',['$0',i],[ [ ['container','',i] ] ] ] ] ] ]}}" wx:for="{{container}}" wx:for-index="i" wx:key="i">
                             <view class="item-detail data-v-b9462a96">
                                 <text class="title data-v-b9462a96">{{item.title}}</text>
@@ -48,6 +53,11 @@
                         </view>
                     </view>
                     <view class="alienation data-v-b9462a96" wx:else>
+                        <view class="list-item data-v-b9462a96">
+                            <ad ad-type="grid" unit-id="{{ads.gridAdId}}" wx:if="{{ads.gridAdId&&cid%3===0}}" />
+                            <ad-custom unit-id="{{ads.nativeAdId}}" wx:if="{{ads.nativeAdId&&cid%3===1}}" />
+                            <ad unit-id="{{ads.bannerId}}" wx:if="{{ads.bannerId&&cid%3===2}}" />
+                        </view>
                         <view bindtap="__e" class="list-item data-v-b9462a96" data-event-opts="{{[ [ 'tap',[ [ 'toQuestion',['$0',i],[ [ ['container','',i] ] ] ] ] ] ]}}" wx:for="{{container}}" wx:for-index="i" wx:key="i">
                             <view class="title data-v-b9462a96">
                                 <view class="data-v-b9462a96">{{''+item.title+''}}</view>

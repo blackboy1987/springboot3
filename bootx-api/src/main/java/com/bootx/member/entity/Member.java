@@ -2,6 +2,8 @@ package com.bootx.member.entity;
 
 import com.bootx.common.BaseAttributeConverter;
 import com.bootx.entity.BaseEntity;
+import emoji4j.EmojiUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.jcajce.provider.digest.MD2;
 
 import javax.persistence.*;
@@ -128,10 +130,16 @@ public class Member extends BaseEntity<Long> {
     }
 
     public String getNickName() {
+       if(StringUtils.isNotBlank(nickName)){
+           nickName = EmojiUtils.removeAllEmojis(nickName);
+       }
         return nickName;
     }
 
     public void setNickName(String nickName) {
+        if(StringUtils.isNotBlank(nickName)){
+            nickName = EmojiUtils.removeAllEmojis(nickName);
+        }
         this.nickName = nickName;
     }
 

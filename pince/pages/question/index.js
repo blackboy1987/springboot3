@@ -610,7 +610,11 @@ var t = null;
                             scene: c.globalData.scene
                         };
                         this.needAsk || (n.israndresult = 1), qq.request({
-                            url: c.globalData.host + "/index.php/Wetest/Entry/getresult",
+                            url: c.globalData.baseUrl + "/index.php/Wetest/Entry/getresult",
+                            header:{
+                                appCode: c.globalData.appCode,
+                                appToken:c.globalData.appToken,
+                            },
                             data: n,
                             success: function(e) {
                                 if (t.resultdata = e.data, t.resimg.qrcode = h + JSON.parse(e.data.attention).qrcode,

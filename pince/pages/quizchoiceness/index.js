@@ -1,4 +1,8 @@
 var e = null;
+const app = getApp();
+
+const appConfig = wx.getStorageSync("appConfig");
+
 (global.webpackJsonp = global.webpackJsonp || []).push([ [ "pages/quizchoiceness/index" ], {
     "5bf7": function(e, t, a) {
         (function(e) {
@@ -559,7 +563,7 @@ var e = null;
                         s.analyzeResult(), 1 == s.hasbannerad && (s.showmodel = !0, setTimeout(function() {
                             s.modelProgress();
                         }, 1e3)))) : (console.log("授权失败"), this.authorButton = !1, this.margin = !1, b.globalData.user = {
-                            nickName: "爱测试",
+                            nickName: appConfig.name,
                             avatarUrl: o.ssl_static_host + "quce/1562666285IKXQK.png"
                         }, this.resimg.avatar = o.ssl_static_host + "quce/1562666285IKXQK.png", this.scrollToView = this.scrollId,
                         this.scrollTop = 1e3 * this.count, s.authorButton = !1, s.margin = !1, s.showAds && s.videoAd ? 0 == this.showVideoModel ? setTimeout(function() {
@@ -781,10 +785,12 @@ var e = null;
                             quizfrom: "wxapp"
                         };
                         0 == this.needAsk ? (d.israndresult = 1, d.option = "A") : d.option = i, e.request({
-                            url: b.globalData.host + "/index.php/Wetest/Entry/getresult",
+                            url: b.globalData.baseUrl + "/index.php/Wetest/Entry/getresult",
                             method: "POST",
                             header: {
-                                "content-type": "application/x-www-form-urlencoded"
+                                "content-type": "application/x-www-form-urlencoded",
+                                appCode: b.globalData.appCode,
+                                appToken:b.globalData.appToken,
                             },
                             data: d,
                             success: function(a) {
@@ -956,17 +962,33 @@ var e = null;
                             var l = JSON.parse(n.headimg_config);
                             r && l[r] && (l = l[r]), o.drawImage(a.avatar.path, 0, 0, a.avatar.width, a.avatar.height, l.x, l.y, l.width, l.height);
                         }
-                        if (o.drawImage(a.result.path, 0, 0), o.drawImage("/static/qrcode.png", 0, 0, a.qrcode.width, a.qrcode.height, 0, a.result.height - a.qrcode.height * a.result.width / a.qrcode.width, a.qrcode.width, a.qrcode.height * a.result.width / a.qrcode.width),
-                        n && n.draw_config && this.question_info.special_result) {
-                            var d = JSON.parse(n.image_config), u = JSON.parse(n.draw_config);
-                            o.setFillStyle("rgb(".concat(d.c_r, ", ").concat(d.c_g, ", ").concat(d.c_b, ")")),
-                            o.setFontSize(parseInt(d.font)), o.setTextAlign(u.align), o.setTextBaseline("top"),
-                            0 == b.globalData.user.verify && this.hasUserinfo ? this.verifyUserInfo(function() {
-                                "center" == u.align ? o.fillText(b.globalData.user.nickName, u.x ? u.x : 320, u.y) : ("right" == u.align || "left" == u.align) && o.fillText(b.globalData.user.nickName, u.x, u.y),
-                                s(i);
-                            }) : ("center" == u.align ? o.fillText(b.globalData.user.nickName, u.x ? u.x : 320, u.y) : ("right" == u.align || "left" == u.align) && o.fillText(b.globalData.user.nickName, u.x, u.y),
-                            s(this));
-                        } else s(this);
+
+                        // 下载图片
+                        let tempFile = "/static/qrcode.png";
+                        const root = this;
+
+                        wx.downloadFile({
+                            url:appConfig.logo,
+                            complete(res) {
+                                if(res.statusCode==200){
+                                    tempFile = res.tempFilePath;
+                                }
+                                if (o.drawImage(a.result.path, 0, 0), o.drawImage("/static/qrcode.png", 0, 0, a.qrcode.width, a.qrcode.height, 0, a.result.height - a.qrcode.height * a.result.width / a.qrcode.width, a.qrcode.width, a.qrcode.height * a.result.width / a.qrcode.width),
+                                n && n.draw_config && root.question_info.special_result) {
+                                    var d = JSON.parse(n.image_config), u = JSON.parse(n.draw_config);
+                                    o.setFillStyle("rgb(".concat(d.c_r, ", ").concat(d.c_g, ", ").concat(d.c_b, ")")),
+                                        o.setFontSize(parseInt(d.font)), o.setTextAlign(u.align), o.setTextBaseline("top"),
+                                        0 == b.globalData.user.verify && root.hasUserinfo ? root.verifyUserInfo(function() {
+                                            "center" == u.align ? o.fillText(b.globalData.user.nickName, u.x ? u.x : 320, u.y) : ("right" == u.align || "left" == u.align) && o.fillText(b.globalData.user.nickName, u.x, u.y),
+                                                s(i);
+                                        }) : ("center" == u.align ? o.fillText(b.globalData.user.nickName, u.x ? u.x : 320, u.y) : ("right" == u.align || "left" == u.align) && o.fillText(b.globalData.user.nickName, u.x, u.y),
+                                            s(root));
+                                } else s(root);
+                            }
+                        });
+
+
+
                     },
                     addResultPicture: function() {
                         var t = this;
