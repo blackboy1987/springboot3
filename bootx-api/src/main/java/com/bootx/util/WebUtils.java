@@ -482,8 +482,43 @@ public final class WebUtils {
 			}
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e.getMessage(), e);
-		} catch (ClientProtocolException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public static <T> T postBody(String url, Map<String,Object> parameterMap,Map<String,String> headers) {
+		Assert.hasText(url, "[Assertion failed] - url must have text; it must not be null, empty, or blank");
+
+		try {
+			HttpPost httpPost = new HttpPost(url);
+			httpPost.addHeader("Content-Type", "application/json;charset=utf-8");
+			for (String key:headers.keySet()) {
+				httpPost.addHeader(key,headers.get(key));
+			}
+			if(parameterMap!=null&&parameterMap.size()>0){
+				httpPost.setEntity(new StringEntity(JsonUtils.toJson(parameterMap), "utf-8"));
+			}
+
+			CloseableHttpResponse httpResponse = HTTP_CLIENT.execute(httpPost);
+			HttpEntity httpEntity = null;
+			try {
+				httpEntity = httpResponse.getEntity();
+				if (httpEntity != null) {
+					if (String.class.isAssignableFrom(String.class)) {
+						return (T) EntityUtils.toString(httpEntity, "UTF-8");
+					} else if (String.class.isArray() && byte.class.isAssignableFrom(String.class.getComponentType())) {
+						return (T) EntityUtils.toByteArray(httpEntity);
+					}
+				}
+			} finally {
+				EntityUtils.consume(httpEntity);
+				IOUtils.closeQuietly(httpResponse);
+			}
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e.getMessage(), e);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

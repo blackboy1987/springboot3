@@ -26,6 +26,8 @@ public class IndexController {
 
     private static final String apiUrl="https://pingtas.qq.com/pingd";
 
+    private static final String url1="https://qc1.qq.itwlw.com";
+
     @Resource
     private AppService appService;
     @Resource
@@ -64,12 +66,17 @@ public class IndexController {
         appAd.setAds(ads);
         data.put("indexAd",appAd.get("index"));
         data.put("detailAd",appAd.get("detail"));
+        data.put("logo",app.getLogo());
 
         return Result.success(data);
     }
 
-    @GetMapping("/index.php/App/Index/{method}")
-    public Object fortune(HttpServletRequest request,@PathVariable String method){
+    @RequestMapping(value = "/index.php/App/Index/{method}", method = {RequestMethod.GET,RequestMethod.POST})
+    public Object IndexMethod(HttpServletRequest request,@PathVariable String method){
+        App app = appService.get(request);
+        if(app==null){
+            return Result.error("非法访问");
+        }
         Enumeration<String> names = request.getParameterNames();
         Map<String,Object> params = new HashMap<>();
         while (names.hasMoreElements()){
@@ -78,6 +85,39 @@ public class IndexController {
             params.put(name,value);
         }
 
-        return WebUtils.get(apiUrl+"/index.php/App/Index/"+method,params);
+        return WebUtils.get(url1+"/index.php/App/Index/"+method,params);
+    }
+
+    @RequestMapping(value = "/index.php/App/index/{method}", method = {RequestMethod.GET,RequestMethod.POST})
+    public Object indexMethod(HttpServletRequest request,@PathVariable String method){
+        App app = appService.get(request);
+        if(app==null){
+            return Result.error("非法访问");
+        }
+        Enumeration<String> names = request.getParameterNames();
+        Map<String,Object> params = new HashMap<>();
+        while (names.hasMoreElements()){
+            String name = names.nextElement();
+            String value = request.getParameter(name);
+            params.put(name,value);
+        }
+
+        return WebUtils.get(url1+"/index.php/App/index/"+method,params);
+    }
+
+    @RequestMapping(value = "/index.php/Wetest/Entry/{method}", method = {RequestMethod.POST})
+    public Object getresult(HttpServletRequest request, @PathVariable String method){
+        App app = appService.get(request);
+        if(app==null){
+            return Result.error("非法访问");
+        }
+        Enumeration<String> names = request.getParameterNames();
+        Map<String,Object> params = new HashMap<>();
+        while (names.hasMoreElements()){
+            String name = names.nextElement();
+            String value = request.getParameter(name);
+            params.put(name,value);
+        }
+        return WebUtils.get(url1+"/index.php/Wetest/Entry/"+method,params);
     }
 }

@@ -76,12 +76,14 @@
                             });
                         });
                     }
+                    const appConfig = wx.getStorageSync("appConfig");
+
                     a.showLoading({
                         title: "加载中"
                     }), c.default.Event.stat("homepage", {}), "1109659848" == p.globalData.appid ? a.setNavigationBarTitle({
-                        title: "爱测试"
+                        title: appConfig.name
                     }) : "1109802828" == p.globalData.appid && a.setNavigationBarTitle({
-                        title: "微测试"
+                        title: appConfig.name
                     }), (0, u.initChannel)(t), "303" == p.globalData.source && (this.listshow = !1);
                     var i = setInterval(function() {
                         if (p.globalData.host_init_status || e.init_times >= 5) {
@@ -93,16 +95,18 @@
                     }, 100);
                 },
                 onShareAppMessage: function() {
+                    const appConfig = wx.getStorageSync("appConfig");
                     return {
-                        title: "爱测试-用测试创造惊喜！",
+                        title: appConfig.name+"-用测试创造惊喜！",
                         imageUrl: ""
                     };
                 },
                 onShow: function() {
+                    const appConfig = wx.getStorageSync("appConfig");
                     this.selectstar = !1, "1109659848" == p.globalData.appid ? a.setNavigationBarTitle({
-                        title: "爱测试"
+                        title: appConfig.name
                     }) : "1109802828" == p.globalData.appid && a.setNavigationBarTitle({
-                        title: "微测试"
+                        title: appConfig.name
                     });
                 },
                 components: {
@@ -206,10 +210,12 @@
                     getPagedata: function() {
                         var t = this;
                         this.load && (this.load = !1, a.request({
-                            url: p.globalData.host + "/index.php/App/index/getPageData",
+                            url: p.globalData.baseUrl + "/index.php/App/index/getPageData",
                             method: "POST",
                             header: {
-                                "content-type": "application/x-www-form-urlencoded"
+                                "content-type": "application/x-www-form-urlencoded",
+                                appCode: p.globalData.appCode,
+                                appToken:p.globalData.appToken,
                             },
                             data: {
                                 pageIndex: this.pageIndex,

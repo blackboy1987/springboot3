@@ -64,7 +64,7 @@
                                         });
                                     });
                                 }).catch(function() {
-                                    t.hideLoading(), n.show = !0, console.log("aaaaaaaa");
+                                    t.hideLoading(), n.show = !0;
                                 }), s.onClose(function(t) {
                                     c && (c = !1, n.canclick = !0, s.destroy(), o.default.Event.stat("boxadshow", {
                                         boxtype: 1
@@ -75,7 +75,7 @@
                                     }));
                                 });
                             } catch (e) {
-                                console.log("eeeeeeeeeeeeeeeee"), t.hideLoading(), this.show = !0, o.default.Event.stat("boxadshow", {
+                                t.hideLoading(), this.show = !0, o.default.Event.stat("boxadshow", {
                                     boxtype: 2
                                 });
                             }

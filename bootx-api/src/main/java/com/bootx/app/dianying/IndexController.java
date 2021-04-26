@@ -310,6 +310,31 @@ public class IndexController {
 
     }
 
+    @GetMapping("/tv/{douBanId}/photos")
+    public Result tv(@PathVariable Long douBanId, Integer start, Integer count, HttpServletRequest request){
+        List<String> list;
+        String s = redisService.get("photos_" + douBanId);
+        try {
+            list = JsonUtils.toObject(s, new TypeReference<List<String>>() {
+            });
+        }catch (Exception e){
+            list = DouBanUtils.photo(douBanId);
+            redisService.set("photos_" + douBanId,JsonUtils.toJson(list));
+        }
+        Map<String,Object> data = new HashMap<>();
+        List<PhotoImage> photos = new ArrayList<>();
+        list.stream().forEach(item->{
+            PhotoImage photoImage = new PhotoImage();
+            photoImage.getLarge().setUrl(item);
+            photoImage.getSmall().setUrl(item);
+            photos.add(photoImage);
+        });
+        data.put("photos",photos);
+        return Result.success(data);
+
+
+    }
+
 
     @GetMapping("/info/{douBanId}")
     public Map<String,Object> movie(@PathVariable Long douBanId, Integer start, Integer couSetSubscribent, HttpServletRequest request){

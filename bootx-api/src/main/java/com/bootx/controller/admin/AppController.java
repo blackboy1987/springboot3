@@ -1,5 +1,7 @@
 package com.bootx.controller.admin;
 
+import com.bootx.common.Page;
+import com.bootx.common.Pageable;
 import com.bootx.common.Result;
 import com.bootx.entity.*;
 import com.bootx.member.entity.MemberRank;
@@ -9,6 +11,8 @@ import com.bootx.service.AppService;
 import com.bootx.service.SubscriptionTemplateService;
 import com.bootx.util.CodeUtils;
 import com.bootx.util.JsonUtils;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,13 +43,50 @@ public class AppController {
     @Resource
     private MemberRankService memberRankService;
 
+    @PostMapping("/list")
+    @JsonView(BaseEntity.PageView.class)
+    public Result list(HttpServletRequest request, Pageable pageable){
+        Admin admin = adminService.get(request);
+        if(admin==null||!admin.getIsAdmin()){
+            return Result.error("非法访问");
+        }
+        Page<App> page = appService.findPage(pageable);
+        return Result.success(page);
+    }
+
+
+    @PostMapping("/resetPass")
+    @JsonView(BaseEntity.PageView.class)
+    public Result resetPass(HttpServletRequest request, Long id){
+        Admin admin = adminService.get(request);
+        if(admin==null||!admin.getIsAdmin()){
+            return Result.error("非法访问");
+        }
+        App app = appService.find(id);
+        Admin admin1 = app.getAdmin();
+        if(admin1!=null){
+            admin1.setPassword("123456");
+            adminService.update(admin1);
+            return Result.success();
+        }
+        return Result.error("系统错误");
+    }
+
+
+
     @PostMapping("/base")
-    public Result base(HttpServletRequest request){
+    public Result base(HttpServletRequest request,Long id){
         Admin admin = adminService.get(request);
         if(admin==null){
             return Result.error("非法访问");
         }
         App app = admin.getApp();
+        if(id!=null){
+            if(!admin.getIsAdmin()){
+                return Result.error("非法访问");
+            }
+            app = appService.find(id);
+        }
         if(app==null){
             return Result.error("非法访问");
         }
@@ -70,12 +111,18 @@ public class AppController {
     }
 
     @PostMapping("/info")
-    public Result info(HttpServletRequest request){
+    public Result info(HttpServletRequest request,Long id){
         Admin admin = adminService.get(request);
         if(admin==null){
             return Result.error("非法访问");
         }
         App app = admin.getApp();
+        if(id!=null){
+            if(!admin.getIsAdmin()){
+                return Result.error("非法访问");
+            }
+            app = appService.find(id);
+        }
         if(app==null){
             return Result.error("非法访问");
         }
@@ -91,12 +138,18 @@ public class AppController {
 
 
     @PostMapping("/baseUpdate")
-    public Result baseUpdate(HttpServletRequest request,String appName,String appId,String appSecret,String logo,Integer status,String templateId){
+    public Result baseUpdate(Long id,HttpServletRequest request,String appName,String appId,String appSecret,String logo,Integer status,String templateId){
         Admin admin = adminService.get(request);
         if(admin==null){
             return Result.error("非法访问");
         }
         App app = admin.getApp();
+        if(id!=null){
+            if(!admin.getIsAdmin()){
+                return Result.error("非法访问");
+            }
+            app = appService.find(id);
+        }
         if(app==null){
             return Result.error("非法访问");
         }
@@ -141,8 +194,18 @@ public class AppController {
 
 
     @PostMapping("/ads")
-    public Result ads(HttpServletRequest request){
-        App app = appService.get1(request);
+    public Result ads(HttpServletRequest request,Long id){
+        Admin admin = adminService.get(request);
+        if(admin==null){
+            return Result.error("非法访问");
+        }
+        App app = admin.getApp();
+        if(id!=null){
+            if(!admin.getIsAdmin()){
+                return Result.error("非法访问");
+            }
+            app = appService.find(id);
+        }
         if(app==null){
             return Result.error("非法访问");
         }
@@ -150,12 +213,18 @@ public class AppController {
     }
 
     @PostMapping("/adsUpdate")
-    public Result adsUpdate(HttpServletRequest request, String ads){
+    public Result adsUpdate(HttpServletRequest request, String ads,Long id){
         Admin admin = adminService.get(request);
         if(admin==null){
             return Result.error("非法访问");
         }
         App app = admin.getApp();
+        if(id!=null){
+            if(!admin.getIsAdmin()){
+                return Result.error("非法访问");
+            }
+            app = appService.find(id);
+        }
         if(app==null){
             return Result.error("非法访问");
         }

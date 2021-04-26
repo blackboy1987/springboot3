@@ -1,5 +1,6 @@
 !function() {
     var t = null;
+    const appConfig = wx.getStorageSync("appConfig");
     (global.webpackJsonp = global.webpackJsonp || []).push([ [ "pages/Category/Category" ], {
         "0014": function(t, e, a) {},
         "41fa": function(t, e, a) {
@@ -79,7 +80,7 @@
                     onReady: function() {},
                     onShareAppMessage: function() {
                         return {
-                            title: "爱测试-用测试创造惊喜",
+                            title: appConfig.name+"-用测试创造惊喜",
                             imageUrl: ""
                         };
                     },
@@ -184,8 +185,12 @@
                         getSubCategory: function(t, a, i, n, o) {
                             var r = this, s = arguments.length > 5 && void 0 !== arguments[5] && arguments[5];
                             e.request({
-                                url: g.globalData.host + "/index.php/App/Index/getPageData",
+                                url: g.globalData.baseUrl + "/index.php/App/Index/getPageData",
                                 method: "GET",
+                                header:{
+                                    appCode: g.globalData.appCode,
+                                    appToken:g.globalData.appToken,
+                                },
                                 data: {
                                     cid: a,
                                     order: i,

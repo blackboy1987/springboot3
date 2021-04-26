@@ -74,7 +74,7 @@
                         d.default.Page.init(), (0, u.initChannel)(e);
                         var o = {};
                         wx.createInterstitialAd && ((a = wx.createInterstitialAd({
-                            adUnitId: appConfig.indexAd.interstitialAdId,
+                            adUnitId: n.indexAd.interstitialAdId,
                         })).onLoad(function() {}), a.onError(function(a) {}), a.onClose(function() {})),
                         t.showLoading({
                             title: "加载中"
@@ -216,10 +216,12 @@
                         getPagedata: function() {
                             var a = this;
                             this.load && (this.load = !1, t.request({
-                                url: p.globalData.host + "/index.php/App/index/getPageData",
+                                url: p.globalData.baseUrl + "/index.php/App/index/getPageData",
                                 method: "POST",
                                 header: {
-                                    "content-type": "application/x-www-form-urlencoded"
+                                    "content-type": "application/x-www-form-urlencoded",
+                                    appCode: p.globalData.appCode,
+                                    appToken:p.globalData.appToken,
                                 },
                                 data: {
                                     pageIndex: this.pageIndex,

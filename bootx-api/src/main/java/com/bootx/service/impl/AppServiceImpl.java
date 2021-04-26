@@ -43,10 +43,15 @@ public class AppServiceImpl extends BaseServiceImpl<App, Long> implements AppSer
         String cacheKey = App.CACHE_PREFIX + appCode;
         App app = redisService.get(cacheKey, App.class);
         if(app==null){
-            app = appDao.find("appCode",appCode);
-            redisService.set(cacheKey, JsonUtils.toJson(app));
+            try{
+                app = appDao.find("appCode",appCode);
+                redisService.set(cacheKey, JsonUtils.toJson(app));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
         return app;
+
     }
 
     @Override

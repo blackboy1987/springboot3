@@ -75,6 +75,9 @@ public class IndexController {
     @GetMapping("/com/json/fortune")
     public String fortune(HttpServletRequest request){
         Map<String,Object> params = getPara(request);
+        params.put("ld","-1");
+        params.put("token","Mh8tGmSoW3fyH642Y+Eb3E");
+        params.put("vc","xcx");
         String result = WebUtils.get(baseUrl + "com/json/fortune", params);
         return result;
     }

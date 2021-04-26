@@ -103,14 +103,14 @@
                     adbannerid: "",
                     appCode:'IEC4OARSJZAB4SG3TB',
                     appToken:'fcb1123588b8c311c661e2e2f6bff63195fb1932809403507e67044dfadgg756',
-                    baseUrl:'http://localhost:9000/api/pince/',
+                    baseUrl:'https://www.igomall.xin/api/pince',
                 }, n(o, "scene", ""), n(o, "host_init_status", 0), n(o, "update", ""), n(o, "adbox", ""),
                 n(o, "getJumpUrl", "https://mp.itwlw.com/index.php/"), n(o, "from_gid", 0), n(o, "christmas", {}),
                 n(o, "template", 1), o),
                 onLaunch: function(t) {
                     var n = this.$scope;
                     wx.request({
-                        url:n.globalData.baseUrl+"config",
+                        url:n.globalData.baseUrl+"/config",
                         method:"POST",
                         header:{
                             appCode: n.globalData.appCode,

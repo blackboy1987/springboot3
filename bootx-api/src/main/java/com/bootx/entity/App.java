@@ -2,7 +2,7 @@ package com.bootx.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.validator.constraints.Length;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,22 +18,27 @@ public class App extends BaseEntity<Long>{
 
     @NotNull
     @Column(nullable = false,unique = true)
+    @JsonView({PageView.class})
     public String appId;
 
     @NotNull
     @Column(nullable = false,unique = true)
+    @JsonView({PageView.class})
     private String appSecret;
 
     @NotNull
     @Column(nullable = false,unique = true)
+    @JsonView({PageView.class})
     private String appToken;
 
     @NotNull
     @Column(nullable = false,unique = true)
+    @JsonView({PageView.class})
     private String appCode;
 
     @NotNull
     @Column(nullable = false,unique = true)
+    @JsonView({PageView.class})
     private String appName;
 
     /**
@@ -44,8 +49,10 @@ public class App extends BaseEntity<Long>{
      */
     @NotNull
     @Column(nullable = false)
+    @JsonView({PageView.class})
     private Integer status;
 
+    @JsonView({PageView.class})
     private String logo;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -62,6 +69,7 @@ public class App extends BaseEntity<Long>{
      */
     @NotNull
     @Column(nullable = false,updatable = false)
+    @JsonView({PageView.class})
     private Integer type;
 
     /**
@@ -69,6 +77,7 @@ public class App extends BaseEntity<Long>{
      */
     @NotNull
     @Column(nullable = false)
+    @JsonView({PageView.class})
     private Date expireDate;
 
     @OneToOne(mappedBy = "app", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -184,5 +193,11 @@ public class App extends BaseEntity<Long>{
 
     public void setSubscriptionTemplates(Set<SubscriptionTemplate> subscriptionTemplates) {
         this.subscriptionTemplates = subscriptionTemplates;
+    }
+
+    @Transient
+    @JsonView({PageView.class})
+    public String getAdminName(){
+        return getAdmin().getUsername();
     }
 }

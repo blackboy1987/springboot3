@@ -153,11 +153,10 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                     },
                     onLoad: function(a) {
                         let appConfig1 = wx.getStorageSync("appConfig");
-                        this.ads = appConfig1.indexAd ||{};
-
-
+                        const ads = appConfig1.indexAd ||{};
+                        this.ads = ads;
                         wx.createInterstitialAd && ((e = wx.createInterstitialAd({
-                            adUnitId: appConfig1.indexAd.interstitialAdId
+                            adUnitId: ads.interstitialAdId
                         })).onLoad(function() {}), e.onError(function(e) {}), e.onClose(function() {})),
                         (0, l.initChannel)(a), v.default.Page.init(),
                         this.onload = 1;
@@ -557,7 +556,7 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                             s.analyzeResult(), 1 == s.hasbannerad && (s.showmodel = !0, setTimeout(function() {
                                 s.modelProgress();
                             }, 1e3)))) : (this.authorButton = !1, this.margin = !1, y.globalData.user = {
-                                nickName: "爱测试",
+                                nickName: appConfig.name,
                                 avatarUrl: r.ssl_static_host + "quce/1562666285IKXQK.png"
                             }, this.resimg.avatar = r.ssl_static_host + "quce/1562666285IKXQK.png", this.scrollToView = this.scrollId,
                             this.scrollTop = 1e3 * this.count, s.authorButton = !1, s.margin = !1, s.showAds && s.videoAd ? 0 == this.showVideoModel ? setTimeout(function() {
@@ -726,10 +725,12 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                                 quizfrom: "wxapp"
                             };
                             0 == this.needAsk ? (i.israndresult = 1, i.option = "A") : i.option = a, t.request({
-                                url: y.globalData.host + "/index.php/Wetest/Entry/getresult",
+                                url: y.globalData.baseUrl + "/index.php/Wetest/Entry/getresult",
                                 method: "POST",
-                                header: {
-                                    "content-type": "application/x-www-form-urlencoded"
+                                header:{
+                                    "content-type": "application/x-www-form-urlencoded",
+                                    appCode: y.globalData.appCode,
+                                    appToken:y.globalData.appToken,
                                 },
                                 data: i,
                                 success: function(a) {
@@ -895,17 +896,28 @@ wx.createInterstitialAd && ((e = wx.createInterstitialAd({
                                 var l = JSON.parse(n.headimg_config);
                                 r && l[r] && (l = l[r]), o.drawImage(a.avatar.path, 0, 0, a.avatar.width, a.avatar.height, l.x, l.y, l.width, l.height);
                             }
-                            if (o.drawImage(a.result.path, 0, 0), o.drawImage("/static/qrcode.png", "1", "1", "120px", "120px", 0, a.result.height - a.qrcode.height * a.result.width / a.qrcode.width, a.result.width, a.qrcode.height * a.result.width / a.qrcode.width),
-                            n && n.draw_config && this.question_info.special_result) {
-                                var u = JSON.parse(n.image_config), d = JSON.parse(n.draw_config);
-                                o.setFillStyle("rgb(".concat(u.c_r, ", ").concat(u.c_g, ", ").concat(u.c_b, ")")),
-                                o.setFontSize(parseInt(u.font)), o.setTextAlign(d.align), o.setTextBaseline("top"),
-                                0 == y.globalData.user.verify && this.hasUserinfo ? this.verifyUserInfo(function() {
-                                    "center" == d.align ? o.fillText(y.globalData.user.nickName, d.x ? d.x : 320, d.y) : ("right" == d.align || "left" == d.align) && o.fillText(y.globalData.user.nickName, d.x, d.y),
-                                    s(i);
-                                }) : ("center" == d.align ? o.fillText(y.globalData.user.nickName, d.x ? d.x : 320, d.y) : ("right" == d.align || "left" == d.align) && o.fillText(y.globalData.user.nickName, d.x, d.y),
-                                s(this));
-                            } else s(this);
+                            // 下载图片
+                            let tempFile = "/static/qrcode.png";
+                            const root = this;
+                            wx.downloadFile({
+                                url:appConfig.logo,
+                                complete(res) {
+                                    if(res.statusCode==200){
+                                        tempFile = res.tempFilePath;
+                                    }
+                                    if (o.drawImage(a.result.path, 0, 0), o.drawImage(tempFile, "1", "1", "120px", "120px", 0, a.result.height - a.qrcode.height * a.result.width / a.qrcode.width, a.result.width, a.qrcode.height * a.result.width / a.qrcode.width),
+                                    n && n.draw_config && root.question_info.special_result) {
+                                        var u = JSON.parse(n.image_config), d = JSON.parse(n.draw_config);
+                                        o.setFillStyle("rgb(".concat(u.c_r, ", ").concat(u.c_g, ", ").concat(u.c_b, ")")),
+                                            o.setFontSize(parseInt(u.font)), o.setTextAlign(d.align), o.setTextBaseline("top"),
+                                            0 == y.globalData.user.verify && root.hasUserinfo ? root.verifyUserInfo(function() {
+                                                "center" == d.align ? o.fillText(y.globalData.user.nickName, d.x ? d.x : 320, d.y) : ("right" == d.align || "left" == d.align) && o.fillText(y.globalData.user.nickName, d.x, d.y),
+                                                    s(i);
+                                            }) : ("center" == d.align ? o.fillText(y.globalData.user.nickName, d.x ? d.x : 320, d.y) : ("right" == d.align || "left" == d.align) && o.fillText(y.globalData.user.nickName, d.x, d.y),
+                                                s(root));
+                                    } else s(root);
+                                }
+                            });
                         },
                         addResultPicture: function() {
                             var e = this;

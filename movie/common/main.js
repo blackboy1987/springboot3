@@ -29,9 +29,9 @@ var e = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? func
                     $theme: "black",
                     systemInfo: [],
                     $platform: "android",
-                    appCode:"IEC4OARSJZAB4SG3TA",
-                    appToken:"fcb1123588b8c311c661e2e2f6bff63195fb1932809403507e67044dfadgg755",
-                    baseUrl:"http://localhost:9000/api/v3/",
+                    appCode:"SE09J6RC762Q",
+                    appToken:"255929adfd062bdd14d7005d3c144e9e12aebcdcf1b198b27462c269886ebeea",
+                    baseUrl:"https://www.igomall.xin/api/v3/",
                 },
                 onLaunch: function() {
                     var t = this, o = this.$scope.globalData, r = wx.getLaunchOptionsSync();
@@ -148,7 +148,7 @@ var e = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? func
             n("3079");
             var c = i(n("66fd")), u = i(n("d64e")), l = i(n("a420")), p = r(n("4a78")), s = r(n("0996"));
             c.default.prototype.md5 = l.default, c.default.prototype.db = p, c.default.prototype.api = s,
-            c.default.prototype.cjurl = "http://localhost:9000/api/v3/", c.default.prototype.mark = "suisui",
+            c.default.prototype.cjurl = "https://www.igomall.xin/api/v3/", c.default.prototype.mark = "suisui",
             c.default.prototype.iv = "eq7U4nDJFMsaZFHC", c.default.prototype.key = "5m0hVqp39zNPd9qL",
             c.default.prototype.$user_login = !1, c.default.config.productionTip = !1, u.default.mpType = "app",
             t(new c.default(function(e) {

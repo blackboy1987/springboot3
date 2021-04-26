@@ -60,6 +60,9 @@ public class Result {
 	public static Result success(String msg, Object data) {
 		return new Result(0, msg, data);
 	}
+	public static Result success() {
+		return new Result(0, "操作成功", null);
+	}
 
 	public static Result success(Object data) {
 		return new Result(0, "成功", data);

@@ -31,9 +31,15 @@
     component: './app/ad',
   },
   {
+    name: '公众号',
+    path: '/app',
+    component: './admin/app',
+    access: 'canAdmin'
+  },
+  {
     name: '订单管理',
     path: '/order',
-    component: './order',
+    component: './admin/order',
     access: 'canAdmin'
   },
   {

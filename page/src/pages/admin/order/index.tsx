@@ -4,7 +4,7 @@ import React, {useRef, useState} from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import {list,save} from "@/pages/order/service";
+import {list,save} from "./service";
 import { ModalForm, ProFormDigit, ProFormText } from '@ant-design/pro-form';
 
 const TableList: React.FC = () => {
