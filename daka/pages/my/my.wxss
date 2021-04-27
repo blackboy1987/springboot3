@@ -1,0 +1,208 @@
+page {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    background: #f6f7f7;
+}
+
+.top {
+    width: 100%;
+    flex-direction: column;
+    padding-top: 50rpx;
+    padding-bottom: 85rpx;
+}
+
+.top,.top .pic {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.top .pic {
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 140rpx;
+    background-size: cover;
+    background-position: 50%;
+}
+
+.top .userName {
+    width: 100%;
+    margin: 14rpx 0;
+}
+
+.top .total,.top .userName {
+    display: flex;
+    justify-content: center;
+    font-size: 28rpx;
+    color: #fff;
+}
+
+.top .total {
+    text-shadow: 0 0 5rpx #186fd8;
+}
+
+.navArea {
+    padding: 0 30rpx;
+    transform: translateY(-50rpx);
+}
+
+.navArea,.navList {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.navList {
+    background: #fff;
+    border-radius: 10rpx;
+    box-shadow: 0 0 20rpx rgba(0,0,0,.1);
+}
+
+.navList .nav {
+    display: flex;
+    width: 100%;
+    height: 100rpx;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 0 30rpx;
+}
+
+.navList .nav:last-child {
+    border-bottom: 0;
+}
+
+.navList .nav .icon {
+    display: flex;
+    margin-right: 20rpx;
+}
+
+.navList .nav .icon image {
+    width: 50rpx;
+    height: 50rpx;
+}
+
+.navList .nav .text {
+    color: #828f98;
+    font-size: 28rpx;
+}
+
+.navList .nav .arrow {
+    color: #828f98;
+}
+
+.bottomBar {
+    width: 100%;
+    height: 108rpx;
+    background: #fff;
+}
+
+.bottomBar,.bottomBar .bar {
+    display: flex;
+}
+
+.bottomBar .bar {
+    flex: 1;
+    -webkit-box-flex: 1;
+    width: 1px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.bottomBar .bar image {
+    display: flex;
+    width: 48rpx;
+    height: 48rpx;
+}
+
+.bottomBar .bar .text {
+    display: flex;
+    font-size: 28rpx;
+}
+
+.bottomBar .bar.this .text {
+    color: #f08200;
+}
+
+.showEmpower {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;
+}
+
+.showEmpower .inner {
+    overflow: hidden;
+}
+
+.showEmpower .center,.showEmpower .inner {
+    width: 80%;
+    background: #fff;
+    border-radius: 20rpx;
+}
+
+.showEmpower .center,.showEmpower .center .showBoxContent,.showEmpower .inner {
+    display: flex;
+    flex-direction: column;
+}
+
+.showEmpower .center .showBoxContent {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.showEmpower .center .headPic {
+    width: 300rpx;
+    position: relative;
+    top: -100rpx;
+}
+
+.showEmpower .center .showBoxContent text {
+    font-size: 28rpx;
+    margin-top: -20rpx;
+}
+
+.showEmpower .center .btnLine,.showEmpower .center .showBoxContent text {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.showEmpower .center .btnLine {
+    background: transparent;
+    transform: translateY(50rpx);
+}
+
+.showEmpower .center .btnLine button.confirm {
+    color: #fff;
+    background: #186fd8;
+    margin-bottom: 30rpx;
+}
+
+.showEmpower .center .btnLine button,.showEmpower .center .btnLine button.confirm {
+    display: flex;
+    width: 80%;
+    height: 80rpx;
+    justify-content: center;
+    align-items: center;
+    font-size: 28rpx;
+    border-radius: 80rpx;
+}
+
+.showEmpower .center .btnLine button {
+    color: #186fd8;
+    background: #eee;
+}

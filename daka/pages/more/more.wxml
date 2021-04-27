@@ -1,0 +1,8 @@
+
+<view class="my_list">
+    <navigator appId="{{item.appid}}" class="my_lis_item" openType="navigate" path="{{item.path}}" target="miniProgram" wx:for="{{program}}" wx:key="f">
+        <image class="list_img" src="{{item.icon}}"></image>
+        <view class="my_list_lable">{{item.name}}</view>
+        <image class="my_icon" src="/images/arrow.png"></image>
+    </navigator>
+</view>

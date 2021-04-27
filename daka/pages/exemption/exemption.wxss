@@ -1,0 +1,124 @@
+page {
+    background: #f0f0f0;
+}
+
+.tab {
+    display: -webkit-flex;
+    width: 100%;
+    height: 2.4rem;
+    background: #fff;
+    position: fixed;
+    z-index: 99;
+}
+
+.tab .tabBox {
+    flex: 1;
+    width: 1px;
+    flex-direction: column;
+    font-size: .9rem;
+    color: #999;
+}
+
+.tab .tabBox,.tab .tabBox text {
+    display: flex;
+    -webkit-box-flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab .tabBox text {
+    flex: 1;
+    flex-grow: 1;
+    border-bottom: .15rem solid #fff;
+}
+
+.tab .tabBox.this {
+    border-bottom: .15rem solid#196fd8;
+}
+
+.tab .tabBox.this text {
+    color: #196fd8;
+}
+
+.outer {
+    width: 100%;
+    height: auto;
+    overflow-y: scroll;
+    margin-top: 2.9rem;
+    background: #f0f0f0;
+}
+
+.outer,.outer .list {
+    display: flex;
+    flex: 1;
+    -webkit-box-flex: 1;
+    flex-direction: column;
+}
+
+.outer .list {
+    width: 92%;
+    margin-left: 4%;
+}
+
+.noData {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    color: #999;
+    font-size: .8rem;
+    background: #f0f0f0;
+}
+
+.noData,.outer .list .userLine {
+    flex: 1;
+    -webkit-box-flex: 1;
+}
+
+.outer .list .userLine {
+    background: #fff;
+    padding: .5rem 1rem;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+    border-radius: 20rpx;
+    margin-bottom: 10rpx;
+    font-size: 26rpx;
+}
+
+.outer .list .userLine .pic {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    margin-right: .5rem;
+}
+
+.outer .list .userLine .pic image {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.outer .list .userLine .name {
+    flex: 1;
+    -webkit-box-flex: 1;
+    color: #333;
+}
+
+.outer .list .userLine .name,.outer .list .userLine .time {
+    display: flex;
+    align-items: center;
+}
+
+.outer .list .userLine .time {
+    color: #999;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}

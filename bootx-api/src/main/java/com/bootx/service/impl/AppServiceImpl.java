@@ -1,6 +1,7 @@
 
 package com.bootx.service.impl;
 
+import com.bootx.app.daka.DaKaConfig;
 import com.bootx.common.Page;
 import com.bootx.common.Pageable;
 import com.bootx.dao.AppDao;
@@ -11,6 +12,7 @@ import com.bootx.service.RedisService;
 import com.bootx.util.DateUtils;
 import com.bootx.util.JWTUtils;
 import com.bootx.util.JsonUtils;
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.jsonwebtoken.Claims;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -184,9 +187,18 @@ public class AppServiceImpl extends BaseServiceImpl<App, Long> implements AppSer
     @Override
     public App save(App app) {
         String cacheKey = App.CACHE_PREFIX + app.getAppCode();
+        if(app.getType()==5){
+            // 打卡配置
+            app.setAppConfig(daKaConfig(app));
+        }
+
+
+
         redisService.set(cacheKey, JsonUtils.toJson(app));
         return super.save(app);
     }
+
+
 
     @Override
     public App update(App app) {
@@ -200,5 +212,35 @@ public class AppServiceImpl extends BaseServiceImpl<App, Long> implements AppSer
         String cacheKey = App.CACHE_PREFIX + app.getAppCode();
         redisService.set(cacheKey, JsonUtils.toJson(app));
         return super.update(app, ignoreProperties);
+    }
+
+
+    /**
+     * 打卡小程序的配置
+     * @param app
+     * @return
+     */
+    private AppConfig daKaConfig(App app) {
+        AppConfig appConfig = buildConfig(app);
+        DaKaConfig daKaConfig = new DaKaConfig();
+        appConfig.setConfig(JsonUtils.toObject(JsonUtils.toJson(daKaConfig), new TypeReference<Map<String, Object>>() {
+        }));
+        return appConfig;
+    }
+
+
+
+    private AppConfig buildConfig(App app){
+        AppConfig appConfig = app.getAppConfig();
+        if(appConfig==null){
+            appConfig = new AppConfig();
+            appConfig.setApp(app);
+        }
+        Map<String, Object> config = appConfig.getConfig();
+        if(config==null){
+            config = new HashMap<>();
+            appConfig.setConfig(config);
+        }
+        return appConfig;
     }
 }

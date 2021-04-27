@@ -1,0 +1,30 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/friendList/friendList",
+          "pathName": "pages/friendList/friendList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/rank/rank",
+          "pathName": "pages/rank/rank",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

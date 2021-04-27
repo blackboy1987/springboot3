@@ -76,7 +76,8 @@ public class IndexController {
         params.put("wd",wd);
 
         String result = WebUtils.get1("https://oss.1259416862.shanghai.mysql.ttqbaby.com/api.php/provide/search/",params);
-        return parseResult(result,service,app);
+        String data = parseResult(result,service,app);
+        return data;
     }
 
 
@@ -106,7 +107,8 @@ public class IndexController {
         }
 
         String result = WebUtils.get1("https://dl.yulu123.xyz/wxApi/public/",params);
-        return parseResult(result,service,app);
+        String data = parseResult(result,service,app);
+        return data;
     }
 
     /**

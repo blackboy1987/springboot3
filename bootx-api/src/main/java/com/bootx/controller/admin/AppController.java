@@ -138,7 +138,7 @@ public class AppController {
 
 
     @PostMapping("/baseUpdate")
-    public Result baseUpdate(Long id,HttpServletRequest request,String appName,String appId,String appSecret,String logo,Integer status,String templateId){
+    public Result baseUpdate(Long id,HttpServletRequest request,String appLogo,String appName,String appId,String appSecret,String logo,Integer status,String templateId){
         Admin admin = adminService.get(request);
         if(admin==null){
             return Result.error("非法访问");
@@ -165,6 +165,7 @@ public class AppController {
         app.setLogo(logo);
         app.setAppName(appName);
         app.setStatus(status);
+        // app.setAppLogo(appLogo);
         appService.update(app);
         // 订阅模板的更新
         SubscriptionTemplate subscriptionTemplate = subscriptionTemplateService.find(1L);

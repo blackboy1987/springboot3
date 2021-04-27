@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="419ea74b-61c1-496f-9beb-dc27804964cc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/Config.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/IndexController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/painter/lib/downloader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/painter/lib/pen.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/painter/lib/qrcode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/painter/lib/util.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/painter/painter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/painter/painter.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/painter/painter.wxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/painter/painter.wxss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/20180917101355.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/add_to_min_program_close.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/add_to_min_program_more.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/address_locate.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/adv_quan.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/gzh.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/jrjkb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lxkf.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/mzsm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/phb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/quan.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/share.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/shop_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/shouqi.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/sytx.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/wode-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/xjjl.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/yili.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/zaoqi.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/zrfdjl.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/zzs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/cash/cash.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/cash/cash.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/cash/cash.wxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/cash/cash.wxss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/exemption/exemption.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/exemption/exemption.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/exemption/exemption.wxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/exemption/exemption.wxss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/friendList/friendList.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/friendList/friendList.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/friendList/friendList.wxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/friendList/friendList.wxss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/friendList/modules/base-canvas-palette.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/friendList/modules/css-To-styleStr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/friendList/modules/handle-create-img.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/friendList/modules/poster-data.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/friendList/modules/request-step-diary-qrcode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/more/more.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/more/more.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/more/more.wxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/more/more.wxss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/my/my.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/my/my.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/my/my.wxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/my/my.wxss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/rank/rank.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/rank/rank.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/rank/rank.wxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/rank/rank.wxss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/today/today.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/today/today.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/today/today.wxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/today/today.wxss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/yesterday/yesterday.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/yesterday/yesterday.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/yesterday/yesterday.wxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/yesterday/yesterday.wxss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/siteinfo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/compare-version.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/filters.wxs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/tools.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/util.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/utils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/wx-promisify/wx-promisify.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/we7/resource/js/base64.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/we7/resource/js/htmlToWxml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/we7/resource/js/md5.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/we7/resource/js/underscore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/we7/resource/js/util.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/we7/resource/js/webview.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/config/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/interceptor/CorsInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/dianying/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/dianying/IndexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/controller/admin/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/controller/admin/AppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/entity/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/entity/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../movie/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../movie/project.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/Demo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/IndexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/request/Body.java" beforeDir="false" afterPath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/request/Body.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/request/Header.java" beforeDir="false" afterPath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/request/Header.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/request/HeaderJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/request/HeaderJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/request/Parameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/request/Parameters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/response/Body.java" beforeDir="false" afterPath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/response/Body.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/response/DataStores.java" beforeDir="false" afterPath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/response/DataStores.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/response/JsonRootBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/response/JsonRootBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/response/Message.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/response/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/response/MetaData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/response/Parameters.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/response/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/response/Result.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/response/RowSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../webpage/src/main/java/com/webpage/response/RowSet.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1rjswcgkPa5IOLO81R42OzBHJtZ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pages" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="E:\IdeaProjects\bootx\min-program\daka\node_modules\typescript\lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\IdeaProjects\bootx\min-program\daka\pages" />
+      <recent name="E:\IdeaProjects\bootx\min-program\daka" />
+      <recent name="E:\IdeaProjects\bootx\min-program\daka\components" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="419ea74b-61c1-496f-9beb-dc27804964cc" name="Default Changelist" comment="" />
+      <created>1619501072836</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1619501072836</updated>
+      <workItem from="1619501074037" duration="10960000" />
+      <workItem from="1619513677181" duration="22000" />
+      <workItem from="1619515022657" duration="5000" />
+      <workItem from="1619515311990" duration="687000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/utils/utils.js</url>
+          <line>4</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

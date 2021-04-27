@@ -1,17 +1,12 @@
-/**
-  * Copyright 2021 json.cn 
-  */
+
 package com.webpage.request;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Auto-generated: 2021-04-25 19:36:58
- *
- * @author json.cn (i@json.cn)
- * @website http://www.json.cn/java2pojo/
- */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Body {
 
     private Map<String,Object> dataStores = new HashMap<>();
