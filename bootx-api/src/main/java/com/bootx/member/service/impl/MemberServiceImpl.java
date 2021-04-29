@@ -101,6 +101,7 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements 
 			member.setParent(parent);
 			member.setTicket(0);
 			member.setGold(0);
+			member.setUpdateDate(new Date());
 			member.setMemberRank(memberRankService.findDefault(app));
 
 			try {

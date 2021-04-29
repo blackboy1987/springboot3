@@ -104,6 +104,7 @@ util.base64Encode = function(e) {
         "content-type": "application/x-www-form-urlencoded",
         appCode: a.siteInfo.appCode,
         appToken: a.siteInfo.appToken,
+        token: wx.getStorageSync("token"),
     }), _defineProperty(t, "success", function(t) {
         if (wx.hideNavigationBarLoading(), wx.hideLoading(), t.data.errno) {
             if ("41009" == t.data.errno) return wx.setStorageSync("userInfo", ""), void util.getUserInfo(function() {

@@ -127,7 +127,7 @@ getApp(), Page({
         return {
             title: this.data.share.text,
             imageUrl: this.data.share.images,
-            path: "bh_rising/pages/index/index?parent_id=" + this.data.share.member_id
+            path: "bh_rising/pages/index/index?parentId=" + this.data.share.member_id
         };
     }
 });

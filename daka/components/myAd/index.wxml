@@ -1,0 +1,4 @@
+<ad unit-id="{{ads.bannerId}}" wx:if="{{type===0&&ads.bannerId}}"></ad>
+<ad unit-id="{{ads.videoAdId}}" ad-type="video" ad-theme="white" wx:if="{{type===1&&ads.videoAdId}}"></ad>
+<ad unit-id="{{ads.gridAdId}}" ad-type="grid" ad-theme="white" wx:if="{{type===1&&ads.gridAdId}}"></ad>
+<ad-custom unit-id="{{ads.nativeAdId}}" wx:if="{{type===2&&ads.nativeAdId}}"></ad-custom>

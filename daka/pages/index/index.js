@@ -29,19 +29,22 @@ Page({
     t_i: "00",
     is_request: 1,
     show_capacity: !1,
-    parent_id: 0,
+    parentId: 0,
     goldcoin: [],
     is_rule: 1,
     showAddMeBtn: !1,
     surplus: 0,
-    show_login: !0,
-    is_auth: !0,
+    show_login: false,
+    isAuth: false,
     show_bd: !1,
     is_video: 1,
+    PageCur:'base'
   },
+  // 点击打开
   signIn: function () {
-    this.data.surplus > 0 || (e.data.is_auth ? e.data.config.profit_subscribe_id ? wx.requestSubscribeMessage({
-      tmplIds: [e.data.config.profit_subscribe_id],
+    const profit_subscribe_id = wx.getStorageSync("profit_subscribe_id");
+    this.data.surplus > 0 || (e.data.isAuth ? profit_subscribe_id ? wx.requestSubscribeMessage({
+      tmplIds: [profit_subscribe_id],
       success: function (t) {
         e.succTips();
       },
@@ -70,8 +73,40 @@ Page({
     });
   },
   onLoad: function (t) {
-    (e = this).data.goldcoin.length = 10, t.parent_id && wx.setStorageSync("parent_id", t.parent_id),
-      t.scene && wx.setStorageSync("parent_id", decodeURIComponent(t.scene)), e.clearTime();
+    (e = this).data.goldcoin.length = 10, t.parentId && wx.setStorageSync("parentId", t.parentId),
+      t.scene && wx.setStorageSync("parentId", decodeURIComponent(t.scene)), e.clearTime();
+    const root = this;
+    // 在这里加个登录功能。主要用来获取当前账号的token。
+    wx.login({
+      success (res) {
+        if (res.code) {
+          //发起网络请求
+          wx.request({
+            url: n.siteInfo.siteroot+'login',
+            header:{
+              appCode: n.siteInfo.appCode,
+              appToken: n.siteInfo.appToken,
+            },
+            data: {
+              code: res.code,
+              parentId:t.parentId,
+            },
+            success(res) {
+              wx.setStorageSync("userInfo",res.data.data);
+              wx.setStorageSync("isAuth",res.data.data.isAuth);
+              wx.setStorageSync("token",res.data.data.token);
+              root.setData({
+                isAuth:res.data.data.isAuth,
+              })
+            }
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    });
+
+
   },
   swRule: function () {
     this.setData({
@@ -79,6 +114,7 @@ Page({
     });
   },
   onReady: function () {
+    const root = this;
     wx.createSelectorQuery().select("#global-nav").boundingClientRect(function (t) {
       if(!t){
         t = {
@@ -95,27 +131,33 @@ Page({
       token: wx.getStorageSync("token")
     };
     o.default.request(a, function (o) {
-      console.log(o.data,"o");
-      o.info = o.data;
+      const appConfig = o.data;
+      wx.setStorageSync("appConfig",appConfig);
+      root.setData(appConfig);
+      console.log("this.data",root.data);
+      const ads = o.data.ads ||{};
+      o.info = o.data.config;
       o.info.time  = o.info.time || 0,
       e.setData(o.info), wx.getStorageSync("showAddMeFlag" + o.info.time) || e.setData({
         showAddMeBtn: !0
       });
       var n = null;
-      wx.createInterstitialAd && o.info.config.screen_ad && ((n = wx.createInterstitialAd({
-        adUnitId: o.info.config.screen_ad
+      wx.createInterstitialAd && appConfig.ads.interstitialAdId && ((n = wx.createInterstitialAd({
+        adUnitId: appConfig.ads.interstitialAdId,
       })).onLoad(function () {
         console.log("onLoad event emit");
       }), n.onError(function (t) {
         console.log("onError event emit", t);
       }), n.onClose(function (t) {
         console.log("onClose event emit", t);
-      }), n.show().catch(function (t) {
-        console.error(t);
-      }));
+      }), setTimeout(function (){
+        n.show().catch(function (t) {
+          console.error(t);
+        })
+      },15e3));
       var a = wx.getSystemInfoSync();
-      o.info.config.video_ad && (t(a.SDKVersion, "2.6.0") && (e.data.videoAd = wx.createRewardedVideoAd({
-        adUnitId: o.info.config.video_ad
+      appConfig.ads.rewardedVideoAdId && (t(a.SDKVersion, "2.6.0") && (e.data.videoAd = wx.createRewardedVideoAd({
+        adUnitId: appConfig.ads.rewardedVideoAdId || '',
       }), e.data.videoAd.onError(function (t) {
         console.log(t);
       })), e.setData({
@@ -124,24 +166,25 @@ Page({
     }, function (t) { }, function () { }, "", !0);
   },
   completed: function () {
-    if (1 == this.data.is_request) {
-      this.data.is_request = 2;
+    const root = this;
+    if (1 === root.data.is_request) {
+      root.data.is_request = 2;
       var t = {
         action: "sign",
         contr: "clock",
         token: wx.getStorageSync("token")
       };
       o.default.request(t, function (t) {
-        e.data.is_request = 1, 2 == t.status ? wx.showModal({
+        root.data.is_request = 1, 2 === t.data.status ? wx.showModal({
           title: "提示",
           mask: !0,
-          content: t.info,
+          content: t.data.info,
           showCancel: !1
-        }) : (e.loadClock(), e.setData(t.info), e.setData({
+        }) : (e.loadClock(), e.setData({
           show_bd: !0,
-          bd_img: t.info.bd_img,
-          surplus: e.data.config.clock_interval
-        }), e.data.surplus > 0 && (e.clearTime(), e.countdown()));
+          bd_img: t.data.bd_img,
+          surplus: root.data.config.clockInterval||60,
+        }), root.data.surplus > 0 && (root.clearTime(), root.countdown()));
       }, function (t) {
         e.data.is_request = 1;
       }, function () {
@@ -170,19 +213,20 @@ Page({
     });
   },
   countdown: function () {
-    var t = e.data.surplus;
+    const root = this;
+    var t = root.data.surplus;
     console.log(t), e.data.surplus--;
     var o = Math.floor(t / 60 / 60 % 24), n = Math.floor(t / 60 % 60), a = Math.floor(t % 60);
-    e.data.surplus < 0 ? e.clearTime() : (o < 10 && (o = "0" + o), n < 10 && (n = "0" + n),
-      a < 10 && (a = "0" + a), e.data.setTimeself = setTimeout(function () {
-        e.setData({
-          surplus: e.data.surplus
+    root.data.surplus < 0 ? root.clearTime() : (o < 10 && (o = "0" + o), n < 10 && (n = "0" + n),
+      a < 10 && (a = "0" + a), root.data.setTimeself = setTimeout(function () {
+      root.setData({
+          surplus: root.data.surplus
         });
         var t = {
-          surplus: e.data.surplus,
+          surplus: root.data.surplus,
           time: Date.parse(new Date())
         };
-        wx.setStorageSync("surplus", t), e.countdown();
+        wx.setStorageSync("surplus", t), root.countdown();
       }, 1e3));
   },
   hideSgin: function () {
@@ -234,27 +278,50 @@ Page({
     return {
       title: this.data.share.text,
       imageUrl: this.data.share.images,
-      path: "/pages/index/index?parent_id=" + this.data.share.member_id
+      path: "/pages/index/index?parentId=" + this.data.share.member_id
     };
   },
   clearTime: function () {
     clearTimeout(e.data.setTimeself);
   },
   getUserInfo: function (t) {
-    if ("getUserInfo:ok" == t.detail.errMsg) {
-      var n = {
-        action: "login",
-        contr: "my",
-        token: wx.getStorageSync("token"),
-        encryptedData: t.detail.encryptedData,
-        iv: t.detail.iv
-      };
-      o.default.request(n, function (t) {
-        e.setData({
-          is_auth: !0
-        });
-      });
-    } else console.log("用户拒绝了");
+    wx.getUserProfile({
+      lang: 'zh_CN',
+      desc: '用户登录',
+      success: (res) => {
+        console.log("getUserProfile",res);
+        if ("getUserProfile:ok" === res.errMsg) {
+          var n = {
+            action: "login",
+            contr: "my",
+            token: wx.getStorageSync("token"),
+            parentId: wx.getStorageSync("parentId"),
+            ...res.userInfo,
+            iv: t.detail.iv
+          };
+          o.default.request(n, function (t) {
+            console.log("tttttttttttttttttttttttttttt",t.data);
+            if(t.data.userInfo){
+              e.setData({
+                isAuth: t.data.userInfo.isAuth
+              });
+              wx.setStorageSync("isAuth",t.data.userInfo.isAuth);
+            }
+
+
+          });
+        } else{
+          console.log("用户拒绝了");
+        }
+
+      },
+      fail: () => {
+        wx.showToast({
+          icon:'none',
+          title:'已拒绝小程序获取信息',
+        })
+      }
+    });
   },
   closecapacity: function () {
     e.setData({

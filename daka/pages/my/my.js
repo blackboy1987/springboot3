@@ -18,7 +18,7 @@ getApp(), Page({
         isIphone: !1,
         audit_model: !0,
         show_login: !0,
-        is_auth: !0
+        isAuth: false,
     },
     onLoad: function(e) {
         (n = this).data.id = e.id;
@@ -39,7 +39,7 @@ getApp(), Page({
                 ad_type:1,
                 grid_ad:"grid_ad",
                 official_account_img:'official_account_img',
-                is_auth:false,
+                isAuth:false,
                 show_login:true,
             }
         })
@@ -103,7 +103,7 @@ getApp(), Page({
         return {
             title: this.data.share.text,
             imageUrl: this.data.share.images,
-            path: "bh_rising/pages/index/index?parent_id=" + this.data.share.member_id
+            path: "bh_rising/pages/index/index?parentId=" + this.data.share.member_id
         };
     }
 });

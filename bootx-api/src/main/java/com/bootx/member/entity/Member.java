@@ -10,10 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Member extends BaseEntity<Long> {
@@ -99,6 +96,10 @@ public class Member extends BaseEntity<Long> {
     @NotNull
     @Column(nullable = false)
     private Integer ticket;
+
+    @NotNull
+    @Column(nullable = false)
+    private Date updateDate;
 
     @NotNull
     @Convert(converter = ConfigConfigConvert.class)
@@ -293,6 +294,14 @@ public class Member extends BaseEntity<Long> {
 
     public void setGrade(Integer grade) {
         this.grade = grade;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
     public Map<String, String> getConfig() {

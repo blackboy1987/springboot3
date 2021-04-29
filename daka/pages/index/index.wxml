@@ -1,4 +1,5 @@
-<view class="exchangeRoll" style="background-color:{{config.roll_content_bg}}" wx:if="{{config.roll_content&&config.roll_content.length>0}}">
+<cu-custom bgColor="bg-gradual-green"><view slot="content">打卡小程序</view></cu-custom>
+<view class="exchangeRoll" style="background-color:{{config.rollContentBg}}" wx:if="{{config.roll_content&&config.roll_content.length>0}}">
   <swiper
     autoplay="{{true}}"
     circular="{{true}}"
@@ -16,7 +17,7 @@
 </view>
 <scroll-view class="container" scrollIntoView="{{gdtext}}" scrollY="true">
   <view class="head">
-  <image class="bg" src="{{images.home_bg_image}}" style="height:378px" />
+  <image class="bg" src="{{homeBgImage}}" style="height:378px" />
   <view class="tips" wx:if="{{showAddMeBtn}}">
     <view class="flex flex-1 leftText">
       点击右上角
@@ -36,7 +37,7 @@
     </view>
     <view class="text">
       <text>{{today.currency}}</text>
-      {{config.currency_name}}
+      {{currencyName}}
     </view>
     <button bindtap="swRule" class="buttonfix">{{is_rule==1?'打卡':'收起'}}规则</button>
   </view>
@@ -44,25 +45,25 @@
   <view class="content" style="transform: translateY({{is_rule==1?-200:-460}}rpx);">
   <view class="waveWrapper waveAnimation">
     <view bindtap="signIn" class="signIn" wx:if="{{surplus<1}}">
-      <view class="inner" style="background:{{config.click_bg_color}}">
-        <image class="icon" mode="widthFix" src="{{images.resize}}" style="height:35px" />
-        <text>{{config.clock_text}}</text>
+      <view class="inner" style="background:{{clickBgColor}}">
+        <image class="icon" mode="widthFix" src="{{resize}}" style="height:35px" />
+        <text>{{clockText}}</text>
       </view>
     </view>
     <view class="signIn" wx:else>
       <view class="inner" style="background:#FFFFFF">
-        <image class="icon" mode="widthFix" src="{{images.resize}}" />
+        <image class="icon" mode="widthFix" src="{{resize}}" />
         <text>{{surplus}}秒后</text>
       </view>
     </view>
     <view class="waveWrapperInner bgTop">
-      <view class="wave waveTop" style="background-image: url('{{images.wave_top}}')"></view>
+      <view class="wave waveTop" style="background-image: url('{{waveTop}}')"></view>
     </view>
     <view class="waveWrapperInner bgMiddle">
-      <view class="wave waveMiddle" style="background-image: url('{{images.wave_mid}}')"></view>
+      <view class="wave waveMiddle" style="background-image: url('{{waveMid}}')"></view>
     </view>
     <view class="waveWrapperInner bgBottom">
-      <view class="wave waveBottom" style="background-image: url('{{images.wave_bot}}')"></view>
+      <view class="wave waveBottom" style="background-image: url('{{waveBot}}')"></view>
     </view>
   </view>
   <view class="signNum" wx:if="{{today.clock>0}}">
@@ -71,7 +72,7 @@
       decode="{{true}}"
       space="{{true}}"
       style="font-weight:bold"
-    >&nbsp;{{today.clock}} / {{config.clock_num}}&nbsp;</text>次
+    >&nbsp;{{today.clock}} / {{clock_num}}&nbsp;</text>次
   </view>
   <view class="ADcontant" wx:if="{{program&&program.length>0}}">
     <view
@@ -97,16 +98,16 @@
     <view class="leftText">
       <view class="num">
         共
-        <text>{{all_num}}</text>人
+        <text>{{allNum}}</text>人
       </view>
       <view class="text">参与打卡</view>
     </view>
     <view class="rightUser">
-      <view class="userPic" wx:for="{{clock_user}}" wx:key="f">
-        <image mode="widthFix" src="{{item.head}}" style="height:30px;" />
+      <view class="userPic" wx:for="{{clockUsers}}" wx:key="f">
+        <image mode="widthFix" src="{{item.avatarUrl}}" style="height:30px;" />
       </view>
-      <view bindtap="gotoRank" class="userPic" wx:if="{{all_num>0}}">
-        <image mode="widthFix" src="{{images.more}}" />
+      <view bindtap="gotoRank" class="userPic" wx:if="{{allNum>0}}">
+        <image mode="widthFix" src="{{moreImg}}" />
       </view>
     </view>
   </view>
@@ -134,7 +135,7 @@
         </view>
       </view>
       <view class="username">{{star.palm.nickname}}</view>
-      <view class="text">{{star.palm.currency}} {{config.currency_name}}</view>
+      <view class="text">{{star.palm.currency}} {{currencyName}}</view>
     </view>
     <view class="userBox" wx:if="{{star.will}}">
       <view class="pic">
@@ -161,7 +162,7 @@
       <text class="line"></text>
     </view>
     <view class="context">
-      <view class="line" wx:for="{{rule}}" wx:key="r">
+      <view class="line" wx:for="{{rules}}" wx:key="r">
         <text>{{index+1}}</text>
         <view class="rightText">{{item.content}}</view>
       </view>
@@ -169,7 +170,7 @@
   </view>
 </view>
 </scroll-view>
-<view class="showEmpower" wx:if="{{!is_auth&&show_login}}">
+<view class="showEmpower" wx:if="{{!isAuth&&show_login}}">
   <view class="center">
     <view class="showBoxContent">
       <image class="headPic" mode="widthFix" src="{{images.login_image}}" style="height:150px" />
@@ -177,10 +178,8 @@
     </view>
     <view class="btnLine">
       <button
-        bindgetuserinfo="getUserInfo"
-        class="buttonfix confirm"
-        lang="zh_CN"
-        openType="getUserInfo"
+              bind:tap="getUserInfo"
+              class="buttonfix confirm"
       >授权并登陆</button>
       <button bindtap="cancel_login" class="buttonfix cancel">取消</button>
     </view>
@@ -194,5 +193,31 @@
     <view class="btnLine">
       <button bindtap="hideBd" class="buttonfix">确定</button>
     </view>
+  </view>
+</view>
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view class="action" bindtap="NavChange" data-cur="basics">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/basics{{PageCur==='basics'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur==='basics'?'text-green':'text-gray'}}">元素</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="component">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/component{{PageCur==='component'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur==='component'?'text-green':'text-gray'}}">组件</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="plugin">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/plugin{{PageCur==='plugin'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur==='plugin'?'text-green':'text-gray'}}">扩展</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="about">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/about{{PageCur==='about'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur==='about'?'text-green':'text-gray'}}">关于</view>
   </view>
 </view>

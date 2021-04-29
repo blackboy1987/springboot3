@@ -1,4 +1,5 @@
-<ad adTheme="white" adType="{{config.ad_type==1?'grid':''}}" gridCount="5" gridOpacity="0.8" unitId="{{config.grid_ad}}" wx:if="{{config.grid_ad}}"></ad>
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}"><view slot="content">排行榜</view></cu-custom>
+<my-ad></my-ad>
 <scroll-view class="container" scrollY="true">
     <view class="tab-box">
         <view bindtap="bindTabClick" class="{{index==1?'tab-item text-select selectd':'tab-item text-select'}}" data-index="1">
@@ -19,11 +20,11 @@
             <view class="user-box">
                 <view class="user-info">
                     <image class="rank-descr" src="{{base64.getRankImg(index+1)}}" wx:if="{{base64.getRankImg(index+1)}}"></image>
-                    <image class="user-icon" src="{{item.head}}"></image>
+                    <image class="user-icon" src="{{item.avatarUrl}}"></image>
                     <view class="user-rank {{base64.getRankTextColor(index+1)}}">NO.{{index+1}}</view>
-                    <view class="user-name text-ellipsis">{{item.nickname}}</view>
+                    <view class="user-name text-ellipsis">{{item.nickName}}</view>
                 </view>
-                <view class="user-coin-all">{{item.currency}}</view>
+                <view class="user-coin-all">{{item.point}}</view>
             </view>
         </view>
         <view class="more-invite-box">

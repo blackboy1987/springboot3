@@ -42,6 +42,9 @@ t(require("../../utils/wx-promisify/wx-promisify"))), s = t(require("./modules/h
     },
     onLoad: function(e) {
         i = this;
+        wx.setNavigationBarTitle({
+            title:'我的好友'
+        })
     },
     onReady: function() {
         var e = {
@@ -332,6 +335,6 @@ t(require("../../utils/wx-promisify/wx-promisify"))), s = t(require("./modules/h
     return {
         title: this.data.share.text,
         imageUrl: this.data.share.images,
-        path: "bh_rising/pages/index/index?parent_id=" + this.data.share.member_id
+        path: "bh_rising/pages/index/index?parentId=" + this.data.share.member_id
     };
 }), o));

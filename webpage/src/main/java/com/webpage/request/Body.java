@@ -10,7 +10,7 @@ import java.util.Map;
 public class Body {
 
     private Map<String,Object> dataStores = new HashMap<>();
-    private Parameters parameters;
+    private Map<String,Object> parameters;
 
     public Map<String, Object> getDataStores() {
         return dataStores;
@@ -20,10 +20,10 @@ public class Body {
         this.dataStores = dataStores;
     }
 
-    public void setParameters(Parameters parameters) {
+    public void setParameters(Map<String,Object> parameters) {
          this.parameters = parameters;
      }
-     public Parameters getParameters() {
+     public Map<String,Object> getParameters() {
          return parameters;
      }
 

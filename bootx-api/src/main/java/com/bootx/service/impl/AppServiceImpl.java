@@ -1,12 +1,11 @@
 
 package com.bootx.service.impl;
 
-import com.bootx.app.daka.DaKaConfig;
+import com.bootx.app.daka.common.DaKaConfig;
 import com.bootx.common.Page;
 import com.bootx.common.Pageable;
 import com.bootx.dao.AppDao;
 import com.bootx.entity.*;
-import com.bootx.member.entity.Member;
 import com.bootx.service.AppService;
 import com.bootx.service.RedisService;
 import com.bootx.util.DateUtils;
@@ -15,7 +14,6 @@ import com.bootx.util.JsonUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.jsonwebtoken.Claims;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

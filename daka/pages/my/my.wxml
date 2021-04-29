@@ -69,7 +69,7 @@
     </view>
     <ad adTheme="white" adType="{{config.ad_type==1?'grid':''}}" gridCount="5" gridOpacity="0.8" unitId="{{config.grid_ad}}" wx:if="{{config.grid_ad}}"></ad>
 </scroll-view>
-<view class="showEmpower" wx:if="{{!is_auth&&show_login}}">
+<view class="showEmpower" wx:if="{{!isAuth&&show_login}}">
     <view class="center">
         <view class="showBoxContent">
             <image class="headPic" mode="widthFix" src="{{images.login_image}}" style="height:150px"></image>

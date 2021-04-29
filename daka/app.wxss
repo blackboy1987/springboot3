@@ -1,3 +1,6 @@
+@import "colorui/main.wxss";
+@import "colorui/icon.wxss";
+
 @font-face {
   font-family: iconfont;
   src: url("//at.alicdn.com/t/font_1007563_u6vawln8k6.eot");
@@ -13,7 +16,7 @@ page {
 }
 
 .container {
-  height: 100%;
+  height: calc(100% - 220rpx);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -127,6 +130,7 @@ button::after {
   width: 80%;
   background: #fff;
   border-radius: 20rpx;
+  height: 600rpx;
 }
 
 .showEmpower .center,.showEmpower .center .showBoxContent,.showEmpower .inner {

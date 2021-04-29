@@ -1,4 +1,4 @@
-package com.bootx.app.daka;
+package com.bootx.app.daka.common;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +49,15 @@ public class DaKaConfig {
 
     private String clickBgColor;
 
+    private String clockText;
+
+    private Integer clockInterval;
+
     private String rollContentBg;
+
+    private String bdImg;
+
+    private String moreImg;
 
 
     private List<Rule> rules = new ArrayList<>();
@@ -135,6 +143,22 @@ public class DaKaConfig {
         this.clickBgColor = clickBgColor;
     }
 
+    public String getClockText() {
+        return clockText;
+    }
+
+    public void setClockText(String clockText) {
+        this.clockText = clockText;
+    }
+
+    public Integer getClockInterval() {
+        return clockInterval;
+    }
+
+    public void setClockInterval(Integer clockInterval) {
+        this.clockInterval = clockInterval;
+    }
+
     public List<Rule> getRules() {
         return rules;
     }
@@ -149,6 +173,22 @@ public class DaKaConfig {
 
     public void setRollContentBg(String rollContentBg) {
         this.rollContentBg = rollContentBg;
+    }
+
+    public String getBdImg() {
+        return bdImg;
+    }
+
+    public void setBdImg(String bdImg) {
+        this.bdImg = bdImg;
+    }
+
+    public String getMoreImg() {
+        return moreImg;
+    }
+
+    public void setMoreImg(String moreImg) {
+        this.moreImg = moreImg;
     }
 
     public static class Rule {
@@ -181,8 +221,12 @@ public class DaKaConfig {
         this.waveBot = "https://cdn-hnymwl.qunyizhan.com/wp-content/uploads/2020/03/1583542505-98c07f052554036.jpg";
         this.more = "https://cdn-hnymwl.qunyizhan.com/wp-content/uploads/2020/03/1583542505-98c07f052554036.jpg";
         this.loginImage = "https://cdn-hnymwl.qunyizhan.com/wp-content/uploads/2020/03/1583542505-98c07f052554036.jpg";
+        this.bdImg = "https://bootx-xiaochengxu.oss-cn-hangzhou.aliyuncs.com/daka/2020-08-12%20122424.jpg?x-oss-process=style/60";
+        this.moreImg="https://bootx-xiaochengxu.oss-cn-hangzhou.aliyuncs.com/more.png";
         this.currencyName = "金豆";
         this.clickBgColor = "green";
+        this.clockText = "立即打卡";
+        this.clockInterval = 60;
         List<Rule> rules = new ArrayList<>();
         rules.add(new Rule("每日打开签到 上午9点打5次，下午6点打卡5次，记录自律的自己"));
         rules.add(new Rule("页面的视频广告点击进去转到下载页面再出来，有机会获取双倍奖励。如果打卡提示激励视频加载失败，就退出来过一会再进来打开"));

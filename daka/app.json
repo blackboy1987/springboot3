@@ -15,39 +15,11 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "打卡小程序",
     "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": false
+    "enablePullDownRefresh": false,
+    "navigationStyle": "custom"
   },
-  "tabBar": {
-    "color": "#aaaaaa",
-    "selectedColor": "#2E87E4",
-    "backgroundColor": "#ddd",
-    "borderStyle": "black",
-    "list": [
-      {
-        "selectedIconPath": "images/gzh.png",
-        "iconPath": "images/lxkf.png",
-        "pagePath": "pages/index/index",
-        "text": "首页"
-      },
-      {
-        "selectedIconPath": "images/gzh.png",
-        "iconPath": "images/lxkf.png",
-        "pagePath": "pages/rank/rank",
-        "text": "好友"
-      },
-      {
-        "selectedIconPath": "images/gzh.png",
-        "iconPath": "images/lxkf.png",
-        "pagePath": "pages/rank/rank",
-        "text": "排行"
-      },
-      {
-        "selectedIconPath": "images/gzh.png",
-        "iconPath": "images/lxkf.png",
-        "pagePath": "pages/my/my",
-        "text": "我的"
-      }
-    ]
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
   },
   "sitemapLocation": "sitemap.json"
 }

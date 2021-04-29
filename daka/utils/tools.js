@@ -25,10 +25,10 @@ var t = function(t) {
     wx.login({
         success: function(e) {
             void 0 === t && (t = {});
-            var i = wx.getStorageSync("parent_id") || "";
+            var i = wx.getStorageSync("parentId") || "";
             n({
                 code: e.code,
-                parent_id: i,
+                parentId: i,
                 contr: "noLogin",
                 action: "login"
             }, function(e) {
@@ -46,7 +46,7 @@ module.exports = {
     },
     upload: function(n) {
         var o = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : function(t) {}, e = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "image", i = t.default.url("entry/wxapp/distribute"), u = getCurrentPages();
-        u.length && (u = u[getCurrentPages().length - 1]) && u.__route__ && (i = i + "&m=" + u.__route__.split("/")[0]), 
+        u.length && (u = u[getCurrentPages().length - 1]) && u.__route__ && (i = i + "&m=" + u.__route__.split("/")[0]),
         wx.uploadFile({
             url: i,
             filePath: n,
