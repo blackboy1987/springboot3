@@ -1,30 +1,30 @@
-
+<cu-custom isBack="{{true}}" bgColor="bg-gradual-green"><view slot="content">昨日{{appConfig.config.currencyName}}</view></cu-custom>
 <view style="display:flex;width:100%;height:100%;flex-direction: column;">
     <view class="tab">
         <view bindtap="clicklevel" class="tabBox {{level==1?'this':''}}" data-level="1">
-            <text>自己 ({{my_num}}次)</text>
+            <text>自己 ({{my_num.times}}次)</text>
         </view>
         <view bindtap="clicklevel" class="tabBox {{level==2?'this':''}}" data-level="2" wx:if="{{config.one_currency>0&&config.audit_model}}">
-            <text>一级 ({{one_num}}次)</text>
+            <text>一级 ({{one_num.times}}次)</text>
         </view>
         <view bindtap="clicklevel" class="tabBox {{level==3?'this':''}}" data-level="3" wx:if="{{config.two_currency>0&&config.audit_model}}">
-            <text>二级 ({{two_num}}次)</text>
+            <text>二级 ({{two_num.times}}次)</text>
         </view>
     </view>
     <scroll-view class="outer" scrollY="true">
         <view class="list">
             <view class="userLine" style="color:#FD7F1E;margin-bottom:25rpx;margin-top:20rpx;" wx:if="{{config.is_bonus==1&&bonus.system_day&&bonus.own&&config.audit_model}}">
-          平台昨天产生{{bonus.system_day.currency}}个{{config.currency_name}}，您奉献了{{bonus.own.currency}}个，{{bonus.own.status==1?'奖励结算中':'平台奖励'+bonus.own.money+'元'}}。
+          平台昨天产生{{all_num.point}}个{{appConfig.config.currency_name}}，您奉献了{{my_num.point}}个，{{bonus.own.status==1?'奖励结算中':'平台奖励'+bonus.own.money+'元'}}。
         </view>
             <ad adTheme="white" adType="{{config.ad_type==1?'grid':''}}" gridCount="5" gridOpacity="0.8" style="margin-bottom: 20rpx;" unitId="{{config.grid_ad}}" wx:if="{{config.grid_ad}}"></ad>
             <view class="userLine" wx:for="{{log}}" wx:key="l">
                 <view class="pic">
-                    <image mode="aspectFill" src="{{item.member.head}}"></image>
+                    <image mode="aspectFill" src="{{item.avatarUrl||'https://bootx-xiaochengxu.oss-cn-hangzhou.aliyuncs.com/daka/defaultAvatar.png'}}"></image>
                 </view>
-                <view class="name">{{item.member.nickname}}</view>
-                <view class="time">{{item.created}}</view>
+                <view class="name">{{item.nickName||'大鼻孔'}}</view>
+                <view class="time">{{item.createdDate}}</view>
             </view>
         </view>
-        <text class="noData">打卡总计共 {{level==1?my_num:level==2?one_num:two_num}} 次</text>
+        <text class="noData">打卡总计共 {{level==1?my_num.times:level==2?one_num.times:two_num.times}} 次</text>
     </scroll-view>
 </view>

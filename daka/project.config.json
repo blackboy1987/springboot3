@@ -4,7 +4,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": false,
+    "urlCheck": true,
     "es6": true,
     "enhance": false,
     "postcss": true,
@@ -40,7 +40,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.16.1",
-  "appid": "wx09eed9f5041cfd47",
+  "appid": "wx26efa1a8a5943840",
   "projectname": "daka1234",
   "debugOptions": {
     "hidedInDevtools": []

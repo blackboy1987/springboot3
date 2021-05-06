@@ -3,5 +3,6 @@
     "navigationBarTextStyle": "white",
     "backgroundColor": "#fb852d",
     "usingComponents": {
+        "my-ad": "/components/myAd/index"
     }
 }

@@ -31,7 +31,6 @@ public class AuditingEntityListener {
 	/**
 	 * 审计者Provider缓存
 	 */
-	@SuppressWarnings("rawtypes")
 	private static final Map<Class<?>, AuditorProvider> AUDITOR_PROVIDER_CACHE = new ConcurrentHashMap<>();
 
 	/**
@@ -40,7 +39,6 @@ public class AuditingEntityListener {
 	 * @param entity
 	 *            实体对象
 	 */
-	@SuppressWarnings("unchecked")
 	@PrePersist
 	public void prePersist(Object entity) {
 		AuditingMetadata auditingMetadata = AuditingMetadata.getAuditingMetadata(entity.getClass());

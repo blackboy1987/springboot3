@@ -24,9 +24,7 @@ getApp(), Page({
     onLoad: function(e) {
         t = this;
         t.setData({
-            my_num:1234,
-            one_num:12,
-            two_num:55,
+            appConfig:wx.getStorageSync("appConfig"),
             config:{
                 ad_type:1,
                 grid_ad:'grid_ad',
@@ -46,85 +44,6 @@ getApp(), Page({
                     money:45,
                 },
             },
-            log:[
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                }
-            ],
 
         })
     },
@@ -152,10 +71,18 @@ getApp(), Page({
         wx.showLoading({
             title: "加载中"
         }), e.default.request(a, function(e) {
-            var a = e.info.log;
+            let a = e.data.list;
+            if(a.length<10){
+                t.setData({
+                    isover: true,
+                })
+            }
             t.data.p > 1 && (a = t.data.log.concat(a)), t.setData({
-                log: a
-            }), e.info.log.length < 10 && t.setData({
+                log: a,
+                my_num:e.data.my_num,
+                one_num:e.data.one_num,
+                two_num:e.data.two_num,
+            }), a.length < 10 && t.setData({
                 isover: !0
             });
         });
@@ -176,10 +103,11 @@ getApp(), Page({
     onHide: function() {},
     onShow: function() {},
     onShareAppMessage: function() {
+        const appConfig = wx.getStorageSync("appConfig");
         return {
-            title: this.data.share.text,
-            imageUrl: this.data.share.images,
-            path: "bh_rising/pages/index/index?parentId=" + this.data.share.member_id
+            title: appConfig.config.shareText,
+            imageUrl: appConfig.config.shareImage,
+            path: "/pages/index/index?parentId=" + wx.getStorageSync("userInfo").id
         };
     }
 });

@@ -68,27 +68,26 @@ getApp(), Page({
     },
     loadToday: function() {
         var n = {
-            action: "today",
+            action: "rank",
             contr: "rank",
             token: wx.getStorageSync("token")
         };
         wx.showLoading({
             title: "加载中"
         }), e.default.request(n, function(e) {
-            console.log("today",e.data);
             t.setData(e.data);
         });
     },
     loadAll: function() {
         var n = {
-            action: "all",
+            action: "rank1",
             contr: "rank",
             token: wx.getStorageSync("token")
         };
         wx.showLoading({
             title: "加载中"
         }), e.default.request(n, function(e) {
-            t.setData(e.info);
+            t.setData(e.data);
         });
     },
     clicklevel: function(e) {
@@ -105,10 +104,11 @@ getApp(), Page({
     onHide: function() {},
     onShow: function() {},
     onShareAppMessage: function() {
+        const appConfig = wx.getStorageSync("appConfig");
         return {
-            title: this.data.share.text,
-            imageUrl: this.data.share.images,
-            path: "/pages/index/index?parentId=" + this.data.share.member_id
+            title: appConfig.config.shareText,
+            imageUrl: appConfig.config.shareImage,
+            path: "/pages/index/index?parentId=" + wx.getStorageSync("userInfo").id
         };
     }
 });

@@ -21,12 +21,14 @@ getApp(), Page({
     onLoad: function(a) {
         t = this;
         t.setData({
+            appConfig:wx.getStorageSync("appConfig"),
+            userInfo:wx.getStorageSync("userInfo"),
             audit_model:false,
             member:{
                 money:12.3,
             },
             cash_type:2,
-            tx:123.5,
+            tx:'提现',
             least_money:5,
             cash_money:3,
             payment_code_url:'payment_code_url',
@@ -124,10 +126,11 @@ getApp(), Page({
     onPullDownRefresh: function() {},
     onReachBottom: function() {},
     onShareAppMessage: function() {
+        const appConfig = wx.getStorageSync("appConfig");
         return {
-            title: this.data.share.text,
-            imageUrl: this.data.share.images,
-            path: "bh_rising/pages/index/index?parentId=" + this.data.share.member_id
+            title: appConfig.config.shareText,
+            imageUrl: appConfig.config.shareImage,
+            path: "/pages/index/index?parentId=" + wx.getStorageSync("userInfo").id
         };
     }
 });

@@ -13,42 +13,6 @@ getApp(), Page({
     },
     onLoad: function(t) {
         e = this, wx.getStorageSync("demo_id") && wx.removeStorageSync("demo_id");
-        e.setData({
-            program:[
-                {
-                    icon:'https://msn-img-nos.yiyouliao.com/inforec-20210427-6a0817dc961fa5943750df62669d0f75.png?time=1619506717&signature=0E3143BA236C3B2343FE17B7AA84ADD6',
-                    name:'name',
-                },
-                {
-                    icon:'https://msn-img-nos.yiyouliao.com/inforec-20210427-6a0817dc961fa5943750df62669d0f75.png?time=1619506717&signature=0E3143BA236C3B2343FE17B7AA84ADD6',
-                    name:'name',
-                },
-                {
-                    icon:'https://msn-img-nos.yiyouliao.com/inforec-20210427-6a0817dc961fa5943750df62669d0f75.png?time=1619506717&signature=0E3143BA236C3B2343FE17B7AA84ADD6',
-                    name:'name',
-                },
-                {
-                    icon:'https://msn-img-nos.yiyouliao.com/inforec-20210427-6a0817dc961fa5943750df62669d0f75.png?time=1619506717&signature=0E3143BA236C3B2343FE17B7AA84ADD6',
-                    name:'name',
-                },
-                {
-                    icon:'https://msn-img-nos.yiyouliao.com/inforec-20210427-6a0817dc961fa5943750df62669d0f75.png?time=1619506717&signature=0E3143BA236C3B2343FE17B7AA84ADD6',
-                    name:'name',
-                },
-                {
-                    icon:'https://msn-img-nos.yiyouliao.com/inforec-20210427-6a0817dc961fa5943750df62669d0f75.png?time=1619506717&signature=0E3143BA236C3B2343FE17B7AA84ADD6',
-                    name:'name',
-                },
-                {
-                    icon:'https://msn-img-nos.yiyouliao.com/inforec-20210427-6a0817dc961fa5943750df62669d0f75.png?time=1619506717&signature=0E3143BA236C3B2343FE17B7AA84ADD6',
-                    name:'name',
-                },
-                {
-                    icon:'https://msn-img-nos.yiyouliao.com/inforec-20210427-6a0817dc961fa5943750df62669d0f75.png?time=1619506717&signature=0E3143BA236C3B2343FE17B7AA84ADD6',
-                    name:'name',
-                },
-            ]
-        })
     },
     onReady: function() {
         var n = {
@@ -57,7 +21,7 @@ getApp(), Page({
             token: wx.getStorageSync("token")
         };
         t.default.request(n, function(t) {
-            e.setData(t.info);
+            e.setData(t.data);
         });
     },
     onShow: function() {},
@@ -66,10 +30,11 @@ getApp(), Page({
     onPullDownRefresh: function() {},
     onReachBottom: function() {},
     onShareAppMessage: function() {
+        const appConfig = wx.getStorageSync("appConfig");
         return {
-            title: e.data.share.text,
-            imageUrl: e.data.share.image,
-            path: "bh_clock/pages/index/index?arent_id=" + e.data.share.member_id
+            title: appConfig.config.shareText,
+            imageUrl: appConfig.config.shareImage,
+            path: "/pages/index/index?parentId=" + wx.getStorageSync("userInfo").id
         };
     }
 });

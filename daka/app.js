@@ -1,6 +1,20 @@
 
 App({
   onLaunch: function() {
+    const root = this;
+    wx.request({
+      url: root.siteInfo.siteroot+'config',
+      method:"POST",
+      header:{
+        appCode: root.siteInfo.appCode,
+        appToken: root.siteInfo.appToken,
+      },
+      success(res) {
+        console.log(res.data);
+        wx.setStorageSync("appConfig",res.data.data);
+      }
+    })
+
 
     wx.getSystemInfo({
       success: e => {

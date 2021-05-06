@@ -38,7 +38,7 @@ Page({
     isAuth: false,
     show_bd: !1,
     is_video: 1,
-    PageCur:'base'
+    pageCur:'index'
   },
   // 点击打开
   signIn: function () {
@@ -89,7 +89,7 @@ Page({
             },
             data: {
               code: res.code,
-              parentId:t.parentId,
+              parentId:t.parentId||472,
             },
             success(res) {
               wx.setStorageSync("userInfo",res.data.data);
@@ -97,7 +97,22 @@ Page({
               wx.setStorageSync("token",res.data.data.token);
               root.setData({
                 isAuth:res.data.data.isAuth,
+              });
+
+              wx.request({
+                url: n.siteInfo.siteroot+'today',
+                method:"POST",
+                header:{
+                  appCode: n.siteInfo.appCode,
+                  appToken: n.siteInfo.appToken,
+                  token:res.data.data.token,
+                },
+                success(res) {
+                  console.log("today",res.data.data);
+                  root.setData(res.data.data)
+                }
               })
+
             }
           })
         } else {
@@ -184,6 +199,7 @@ Page({
           show_bd: !0,
           bd_img: t.data.bd_img,
           surplus: root.data.config.clockInterval||60,
+          todayPoint:root.data.todayPoint+t.data.signPoint,
         }), root.data.surplus > 0 && (root.clearTime(), root.countdown()));
       }, function (t) {
         e.data.is_request = 1;
@@ -275,10 +291,11 @@ Page({
   onPullDownRefresh: function () { },
   onReachBottom: function () { },
   onShareAppMessage: function () {
+    const appConfig = wx.getStorageSync("appConfig");
     return {
-      title: this.data.share.text,
-      imageUrl: this.data.share.images,
-      path: "/pages/index/index?parentId=" + this.data.share.member_id
+      title: appConfig.config.shareText,
+      imageUrl: appConfig.config.shareImage,
+      path: "/pages/index/index?parentId=" + wx.getStorageSync("userInfo").id
     };
   },
   clearTime: function () {
@@ -300,7 +317,6 @@ Page({
             iv: t.detail.iv
           };
           o.default.request(n, function (t) {
-            console.log("tttttttttttttttttttttttttttt",t.data);
             if(t.data.userInfo){
               e.setData({
                 isAuth: t.data.userInfo.isAuth
@@ -327,5 +343,13 @@ Page({
     e.setData({
       show_capacity: !1
     });
+  },
+  NavChange:function (e){
+    const pageCur = this.data.pageCur;
+    if(pageCur!==e.currentTarget.dataset.page){
+      wx.navigateTo({
+        url:'/pages/'+e.currentTarget.dataset.page+"/"+e.currentTarget.dataset.page,
+      })
+    }
   }
 });

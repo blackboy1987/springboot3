@@ -7,4 +7,5 @@
 	<cache name="accessToken" maxElementsInMemory="1000" timeToIdleSeconds="3600" timeToLiveSeconds="3600" eternal="false" overflowToDisk="true" />
 	<cache name="accessToken1" maxElementsInMemory="1000" timeToIdleSeconds="3600" timeToLiveSeconds="3600" eternal="false" overflowToDisk="true" />
 	<cache name="wechatUser" maxElementsInMemory="1000" timeToIdleSeconds="3600" timeToLiveSeconds="3600" eternal="false" overflowToDisk="true" />
+	<cache name="smsCode" maxElementsInMemory="1000" timeToIdleSeconds="3600" timeToLiveSeconds="3600" eternal="false" overflowToDisk="true" />
 </ehcache>

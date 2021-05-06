@@ -8,6 +8,9 @@
     "pages/cash/cash",
     "pages/my/my",
     "pages/rank/rank",
+    "pages/goodsconvert/goodsconvert",
+    "pages/goods/goods",
+    "pages/order/order",
     "pages/friendList/friendList"
   ],
   "window": {
@@ -19,7 +22,9 @@
     "navigationStyle": "custom"
   },
   "usingComponents": {
-    "cu-custom": "/colorui/components/cu-custom"
+    "cu-custom": "/colorui/components/cu-custom",
+    "tab-bar": "/components/tabBar/index",
+    "my-ad": "/components/myAd/index"
   },
   "sitemapLocation": "sitemap.json"
 }

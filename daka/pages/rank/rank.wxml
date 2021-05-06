@@ -2,33 +2,33 @@
 <my-ad></my-ad>
 <scroll-view class="container" scrollY="true">
     <view class="tab-box">
-        <view bindtap="bindTabClick" class="{{index==1?'tab-item text-select selectd':'tab-item text-select'}}" data-index="1">
+        <view bindtap="bindTabClick" class="{{index===1?'tab-item text-select selectd':'tab-item text-select'}}" data-index="1">
             <view>今日榜单</view>
-            <view class="tab-descr" hidden="{{index!=1}}"></view>
+            <view class="tab-descr" hidden="{{index!==1}}"></view>
         </view>
-        <view bindtap="bindTabClick" class="{{index==2?'tab-item text-select selectd':'tab-item text-select'}}" data-index="2">
+        <view bindtap="bindTabClick" class="{{index===2?'tab-item text-select selectd':'tab-item text-select'}}" data-index="2">
             <view>总榜单</view>
-            <view class="tab-descr" hidden="{{index!=2}}"></view>
+            <view class="tab-descr" hidden="{{index!==2}}"></view>
         </view>
     </view>
     <view>
         <view class="nav">
             <view class="nav-user-all">用户排名</view>
-            <view class="nav-coin-all">{{config.currency_name}}</view>
+            <view class="nav-coin-all">{{config.currencyName}}</view>
         </view>
-        <view wx:for="{{rank}}" wx:key="key">
+        <view wx:for="{{list}}" wx:key="key">
             <view class="user-box">
                 <view class="user-info">
                     <image class="rank-descr" src="{{base64.getRankImg(index+1)}}" wx:if="{{base64.getRankImg(index+1)}}"></image>
-                    <image class="user-icon" src="{{item.avatarUrl}}"></image>
+                    <image class="user-icon" src="{{item.avatarUrl||config.defaultAvatarUrl}}"></image>
                     <view class="user-rank {{base64.getRankTextColor(index+1)}}">NO.{{index+1}}</view>
-                    <view class="user-name text-ellipsis">{{item.nickName}}</view>
+                    <view class="user-name text-ellipsis">{{item.nickName||config.defaultNickName}}</view>
                 </view>
                 <view class="user-coin-all">{{item.point}}</view>
             </view>
         </view>
         <view class="more-invite-box">
-            <button class="inv-btn reset-btn" id="more-friend-invite" openType="share" style="background-color:#FFF" wx:if="{{audit_pattern!=2}}">
+            <button class="inv-btn reset-btn" id="more-friend-invite" openType="share" style="background-color:#FFF" wx:if="{{audit_pattern!==2}}">
                 <view class="more-invite-btn invite-btn">邀请好友</view>
             </button>
             <view class="more-invite-tip">好友越多，每日签到收益越大</view>

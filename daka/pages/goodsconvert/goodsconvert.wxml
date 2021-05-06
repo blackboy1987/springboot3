@@ -1,0 +1,37 @@
+<cu-custom isBack="{{true}}" bgColor="bg-gradual-green"><view slot="content">打卡小程序</view></cu-custom>
+<scroll-view class="container" scrollY="true">
+    <view bindtap="gotoSgin" class="sign">
+        <view class="left flex flex-1 flex-ai">
+            <image bindtap="bindViewTap" mode="cover" src="{{config.currencyIcon || '/images/xin.png'}}"></image>
+          {{member.point || 0}}
+          <text class="text">{{config.currencyName}}</text>
+        </view>
+        <text class="goSign flex flex-ai">我的订单</text>
+    </view>
+    <view style="width:750rpx;" wx:for="{{list}}" wx:for-index="ind" wx:key="fx">
+        <view class="good-group-title-div">{{item.name}}<view class="see_more_goods">{{item.name}}</view></view>
+        <view style="height:24rpx;"></view>
+        <view class="panel-goods-group">
+            <view class="panel-goods-group-row">
+                <block wx:for="{{item.products}}" wx:for-item="val" wx:key="f">
+                    <view class="panel-goods-sp" wx:if="{{index%2!=0}}"></view>
+                    <view bindtap="goodsDetails" class="panel-goods" data-etype="{{val.exchange_type}}" data-id="{{val.id}}">
+                        <image class="panel-goods-image" src="{{val.cover_image}}"></image>
+                        <text class="panel-goods-title">{{val.name}}</text>
+                        <view class="panel-goods-div">
+                            <text class="panel-goods-ydb" wx:if="{{val.type==1}}">{{val.quantity}}<text class="panel-goods-mix2" style="font-size:19rpx;">{{config.currencyName}}</text></text>
+                            <text class="panel-goods-mix" style="width:220rpx;" wx:else>{{val.quantity}}<text class="panel-goods-mix2" style="font-size:19rpx;">{{config.currencyName}}</text><text class="panel-goods-mix2">+</text>{{val.price}}<text class="panel-goods-mix3">元</text></text>
+                            <text class="panel-goods-exchange-ydb text-orangered">原价:{{val.marketPrice}}</text>
+                        </view>
+                        <view class="panel-goods-exchange-btn">立即兑换</view>
+                    </view>
+                </block>
+                <block wx:if="{{item.products.length>0&&item.products.length%2!==0}}">
+                    <view class="panel-goods-sp"></view>
+                    <view class="panel-goods-empty"></view>
+                </block>
+            </view>
+        </view>
+        <my-ad></my-ad>
+    </view>
+</scroll-view>

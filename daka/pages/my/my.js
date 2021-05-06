@@ -18,31 +18,12 @@ getApp(), Page({
         isIphone: !1,
         audit_model: !0,
         show_login: !0,
-        isAuth: false,
+        isAuth: wx.getStorageSync("isAuth")||false,
+        appConfig:{},
+        userInfo:{},
     },
     onLoad: function(e) {
         (n = this).data.id = e.id;
-
-        this.setData({
-            images:{
-                my_bg:"my_bg",
-                login_image:"login_image",
-            },
-            member:{
-                head:'head',
-                nickname:'nickname',
-            },
-            all_nun:123,
-            audit_model:false,
-            currency_name:'currency_name',
-            config:{
-                ad_type:1,
-                grid_ad:"grid_ad",
-                official_account_img:'official_account_img',
-                isAuth:false,
-                show_login:true,
-            }
-        })
     },
     cancel_login: function() {
         n.setData({
@@ -51,21 +32,27 @@ getApp(), Page({
     },
     showOfficial: function() {
         wx.previewImage({
-            current: n.data.config.official_account_img,
-            urls: [ n.data.config.official_account_img ]
+            current: n.data.appConfig.config.officialAccountImg,
+            urls: [ n.data.appConfig.config.officialAccountImg ]
         });
     },
     onReady: function() {
+        n.setData({
+            appConfig:wx.getStorageSync("appConfig"),
+            userInfo:wx.getStorageSync("userInfo"),
+        });
+
         var t = {
-            action: "index",
+            action: "my",
             contr: "my",
             token: wx.getStorageSync("token")
         };
         e.default.request(t, function(e) {
-            n.setData(e.info);
+            const appConfig = wx.getStorageSync("appConfig");
+            n.setData(e.data);
             var t = null;
-            wx.createInterstitialAd && e.info.config.screen_ad && ((t = wx.createInterstitialAd({
-                adUnitId: e.info.config.screen_ad
+            wx.createInterstitialAd && appConfig.ads.interstitialAdId && ((t = wx.createInterstitialAd({
+                adUnitId: appConfig.ads.interstitialAdId
             })).onLoad(function() {
                 console.log("onLoad event emit");
             }), t.onError(function(n) {
@@ -78,18 +65,42 @@ getApp(), Page({
         });
     },
     getUserInfo: function(t) {
-        if ("getUserInfo:ok" == t.detail.errMsg) {
-            var o = {
-                action: "login",
-                contr: "my",
-                token: wx.getStorageSync("token"),
-                encryptedData: t.detail.encryptedData,
-                iv: t.detail.iv
-            };
-            e.default.request(o, function(e) {
-                n.onReady();
-            });
-        } else console.log("用户拒绝了");
+        const root = this;
+        wx.getUserProfile({
+            lang: 'zh_CN',
+            desc: '用户登录',
+            success: (res) => {
+                if ("getUserProfile:ok" === res.errMsg) {
+                    var n = {
+                        action: "login",
+                        contr: "my",
+                        token: wx.getStorageSync("token"),
+                        parentId: wx.getStorageSync("parentId"),
+                        ...res.userInfo,
+                        iv: t.detail.iv
+                    };
+                    e.default.request(n, function (t) {
+                        if(t.data.userInfo){
+                            root.setData({
+                                isAuth: t.data.userInfo.isAuth
+                            });
+                            wx.setStorageSync("isAuth",t.data.userInfo.isAuth);
+                        }
+
+
+                    });
+                } else{
+                    console.log("用户拒绝了");
+                }
+
+            },
+            fail: () => {
+                wx.showToast({
+                    icon:'none',
+                    title:'已拒绝小程序获取信息',
+                })
+            }
+        });
     },
     gotoCash: function() {
         wx.navigateTo({
@@ -100,10 +111,11 @@ getApp(), Page({
     onHide: function() {},
     onShow: function() {},
     onShareAppMessage: function() {
+        const appConfig = wx.getStorageSync("appConfig");
         return {
-            title: this.data.share.text,
-            imageUrl: this.data.share.images,
-            path: "bh_rising/pages/index/index?parentId=" + this.data.share.member_id
+            title: appConfig.config.shareText,
+            imageUrl: appConfig.config.shareImage,
+            path: "/pages/index/index?parentId=" + wx.getStorageSync("userInfo").id
         };
     }
 });

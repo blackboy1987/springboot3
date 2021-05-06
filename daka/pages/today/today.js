@@ -24,9 +24,7 @@ getApp(), Page({
     onLoad: function(e) {
         t = this;
         t.setData({
-            my_num:1234,
-            one_num:12,
-            two_num:55,
+            appConfig:wx.getStorageSync("appConfig"),
             config:{
                 ad_type:1,
                 grid_ad:'grid_ad',
@@ -34,98 +32,11 @@ getApp(), Page({
                 two_currency:22,
                 audit_model:true,
             },
-            log:[
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                },
-                {
-                    member:{
-                        nickname:'nickname',
-                        head:'head',
-                    },
-                    created:'created',
-                }
-            ],
 
         })
     },
     onReady: function() {
-        var a = {
-            action: "index",
-            contr: "clock",
-            level: t.data.level,
-            token: wx.getStorageSync("token")
-        };
-        e.default.request(a, function(e) {
-            t.setData(e.info), t.loadContent();
-        });
+        t.loadContent();
     },
     loadContent: function() {
         var a = {
@@ -139,11 +50,19 @@ getApp(), Page({
         wx.showLoading({
             title: "加载中"
         }), e.default.request(a, function(e) {
-            var a = e.info.log;
+            console.log("e.info",e.data);
+            let a = e.data.list;
+            if(a.length<10){
+                t.setData({
+                    isover: true,
+                })
+            }
             t.data.p > 1 && (a = t.data.log.concat(a)), t.setData({
-                log: a
-            }), e.info.log.length < 10 && t.setData({
-                isover: !0
+                log: a,
+                my_num:e.data.my_num,
+                one_num:e.data.one_num,
+                two_num:e.data.two_num,
+                all_num:e.data.all_num,
             });
         });
     },
@@ -157,16 +76,18 @@ getApp(), Page({
         }), t.loadContent();
     },
     onReachBottom: function() {
+        console.log(this.data.isover);
         this.data.isover || (this.data.p += 1, t.loadContent());
     },
     onUnload: function() {},
     onHide: function() {},
     onShow: function() {},
     onShareAppMessage: function() {
+        const appConfig = wx.getStorageSync("appConfig");
         return {
-            title: this.data.share.text,
-            imageUrl: this.data.share.images,
-            path: "bh_rising/pages/index/index?parentId=" + this.data.share.member_id
+            title: appConfig.config.shareText,
+            imageUrl: appConfig.config.shareImage,
+            path: "/pages/index/index?parentId=" + wx.getStorageSync("userInfo").id
         };
     }
 });

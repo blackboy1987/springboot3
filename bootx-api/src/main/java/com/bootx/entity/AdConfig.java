@@ -1,6 +1,7 @@
 package com.bootx.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import java.io.Serializable;
 
@@ -10,36 +11,43 @@ public class AdConfig implements Serializable {
     /**
      * Banner 广告
      */
+    @JsonView({BaseEntity.ListView.class})
     private String bannerId;
 
     /**
      * 激励视频广告
      */
+    @JsonView({BaseEntity.ListView.class})
     private String rewardedVideoAdId;
 
     /**
      * 插屏广告
      */
+    @JsonView({BaseEntity.ListView.class})
     private String interstitialAdId;
 
     /**
      * 视频广告
      */
+    @JsonView({BaseEntity.ListView.class})
     private String videoAdId;
 
     /**
      * 视频前贴广告(视频贴片广告)
      */
+    @JsonView({BaseEntity.ListView.class})
     private String videoFrontAdId;
 
     /**
      * 格子广告
      */
+    @JsonView({BaseEntity.ListView.class})
     private String gridAdId;
 
     /**
      * 原生模板广告
      */
+    @JsonView({BaseEntity.ListView.class})
     private String nativeAdId;
 
     public String getBannerId() {

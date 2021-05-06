@@ -55,8 +55,8 @@ public class App extends BaseEntity<Long>{
     @JsonView({PageView.class})
     private String logo;
 
-    //@JsonView({PageView.class})
-    //private String appLogo;
+    @JsonView({PageView.class})
+    private String appLogo;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(updatable = false)
@@ -150,13 +150,13 @@ public class App extends BaseEntity<Long>{
         this.logo = logo;
     }
 
-   /* public String getAppLogo() {
+   public String getAppLogo() {
         return appLogo;
     }
 
     public void setAppLogo(String appLogo) {
         this.appLogo = appLogo;
-    }*/
+    }
 
     public Integer getType() {
         return type;
@@ -210,5 +210,11 @@ public class App extends BaseEntity<Long>{
     @JsonView({PageView.class})
     public String getAdminName(){
         return getAdmin().getUsername();
+    }
+
+    @Transient
+    @JsonView({PageView.class})
+    public boolean getIsExpired(){
+        return getExpireDate().compareTo(new Date())<0;
     }
 }

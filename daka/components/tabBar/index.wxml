@@ -1,0 +1,26 @@
+<view class="cu-bar tabbar bg-white shadow foot">
+    <view class="action" bindtap="NavChange" data-cur="basics">
+        <view class='cuIcon-cu-image'>
+            <image src="/images/tabbar/basics{{pageCur==='basics'?'_cur':''}}.png"></image>
+        </view>
+        <view class="{{pageCur==='basics'?'text-green':'text-gray'}}">首页</view>
+    </view>
+    <view class="action" bindtap="NavChange" data-cur="component">
+        <view class='cuIcon-cu-image'>
+            <image src="/images/tabbar/component{{pageCur==='component'?'_cur':''}}.png"></image>
+        </view>
+        <view class="{{pageCur==='component'?'text-green':'text-gray'}}">好友</view>
+    </view>
+    <view class="action" bindtap="NavChange" data-cur="plugin">
+        <view class='cuIcon-cu-image'>
+            <image src="/images/tabbar/plugin{{pageCur==='plugin'?'_cur':''}}.png"></image>
+        </view>
+        <view class="{{pageCur==='plugin'?'text-green':'text-gray'}}">排行榜</view>
+    </view>
+    <view class="action" bindtap="NavChange" data-cur="about">
+        <view class='cuIcon-cu-image'>
+            <image src="/images/tabbar/about{{PageCur==='about'?'_cur':''}}.png"></image>
+        </view>
+        <view class="{{pageCur==='about'?'text-green':'text-gray'}}">我的</view>
+    </view>
+</view>

@@ -13,6 +13,13 @@ public class ClickRecord extends BaseEntity<Long> {
     @Column(nullable = false,updatable = false)
     private Long memberId;
 
+    @Column(nullable = false)
+    private Long point;
+
+    @NotNull
+    @Column(nullable = false,updatable = false)
+    private Long appId;
+
 
     public Long getMemberId() {
         return memberId;
@@ -20,5 +27,21 @@ public class ClickRecord extends BaseEntity<Long> {
 
     public void setMemberId(Long memberId) {
         this.memberId = memberId;
+    }
+
+    public Long getPoint() {
+        return point;
+    }
+
+    public void setPoint(Long point) {
+        this.point = point;
+    }
+
+    public Long getAppId() {
+        return appId;
+    }
+
+    public void setAppId(Long appId) {
+        this.appId = appId;
     }
 }

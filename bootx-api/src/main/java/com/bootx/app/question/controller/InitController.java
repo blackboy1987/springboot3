@@ -63,7 +63,7 @@ public class InitController {
         String s = WebUtils.get(url, null);
         JsonRootBean jsonRootBean = JsonUtils.toObject(s,JsonRootBean.class);
         Question question = jsonRootBean.getQuestion();
-        com.bootx.app.question.entity.Subject subject = new com.bootx.app.question.entity.Subject();
+        Subject subject = new Subject();
         Boolean aBoolean = redisService.hasKey(question.getTitle());
         if(aBoolean){
             return;

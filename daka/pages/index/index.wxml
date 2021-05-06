@@ -1,4 +1,6 @@
-<cu-custom bgColor="bg-gradual-green"><view slot="content">打卡小程序</view></cu-custom>
+<cu-custom bgColor="bg-gradual-green">
+  <view slot="content">打卡小程序</view>
+</cu-custom>
 <view class="exchangeRoll" style="background-color:{{config.rollContentBg}}" wx:if="{{config.roll_content&&config.roll_content.length>0}}">
   <swiper
     autoplay="{{true}}"
@@ -36,13 +38,13 @@
       <open-data class="avatar" type="userAvatarUrl"></open-data>
     </view>
     <view class="text">
-      <text>{{today.currency}}</text>
+      <text>{{todayPoint||0}}</text>
       {{currencyName}}
     </view>
-    <button bindtap="swRule" class="buttonfix">{{is_rule==1?'打卡':'收起'}}规则</button>
+    <button bindtap="swRule" class="buttonfix">{{is_rule===1?'打卡':'收起'}}规则</button>
   </view>
 </view>
-  <view class="content" style="transform: translateY({{is_rule==1?-200:-460}}rpx);">
+  <view class="content" style="transform: translateY({{is_rule===1?-200:-460}}rpx);">
   <view class="waveWrapper waveAnimation">
     <view bindtap="signIn" class="signIn" wx:if="{{surplus<1}}">
       <view class="inner" style="background:{{clickBgColor}}">
@@ -148,14 +150,7 @@
       <view class="text">连续打卡{{star.will.click}}次</view>
     </view>
   </view>
-  <ad
-    adTheme="white"
-    adType="{{config.ad_type==1?'grid':''}}"
-    gridCount="5"
-    gridOpacity="0.8"
-    unitId="{{config.grid_ad}}"
-    wx:if="{{config.grid_ad}}"
-  ></ad>
+  <my-ad></my-ad>
   <view class="rule" id="page-home-frien">
     <view class="title">
       <text class="text">打卡规则</text>
@@ -173,7 +168,7 @@
 <view class="showEmpower" wx:if="{{!isAuth&&show_login}}">
   <view class="center">
     <view class="showBoxContent">
-      <image class="headPic" mode="widthFix" src="{{images.login_image}}" style="height:150px" />
+      <image class="headPic" mode="widthFix" src="{{config.loginImage}}" style="height:150px" />
       <text>您的信息和数据将受到保护</text>
     </view>
     <view class="btnLine">
@@ -196,28 +191,35 @@
   </view>
 </view>
 <view class="cu-bar tabbar bg-white shadow foot">
-  <view class="action" bindtap="NavChange" data-cur="basics">
+  <view class="action" bindtap="NavChange" data-page="index">
     <view class='cuIcon-cu-image'>
-      <image src="/images/tabbar/basics{{PageCur==='basics'?'_cur':''}}.png"></image>
+      <image src="/images/tabbar/home{{pageCur==='index'?'_active':''}}.png"></image>
     </view>
-    <view class="{{PageCur==='basics'?'text-green':'text-gray'}}">元素</view>
+    <view class="{{pageCur==='index'?'text-green':'text-gray'}}">首页</view>
   </view>
-  <view class="action" bindtap="NavChange" data-cur="component">
+  <view class="action" bindtap="NavChange" data-page="goodsconvert" wx:if="{{status===2}}">
     <view class='cuIcon-cu-image'>
-      <image src="/images/tabbar/component{{PageCur==='component'?'_cur':''}}.png"></image>
+      <image src="/images/tabbar/my{{pageCur==='exchange'?'_active':''}}.png"></image>
     </view>
-    <view class="{{PageCur==='component'?'text-green':'text-gray'}}">组件</view>
+    <view class="{{pageCur==='exchange'?'text-green':'text-gray'}}">兑换</view>
   </view>
-  <view class="action" bindtap="NavChange" data-cur="plugin">
+  <view class="action" bindtap="NavChange" data-page="friendList">
     <view class='cuIcon-cu-image'>
-      <image src="/images/tabbar/plugin{{PageCur==='plugin'?'_cur':''}}.png"></image>
+      <image src="/images/tabbar/friend{{pageCur==='friendList'?'_active':''}}.png"></image>
     </view>
-    <view class="{{PageCur==='plugin'?'text-green':'text-gray'}}">扩展</view>
+    <view class="{{pageCur==='friendList'?'text-green':'text-gray'}}">好友</view>
   </view>
-  <view class="action" bindtap="NavChange" data-cur="about">
+  <view class="action" bindtap="NavChange" data-page="rank">
     <view class='cuIcon-cu-image'>
-      <image src="/images/tabbar/about{{PageCur==='about'?'_cur':''}}.png"></image>
+      <image src="/images/tabbar/rank{{pageCur==='rank'?'_active':''}}.png"></image>
     </view>
-    <view class="{{PageCur==='about'?'text-green':'text-gray'}}">关于</view>
+    <view class="{{pageCur==='rank'?'text-green':'text-gray'}}">排行榜</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-page="my">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/my{{pageCur==='my'?'_active':''}}.png"></image>
+    </view>
+    <view class="{{pageCur==='my'?'text-green':'text-gray'}}">我的</view>
   </view>
 </view>
+

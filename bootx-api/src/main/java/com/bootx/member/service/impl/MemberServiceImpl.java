@@ -5,6 +5,7 @@ import com.bootx.common.Page;
 import com.bootx.common.Pageable;
 import com.bootx.entity.App;
 import com.bootx.entity.AppConfig;
+import com.bootx.entity.Area;
 import com.bootx.entity.RewardType;
 import com.bootx.member.dao.MemberDao;
 import com.bootx.member.dao.MemberDepositLogDao;
@@ -25,6 +26,7 @@ import io.jsonwebtoken.Claims;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -83,8 +85,8 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements 
 		result.put("unionid",unionid);
 		result.put("sessionKey",sessionKey);
 		Member member = memberDao.find("openId",openId);
+		Member parent = findByAppAndId(app,scene);
 		if(member==null){
-			Member parent = findByAppAndId(app,scene);
 			member = new Member();
 			member.setLevel(0);
 			member.setRank(1);
@@ -97,13 +99,11 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements 
 			member.setPoint(0L);
 			member.setIsAuth(false);
 			member.setParent(null);
-			member.setGrade(1);
 			member.setParent(parent);
 			member.setTicket(0);
 			member.setGold(0);
 			member.setUpdateDate(new Date());
 			member.setMemberRank(memberRankService.findDefault(app));
-
 			try {
 				if(appConfig.get("registerRewardPoint")!=null){
 					Long point = Long.valueOf(appConfig.get("registerRewardPoint")+"");
@@ -123,12 +123,39 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements 
 				config = new HashMap<>();
 			}
 			member.setConfig(config);
-			member = super.save(member);
+			member = save(member);
 		}
-		member.setNickName(map.get("name"));
-		member.setAvatarUrl(map.get("avatarUrl"));
-		return super.update(member);
+		if(member.getParent()==null&&parent!=null){
+			member.setParent(parent);
+		}
+		if(StringUtils.isNotBlank(map.get("name"))){
+			member.setNickName(map.get("name"));
+		}
+		if(StringUtils.isNotBlank(map.get("avatarUrl"))){
+			member.setAvatarUrl(map.get("avatarUrl"));
+		}
+		return update(member);
 	}
+
+
+	@Override
+	@Transactional
+	public Member save(Member area) {
+		Assert.notNull(area, "[Assertion failed] - area is required; it must not be null");
+		setValue(area);
+		return super.save(area);
+	}
+
+	@Override
+	@Transactional
+	public Member update(Member area) {
+		Assert.notNull(area, "[Assertion failed] - area is required; it must not be null");
+		setValue(area);
+		return super.update(area);
+	}
+
+
+
 
 	@Transactional(readOnly = true)
 	Member findByAppAndId(App app, Long id) {
@@ -332,5 +359,24 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements 
 	@Override
 	public Map<String, Object> findJdbc(Long id) {
 		return null;
+	}
+
+	/**
+	 * 设置值
+	 *
+	 * @param member
+	 *            会员
+	 */
+	private void setValue(Member member) {
+		if (member == null) {
+			return;
+		}
+		Member parent = member.getParent();
+		if (parent != null) {
+			member.setTreePath(parent.getTreePath() + parent.getId() + Member.TREE_PATH_SEPARATOR);
+		} else {
+			member.setTreePath(Area.TREE_PATH_SEPARATOR);
+		}
+		member.setGrade(member.getParentIds().length);
 	}
 }

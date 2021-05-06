@@ -23,29 +23,7 @@ getApp(), Page({
     },
     onLoad: function(t) {
         e = this;
-        e.setData({
-            config:{
-                ad_type:1,
-                grid_ad:'grid_ad',
-            },
-            rule:[
-                {
-                    content:'1111',
-                },
-                {
-                    content:'22222',
-                },
-                {
-                    content:'33333',
-                },
-                {
-                    content:'44444',
-                },
-                {
-                    content:'115555511',
-                },
-            ]
-        })
+        e.setData(wx.getStorageSync("appConfig"));
     },
     onReady: function() {
         var n = {
@@ -54,17 +32,18 @@ getApp(), Page({
             token: wx.getStorageSync("token")
         };
         t.default.request(n, function(t) {
-            e.setData(t.info);
+            e.setData(t.data);
         });
     },
     onUnload: function() {},
     onHide: function() {},
     onShow: function() {},
     onShareAppMessage: function() {
+        const appConfig = wx.getStorageSync("appConfig");
         return {
-            title: this.data.share.text,
-            imageUrl: this.data.share.images,
-            path: "bh_rising/pages/index/index?parentId=" + this.data.share.member_id
+            title: appConfig.config.shareText,
+            imageUrl: appConfig.config.shareImage,
+            path: "/pages/index/index?parentId=" + wx.getStorageSync("userInfo").id
         };
     }
 });

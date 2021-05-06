@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  * Entity - 管理员
@@ -36,6 +37,15 @@ public class Admin extends BaseEntity<Long> {
 	@Length(min = 4, max = 20)
 	@Transient
 	private String password;
+
+	/**
+	 * 密码
+	 */
+	@NotEmpty
+	@Length(max = 200)
+	@Pattern(regexp = "^1[3|4|5|6|7|8|9]\\d{9}$")
+	@Column(nullable = false,unique = true)
+	private String mobile;
 
 	/**
 	 * 加密密码
@@ -112,6 +122,14 @@ public class Admin extends BaseEntity<Long> {
 	 */
 	public void setEncodedPassword(String encodedPassword) {
 		this.encodedPassword = encodedPassword;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
 	public String getUsername() {

@@ -80,6 +80,9 @@ public class AppServiceImpl extends BaseServiceImpl<App, Long> implements AppSer
             appToken = request.getParameter("appToken");
         }
         App app = findByAppCode(appCode);
+        if(app==null){
+           return get1(request);
+        }
         if(app==null||!StringUtils.equals(appToken,app.getAppToken())){
             return null;
         }

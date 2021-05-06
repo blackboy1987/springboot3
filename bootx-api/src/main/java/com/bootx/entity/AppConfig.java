@@ -1,5 +1,6 @@
 package com.bootx.entity;
 
+import com.bootx.app.daka.common.DaKaConfig;
 import com.bootx.app.dianying.pojo.Demo;
 import com.bootx.common.BaseAttributeConverter;
 import com.bootx.util.JsonUtils;
@@ -36,6 +37,9 @@ public class AppConfig extends BaseEntity<Long>{
             String danMu = "[{\"text\":\"请勿相信视频内广告\",\"color\":\"#ff0000\",\"time\":1},{\"text\":\"本软件永久免费,为避免小程序被封,请联系客服!\",\"color\":\"#ff00ff\",\"time\":3}]";
             getConfig().put("danMu", JsonUtils.toJson(JsonUtils.toObject(danMu, new TypeReference<List<Demo.DataDTO.PlayDTO.DanMu>>() {
             })));
+        }else if(app.getType()==5){
+            getConfig().putAll(JsonUtils.toObject(JsonUtils.toJson(new DaKaConfig()), new TypeReference<Map<String,Object>>() {
+            }));
         }
         this.app = app;
     }

@@ -44,6 +44,9 @@ t(require("../../utils/wx-promisify/wx-promisify"))), s = t(require("./modules/h
         i = this;
         wx.setNavigationBarTitle({
             title:'我的好友'
+        });
+        i.setData({
+            "appConfig":wx.getStorageSync("appConfig"),
         })
     },
     onReady: function() {
@@ -55,186 +58,11 @@ t(require("../../utils/wx-promisify/wx-promisify"))), s = t(require("./modules/h
         wx.showLoading({
             title: "加载中"
         }), n.default.request(e, function(e) {
-            e.info = e.data;
-
-            i.setData({
-                config:{
-                    ad_type:1,
-                    grid_ad:'111',
-                    poster_bg:'https://img.yzcdn.cn/public_files/2019/07/22/f4b70763c55c8710c52c667ecf192c05.jpeg',
-                },
-                friends_num:100,
-                friends:[
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                    {
-                        head:'https://img01.yzcdn.cn/vant/logo.png',
-                        nickname:'1234',
-                        all_clock:1345,
-                        day:{
-                            clock:3
-                        }
-                    },
-                ],
-                audit_model:true,
-                share:{
-                    member_id:123,
-                    text:'分享哈哈哈',
-                    images:'https://img.yzcdn.cn/public_files/2019/08/15/fa0549210055976cb63798503611ce3d.png',
-                },
-                show_poster: false,
-                poster:'',
-                head:'https://msn-img-nos.yiyouliao.com/inforec-20210427-6a0817dc961fa5943750df62669d0f75.png?time=1619506717&signature=0E3143BA236C3B2343FE17B7AA84ADD6',
-                qr_code:'https://msn-img-nos.yiyouliao.com/inforec-20210427-6a0817dc961fa5943750df62669d0f75.png?time=1619506717&signature=0E3143BA236C3B2343FE17B7AA84ADD6',
-            })
-
-            console.log("e.info",e.info);
-            i.setData(e.info);
+            const appConfig = wx.getStorageSync("appConfig");
+            i.setData(e.data);
             var t = null;
-            wx.createInterstitialAd && e.info.config.screen_ad && ((t = wx.createInterstitialAd({
-                adUnitId: e.info.config.screen_ad
+            wx.createInterstitialAd && appConfig.ads.interstitialAdId && ((t = wx.createInterstitialAd({
+                adUnitId: appConfig.ads.interstitialAdId
             })).onLoad(function() {
                 console.log("onLoad event emit");
             }), t.onError(function(e) {
@@ -251,9 +79,10 @@ t(require("../../utils/wx-promisify/wx-promisify"))), s = t(require("./modules/h
     onHide: function() {},
     onShow: function() {}
 }, e(o, "showShare", function() {
-    var e = this.data.config.poster_bg;
-    e = "https://img.yzcdn.cn/vant-weapp/qrcode-201808101114.jpg";
-    if (console.log(e), this.data.poster) this.setData({
+    const appConfig = wx.getStorageSync("appConfig");
+    const e = appConfig.config.posterBg;
+    const userInfo = wx.getStorageSync("userInfo");
+    if (this.data.poster) this.setData({
         show_poster: !0
     }); else {
         var t = [ {
@@ -268,7 +97,7 @@ t(require("../../utils/wx-promisify/wx-promisify"))), s = t(require("./modules/h
             }
         }, {
             type: "image",
-            url: this.data.head,
+            url: userInfo.avatarUrl||appConfig.config.defaultAvatar,
             css: {
                 top: "250px",
                 left: "200px",
@@ -280,7 +109,7 @@ t(require("../../utils/wx-promisify/wx-promisify"))), s = t(require("./modules/h
             }
         }, {
             type: "image",
-            url: this.data.qr_code,
+            url: appConfig.config.qrCode,
             css: {
                 top: "655px",
                 left: "185px",
@@ -332,9 +161,10 @@ t(require("../../utils/wx-promisify/wx-promisify"))), s = t(require("./modules/h
         fail: function(e) {}
     });
 }), e(o, "onShareAppMessage", function() {
+    const appConfig = wx.getStorageSync("appConfig");
     return {
-        title: this.data.share.text,
-        imageUrl: this.data.share.images,
-        path: "bh_rising/pages/index/index?parentId=" + this.data.share.member_id
+        title: appConfig.config.shareText,
+        imageUrl: appConfig.config.shareImage,
+        path: "/pages/index/index?parentId=" + wx.getStorageSync("userInfo").id
     };
 }), o));

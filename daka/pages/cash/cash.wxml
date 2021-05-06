@@ -1,10 +1,10 @@
-<image class="hd-bg" src="{{images.bg}}"></image>
-
+<cu-custom isBack="{{true}}" bgColor="bg-gradual-green"><view slot="content">打卡小程序</view></cu-custom>
+<image class="hd-bg" src="{{appConfig.config.bg}}"></image>
 <view class="withdraw-box">
-    <view class="withdraw-title" wx:if="{{!audit_model}}">可提金额</view>
+    <view class="withdraw-title" wx:if="{{appConfig.status===2}}">可提金额</view>
     <view class="withdraw-num">{{member.money}}</view>
 </view>
-<view class="input-box input-box-height {{cash_type==2&&payment_code_url?'input-box-cash-height':''}}" wx:if="{{!audit_model}}">
+<view class="input-box input-box-height {{cash_type==2&&payment_code_url?'input-box-cash-height':''}}" wx:if="{{appConfig.status===2}}">
     <view class="input-title">{{tx}}金额</view>
     <view class="input-model-box">
         <view>¥</view>
@@ -23,7 +23,7 @@
 <view class="ad" wx:if="{{isShowAd}}">
     <ad binderror="bindAdError" unitId="adunit-30e0c30af902a958"></ad>
 </view>
-<block wx:if="{{!audit_model}}">
+<block wx:if="{{appConfig.status===2}}">
     <view class="tip-tt tip">{{tx}}说明：</view>
     <view class="tip-content tip" wx:if="{{!cash_explain}}">1.首次余额满{{first_presentation}}元可{{tx}}；</view>
     <view class="tip-content tip" wx:if="{{!cash_explain}}">2.后续每笔{{tx}}至少要{{follow_up_presentation}}元；</view>

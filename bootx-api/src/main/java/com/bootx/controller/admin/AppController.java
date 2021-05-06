@@ -153,6 +153,10 @@ public class AppController {
         if(app==null){
             return Result.error("非法访问");
         }
+        if(StringUtils.isNotBlank(appId)){
+            app.setAppId(appId);
+        }
+
         if(!StringUtils.equals(appId,app.getAppId())||!StringUtils.equals(appSecret,app.getAppSecret())){
             // 重新生成appCode和appToken
             String code = CodeUtils.getCode(12);

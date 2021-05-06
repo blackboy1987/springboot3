@@ -106,17 +106,23 @@ public class RegisterController extends BaseController {
     }
 
     @PostMapping("/submit")
-    public Result submit(String orderSn) {
+    public Result submit(String orderSn,String mobile) {
         Map<String,Object> data = new HashMap<>();
         if (StringUtils.isBlank(orderSn)) {
             return Result.error("请输入订单号");
+        }
+        if (StringUtils.isBlank(mobile)) {
+            return Result.error("请输入手机号");
         }
         Order order = orderService.findByOrderSn(orderSn);
         if(order==null||order.getIsUsed()){
             return Result.error("订单不存在或已被使用");
         }
+        if(adminService.mobileExist(mobile)){
+            return Result.error("手机号已被使用");
+        }
         // 创建admin
-        Admin admin = adminService.create(orderSn);
+        Admin admin = adminService.create(orderSn,mobile);
         // 创建app
         App app = appService.create(admin,order);
         order.setAppId(app.getId());
