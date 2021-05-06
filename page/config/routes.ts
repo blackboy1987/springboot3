@@ -88,6 +88,12 @@
         component: './daKa/app/share',
         access: 'daKa',
       },
+      {
+        name: '打卡配置',
+        path: '/daKa/click',
+        component: './daKa/app/click',
+        access: 'daKa',
+      },
     ]
   },
   {

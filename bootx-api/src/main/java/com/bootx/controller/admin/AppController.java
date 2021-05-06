@@ -314,4 +314,58 @@ public class AppController {
 
         return Result.success("操作成功");
     }
+
+
+
+
+
+
+
+    @PostMapping("/share")
+    public Result share(HttpServletRequest request,Long id){
+        Admin admin = adminService.get(request);
+        if(admin==null){
+            return Result.error("非法访问");
+        }
+        App app = admin.getApp();
+        if(id!=null){
+            if(!admin.getIsAdmin()){
+                return Result.error("非法访问");
+            }
+            app = appService.find(id);
+        }
+        if(app==null){
+            return Result.error("非法访问");
+        }
+        return Result.success(app.getAppAd().getAds());
+    }
+
+    @PostMapping("/shareUpdate")
+    public Result shareUpdate(HttpServletRequest request,String shareText,String shareImage,Long id){
+        Admin admin = adminService.get(request);
+        if(admin==null){
+            return Result.error("非法访问");
+        }
+        App app = admin.getApp();
+        if(id!=null){
+            if(!admin.getIsAdmin()){
+                return Result.error("非法访问");
+            }
+            app = appService.find(id);
+        }
+        if(app==null){
+            return Result.error("非法访问");
+        }
+
+        if (StringUtils.isBlank(shareImage)) {
+            shareImage = app.getLogo();
+        }
+        if (StringUtils.isBlank(shareText)) {
+            shareText = app.getAppName();
+        }
+        app.getAppConfig().getConfig().put("shareText",shareText);
+        app.getAppConfig().getConfig().put("shareImage",shareImage);
+        appService.update(app);
+        return Result.success("操作成功");
+    }
 }

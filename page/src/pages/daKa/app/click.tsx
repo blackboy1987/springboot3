@@ -42,19 +42,51 @@ const Share=()=>{
 
   return (
     <PageContainer title={false} breadcrumb={{}}>
-      <Card title='分享配置' bordered={false} size='small'>
+      <Card title='打卡配置' bordered={false} size='small'>
         <Form
           form={form}
           {...layout}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
-          <Form.Item name='shareText' label='分享标题' extra='默认为小程序名称'>
+          <Form.Item name='clockNum' label='每日打卡次数'>
             <Input />
           </Form.Item>
-          <Form.Item name='shareImage' label='分享图片' extra='默认为小程序logo'>
-            <Input readOnly addonAfter={<span style={{cursor: 'pointer'}}><MyUpload success={(url: string)=>form.setFieldsValue({shareImage:url})} accept='image/png, image/jpeg' name='shareImage' /></span>} />
+          <Form.Item name='signPoint' label='每次打卡积分'>
+            <Input />
           </Form.Item>
+          <Form.Item name='clickRule' label='打卡规则' extra='9-12-5;13-24-3:9点到12点累计打卡5次，13点到24点累计打开3次'>
+            <Input />
+          </Form.Item>
+          <Form.Item name='homeBgImage' label='首页背景图'>
+            <Input />
+          </Form.Item>
+          <Form.Item name='defaultAvatar' label='默认头像'>
+            <Input />
+          </Form.Item>
+          <Form.Item name='defaultNickName' label='默认昵称'>
+            <Input />
+          </Form.Item>
+          <Form.Item name='waveTop' label='水波纹图1'>
+            <Input />
+          </Form.Item>
+          <Form.Item name='waveMid' label='水波纹图2'>
+            <Input />
+          </Form.Item>
+          <Form.Item name='waveBot' label='水波纹图3'>
+            <Input />
+          </Form.Item>
+          <Form.Item name='loginImage' label='登陆背景'>
+            <Input />
+          </Form.Item>
+          <Form.Item name='currencyName' label='货币名称'>
+            <Input />
+          </Form.Item>
+          <Form.Item name='currencyIcon' label='货币图片'>
+            <Input />
+          </Form.Item>
+
+
           <Form.Item {...tailLayout}>
             <Button block type="primary" htmlType="submit" loading={loading}>保存</Button>
           </Form.Item>
