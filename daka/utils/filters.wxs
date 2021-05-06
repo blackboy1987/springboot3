@@ -1,0 +1,12 @@
+var filters = (({
+    ceil: ((function(val1, val2) {
+        return ((Math.ceil((val1 / val2) * 100)))
+    })),
+    plus: ((function(val1, val2) {
+        return ((parseInt(val1) + parseInt(val2)))
+    })),
+}));
+module.exports = (({
+    ceil: filters.ceil,
+    plus: filters.plus,
+}));

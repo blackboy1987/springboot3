@@ -1,0 +1,98 @@
+<cu-custom isBack="{{true}}" bgColor="bg-gradual-green"><view slot="content">我的订单</view></cu-custom>
+<view class="card-item" wx:if="{{orders.length>0}}" wx:for="{{orders}}" wx:key="f">
+    <view class="express-card">
+        <view class="express-card-top">
+            <view class="express-top-left">订单编号：{{item.sn}}</view>
+            <view class="express-top-right" style="color:#{{orderStatus[item.status]}}">{{item.statusMsg}}</view>
+        </view>
+        <view class="express-card-bottom">
+			{{item.createdDate}}
+		</view>
+    </view>
+    <view class="driver"></view>
+    <view class="media-box media-box_appmsg">
+        <view bindtap="navigateToDetial" class="media-box__hd media-box__hd_in-appmsg" data-value="{{item.product.id}}" style="margin-left:{{isStepItem?'20':'30'}}rpx">
+            <image class="media-box__thumb" mode="widthFix" src="{{item.product.icon}}"></image>
+        </view>
+        <view class="media-box__bd media-box__bd_in-appmsg">
+            <view class="media-box__title" style="-webkit-line-clamp:{{isGoodsDialog?2:100}}">
+				{{item.product.name}}
+			</view>
+            <view class="media-box__desc">
+                <text class="text-orangered">{{item.product.exchangeNumber}}</text>
+                {{currency_name}} {{item.product.exchangeType===2?'+':''}}
+                <text class="text-orangered" wx:if="{{item.product.exchangeType===2}}"> {{item.product.money}}</text>
+                {{item.product.exchangeType===2?'￥':''}}
+				<text class="text-tag" wx:if="{{item.product.isFree===1&&item.product.type===1}}">包邮</text>
+            </view>
+        </view>
+    </view>
+    <view class="order-card" wx:if="{{item.type===1}}">
+        <view class="driver-bh"></view>
+        <view class="address-card">
+            <image class="card-icon icon-locate" mode="widthFix" src="/images/address_locate.png"></image>
+            <view class="label-info">
+                <view class="label-address">
+					收货人： {{item.name}}
+					<text> {{item.phone}}</text>
+                </view>
+                <view class="address">
+					收货地址：{{item.address}}
+				</view>
+                <view class="error-info" wx:if="{{item.status===4}}">{{item.memo}}</view>
+            </view>
+        </view>
+        <view class="driver"></view>
+        <view class="waybill-info" wx:if="{{item.courierNumber&&(item.status===2||item.status===3)}}">
+            <view class="waybill-left">
+                <image class="express-icon" src="{{images.my_express_icon}}"></image>
+				运单信息：{{item.courierName}} {{item.courierNumber}}
+			</view>
+            <view bindtap="copy" class="waybill-btn" data-value="{{item.courierNumber}}" hoverClass="btn-hover">
+				复制
+			</view>
+        </view>
+    </view>
+    <view class="public-card" wx:if="{{item.type===3}}">
+        <view class="driver-bh"></view>
+        <view class="waybill-info">
+            <view class="waybill-left">
+                <image class="express-icon" src="{{images.attention}}"></image>
+				兑换码:{{item.fictitious}}
+			</view>
+            <view bindtap="copy" class="waybill-btn" data-value="{{item.fictitious}}" hoverClass="btn-hover">
+				复制
+			</view>
+        </view>
+        <view class="piblic-content" wx:if="{{item.product.isUnderLine}}">
+            <image class="public-img" src="{{images.attention}}"></image>
+            <view class="public-text">使用教程可查看
+				<text bindtap="navigateToDetial" class="text-undeline" data-etype="{{item.product.exchangeType}}" data-moudule="{{'商品详情'}}" data-oemtype="{{item.oem_type}}" data-value="{{item.product.id}}">商品详情</text>
+            </view>
+        </view>
+        <view class="piblic-content" wx:if="{{item.goods.is_under_line===2}}">
+            <image class="public-img" src="{{images.attention}}"></image>
+            <view class="public-text">已放入你的优惠券
+				<text bindtap="navigateToVoucher" class="text-undeline">点击查看</text>
+            </view>
+        </view>
+    </view>
+    <view class="public-card" wx:if="{{item.type===2}}">
+        <view class="driver-bh"></view>
+        <view class="piblic-content">
+            <image class="public-img" src="{{images.attention}}"></image>
+            <view class="public-text">已放入您的账户余额
+				<text bindtap="navigateCash" class="text-undeline">点击查看</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="container" wx:if="{{orders.length===0}}">
+    <view class="img-box">
+        <image class="box-image" src="{{images.my_orders_nodata}}"></image>
+        <text class="img-text">您没有相关订单~</text>
+    </view>
+    <view class="btn-pre">
+        <view bindtap="nagativeToIndex" class="btn-change" hoverClass="btn-hover">去兑换</view>
+    </view>
+</view>

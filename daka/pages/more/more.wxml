@@ -1,0 +1,9 @@
+<cu-custom isBack="{{true}}" bgColor="bg-gradual-green"><view slot="content">打卡小程序</view></cu-custom>
+<my-ad></my-ad>
+<view class="my_list">
+    <navigator appId="{{item.appId}}" class="my_lis_item" openType="navigate" path="{{item.path}}" target="miniProgram" wx:for="{{program}}" wx:key="f">
+        <image class="list_img" src="{{item.icon}}"></image>
+        <view class="my_list_lable">{{item.name}}</view>
+        <image class="my_icon" src="/images/arrow.png"></image>
+    </navigator>
+</view>

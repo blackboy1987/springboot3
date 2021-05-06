@@ -1,0 +1,83 @@
+<cu-custom isBack="{{true}}" bgColor="bg-gradual-green"><view slot="content">打卡小程序</view></cu-custom>
+<scroll-view class="container" scrollY="true">
+    <view class="top" style="background-image:url({{appConfig.config.myBg}});background-repeat:no-repeat;background-size:100% 100%;">
+        <view class="pic" style="background-image:url({{userInfo.avatarUrl||appConfig.config.defaultAvatar}})"></view>
+        <text class="userName">{{userInfo.nickName||appConfig.config.defaultNickName||'微信用户'}}</text>
+        <text class="total">累计打卡 {{all_nun.count}} 天</text>
+    </view>
+    <view class="navArea">
+        <view class="navList">
+            <navigator class="nav" hoverClass="none" url="/pages/cash/cash" wx:if="{{appConfig.status===2}}">
+                <view class="icon">
+                    <image mode="widthFix" src="/images/xjjl.png"></image>
+                </view>
+                <text class="flex flex-1 text">奖励</text>
+                <text class="text">兑换</text>
+                <view class="arrow"></view>
+            </navigator>
+            <navigator class="nav" hoverClass="none" url="/pages/today/today">
+                <view class="icon">
+                    <image mode="widthFix" src="/images/jrjkb.png"></image>
+                </view>
+                <text class="flex flex-1 text">今日{{appConfig.config.currencyName}}</text>
+                <view class="arrow"></view>
+            </navigator>
+            <navigator class="nav" hoverClass="none" url="/pages/yesterday/yesterday" wx:if="{{appConfig.status===2}}">
+                <view class="icon">
+                    <image mode="widthFix" src="/images/zrfdjl.png"></image>
+                </view>
+                <text class="flex flex-1 text">昨日奖励</text>
+                <view class="arrow"></view>
+            </navigator>
+            <navigator class="nav" hoverClass="none" url="/pages/rank/rank">
+                <view class="icon">
+                    <image mode="widthFix" src="/images/phb.png"></image>
+                </view>
+                <text class="flex flex-1 text">排行榜</text>
+                <view class="arrow"></view>
+            </navigator>
+            <navigator class="nav" hoverClass="none" url="/pages/exemption/exemption">
+                <view class="icon">
+                    <image mode="widthFix" src="/images/mzsm.png" style="height:26px"></image>
+                </view>
+                <text class="flex flex-1 text">免责声明</text>
+                <view class="arrow"></view>
+            </navigator>
+            <button bindtap="showOfficial" class="buttonfix nav" wx:if="{{appConfig.config.officialAccountImgofficial_account_img}}">
+                <view class="icon">
+                    <image mode="widthFix" src="/images/gzh.png"></image>
+                </view>
+                <text class="flex flex-1 text">官方公众号</text>
+                <text class="text">关注不迷路</text>
+                <view class="arrow"></view>
+            </button>
+            <button class="buttonfix nav" hoverClass="none" openType="contact">
+                <view class="icon">
+                    <image mode="widthFix" src="/images/lxkf.png"></image>
+                </view>
+                <text class="flex flex-1 text">联系客服</text>
+                <view class="arrow"></view>
+            </button>
+            <navigator class="nav" hoverClass="none" url="/pages/more/more">
+                <view class="icon">
+                    <image mode="widthFix" src="/images/zzs.png" style="height:26px"></image>
+                </view>
+                <text class="flex flex-1 text">更多小程序</text>
+                <view class="arrow"></view>
+            </navigator>
+        </view>
+    </view>
+    <my-ad></my-ad>
+</scroll-view>
+<view class="showEmpower" wx:if="{{!isAuth&&show_login}}">
+    <view class="center">
+        <view class="showBoxContent">
+            <image class="headPic" mode="widthFix" src="{{appConfig.config.loginImage}}" style="height:150px"></image>
+            <text>您的信息和数据将受到保护</text>
+        </view>
+        <view class="btnLine">
+            <button bind:tap="getUserInfo" class="buttonfix confirm" lang="zh_CN">授权并登陆</button>
+            <button bindtap="cancel_login" class="buttonfix cancel">取消</button>
+        </view>
+    </view>
+</view>

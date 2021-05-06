@@ -7,6 +7,7 @@ import com.bootx.util.wechat.AccessToken1;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
+import org.apache.commons.lang3.StringUtils;
 
 public class EhCacheUtils {
 
@@ -14,7 +15,7 @@ public class EhCacheUtils {
     private static final Cache accessTokenCache = cacheManager.getCache("accessToken");
     private static final Cache accessToken1Cache = cacheManager.getCache("accessToken1");
     private static final Cache wechatUserCache = cacheManager.getCache("wechatUser");
-
+    private static final Cache smsCodeCache = cacheManager.getCache("smsCode");
 
     public static AccessToken getAccessToken(String key){
         if(accessTokenCache!=null){
@@ -108,6 +109,37 @@ public class EhCacheUtils {
     public static void removeCacheWechatUserCache(){
         if(wechatUserCache!=null){
             wechatUserCache.remove("accessToken");
+        }
+    }
+
+
+
+    public static String getSmsCodeCache(String key){
+        if(smsCodeCache!=null){
+            Element element = smsCodeCache.get(key);
+            if(element==null){
+                return null;
+            }else{
+                Object result = element.getObjectValue();
+                if(result==null){
+                    return null;
+                }
+                return (String) result;
+            }
+        }else{
+            return null;
+        }
+    }
+
+    public static void setSmsCodeCache(String key,String value){
+        if(smsCodeCache!=null&& StringUtils.isNotBlank(key)&&StringUtils.isNotBlank(value)){
+            smsCodeCache.put(new Element(key,value,0,60*10));
+        }
+    }
+
+    public static void removeSmsCodeCache(String key){
+        if(smsCodeCache!=null&&StringUtils.isNotBlank(key)){
+            smsCodeCache.remove(key);
         }
     }
 

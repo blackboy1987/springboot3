@@ -86,7 +86,7 @@ public class DateUtils {
      * @return
      *      距离当前时间index天之后的时间
      */
-    public static Date getNextHhour(Integer index) {
+    public static Date getNextHour(Integer index) {
         LocalDateTime localDateTime = LocalDateTime.now();
         return convertLocalDateTimeToDate(localDateTime.plusHours(index));
     }
@@ -128,6 +128,11 @@ public class DateUtils {
     public static Date getNextDay(Date date,Integer index) {
         LocalDateTime localDateTime = convertDateToLocalDateTime(date);
         return convertLocalDateTimeToDate(localDateTime.plusDays(index));
+    }
+
+    public static Date getNextHours(Date date,Integer index) {
+        LocalDateTime localDateTime = convertDateToLocalDateTime(date);
+        return convertLocalDateTimeToDate(localDateTime.plusHours(index));
     }
 
 

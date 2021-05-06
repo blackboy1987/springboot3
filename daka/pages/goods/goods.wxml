@@ -1,0 +1,69 @@
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">打卡小程序</view>
+</cu-custom>
+<view class="container {{isShowDialog?'bodyLock':''}}">
+    <view class="swiper-container">
+        <swiper autoplay="{{autoplay}}" circular="{{true}}" bindchange="swiperchange" class="swiper-box" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}" vertical="{{vertical}}">
+            <swiper-item style="overflow:hidden; vertical-align: middle;" wx:for="{{product.images}}" wx:key="f">
+                <image class="slide-image" data-index="{{index}}" mode="widthFix" src="{{item}}"></image>
+            </swiper-item>
+        </swiper>
+        <view class="swiper-pager">
+            <text class="current-pager">{{current+1}}</text> /
+      <text class="total-pager"> {{product.images.length}}</text>
+        </view>
+    </view>
+    <view class="shopping-container">
+        <view class="name" wx:if="{{product.type===1}}">
+            <text class="text-tag" wx:if="{{free===0}}">包邮</text>
+            <text class="text-tag" wx:else>邮费:{{goods.free}}</text> {{name}}
+        </view>
+        <view class="price-babel">
+            <view class="energy-price">
+                <text>{{goods.exchange_number}}</text> {{config.currencyName}}{{goods.exchange_type==2?'+':''}}
+        <text wx:if="{{goods.exchange_type==2}}">{{goods.money}}</text> {{goods.exchange_type==2?'¥':''}}
+      </view>
+            <view class="pre-price">原价￥{{marketPrice}}</view>
+            <button bindtap="setAddress" class="btn-share share" hoverClass="other-button-hover" style="margin-top:65rpx;color:#949494" wx:if="{{goods.type==1&&goods.is_free!=3}}">
+        {{address?'修改':'设置'}}收货地址
+        <image class="share-icon" src="/images/address_locate.png" style="width:35rpx;height:35rpx;"></image>
+            </button>
+        </view>
+        <text class="shopping-left">剩余{{product.quantity}}件</text>
+    </view>
+    <view class="show-container {{isIphoneX?'fix-iphonex-container':isIphone?'fix-iphone-container':''}}">
+        <view class="goods_extra_info_tab" id="goods_extra_info_tab">
+            <view bindtap="switchTab" class="goods_extra_info_tab_item {{extra_info_tab==1?'goods_extra_info_tab_item_selected':''}}" data-extra="1">商品介绍</view>
+            <view bindtap="switchTab" class="goods_extra_info_tab_item {{extra_info_tab==2?'goods_extra_info_tab_item_selected':''}}" data-extra="2">兑换记录</view>
+        </view>
+        <block wx:if="{{extra_info_tab==1}}">
+            <import src="../wxParse/wxParse.wxml"></import>
+            <view style="margin-left:30rpx;margin-right:10rpx;word-wrap:break-word;margin-bottom:150rpx;">
+                <view class="wxParse c-image">
+                    <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+                </view>
+            </view>
+        </block>
+        <view class="exchange_record_list" wx:if="{{extra_info_tab==2}}">
+            <view class="exchange_record_item" wx:for="{{order}}" wx:key="or">
+                <view class="exchange_record_user_icon_container">
+                    <image class="exchange_record_user_icon" src="{{item.member.head}}"></image>
+                </view>
+                <view class="exchange_record_user_name">{{item.member.nickname}}</view>
+                <view class="exchange_record_goods_name">兑换了{{goods.goods_name}}</view>
+                <view class="exchange_record_time">{{item.formatTime}}</view>
+                <view class="exchange_record_line"></view>
+            </view>
+        </view>
+        <view style="margin-bottom: 128rpx;">
+            <my-ad></my-ad>
+        </view>
+    </view>
+    <view class="btn-plus {{isIphoneX?'fix-iphonex-button':''}}">
+        <button class="btn-change " hoverClass="btn-hover" id="btn-goods" openType="share" wx:if="{{product.status===4}}">{{config.currencyName}}不足，邀请好友产更多{{config.currencyName}}<image class="share-img" src="/images/share.png"></image></button>
+        <button bindtap="exchange" class="btn-change " hoverClass="btn-hover" wx:if="{{product.status===1}}">立即兑换</button>
+        <button disabled class="btn-change gray" hoverClass="btn-hover " type="button" wx:if="{{product.status===3}}">该商品每个用户可兑换{{goods.allow_number}}次</button>
+        <button disabled class="btn-change gray" hoverClass="btn-hover " type="button" wx:if="{{product.status===2}}">商品已被抢完</button>
+    </view>
+</view>

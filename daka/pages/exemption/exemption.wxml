@@ -1,0 +1,11 @@
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}"><view slot="content">免责申明</view></cu-custom>
+<my-ad></my-ad>
+<view style="display:flex;width:100%;height:100%;flex-direction: column;">
+    <scroll-view class="outer" scrollY="true">
+        <view class="list">
+            <view class="userLine" style="margin-bottom:50rpx;padding-top:35rpx;color:#818181">
+                <view style="margin-bottom:25rpx;" wx:for="{{rule}}" wx:key="r">{{item.content}}</view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

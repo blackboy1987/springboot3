@@ -1,16 +1,11 @@
-/**
-  * Copyright 2021 json.cn 
-  */
+
 package com.webpage.response;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
-/**
- * Auto-generated: 2021-04-25 19:56:40
- *
- * @author json.cn (i@json.cn)
- * @website http://www.json.cn/java2pojo/
- */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class RowSet {
 
     private List<String> filter;

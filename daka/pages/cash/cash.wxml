@@ -1,0 +1,34 @@
+<cu-custom isBack="{{true}}" bgColor="bg-gradual-green"><view slot="content">打卡小程序</view></cu-custom>
+<image class="hd-bg" src="{{appConfig.config.bg}}"></image>
+<view class="withdraw-box">
+    <view class="withdraw-title" wx:if="{{appConfig.status===2}}">可提金额</view>
+    <view class="withdraw-num">{{member.money}}</view>
+</view>
+<view class="input-box input-box-height {{cash_type==2&&payment_code_url?'input-box-cash-height':''}}" wx:if="{{appConfig.status===2}}">
+    <view class="input-title">{{tx}}金额</view>
+    <view class="input-model-box">
+        <view>¥</view>
+        <input bindinput="bindKeyInput" class="input-model" placeholder="输入{{tx}}金额,最低{{least_money}}元" placeholderClass="input-placeholder" type="digit" value="{{cash_money?cash_money:''}}"></input>
+        <view bindtap="bindWithdrawAllClick" class="input-all">全部</view>
+    </view>
+    <view class="input-line" wx:if="{{cash_type==2}}"></view>
+    <view class="input-model-box" style="margin:0 auto" wx:if="{{cash_type==2&&payment_code_url}}">
+        <image src="{{payment_code_url}}" style="width:200rpx;height:200rpx;margin:0 auto;margin-top:15rpx;"></image>
+    </view>
+    <view class="input-line" wx:if="{{cash_type==2&&payment_code_url}}"></view>
+    <view bindtap="bindWithdrawBtnClick" class="input-withdraw btn">{{tx}}</view>
+    <button bindtap="addImg" class="input-invite btn" wx:if="{{cash_type==2}}">{{payment_code_url?'更换收款码':'上传收款码'}}</button>
+    <button class="input-invite btn" openType="share" wx:else>{{share_text}}</button>
+</view>
+<view class="ad" wx:if="{{isShowAd}}">
+    <ad binderror="bindAdError" unitId="adunit-30e0c30af902a958"></ad>
+</view>
+<block wx:if="{{appConfig.status===2}}">
+    <view class="tip-tt tip">{{tx}}说明：</view>
+    <view class="tip-content tip" wx:if="{{!cash_explain}}">1.首次余额满{{first_presentation}}元可{{tx}}；</view>
+    <view class="tip-content tip" wx:if="{{!cash_explain}}">2.后续每笔{{tx}}至少要{{follow_up_presentation}}元；</view>
+    <view class="tip-content tip" wx:if="{{!cash_explain}}">3.单日{{tx}}上限为{{bag_daily_upper}}元；</view>
+    <view class="tip-content tip" wx:if="{{!cash_explain}}">4.{{tx}}成功后，24小时内转账到微信零钱包；</view>
+    <view class="tip-content tip" wx:if="{{!cash_explain}}">5.如有疑问请通过小程序联系客服。</view>
+    <view class="tip-content tip" wx:if="{{cash_explain}}" wx:for="{{cash_explain}}" wx:key="key">{{item}}</view>
+</block>

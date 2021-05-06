@@ -10,13 +10,15 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Member extends BaseEntity<Long> {
+
+    /**
+     * 树路径分隔符
+     */
+    public static final String TREE_PATH_SEPARATOR = ",";
 
     @NotNull
     @Column(nullable = false,updatable = false,unique = true)
@@ -75,10 +77,15 @@ public class Member extends BaseEntity<Long> {
     @OneToMany(mappedBy = "parent",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Set<Member> children = new HashSet<>();
 
-    @Min(1)
     @NotNull
     @Column(nullable = false)
     private Integer grade;
+
+    /**
+     * 树路径
+     */
+    @Column(nullable = false)
+    private String treePath;
 
     @Min(0)
     @NotNull
@@ -99,6 +106,10 @@ public class Member extends BaseEntity<Long> {
     @NotNull
     @Column(nullable = false)
     private Integer ticket;
+
+    @NotNull
+    @Column(nullable = false)
+    private Date updateDate;
 
     @NotNull
     @Convert(converter = ConfigConfigConvert.class)
@@ -259,6 +270,25 @@ public class Member extends BaseEntity<Long> {
         return grade;
     }
 
+    /**
+     * 获取树路径
+     *
+     * @return 树路径
+     */
+    public String getTreePath() {
+        return treePath;
+    }
+
+    /**
+     * 设置树路径
+     *
+     * @param treePath
+     *            树路径
+     */
+    public void setTreePath(String treePath) {
+        this.treePath = treePath;
+    }
+
     public Integer getLevel() {
         return level;
     }
@@ -295,12 +325,66 @@ public class Member extends BaseEntity<Long> {
         this.grade = grade;
     }
 
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
     public Map<String, String> getConfig() {
         return config;
     }
 
     public void setConfig(Map<String, String> config) {
         this.config = config;
+    }
+
+    /**
+     * 获取所有上级地区ID
+     *
+     * @return 所有上级地区ID
+     */
+    @Transient
+    public Long[] getParentIds() {
+        String[] parentIds = StringUtils.split(getTreePath(), TREE_PATH_SEPARATOR);
+        Long[] result = new Long[parentIds.length];
+        for (int i = 0; i < parentIds.length; i++) {
+            result[i] = Long.valueOf(parentIds[i]);
+        }
+        return result;
+    }
+
+    /**
+     * 获取所有上级地区
+     *
+     * @return 所有上级地区
+     */
+    @Transient
+    public List<Member> getParents() {
+        List<Member> parents = new ArrayList<>();
+        recursiveParents(parents, this);
+        return parents;
+    }
+
+    /**
+     * 递归上级地区
+     *
+     * @param parents
+     *            上级地区
+     * @param area
+     *            地区
+     */
+    private void recursiveParents(List<Member> parents, Member member) {
+        if (member == null) {
+            return;
+        }
+        Member parent = member.getParent();
+        if (parent != null) {
+            parents.add(0, parent);
+            recursiveParents(parents, parent);
+        }
     }
 
     @Convert

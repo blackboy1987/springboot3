@@ -76,7 +76,7 @@ public class IndexController {
 
     @PostMapping("/login")
     public Result category(HttpServletRequest request,String code){
-        com.bootx.entity.App app = appService.get(request);
+        App app = appService.get(request);
         if(app==null){
             return Result.error("非法访问");
         }
@@ -100,7 +100,7 @@ public class IndexController {
 
     @PostMapping("/list")
     public Result list(HttpServletRequest request, Pageable pageable,Integer type){
-        com.bootx.entity.App app = appService.get(request);
+        App app = appService.get(request);
         if(app==null){
             return Result.error("非法访问");
         }

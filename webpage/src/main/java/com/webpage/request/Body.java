@@ -1,21 +1,16 @@
-/**
-  * Copyright 2021 json.cn 
-  */
+
 package com.webpage.request;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Auto-generated: 2021-04-25 19:36:58
- *
- * @author json.cn (i@json.cn)
- * @website http://www.json.cn/java2pojo/
- */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Body {
 
     private Map<String,Object> dataStores = new HashMap<>();
-    private Parameters parameters;
+    private Map<String,Object> parameters;
 
     public Map<String, Object> getDataStores() {
         return dataStores;
@@ -25,10 +20,10 @@ public class Body {
         this.dataStores = dataStores;
     }
 
-    public void setParameters(Parameters parameters) {
+    public void setParameters(Map<String,Object> parameters) {
          this.parameters = parameters;
      }
-     public Parameters getParameters() {
+     public Map<String,Object> getParameters() {
          return parameters;
      }
 

@@ -42,12 +42,12 @@ const TableList: React.FC = () => {
     {
       title: '登录账号',
       dataIndex: 'adminName',
-      width:120,
+      width:100,
     },
     {
       title: '小程序',
       dataIndex: 'appName',
-      width:200,
+      width:120,
       copyable: true,
     },
     {
@@ -60,6 +60,7 @@ const TableList: React.FC = () => {
       title: 'appSecret',
       dataIndex: 'appSecret',
       copyable: true,
+      ellipsis: true,
     },
     {
       title: 'appCode',
@@ -85,8 +86,23 @@ const TableList: React.FC = () => {
       dataIndex: 'type',
       width:60,
       renderText:text=>{
+        if(text===0){
+          return "成语";
+        }
         if(text===1){
           return "影视";
+        }
+        if(text===2){
+          return "短视频";
+        }
+        if(text===3){
+          return "图转文";
+        }
+        if(text===4){
+          return "答题";
+        }
+        if(text===5){
+          return "打卡";
         }
 
         return text;
@@ -179,7 +195,20 @@ const TableList: React.FC = () => {
           rules={[
             {
               required: true,
-              message: '规则名称为必填项',
+              message: '订单编号为必填项',
+            },
+          ]}
+        />
+        <ProFormText
+          placeholder='请输入订单手机号'
+          labelCol={{span: 6}}
+          wrapperCol={{span: 18}}
+          label='手机号'
+          name='mobile'
+          rules={[
+            {
+              required: true,
+              message: '手机号为必填项',
             },
           ]}
         />

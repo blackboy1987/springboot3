@@ -21,13 +21,16 @@ public interface AdminService extends BaseService<Admin, Long> {
 
     Admin findByUsername(String username);
 
+    Admin findByMobile(String mobile);
+
     boolean usernameExist(String username);
 
+    boolean mobileExist(String username);
     Admin create(WeChatUser weChatUser);
 
     Admin get(HttpServletRequest request);
 
     Map<String, Object> getData(Admin admin);
 
-    Admin create(String orderSn);
+    Admin create(String orderSn,String mobile);
 }

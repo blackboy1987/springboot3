@@ -1,0 +1,33 @@
+<cu-custom isBack="{{true}}" bgColor="bg-gradual-green"><view slot="content">打卡小程序</view></cu-custom>
+<scroll-view class="container" scrollY="true">
+    <my-ad></my-ad>
+    <view class="title">
+        <text class="icon tips"></text>一共{{list.length || 0}}位好友</view>
+    <view class="list">
+        <view class="li" wx:for="{{list}}" wx:key="f">
+            <view class="pic">
+                <image mode="aspectFill" src="{{item.avatarUrl||appConfig.config.defaultAvatar}}"></image>
+            </view>
+            <view class="right">
+                <view class="name">{{item.nickName||appConfig.config.defaultNickName}}</view>
+                <view class="total">
+                    <text class="icon sign"></text>今日打卡{{item.todayCount}}次，总共打卡{{item.allCount}}次</view>
+            </view>
+        </view>
+    </view>
+    <button bindtap="showShare" class="buttonfix invotation" wx:if="{{appConfig.status===2}}">邀请好友</button>
+</scroll-view>
+<view class="showBox" wx:if="{{show_poster}}">
+    <view class="center">
+        <view bindtap="hidePost" class="close"></view>
+        <view class="title">海报图片</view>
+        <view class="showBoxContent">
+            <image class="bookmark" src="{{poster}}" style="height:420px"></image>
+        </view>
+        <view class="btnLine">
+            <button class="buttonfix" openType="share" style="background:#8799a3">立即分享</button>
+            <button bindtap="preservation" class="buttonfix">保存海报</button>
+        </view>
+    </view>
+</view>
+<painter bind:imgErr="imgErr" bind:imgOK="onImgOK" class="canvas" customStyle="width:540px;height:960px;" palette="{{template}}" wx:if="{{is_poster}}"></painter>

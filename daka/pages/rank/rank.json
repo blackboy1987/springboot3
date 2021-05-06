@@ -1,0 +1,9 @@
+{
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#fb852d",
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTitleText": "排行榜",
+    "usingComponents": {
+        "my-ad": "/components/myAd/index"
+    }
+}

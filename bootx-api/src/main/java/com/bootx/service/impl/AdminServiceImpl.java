@@ -44,8 +44,17 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
     }
 
     @Override
+    public Admin findByMobile(String mobile) {
+        return adminDao.find("mobile",mobile);
+    }
+
+    @Override
     public boolean usernameExist(String username) {
         return adminDao.exists("username",username);
+    }
+    @Override
+    public boolean mobileExist(String mobile) {
+        return adminDao.exists("mobile",mobile);
     }
 
     @Override
@@ -87,7 +96,7 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
     }
 
     @Override
-    public Admin create(String orderSn) {
+    public Admin create(String orderSn,String mobile) {
         Admin admin = new Admin();
         admin.setIsAdmin(false);
         admin.setOpenId(orderSn);
@@ -96,6 +105,7 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
         while (usernameExist(username)){
             username = CodeUtils.getCode1(8);
         }
+        admin.setMobile(mobile);
         admin.setUsername(username);
         admin.setPassword(username);
         admin = super.save(admin);

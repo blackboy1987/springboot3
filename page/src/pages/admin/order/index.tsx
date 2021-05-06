@@ -18,6 +18,10 @@ const TableList: React.FC = () => {
       dataIndex: 'orderSn',
     },
     {
+      title: '订单用户',
+      dataIndex: 'orderName',
+    },
+    {
       title: '小程序',
       dataIndex: 'appName',
     },

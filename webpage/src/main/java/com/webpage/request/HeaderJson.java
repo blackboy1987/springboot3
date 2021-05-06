@@ -1,12 +1,9 @@
 
 package com.webpage.request;
 
-/**
- * Auto-generated: 2021-04-25 19:36:58
- *
- * @author json.cn (i@json.cn)
- * @website http://www.json.cn/java2pojo/
- */
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class HeaderJson {
 
     private Header header;

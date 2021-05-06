@@ -54,7 +54,7 @@ public class SubscriptionRecordDaoImpl extends BaseDaoImpl<SubscriptionRecord, L
         criteriaQuery.select(root);
         Predicate restrictions = criteriaBuilder.conjunction();
         restrictions = criteriaBuilder.and(restrictions, criteriaBuilder.equal(root.get("status"), status));
-        restrictions = criteriaBuilder.and(restrictions, criteriaBuilder.lessThanOrEqualTo(root.get("createdDate"), DateUtils.getNextHhour(3)));
+        restrictions = criteriaBuilder.and(restrictions, criteriaBuilder.lessThanOrEqualTo(root.get("createdDate"), DateUtils.getNextHour(3)));
         criteriaQuery.where(restrictions);
         return super.findList(criteriaQuery,null,null,null,null);
     }

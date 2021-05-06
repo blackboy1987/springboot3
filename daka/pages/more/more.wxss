@@ -1,0 +1,45 @@
+.my_list {
+    width: 686rpx;
+    margin-top: 40rpx;
+    margin-left: 32rpx;
+    margin-bottom: 16rpx;
+}
+
+.my_lis_item,.my_list {
+    float: left;
+    box-sizing: border-box;
+}
+
+.my_lis_item {
+    border-radius: 10rpx;
+    background-color: #fff;
+    width: 100%;
+    padding: 30rpx;
+    color: #333;
+    position: relative;
+    margin-bottom: 30rpx;
+    box-shadow: 10rpx 10rpx 40rpx rgba(158,174,192,.2);
+}
+
+.list_img {
+    width: 80rpx;
+    height: 80rpx;
+    margin-right: 20rpx;
+    float: left;
+    border-radius: 50%;
+}
+
+.my_list_lable {
+    float: left;
+    font-size: 28rpx;
+    color: #333;
+    line-height: 40rpx;
+    margin-top: 20rpx;
+}
+
+.my_icon {
+    float: right;
+    width: 30rpx;
+    height: 30rpx;
+    margin-top: 25rpx;
+}
