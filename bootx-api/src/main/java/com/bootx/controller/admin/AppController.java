@@ -11,6 +11,7 @@ import com.bootx.member.service.MemberRankService;
 import com.bootx.member.service.MemberService;
 import com.bootx.service.AdminService;
 import com.bootx.service.AppService;
+import com.bootx.service.MoreProgramService;
 import com.bootx.service.SubscriptionTemplateService;
 import com.bootx.util.CodeUtils;
 import com.bootx.util.JsonUtils;
@@ -50,6 +51,8 @@ public class AppController {
     private MemberRankService memberRankService;
     @Resource
     private ProductCategoryService productCategoryService;
+    @Resource
+    private MoreProgramService moreProgramService;
 
     @PostMapping("/list")
     @JsonView(BaseEntity.PageView.class)
@@ -475,6 +478,8 @@ public class AppController {
 
         Map<String,Object> config = JsonUtils.toObject(otherConfig, new TypeReference<Map<String, Object>>() {
         });
+        String rules = config.get("rules")+"";
+        config.put("rules",rules.split(";"));
         AppConfig appConfig = app.getAppConfig();
         if(appConfig==null){
             appConfig = new AppConfig();
@@ -484,5 +489,51 @@ public class AppController {
         app.setAppConfig(appConfig);
         appService.update(app);
         return Result.success("操作成功");
+    }
+
+    @PostMapping("/moreProgram")
+    public Result moreProgram(HttpServletRequest request,Long id){
+        Admin admin = adminService.get(request);
+        if(admin==null){
+            return Result.error("非法访问");
+        }
+        App app = admin.getApp();
+        if(id!=null){
+            if(!admin.getIsAdmin()){
+                return Result.error("非法访问");
+            }
+            app = appService.find(id);
+        }
+        if(app==null){
+            return Result.error("非法访问");
+        }
+        return Result.success(moreProgramService.findListByApp(app));
+    }
+
+    @PostMapping("/moreProgramSave")
+    public Result moreProgramSave(HttpServletRequest request,Long id1, MoreProgram moreProgram){
+        Admin admin = adminService.get(request);
+        if(admin==null){
+            return Result.error("非法访问");
+        }
+        App app = admin.getApp();
+        if(id1!=null){
+            if(!admin.getIsAdmin()){
+                return Result.error("非法访问");
+            }
+            app = appService.find(id1);
+        }
+        if(app==null){
+            return Result.error("非法访问");
+        }
+        if(moreProgram.isNew()){
+            moreProgram.setApp(app);
+            moreProgramService.save(moreProgram);
+            return Result.success("操作成功");
+        }else{
+            return Result.error("参数错误");
+        }
+
+
     }
 }

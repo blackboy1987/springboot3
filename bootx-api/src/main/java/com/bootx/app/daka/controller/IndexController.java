@@ -8,14 +8,12 @@ import com.bootx.app.daka.service.OrderService;
 import com.bootx.app.daka.service.ProductCategoryService;
 import com.bootx.app.daka.service.ProductService;
 import com.bootx.common.Result;
-import com.bootx.entity.AdConfig;
-import com.bootx.entity.App;
-import com.bootx.entity.AppConfig;
-import com.bootx.entity.BaseEntity;
+import com.bootx.entity.*;
 import com.bootx.member.entity.Member;
 import com.bootx.member.entity.PointLog;
 import com.bootx.member.service.MemberService;
 import com.bootx.service.AppService;
+import com.bootx.service.MoreProgramService;
 import com.bootx.service.RedisService;
 import com.bootx.util.DateUtils;
 import com.bootx.util.JWTUtils;
@@ -51,6 +49,8 @@ public class IndexController {
     private ProductService productService;
     @Resource
     private OrderService orderService;
+    @Resource
+    private MoreProgramService moreProgramService;
 
     @PostMapping("/config")
     public Result config(HttpServletRequest request){
@@ -76,7 +76,7 @@ public class IndexController {
             data.put("config",new DaKaConfig());
             app.setAppConfig(JsonUtils.toObject(JsonUtils.toJson(new DaKaConfig()),AppConfig.class));
         }else{
-            data.put("config",app.getAppConfig());
+            data.put("config",app.getAppConfig().getConfig());
         }
         // 订阅的模板
 
@@ -143,17 +143,7 @@ public class IndexController {
             data.put("rule",list);
         }else if(StringUtils.equalsAnyIgnoreCase("program",action)){
             // 更多小程序
-            List<Map<String,Object>> list = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
-                Map<String,Object> map = new HashMap<>();
-                map.put("appId","appId");
-                map.put("path","path");
-                map.put("icon","icon");
-                map.put("name","name");
-
-                list.add(map);
-            }
-            data.put("program",list);
+            data.put("program",moreProgramService.findListByApp(app));
         }else if(StringUtils.equalsAnyIgnoreCase("shop",action)){
             Map<String,Object> map = new HashMap<>();
             map.put("list",productCategoryService.findList(app));
@@ -395,4 +385,17 @@ public class IndexController {
         return Result.success(data);
     }
 
+    @PostMapping("/star")
+    public Result star(HttpServletRequest request){
+        App app = appService.get(request);
+        if(app==null){
+            return Result.error("非法访问");
+        }
+        Map<String,Object> data = new HashMap<>();
+        Date now = new Date();
+        data.put("earliest",jdbcTemplate.queryForMap("SELECT DATE_FORMAT(clickrecord.createdDate,'%H:%i:%s') createdDate,member.nickName,member.avatarUrl FROM clickrecord,member WHERE clickrecord.appId="+app.getId()+" and clickrecord.memberId=member.id AND clickrecord.createdDate>='"+DateUtils.formatDateToString(now,"yyyy-MM-dd 00:00:00")+"' AND clickrecord.createdDate<='"+DateUtils.formatDateToString(now,"yyyy-MM-dd 23:59:59")+"'"));
+        data.put("will",jdbcTemplate.queryForMap("SELECT member.avatarUrl,member.nickName,count(clickrecord.id) count FROM clickrecord,member WHERE clickrecord.appId="+app.getId()+" and member.id=clickrecord.memberId GROUP BY memberId ORDER BY count(id) DESC LIMIT 1"));
+        data.put("palm",jdbcTemplate.queryForMap("SELECT member.avatarUrl,member.nickName,SUM(clickrecord.point) count FROM clickrecord,member WHERE clickrecord.appId="+app.getId()+" and member.id=clickrecord.memberId GROUP BY memberId ORDER BY SUM(clickrecord.point) DESC LIMIT 1"));
+        return Result.success(data);
+    }
 }
