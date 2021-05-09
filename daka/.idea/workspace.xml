@@ -2,43 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="419ea74b-61c1-496f-9beb-dc27804964cc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/dao/MoreProgramDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/dao/impl/MoreProgramDaoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/entity/MoreProgram.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/service/MoreProgramService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/service/impl/MoreProgramServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/adConfig.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/baseConfig.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/config.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/member.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/moreProgramConfig.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/order.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/otherConfig.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/product.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/productCategory.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/shareConfig.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/controller/IndexController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/controller/admin/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/controller/admin/AppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/friendList/friendList.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/friendList/friendList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/friendList/friendList.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/friendList/friendList.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/order/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order/order.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/rank/rank.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rank/rank.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/rank/rank.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rank/rank.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/we7/resource/js/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/we7/resource/js/util.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../page/config/defaultSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../page/config/defaultSettings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../page/config/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../page/config/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../page/src/pages/admin/app/ad.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../page/src/pages/admin/app/base.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../page/src/pages/admin/app/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../page/src/pages/admin/app/service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../page/src/pages/admin/app/typings.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/typings.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../page/src/pages/daKa/app/ad.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/pages/daKa/app/ad.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +73,7 @@
       <workItem from="1620398310118" duration="1557000" />
       <workItem from="1620434836145" duration="75000" />
       <workItem from="1620435791315" duration="2474000" />
-      <workItem from="1620543911407" duration="8501000" />
+      <workItem from="1620543911407" duration="8829000" />
     </task>
     <servers />
   </component>

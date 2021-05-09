@@ -533,7 +533,5 @@ public class AppController {
         }else{
             return Result.error("参数错误");
         }
-
-
     }
 }

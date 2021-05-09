@@ -34,6 +34,24 @@ export async function adsUpdate(body: Record<string, any>) {
     data: body,
   });
 }
+export async function share() {
+  return request<Record<string, any>>(`${Constants.baseUrl}app/share`, {
+    requestType:'form',
+    method: 'POST',
+  });
+}
+
+export async function shareUpdate(body: Record<string, any>) {
+  return request<Record<string, any>>(`${Constants.baseUrl}app/shareUpdate`, {
+    requestType:'form',
+    method: 'POST',
+    data: body,
+  });
+}
+
+
+
+
 
 export async function updatePassword(body: Record<string, any>) {
   return request<Record<string, any>>(`${Constants.baseUrl}app/updatePassword`, {
