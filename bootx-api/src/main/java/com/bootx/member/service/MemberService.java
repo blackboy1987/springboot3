@@ -1,6 +1,8 @@
 
 package com.bootx.member.service;
 
+import com.bootx.common.Page;
+import com.bootx.common.Pageable;
 import com.bootx.entity.App;
 import com.bootx.entity.RewardType;
 import com.bootx.member.entity.Member;
@@ -88,4 +90,6 @@ public interface MemberService extends BaseService<Member,Long> {
     List<Map<String,Object>> rank(App app, int count);
 
     Integer countPointLog(Date date, Member member, PointLog.Type type);
+
+    Page<Map<String,Object>> findPage(Pageable pageable, App app);
 }

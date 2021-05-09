@@ -6,6 +6,7 @@ import com.bootx.common.BaseAttributeConverter;
 import com.bootx.util.JsonUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.hibernate.validator.constraints.Length;
 
@@ -30,6 +31,7 @@ public class AppConfig extends BaseEntity<Long>{
     @NotNull
     @Convert(converter = ConfigConfigConvert.class)
     @Column(length = 3000,nullable = false)
+    @JsonView({BaseEntity.ListView.class})
     private Map<String,Object> config = new HashMap<>();
 
     public AppConfig(@NotNull App app) {
@@ -45,6 +47,7 @@ public class AppConfig extends BaseEntity<Long>{
     }
 
     public AppConfig() {
+        this.config = new HashMap<>();
     }
 
     public App getApp() {

@@ -1,6 +1,8 @@
 
 package com.bootx.service;
 
+import com.bootx.common.Page;
+import com.bootx.common.Pageable;
 import com.bootx.entity.Admin;
 import com.bootx.entity.App;
 import com.bootx.entity.Order;
@@ -78,4 +80,6 @@ public interface AppService extends BaseService<App,Long> {
     boolean appTokenExists(String appToken);
 
     App create(Admin admin, Order order);
+
+    Page<App> findPage(Admin admin, Pageable pageable);
 }

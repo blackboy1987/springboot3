@@ -60,13 +60,13 @@ public class IndexController {
         }
         Map<String,Object> data = new HashMap<>();
         AdConfig adConfig = new AdConfig();
-        adConfig.setBannerId("adunit-090ca0df5b0c4b32");
-        adConfig.setRewardedVideoAdId("adunit-371bd79d00078a90");
-        adConfig.setInterstitialAdId("adunit-bd3d4cbec78fdf97");
-        adConfig.setVideoAdId("adunit-33c30621be64ff71");
-        adConfig.setVideoFrontAdId("adunit-ef4637cc787de087");
-        adConfig.setGridAdId("adunit-f26ade6249502c6a");
-        adConfig.setNativeAdId("adunit-e93eada4f72d2341");
+        adConfig.setBannerId("adunit-5b0f059b101f9db3");
+        adConfig.setRewardedVideoAdId("adunit-47ed54439d22d0ec");
+        adConfig.setInterstitialAdId("adunit-9a5a00c59d1ecaa4");
+        adConfig.setVideoAdId("adunit-8ee7c94a4a1e3c35");
+        adConfig.setVideoFrontAdId("adunit-c8b28705e1687108");
+        adConfig.setGridAdId("adunit-a122e02d80caa68e");
+        adConfig.setNativeAdId("adunit-a122e02d80caa68e");
         data.put("ads",adConfig);
         data.put("logo",app.getLogo());
         data.put("name",app.getAppName());
@@ -84,9 +84,12 @@ public class IndexController {
         Date beginDate = DateUtils.getBeginDay(new Date());
         Date endDate = DateUtils.getEndDay(new Date());
         // 今日打卡人数（all_num）
-        data.put("allNum",jdbcTemplate.queryForObject("SELECT count(id) FROM member WHERE updateDate is NOT NULL AND appId="+app.getId()+" AND updateDate>='"+DateUtils.formatDateToString(beginDate,"yyyy-MM-dd HH:mm:ss")+"' AND updateDate<='"+DateUtils.formatDateToString(endDate,"yyyy-MM-dd HH:mm:ss")+"'",Integer.class));
+        String sql="SELECT count(id) FROM member WHERE updateDate is NOT NULL AND point>0 and appId="+app.getId()+" AND updateDate>='"+DateUtils.formatDateToString(beginDate,"yyyy-MM-dd HH:mm:ss")+"' AND updateDate<='"+DateUtils.formatDateToString(endDate,"yyyy-MM-dd HH:mm:ss")+"'";
+        System.out.println(sql);
+
+        data.put("allNum",jdbcTemplate.queryForObject(sql,Integer.class));
         // 今日打卡的用户（按照打卡时间逆序排列）
-        data.put("clockUsers",jdbcTemplate.queryForList("SELECT avatarUrl FROM member WHERE updateDate is NOT NULL AND appId="+app.getId()+" AND updateDate>='"+DateUtils.formatDateToString(beginDate,"yyyy-MM-dd HH:mm:ss")+"' AND updateDate<='"+DateUtils.formatDateToString(endDate,"yyyy-MM-dd HH:mm:ss")+"' ORDER BY updateDate DESC LIMIT 5"));
+        data.put("clockUsers",jdbcTemplate.queryForList("SELECT avatarUrl FROM member WHERE updateDate is NOT NULL AND point>0 and appId="+app.getId()+" AND updateDate>='"+DateUtils.formatDateToString(beginDate,"yyyy-MM-dd HH:mm:ss")+"' AND updateDate<='"+DateUtils.formatDateToString(endDate,"yyyy-MM-dd HH:mm:ss")+"' ORDER BY updateDate DESC LIMIT 5"));
         return Result.success(data);
     }
 
@@ -97,6 +100,7 @@ public class IndexController {
         Date beginDate = DateUtils.getBeginDay(new Date());
         Date endDate = DateUtils.getEndDay(new Date());
         String action = request.getParameter("action");
+        System.out.println("===================="+action);
         App app = appService.get(request);
         if(app==null&&!StringUtils.equalsAnyIgnoreCase("login",action)){
             return Result.error("非法访问");
@@ -163,8 +167,6 @@ public class IndexController {
             map.put("orders",orderService.findList(app,member));
             data.putAll(map);
         }
-
-
         return Result.success(data);
     }
 
@@ -294,6 +296,7 @@ public class IndexController {
     }
 
     public Map<String,Object> login(HttpServletRequest request,App app) {
+
         Map<String,Object> data = new HashMap<>();
         Member member = memberService.get(request);
         if(member==null|| app == null || member.getAppId().compareTo(app.getId())!=0){

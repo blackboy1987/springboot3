@@ -17,9 +17,11 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.ResolvableType;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import javax.persistence.*;
 import javax.persistence.criteria.*;
 import java.io.Serializable;
@@ -57,6 +59,9 @@ public abstract class BaseDaoImpl<T extends BaseEntity<ID>, ID extends Serializa
 
 	@PersistenceContext
 	protected EntityManager entityManager;
+
+	@Resource
+	protected JdbcTemplate jdbcTemplate;
 
 	/**
 	 * 构造方法

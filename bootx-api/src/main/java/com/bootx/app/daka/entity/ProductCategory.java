@@ -18,7 +18,7 @@ public class ProductCategory extends BaseEntity<Long> {
 
     @NotEmpty
     @Column(nullable = false)
-    @JsonView({ListView.class})
+    @JsonView({ListView.class,PageView.class})
     private String name;
 
     @OneToMany(mappedBy = "productCategory",fetch = FetchType.LAZY,cascade = CascadeType.ALL)

@@ -102,7 +102,6 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements 
 			member.setParent(parent);
 			member.setTicket(0);
 			member.setGold(0);
-			member.setUpdateDate(new Date());
 			member.setMemberRank(memberRankService.findDefault(app));
 			try {
 				if(appConfig.get("registerRewardPoint")!=null){
@@ -378,5 +377,10 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements 
 			member.setTreePath(Area.TREE_PATH_SEPARATOR);
 		}
 		member.setGrade(member.getParentIds().length);
+	}
+
+	@Override
+	public Page<Map<String,Object>> findPage(Pageable pageable, App app) {
+		return memberDao.findPage(pageable,app);
 	}
 }

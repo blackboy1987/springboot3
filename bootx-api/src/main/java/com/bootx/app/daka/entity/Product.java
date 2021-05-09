@@ -1,6 +1,7 @@
 package com.bootx.app.daka.entity;
 
 import com.bootx.common.BaseAttributeConverter;
+import com.bootx.entity.App;
 import com.bootx.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -18,26 +19,25 @@ public class Product extends BaseEntity<Long> {
     @ManyToOne(fetch = FetchType.LAZY)
     private ProductCategory productCategory;
 
-    @NotNull
-    @Column(nullable = false,updatable = false)
-    private Long appId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private App app;
 
     @Column(nullable = false, precision = 27, scale = 12)
-    @JsonView({ListView.class})
+    @JsonView({ListView.class,PageView.class})
     private BigDecimal price;
 
     @Column(nullable = false, precision = 27, scale = 12)
-    @JsonView({ListView.class})
+    @JsonView({ListView.class,PageView.class})
     private BigDecimal marketPrice;
 
     @NotEmpty
     @Column(nullable = false)
-    @JsonView({ListView.class})
+    @JsonView({ListView.class,PageView.class})
     private String icon;
 
     @NotEmpty
     @Column(nullable = false)
-    @JsonView({ListView.class})
+    @JsonView({ListView.class,PageView.class})
     private String name;
 
     /**
@@ -47,16 +47,16 @@ public class Product extends BaseEntity<Long> {
      */
     @NotNull
     @Column(nullable = false)
-    @JsonView({ListView.class})
+    @JsonView({ListView.class,PageView.class})
     private Integer type;
 
     @NotNull
     @Column(nullable = false)
-    @JsonView({ListView.class})
+    @JsonView({ListView.class,PageView.class})
     private Integer exchangeNumber;
 
     @Convert(converter = ImagesConvert.class)
-    @JsonView({ListView.class})
+    @JsonView({ListView.class,PageView.class})
     @Lob
     private List<String> images = new ArrayList<>();
 
@@ -66,12 +66,12 @@ public class Product extends BaseEntity<Long> {
 
     @NotNull
     @Column(nullable = false)
-    @JsonView({ListView.class})
+    @JsonView({ListView.class,PageView.class})
     private Integer quantity;
 
     @NotNull
     @Column(nullable = false)
-    @JsonView({ListView.class})
+    @JsonView({ListView.class,PageView.class})
     private Integer status;
 
     /**
@@ -79,7 +79,7 @@ public class Product extends BaseEntity<Long> {
      */
     @NotNull
     @Column(nullable = false)
-    @JsonView({ListView.class})
+    @JsonView({ListView.class,PageView.class})
     private Boolean isUnderLine;
 
     public ProductCategory getProductCategory() {
@@ -90,12 +90,12 @@ public class Product extends BaseEntity<Long> {
         this.productCategory = productCategory;
     }
 
-    public Long getAppId() {
-        return appId;
+    public App getApp() {
+        return app;
     }
 
-    public void setAppId(Long appId) {
-        this.appId = appId;
+    public void setApp(App app) {
+        this.app = app;
     }
 
     public BigDecimal getPrice() {
@@ -200,6 +200,14 @@ public class Product extends BaseEntity<Long> {
     @JsonView({ListView.class})
     public BigDecimal getMoney(){
         return new BigDecimal(1.23);
+    }
+    @Transient
+    @JsonView({PageView.class})
+    public String getProductCategoryName(){
+        if(productCategory!=null){
+            return productCategory.getName();
+        }
+        return null;
     }
 
     @Convert

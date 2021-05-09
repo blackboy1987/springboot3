@@ -22,5 +22,4 @@ public interface ProductService extends BaseService<Product, Long> {
 	List<Product> findList(App app);
 
 	Page<Product> findPage(App app,Pageable pageable);
-
 }

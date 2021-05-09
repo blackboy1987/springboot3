@@ -211,6 +211,11 @@ public class App extends BaseEntity<Long>{
     public String getAdminName(){
         return getAdmin().getUsername();
     }
+    @Transient
+    @JsonView({PageView.class})
+    public String getMobile(){
+        return getAdmin().getMobile();
+    }
 
     @Transient
     @JsonView({PageView.class})

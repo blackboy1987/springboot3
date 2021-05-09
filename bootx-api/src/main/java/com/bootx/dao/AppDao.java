@@ -1,6 +1,9 @@
 
 package com.bootx.dao;
 
+import com.bootx.common.Page;
+import com.bootx.common.Pageable;
+import com.bootx.entity.Admin;
 import com.bootx.entity.App;
 
 /**
@@ -11,4 +14,5 @@ import com.bootx.entity.App;
  */
 public interface AppDao extends BaseDao<App, Long> {
 
+    Page<App> findPage(Admin admin, Pageable pageable);
 }

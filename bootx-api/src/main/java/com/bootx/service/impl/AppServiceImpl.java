@@ -144,6 +144,11 @@ public class AppServiceImpl extends BaseServiceImpl<App, Long> implements AppSer
     }
 
     @Override
+    public Page<App> findPage(Admin admin, Pageable pageable) {
+        return appDao.findPage(admin,pageable);
+    }
+
+    @Override
     public Page<Map<String, Object>> findPageJdbc(Pageable pageable) {
         StringBuffer sb = new StringBuffer("select id,createdDate,appId,username from app ");
         StringBuffer totalSql = new StringBuffer("select count(1) from app");

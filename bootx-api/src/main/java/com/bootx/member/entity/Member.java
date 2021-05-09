@@ -2,6 +2,7 @@ package com.bootx.member.entity;
 
 import com.bootx.common.BaseAttributeConverter;
 import com.bootx.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonView;
 import emoji4j.EmojiUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.jcajce.provider.digest.MD2;
@@ -33,6 +34,7 @@ public class Member extends BaseEntity<Long> {
     @JoinColumn(nullable = false)
     private MemberRank memberRank;
 
+    @JsonView({BaseEntity.PageView.class})
     private String nickName;
 
     private String sessionKey;
@@ -43,29 +45,40 @@ public class Member extends BaseEntity<Long> {
 
     private Integer gender;
 
+
+    @JsonView({BaseEntity.PageView.class})
     private String city;
 
+
+    @JsonView({BaseEntity.PageView.class})
     private String province;
 
+    @JsonView({BaseEntity.PageView.class})
     private String country;
 
+
+    @JsonView({BaseEntity.PageView.class})
     private String avatarUrl;
 
     /**
      * 是否认证过，如果用户主动点击获取用户信息之后，设置为true
      */
+    @JsonView({BaseEntity.PageView.class})
     private Boolean isAuth;
 
     /**
      * 积分
      */
     @Column(nullable = false)
+
+    @JsonView({BaseEntity.PageView.class})
     private Long point;
 
     /**
      * 余额
      */
     @Column(nullable = false, precision = 27, scale = 12)
+    @JsonView({BaseEntity.PageView.class})
     private BigDecimal balance;
 
     @Column(nullable = false, precision = 27, scale = 12)
@@ -107,13 +120,13 @@ public class Member extends BaseEntity<Long> {
     @Column(nullable = false)
     private Integer ticket;
 
-    @NotNull
-    @Column(nullable = false)
+    @JsonView({BaseEntity.PageView.class})
     private Date updateDate;
 
     @NotNull
     @Convert(converter = ConfigConfigConvert.class)
     @Column(length = 3000,nullable = false)
+    @JsonView({BaseEntity.PageView.class})
     private Map<String,String> config = new HashMap<>();
 
     public String getOpenId() {
@@ -372,8 +385,8 @@ public class Member extends BaseEntity<Long> {
      * 递归上级地区
      *
      * @param parents
-     *            上级地区
-     * @param area
+     *            上级会员
+     * @param member
      *            地区
      */
     private void recursiveParents(List<Member> parents, Member member) {
@@ -385,6 +398,33 @@ public class Member extends BaseEntity<Long> {
             parents.add(0, parent);
             recursiveParents(parents, parent);
         }
+    }
+
+
+    @Transient
+    @JsonView({BaseEntity.PageView.class})
+    public String getParentName() {
+       if(parent==null){
+           return null;
+       }
+       return parent.getNickName();
+    }
+
+    @Transient
+    @JsonView({BaseEntity.PageView.class})
+    public Integer getLevel1Count() {
+        return getChildren().size();
+    }
+
+    @Transient
+    @JsonView({BaseEntity.PageView.class})
+    public Integer getLevel2Count() {
+        Integer count = 0;
+        for (Member child:getChildren()) {
+            count += child.getLevel1Count();
+        }
+
+        return count;
     }
 
     @Convert
