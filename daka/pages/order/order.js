@@ -12,7 +12,7 @@ var a, n = function(t) {
         default: t
     };
 }(require("../../utils/tools.js")), o = getApp();
-
+const app = getApp();
 Page(e({
     data: {
         p: 1,
@@ -30,7 +30,7 @@ Page(e({
     },
     onLoad: function(t) {
         this.setData({
-            img_url: o.siteInfo.siteroot.replace(/app\/index.php/, "") + o.img_url
+            img_url: app.globalData.siteroot.replace(/app\/index.php/, "") + o.img_url
         }), this.setData({
             attention: this.data.img_url + "/step2gift/attention.png"
         }), a = this;

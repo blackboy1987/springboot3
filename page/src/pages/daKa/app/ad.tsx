@@ -1,26 +1,41 @@
 import {FooterToolbar, PageContainer} from "@ant-design/pro-layout";
-import {Button, Card, Col, Form, Input, message, Row} from "antd";
+import {Button, Card, Form, Input, message} from "antd";
 import {useEffect, useState} from "react";
-import {adsUpdate, ads} from "./service";
+import {adsUpdate, ads, base} from "./service";
 
 const layout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 20 },
 };
-const Ad=()=>{
 
+type AdProps = {
+  match: {
+    params: {
+      [key: string]: any;
+    };
+  }
+}
+
+const Ad: React.FC<AdProps>=({match:{params={}}})=>{
   const [loading,setLoading] = useState<boolean>(false);
+  const [app,setApp] = useState<{ [key: string]: any }>({});
   const [form] = Form.useForm();
 
   useEffect(()=>{
-    ads().then(res=>{
+    ads(params).then(res=>{
       form.setFieldsValue(res.data)
     });
-  })
+    base(params).then(res=>{
+      setApp(res.data);
+    });
+  },[]);
 
   const onFinish = (values: { [key: string]: any }) => {
     setLoading(true);
-    adsUpdate({ads:JSON.stringify(values)}).then(res=>{
+    adsUpdate({
+      ...params,
+      ads:JSON.stringify(values),
+    }).then(res=>{
       if(res.code !==0){
         message.error(res.msg).then();
       }else{
@@ -34,15 +49,14 @@ const Ad=()=>{
     setLoading(false);
     console.log('Failed:', errorInfo);
   };
-
+  console.log("app",app);
   return (
     <PageContainer title={false} breadcrumb={{}}>
-      <Card title='小程序广告配置' bordered={false} size='small'>
+      <Card title={`${app.appName} 小程序广告配置`} bordered={false} size='small'>
         <Form
           form={form}
           {...layout}
           onFinish={onFinish}
-          initialValues={ads}
           onFinishFailed={onFinishFailed}
         >
           <Form.Item name={['index', 'bannerId']} label='Banner广告' extra='不填不启用'>
@@ -58,9 +72,6 @@ const Ad=()=>{
             <Input />
           </Form.Item>
           <Form.Item name={['index', 'videoFrontAdId']} label='视频贴片广告' extra='不填不启用'>
-            <Input />
-          </Form.Item>
-          <Form.Item name={['index', 'gridAdId']} label='格子广告' extra='不填不启用'>
             <Input />
           </Form.Item>
           <Form.Item name={['index', 'nativeAdId']} label='原生模板广告' extra='不填不启用'>

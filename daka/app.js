@@ -3,7 +3,7 @@ App({
   onLaunch: function() {
     const root = this;
     wx.request({
-      url: root.siteInfo.siteroot+'config',
+      url: root.globalData.siteroot+'config',
       method:"POST",
       header:{
         appCode: root.siteInfo.appCode,
@@ -49,7 +49,10 @@ App({
   onError: function(n) {},
   globalData: {
     systemInfo: wx.getSystemInfoSync(),
-    nav_height: 0
+    nav_height: 0,
+    siteroot: "https://www.igomall.xin/api/daka/",
+    appCode: "V91DCWGV0F0U",
+    appToken: "e09f8f7f3346685928a1a24559979a9624a768fd8f56da63bac52cda5b88b80b",
   },
   util: require("we7/resource/js/util.js"),
   siteInfo: require("siteinfo.js"),

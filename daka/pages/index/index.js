@@ -11,7 +11,7 @@ var e, o = function (t) {
     default: t
   };
 }(require("../../utils/tools.js")), n = getApp();
-
+const app = getApp();
 Page({
   data: {
     videoAd: "",
@@ -76,13 +76,14 @@ Page({
     (e = this).data.goldcoin.length = 10, t.parentId && wx.setStorageSync("parentId", t.parentId),
       t.scene && wx.setStorageSync("parentId", decodeURIComponent(t.scene)), e.clearTime();
     const root = this;
+    root.star();
     // 在这里加个登录功能。主要用来获取当前账号的token。
     wx.login({
       success (res) {
         if (res.code) {
           //发起网络请求
           wx.request({
-            url: n.siteInfo.siteroot+'login',
+            url: app.globalData.siteroot+'login',
             header:{
               appCode: n.siteInfo.appCode,
               appToken: n.siteInfo.appToken,
@@ -100,7 +101,7 @@ Page({
               });
 
               wx.request({
-                url: n.siteInfo.siteroot+'today',
+                url: app.globalData.siteroot+'today',
                 method:"POST",
                 header:{
                   appCode: n.siteInfo.appCode,
@@ -148,8 +149,8 @@ Page({
     o.default.request(a, function (o) {
       const appConfig = o.data;
       wx.setStorageSync("appConfig",appConfig);
+      const rules = appConfig.config.rules;
       root.setData(appConfig);
-      console.log("this.data",root.data);
       const ads = o.data.ads ||{};
       o.info = o.data.config;
       o.info.time  = o.info.time || 0,
@@ -351,5 +352,21 @@ Page({
         url:'/pages/'+e.currentTarget.dataset.page+"/"+e.currentTarget.dataset.page,
       })
     }
+  },
+  star:function (){
+    const root = this;
+    wx.request({
+      url: app.globalData.siteroot+'star',
+      method:"POST",
+      header:{
+        appCode: n.siteInfo.appCode,
+        appToken: n.siteInfo.appToken,
+      },
+      success(res) {
+        root.setData({
+          star:res.data.data
+        })
+      }
+    })
   }
 });

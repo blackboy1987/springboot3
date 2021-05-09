@@ -1,18 +1,16 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Divider, message, Modal } from 'antd';
+import {Button, Divider, message, Modal, Typography} from 'antd';
 import React, {useRef, useState} from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {list,register,resetPass} from "./service";
 import { ModalForm, ProFormText } from '@ant-design/pro-form';
-import Ad from '@/pages/admin/app/ad';
-import BaseConfig from '@/pages/admin/app/base';
+import Config from "@/pages/admin/app/config";
 
 const TableList: React.FC = () => {
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
-  const [adModalVisible, setAdModalVisible] = useState<boolean>(false);
-  const [baseModalVisible, setBaseModalVisible] = useState<boolean>(false);
+  const [configModalVisible, setConfigModalVisible] = useState<boolean>(false);
   const [record, setRecord] = useState<{[key: string]: any}>({});
 
   const actionRef = useRef<ActionType>();
@@ -38,10 +36,15 @@ const TableList: React.FC = () => {
 
 
 
-  const columns: ProColumns<API.OrderListItem>[] = [
+  const columns: ProColumns<API.App>[] = [
     {
-      title: '登录账号',
+      title: '用户名',
       dataIndex: 'adminName',
+      width:100,
+    },
+    {
+      title: '手机号',
+      dataIndex: 'mobile',
       width:100,
     },
     {
@@ -51,29 +54,16 @@ const TableList: React.FC = () => {
       copyable: true,
     },
     {
-      title: 'appId',
+      title: '认证信息',
       dataIndex: 'appId',
-      width:180,
-      copyable: true,
-    },
-    {
-      title: 'appSecret',
-      dataIndex: 'appSecret',
-      copyable: true,
-      ellipsis: true,
-    },
-    {
-      title: 'appCode',
-      dataIndex: 'appCode',
-      ellipsis:true,
-      copyable: true,
-      width:200,
-    },
-    {
-      title: 'appToken',
-      dataIndex: 'appToken',
-      ellipsis:true,
-      copyable: true,
+      renderText:(_,record1)=>(
+        <>
+          <p> <Typography.Text copyable={{text:`${record1.appId}`}}>appId：{record1.appId}</Typography.Text></p>
+          <p><Typography.Text copyable={{text:`${record1.appSecret}`}}>appSecret：{record1.appSecret}</Typography.Text></p>
+          <p><Typography.Text copyable={{text:`${record1.appCode}`}}>appCode：{record1.appCode}</Typography.Text></p>
+          <p><Typography.Text copyable={{text:`${record1.appToken}`}}>appToken：{record1.appToken}</Typography.Text></p>
+        </>
+      )
     },
     {
       title: '过期时间',
@@ -119,27 +109,22 @@ const TableList: React.FC = () => {
       dataIndex: 'opt',
       width:100,
       fixed:'right',
-      renderText:(_,record)=>(
+      renderText:(_,record1)=>(
         <>
-          <a onClick={()=>{
-            setBaseModalVisible(true);
-            setRecord(record);
-          }}>基础配置</a>
+          <Divider type='vertical' />
+          <a onClick={()=>handleResetPass(record1.id)}>重置密码</a>
           <Divider type='vertical' />
           <a onClick={()=>{
-            setAdModalVisible(true);
-            setRecord(record);
-          }}>广告配置</a>
-          <Divider type='vertical' />
-          <a onClick={()=>handleResetPass(record.id)}>重置密码</a>
+            setConfigModalVisible(true);
+            setRecord(record1);
+          }}>设置</a>
         </>
       )
     },
   ];
-
   return (
     <PageContainer>
-      <ProTable<API.OrderListItem, API.PageParams>
+      <ProTable<API.App, API.PageParams>
         bordered
         size='small'
         headerTitle='公众号'
@@ -164,7 +149,6 @@ const TableList: React.FC = () => {
         ]}
         request={list}
         columns={columns}
-        scroll={{x:1200}}
       />
 
 
@@ -213,27 +197,14 @@ const TableList: React.FC = () => {
           ]}
         />
       </ModalForm>
-
-      <Modal width={1200} visible={adModalVisible&&Object.keys(record).length>0} destroyOnClose maskClosable={false} onCancel={()=>{
-        setAdModalVisible(false);
-        setRecord({})
-      }} footer={null}>
-        <Ad id={record.id} onClose={()=>{
-          setAdModalVisible(false);
-          setRecord({})
-        }} />
-      </Modal>
-
-      <Modal width={800} visible={baseModalVisible&&Object.keys(record).length>0} destroyOnClose maskClosable={false} onCancel={()=>{
-        setBaseModalVisible(false);
-        setRecord({});
-      }} footer={null}>
-        <BaseConfig id={record.id} onClose={()=>{
-          setAdModalVisible(false);
-          setRecord({})
-        }} />
-      </Modal>
-
+      {
+        configModalVisible&&Object.keys(record).length>0 ? (
+          <Config visible={configModalVisible} onClose={()=>{
+            setConfigModalVisible(false);
+            setRecord({})
+          }} values={record} />
+        ) : null
+      }
     </PageContainer>
   );
 };

@@ -2,298 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="419ea74b-61c1-496f-9beb-dc27804964cc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/dao/OrderDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/dao/ProductCategoryDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/dao/ProductDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/dao/impl/OrderDaoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/dao/impl/ProductCategoryDaoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/dao/impl/ProductDaoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/entity/Order.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/entity/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/entity/ProductCategory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/service/OrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/service/ProductCategoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/service/ProductService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/service/impl/OrderServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/service/impl/ProductCategoryServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/service/impl/ProductServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/controller/InitController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/util/SmsUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__Welcome.b0a89848.async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__admin__app.07ba5d44.async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__admin__app.ebde59d3.chunk.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__admin__order.56bb96b1.chunk.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__admin__order.8c05f6da.async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__ad.8272c377.async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__base.6c3d4b8f.async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__password.0ca6f1f4.chunk.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__password.f96f3d02.async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__user__Login.703ff4b5.chunk.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__user__Login.ec47fea6.async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/t__plugin-layout__Layout.1839d8f5.async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/t__plugin-layout__Layout.30692344.chunk.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/umi.159bbd64.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/umi.24da9e45.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~p__user__Login.bbdac6c9.async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~p__user__Login.f25d3dd8.chunk.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~t__plugin-~76786854.48e86d2d.chunk.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~t__plugin-~76786854.bb039afc.async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__user__Login~t__plugin-layout__Layout.05d18c41.async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/tabBar/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/tabBar/index.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/tabBar/index.wxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/tabBar/index.wxss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/tabbar/friend.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/tabbar/friend_active.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/tabbar/home.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/tabbar/home_active.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/tabbar/my.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/tabbar/my_active.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/tabbar/rank.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/tabbar/rank_active.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/xin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/address/address.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/address/address.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/address/address.wxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/address/address.wxss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/goods/goods.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/goods/goods.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/goods/goods.wxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/goods/goods.wxss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/goods/images/1539776181.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/goods/images/qr-code.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/goodsconvert/goodsconvert.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/goodsconvert/goodsconvert.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/goodsconvert/goodsconvert.wxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/goodsconvert/goodsconvert.wxss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/order/order.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/order/order.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/order/order.wxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/order/order.wxss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/00.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/01.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/02.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/03.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/04.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/05.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/06.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/07.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/08.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/09.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/10.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/100.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/101.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/102.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/103.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/104.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/105.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/106.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/107.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/108.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/109.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/11.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/110.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/111.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/112.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/113.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/114.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/115.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/116.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/117.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/118.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/119.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/12.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/120.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/121.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/122.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/123.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/124.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/125.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/126.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/127.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/128.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/129.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/13.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/130.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/131.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/132.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/133.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/134.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/14.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/15.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/16.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/17.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/18.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/19.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/20.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/21.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/22.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/23.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/24.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/25.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/26.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/27.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/28.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/29.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/30.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/31.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/32.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/33.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/34.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/35.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/36.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/37.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/38.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/39.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/40.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/41.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/42.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/43.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/44.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/45.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/46.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/47.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/48.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/49.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/50.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/51.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/52.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/53.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/54.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/55.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/56.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/57.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/58.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/59.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/60.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/61.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/62.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/63.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/64.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/65.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/66.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/67.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/68.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/69.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/70.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/71.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/72.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/73.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/74.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/75.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/76.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/77.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/78.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/79.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/80.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/81.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/82.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/83.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/84.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/85.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/86.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/87.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/88.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/89.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/90.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/91.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/92.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/93.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/94.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/95.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/96.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/97.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/98.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/emojis/99.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/html2json.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/htmlparser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/showdown.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/wxDiscode.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/wxParse.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/wxParse.wxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wxParse/wxParse.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/common/DaKaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/common/DaKaConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/dao/MoreProgramDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/dao/impl/MoreProgramDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/entity/MoreProgram.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/service/MoreProgramService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/service/impl/MoreProgramServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/adConfig.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/baseConfig.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/config.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/member.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/moreProgramConfig.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/order.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/otherConfig.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/product.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/productCategory.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/shareConfig.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/controller/IndexController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/entity/ClickRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/entity/ClickRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/service/ClickRecordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/service/ClickRecordService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/service/impl/ClickRecordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/daka/service/impl/ClickRecordServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/question/controller/InitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/question/controller/InitController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/renwu/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/renwu/controller/IndexController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/audit/AuditingEntityListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/audit/AuditingEntityListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/controller/admin/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/controller/admin/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/dao/impl/BaseDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/dao/impl/BaseDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/dao/impl/SubscriptionRecordDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/dao/impl/SubscriptionRecordDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/entity/AdConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/entity/AdConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/entity/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/entity/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/entity/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/entity/BaseEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/member/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/member/entity/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/member/service/impl/MemberServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/member/service/impl/MemberServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/service/AdminService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/service/impl/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/service/impl/AdminServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/util/DateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/util/DateUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/util/EhCacheUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/util/EhCacheUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/controller/admin/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/controller/admin/AppController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/ehcache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/ehcache.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__Welcome.9a222969.async.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__ad.024c27e8.chunk.css" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__ad.61ada935.chunk.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__ad.9260e3b3.async.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__base.042475b9.async.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__base.c109af0c.chunk.css" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__base.84be4c5a.chunk.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__user__Login.48c4d0de.async.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__user__Login.d3037ce4.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/t__plugin-layout__Layout.32b57dc7.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/t__plugin-layout__Layout.4f24ecc7.async.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/umi.797ee14a.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/umi.eb13f600.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__404~t__plugin-layout__Layout.72c52f54.chunk.css" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__404~t__plugin-layout__Layout.729f8786.chunk.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__404~t__plugin-layout__Layout.82bf2fb6.async.js" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__404~t__plugin-layout__Layout.fbb13544.async.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome.3c06abed.chunk.css" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome.71b8a4f8.chunk.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome.64f70bdf.async.js" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome.bd3665c2.async.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__app__ad~p__app__base~p__user__Login.514fc488.async.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__app__ad~p__app__base~p__user__Login.66449bea.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__app__ad~p__app__base~p__user__Login~t__plugin-layout__Layout.46ff518a.chunk.css" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~p__user__L~b7b07577.b805d970.chunk.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__app__ad~p__app__base~p__user__Login~t__plugin-layout__Layout.4c83dcda.async.js" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~p__user__L~b7b07577.a50a4e44.async.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__app__ad~p__app__base~t__plugin-layout__Layout.4c664203.async.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__app__ad~p__app__base~t__plugin-layout__Layout.642fef05.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__app__ad~p__app__base~p__user__Login.2bc0c818.async.js" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~p__user__Login.4caffa5e.async.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__app__ad~p__app__base~p__user__Login.329c6d03.chunk.css" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~p__user__Login.c2afe855.chunk.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__user__Login~t__plugin-layout__Layout.120dbfeb.async.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/myAd/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/components/myAd/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/home.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/cash/cash.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cash/cash.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/cash/cash.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cash/cash.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/exemption/exemption.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/exemption/exemption.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/exemption/exemption.json" beforeDir="false" afterPath="$PROJECT_DIR$/pages/exemption/exemption.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/exemption/exemption.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/exemption/exemption.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/exemption/exemption.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/exemption/exemption.wxss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/friendList/friendList.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/friendList/friendList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/friendList/friendList.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/friendList/friendList.wxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/more/more.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/more/more.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/more/more.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/more/more.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/my/my.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/my/my.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/my/my.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/my/my.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/order/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order/order.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/rank/rank.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rank/rank.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/rank/rank.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rank/rank.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/today/today.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/today/today.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/today/today.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/today/today.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/yesterday/yesterday.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/yesterday/yesterday.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/yesterday/yesterday.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/yesterday/yesterday.wxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.private.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.private.config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siteinfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/siteinfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../movie/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../movie/project.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/we7/resource/js/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/we7/resource/js/util.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../page/config/defaultSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../page/config/defaultSettings.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../page/config/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../page/config/routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../page/src/pages/admin/app/ad.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../page/src/pages/admin/app/base.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../page/src/pages/admin/app/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../page/src/pages/admin/order/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/pages/admin/order/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../page/src/pages/user/Login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/pages/user/Login/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../page/src/services/ant-design-pro/login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/services/ant-design-pro/login.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../page/src/services/ant-design-pro/typings.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/services/ant-design-pro/typings.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../page/src/pages/admin/app/service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../page/src/pages/admin/app/typings.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/typings.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../page/src/pages/daKa/app/ad.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/pages/daKa/app/ad.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -361,6 +106,10 @@
       <workItem from="1620002697523" duration="261000" />
       <workItem from="1620044554059" duration="12000" />
       <workItem from="1620091547245" duration="16779000" />
+      <workItem from="1620398310118" duration="1557000" />
+      <workItem from="1620434836145" duration="75000" />
+      <workItem from="1620435791315" duration="2474000" />
+      <workItem from="1620543911407" duration="8501000" />
     </task>
     <servers />
   </component>

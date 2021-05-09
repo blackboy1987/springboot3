@@ -19,7 +19,7 @@
 </view>
 <scroll-view class="container" scrollIntoView="{{gdtext}}" scrollY="true">
   <view class="head">
-  <image class="bg" src="{{homeBgImage}}" style="height:378px" />
+  <image class="bg" src="{{config.homeBgImage}}" style="height:378px" />
   <view class="tips" wx:if="{{showAddMeBtn}}">
     <view class="flex flex-1 leftText">
       点击右上角
@@ -47,25 +47,25 @@
   <view class="content" style="transform: translateY({{is_rule===1?-200:-460}}rpx);">
   <view class="waveWrapper waveAnimation">
     <view bindtap="signIn" class="signIn" wx:if="{{surplus<1}}">
-      <view class="inner" style="background:{{clickBgColor}}">
-        <image class="icon" mode="widthFix" src="{{resize}}" style="height:35px" />
-        <text>{{clockText}}</text>
+      <view class="inner" style="background:{{config.clickBgColor}}">
+        <image class="icon" mode="widthFix" src="{{config.resize}}" style="height:35px" />
+        <text>{{config.clockText}}</text>
       </view>
     </view>
     <view class="signIn" wx:else>
       <view class="inner" style="background:#FFFFFF">
-        <image class="icon" mode="widthFix" src="{{resize}}" />
+        <image class="icon" mode="widthFix" src="{{config.resize}}" />
         <text>{{surplus}}秒后</text>
       </view>
     </view>
     <view class="waveWrapperInner bgTop">
-      <view class="wave waveTop" style="background-image: url('{{waveTop}}')"></view>
+      <view class="wave waveTop" style="background-image: url('{{config.waveTop}}')"></view>
     </view>
     <view class="waveWrapperInner bgMiddle">
-      <view class="wave waveMiddle" style="background-image: url('{{waveMid}}')"></view>
+      <view class="wave waveMiddle" style="background-image: url('{{config.waveMid}}')"></view>
     </view>
     <view class="waveWrapperInner bgBottom">
-      <view class="wave waveBottom" style="background-image: url('{{waveBot}}')"></view>
+      <view class="wave waveBottom" style="background-image: url('{{config.waveBot}}')"></view>
     </view>
   </view>
   <view class="signNum" wx:if="{{today.clock>0}}">
@@ -119,35 +119,35 @@
         <image
           class="userPic"
           mode="widthFix"
-          src="{{star.earliest.member.head}}"
+          src="{{star.earliest.avatarUrl}}"
           style="height:65px"
         />
         <view class="tags" style="background:#ff7735">
           <image class="icon" mode="widthFix" src="/images/zaoqi.png" style="height:27px" />早起之星
         </view>
       </view>
-      <view class="username">{{star.earliest.member.nickname}}</view>
-      <view class="text">{{star.earliest.created}} 打卡</view>
+      <view class="username">{{star.earliest.nickName}}</view>
+      <view class="text">{{star.earliest.createdDate}} 打卡</view>
     </view>
     <view class="userBox" wx:if="{{star.palm}}">
       <view class="pic">
-        <image class="userPic" mode="widthFix" src="{{star.palm.head}}" style="height:65px" />
+        <image class="userPic" mode="widthFix" src="{{star.palm.avatarUrl}}" style="height:65px" />
         <view class="tags" style="background:#2e99a3">
           <image class="icon" mode="widthFix" src="/images/shouqi.png" style="height:27px" />手气之星
         </view>
       </view>
-      <view class="username">{{star.palm.nickname}}</view>
-      <view class="text">{{star.palm.currency}} {{currencyName}}</view>
+      <view class="username">{{star.palm.nickName}}</view>
+      <view class="text">{{star.palm.count}} {{currencyName}}</view>
     </view>
     <view class="userBox" wx:if="{{star.will}}">
       <view class="pic">
-        <image class="userPic" mode="widthFix" src="{{star.will.head}}" style="height:65px" />
+        <image class="userPic" mode="widthFix" src="{{star.will.avatarUrl}}" style="height:65px" />
         <view class="tags" style="background:#fbb93b">
           <image class="icon" mode="widthFix" src="/images/yili.png" style="height:27px" />毅力之星
         </view>
       </view>
-      <view class="username">{{star.will.nickname}}</view>
-      <view class="text">连续打卡{{star.will.click}}次</view>
+      <view class="username">{{star.will.nickName}}</view>
+      <view class="text">连续打卡{{star.will.count}}次</view>
     </view>
   </view>
   <my-ad></my-ad>
@@ -157,9 +157,9 @@
       <text class="line"></text>
     </view>
     <view class="context">
-      <view class="line" wx:for="{{rules}}" wx:key="r">
+      <view class="line" wx:for="{{config.rules}}" wx:key="r">
         <text>{{index+1}}</text>
-        <view class="rightText">{{item.content}}</view>
+        <view class="rightText">{{item}}</view>
       </view>
     </view>
   </view>
@@ -172,10 +172,7 @@
       <text>您的信息和数据将受到保护</text>
     </view>
     <view class="btnLine">
-      <button
-              bind:tap="getUserInfo"
-              class="buttonfix confirm"
-      >授权并登陆</button>
+      <button bind:tap="getUserInfo" class="buttonfix confirm">授权并登陆</button>
       <button bindtap="cancel_login" class="buttonfix cancel">取消</button>
     </view>
   </view>

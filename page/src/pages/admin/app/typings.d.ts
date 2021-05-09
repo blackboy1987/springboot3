@@ -37,5 +37,45 @@ declare namespace API {
   type PageParams = {
     current?: number;
     pageSize?: number;
+    id?: number;
   };
+
+  type App = {
+    id: number;
+    type: number;
+    appId?: string;
+    appSecret?: string;
+    appCode?: string;
+    appToken?: string;
+    appName?: string;
+  }
+  type Member = {
+    id?: number;
+    nickName?: string;
+    avatarUrl?: string;
+    country?: string;
+    province?: string;
+    city?: string;
+    isAuth?: boolean;
+    updateDate?: Date;
+    createdDate?: Date;
+    point?: number;
+    level1Count?: number;
+    level2Count?: number;
+    todayCount?: number;
+    allCount?: number;
+  }
+  type ProductCategory = {
+    id?: number;
+    name?: string;
+  }
+  type Product = {
+    id?: number;
+    productCategoryName?: string;
+    name?: string;
+  }
+
+  type MoreProgram = {
+
+  }
 }

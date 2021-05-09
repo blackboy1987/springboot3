@@ -2,13 +2,13 @@
 <my-ad></my-ad>
 <scroll-view class="container" scrollY="true">
     <view class="tab-box">
-        <view bindtap="bindTabClick" class="{{index===1?'tab-item text-select selectd':'tab-item text-select'}}" data-index="1">
+        <view bindtap="bindTabClick" class="{{index==='1'?'tab-item text-select selectd':'tab-item text-select'}}" data-index="1">
             <view>今日榜单</view>
-            <view class="tab-descr" hidden="{{index!==1}}"></view>
+            <view class="tab-descr" hidden="{{index!=='1'}}"></view>
         </view>
-        <view bindtap="bindTabClick" class="{{index===2?'tab-item text-select selectd':'tab-item text-select'}}" data-index="2">
+        <view bindtap="bindTabClick" class="{{index==='2'?'tab-item text-select selectd':'tab-item text-select'}}" data-index="2">
             <view>总榜单</view>
-            <view class="tab-descr" hidden="{{index!==2}}"></view>
+            <view class="tab-descr" hidden="{{index!=='2'}}"></view>
         </view>
     </view>
     <view>

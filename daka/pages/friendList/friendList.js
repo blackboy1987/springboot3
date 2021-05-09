@@ -45,9 +45,7 @@ t(require("../../utils/wx-promisify/wx-promisify"))), s = t(require("./modules/h
         wx.setNavigationBarTitle({
             title:'我的好友'
         });
-        i.setData({
-            "appConfig":wx.getStorageSync("appConfig"),
-        })
+        i.setData(wx.getStorageSync("appConfig"))
     },
     onReady: function() {
         var e = {

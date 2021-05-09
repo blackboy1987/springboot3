@@ -21,7 +21,7 @@ getApp(), Page({
         extra_info_tab: 1,
         level: 1,
         p: 1,
-        index: 1,
+        index: "1",
         interstitialAd: null,
     },
     onLoad: function(e) {
