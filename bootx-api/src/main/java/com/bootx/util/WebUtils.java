@@ -522,7 +522,6 @@ public final class WebUtils {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 }

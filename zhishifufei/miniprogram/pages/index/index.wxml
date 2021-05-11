@@ -46,7 +46,7 @@
   </view>
   <view class="postlist-bg">
     <block wx:for="{{list}}" wx:key="index">
-      <view class="menu-scroll-list">
+      <view class="menu-scroll-list" bind:tap="openWin" data-id="{{item.id}}" data-title="{{item.title}}">
         <view class="menu-scroll-list-img">
           <image class="fengrui-img" src="{{item.picname}}"></image>
         </view>

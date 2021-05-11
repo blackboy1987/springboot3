@@ -10,7 +10,7 @@
         </view>
         <image class="gif-wave" mode="scaleToFill" src="../../../static/images/sb.gif"></image>
     </view>
-    <view bindtap="__e" class="mine_head" data-event-opts="{{[ [ 'tap',[ ['openlogin'] ] ] ]}}" wx:else>
+    <view bindtap="openlogin" class="mine_head" wx:else>
         <view class="mine_head_body">
             <view class="tx">
                 <image mode src="../../../static/images/logo-w.png" style="width:100%;height:100%;"></image>
@@ -24,18 +24,18 @@
             <view class="num">{{userjifen}}</view>
             <view>会员积分</view>
         </view>
-        <view bindtap="__e" class="mine_info" data-event-opts="{{[ [ 'tap',[ ['openBuy'] ] ] ]}}" style="border-left:1px solid #e4e5ea;-webkit-tap-highlight-color:transparent;">
+        <view bindtap="__e" class="mine_info" style="border-left:1px solid #e4e5ea;-webkit-tap-highlight-color:transparent;">
             <view class="num">{{goumai}}</view>
             <view>兑换记录</view>
         </view>
-        <view bindtap="__e" class="mine_info" data-event-opts="{{[ [ 'tap',[ ['openCollect'] ] ] ]}}" style="border-left:1px solid #e4e5ea;-webkit-tap-highlight-color:transparent;">
+        <view bindtap="__e" class="mine_info" style="border-left:1px solid #e4e5ea;-webkit-tap-highlight-color:transparent;">
             <view class="num">{{shoucang}}</view>
             <view>收藏记录</view>
         </view>
     </view>
     <view style="width:100%;height:8px;background-color:#F1F1F5;"></view>
     <view class="aui-card-white">
-        <view bindtap="__e" class="aui-well-item" data-event-opts="{{[ [ 'tap',[ ['getVideoAd'] ] ] ]}}">
+        <view bindtap="__e" class="aui-well-item">
             <view class="aui-well-item-hd" style="width:16px;height:16px;">
                 <image alt src="../../../static/images/qian.png"></image>
             </view>

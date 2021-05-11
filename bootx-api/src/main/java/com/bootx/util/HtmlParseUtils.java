@@ -28,6 +28,10 @@ public final class HtmlParseUtils {
         for (Element element : elements) {
             element.tagName("p");
         }
+        Elements elements1 = parse.select("a");
+        for (Element element : elements1) {
+            element.tagName("p");
+        }
         System.out.println(parse.body().html());
     }
 

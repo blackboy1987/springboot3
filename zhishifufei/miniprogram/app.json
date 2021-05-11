@@ -2,7 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/login/login",
+    "pages/user/login/login",
     "pages/type/type",
     "pages/type/list/list",
     "pages/details/details",
@@ -13,6 +13,34 @@
     "navigationBarTitleText": "电竞挑战",
     "navigationBarBackgroundColor": "#FFFFFF",
     "backgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/static/tabbar/1-1.png",
+        "selectedIconPath": "/static/tabbar/1.png"
+      },
+      {
+        "pagePath": "pages/type/type",
+        "text": "分类",
+        "iconPath": "/static/tabbar/3-1.png",
+        "selectedIconPath": "/static/tabbar/3.png"
+      },
+      {
+        "pagePath": "pages/type/type",
+        "text": "发现",
+        "iconPath": "/static/tabbar/2-1.png",
+        "selectedIconPath": "/static/tabbar/2.png"
+      },
+      {
+        "pagePath": "pages/user/index/index",
+        "text": "我的",
+        "iconPath": "/static/tabbar/4-1.png",
+        "selectedIconPath": "/static/tabbar/4.png"
+      }
+    ]
   },
   "usingComponents": {
     "my-ad": "/components/my-ad/index"

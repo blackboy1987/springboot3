@@ -47,10 +47,9 @@ Page({
        const root = this;
        root.leibiao(root.data.page);
     },
-    openWin: function(e:any) {
-        console.log("e",e.currentTarget.dataset);
+    openWin: function(e:{currentTarget:{dataset:{id: number,title: string}}}) {
         wx.navigateTo({
-            url: "/pages/details/details?tid=" + e + "&title=" + n
+            url: "/pages/details/details?tid=" + e.currentTarget.dataset.id + "&title=" + e.currentTarget.dataset.title
         });
     },
 

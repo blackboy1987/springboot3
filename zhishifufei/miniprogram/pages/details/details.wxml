@@ -21,11 +21,11 @@
             </view>
             <view class="main">
                 <view class="liebiao">
-                    <view bindtap="__e" class="liebiao-li" data-event-opts="{{[ [ 'tap',[ [ 'openWin',['vip'] ] ] ] ]}}">
+                    <view bindtap="__e" class="liebiao-li">
                         <image class="liebiao-img" src="../../static/images/all.png"></image>
                         <view class="liebiao-i _i">升级会员</view>
                     </view>
-                    <view bindtap="__e" class="liebiao-li" data-event-opts="{{[ [ 'tap',[ [ 'openWin',['faq'] ] ] ] ]}}">
+                    <view bindtap="__e" class="liebiao-li" >
                         <image class="liebiao-img" src="../../static/images/zuixin.png"></image>
                         <view class="liebiao-i _i">使用说明</view>
                     </view>
@@ -33,11 +33,11 @@
                         <image class="liebiao-img" src="../../static/images/remen.png"></image>
                         <view class="liebiao-i _i">连接失效</view>
                     </button>
-                    <view bindtap="__e" class="liebiao-li" data-event-opts="{{[ [ 'tap',[ ['previewImg'] ] ] ]}}">
+                    <view bindtap="__e" class="liebiao-li">
                         <image class="liebiao-img" src="../../static/images/vip.png"></image>
                         <view class="liebiao-i _i">赞赏</view>
                     </view>
-                    <view bindtap="__e" class="liebiao-li" data-event-opts="{{[ [ 'tap',[ [ 'openWin',['about'] ] ] ] ]}}">
+                    <view bindtap="__e" class="liebiao-li">
                         <image class="liebiao-img" src="../../static/images/remen.png"></image>
                         <view class="liebiao-i _i">关于我们</view>
                     </view>
@@ -51,7 +51,7 @@
             <image src="../../static/images/sy.png" style="width:20px;height:20px;"></image>
             <view style="color:rgba(41, 43, 51, 0.4);font-size:10px;line-height:18px;">首页</view>
         </navigator>
-        <view bindtap="__e" class="gohome" data-event-opts="{{[ [ 'tap',[ [ 'openShou',['$0','$1','$2'],['info.id','info.title','info.picname'] ] ] ] ]}}">
+        <view bindtap="__e" class="gohome">
             <image src="../../static/images/sc.png" style="width:20px;height:20px;"></image>
             <view style="color:rgba(41, 43, 51, 0.4);font-size:10px;line-height:18px;">收藏</view>
         </view>
@@ -59,16 +59,16 @@
             <image src="../../static/images/fx.png" style="width:20px;height:20px;"></image>
             <view style="color:rgba(41, 43, 51, 0.4);font-size:10px;line-height:18px;">分享</view>
         </button>
-        <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'openJi',['$0','$1','$2'],['info.id','info.title','info.picname'] ] ] ] ]}}" style="color:#fff;-webkit-box-flex:1;flex:1 100%;background:#fff;" wx:if="{{dibu1}}">
+        <view bindtap="__e" style="color:#fff;-webkit-box-flex:1;flex:1 100%;background:#fff;">
             <button style="border-radius:80rpx;font-size:35rpx;width:80%;height:40px;background:#F19E38;color:#fff;line-height:40px;" type="default">获取资源</button>
         </view>
-        <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'openVip',['$0','$1','$2'],['info.id','info.title','info.picname'] ] ] ] ]}}" style="color:#fff;-webkit-box-flex:1;flex:1 100%;background:#fff;" wx:if="{{vipcha}}">
+        <view bindtap="__e" style="color:#fff;-webkit-box-flex:1;flex:1 100%;background:#fff;" wx:if="{{vipcha}}">
             <button style="border-radius:80rpx;font-size:35rpx;width:80%;height:40px;background:#F19E38;color:#fff;line-height:40px;" type="default">查看资源</button>
         </view>
-        <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'openGoods',['$0','$1','$2'],['info.id','info.title','info.picname'] ] ] ] ]}}" style="color:#fff;-webkit-box-flex:1;flex:1 100%;background:#fff;" wx:if="{{goods}}">
+        <view bindtap="__e" style="color:#fff;-webkit-box-flex:1;flex:1 100%;background:#fff;" wx:if="{{goods}}">
             <button style="border-radius:80rpx;font-size:35rpx;width:80%;height:40px;background:#F19E38;color:#fff;line-height:40px;" type="default">{{info.price+' 积分获取资源'}}</button>
         </view>
-        <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'showModal',['$event'] ] ] ] ]}}" data-target="DialogModal1" style="color:#fff;-webkit-box-flex:1;flex:1 100%;background:#fff;" wx:if="{{mianfei}}">
+        <view bindtap="__e" data-target="DialogModal1" style="color:#fff;-webkit-box-flex:1;flex:1 100%;background:#fff;" wx:if="{{mianfei}}">
             <button style="border-radius:80rpx;font-size:35rpx;width:80%;height:40px;background:#F19E38;color:#fff;line-height:40px;" type="default">查看资源</button>
         </view>
     </view>
@@ -76,15 +76,15 @@
         <view class="cu-dialog">
             <view class="cu-bar bg-white justify-end">
                 <view class="content">资源地址</view>
-                <view bindtap="__e" class="action" data-event-opts="{{[ [ 'tap',[ [ 'hideModal',['$event'] ] ] ] ]}}">
+                <view bindtap="__e" class="action">
                     <text class="cuIcon-close text-red"></text>
                 </view>
             </view>
-            <view style="padding:5px;text-align:left;">{{''+info.dizhi+''}}</view>
+            <view style="padding:5px;text-align:left;">{{info.dizhi}}</view>
             <view class="cu-bar bg-white justify-end">
                 <view class="action">
-                    <button bindtap="__e" class="cu-btn line-green text-green" data-event-opts="{{[ [ 'tap',[ [ 'hideModal',['$event'] ] ] ] ]}}">取消</button>
-                    <button bindtap="__e" class="cu-btn bg-green margin-left" data-event-opts="{{[ [ 'tap',[ [ 'copy',['$0'],['info.dizhi'] ] ] ] ]}}">复制</button>
+                    <button bindtap="__e" class="cu-btn line-green text-green">取消</button>
+                    <button bindtap="__e" class="cu-btn bg-green margin-left">复制</button>
                 </view>
             </view>
         </view>

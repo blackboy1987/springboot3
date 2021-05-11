@@ -84,5 +84,11 @@ Page({
   },
   onReachBottom:function (){
     this.all(this.data.page);
-  }
+  },
+  
+  openWin: function(e:{currentTarget:{dataset:{id: number,title: string}}}) {
+    wx.navigateTo({
+      url: "/pages/details/details?tid=" + e.currentTarget.dataset.id + "&title=" + e.currentTarget.dataset.title
+    });
+  },
 })
