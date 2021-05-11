@@ -16,6 +16,12 @@ getApp(), Page({
         t.setData({
             member:wx.getStorageSync("userInfo"),
         });
+        if(wx.getStorageSync("appConfig").status!==2){
+            console.log("abc");
+            wx.navigateTo({
+                url:'/pages/index/index'
+            });
+        }
     },
     onReady: function() {
     },

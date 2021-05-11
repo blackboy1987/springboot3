@@ -111,9 +111,6 @@ const TableList: React.FC = () => {
       fixed:'right',
       renderText:(_,record1)=>(
         <>
-          <Divider type='vertical' />
-          <a onClick={()=>handleResetPass(record1.id)}>重置密码</a>
-          <Divider type='vertical' />
           <a onClick={()=>{
             setConfigModalVisible(true);
             setRecord(record1);

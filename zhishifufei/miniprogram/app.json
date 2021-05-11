@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/login/login",
+    "pages/type/type",
+    "pages/type/list/list",
+    "pages/details/details",
+    "pages/user/index/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "电竞挑战",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#FFFFFF"
+  },
+  "usingComponents": {
+    "my-ad": "/components/my-ad/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,17 @@
+<view style="margin-top:5px;">
+    <view style="width:100%;padding:0 15px;padding-bottom:.8rem;">
+        <my-ad></my-ad>
+    </view>
+    <view class="shipin-ul" style="padding:0 .8rem;">
+        <view bindtap="openWin" data-id="{{list.id}}" style="width:100%;height:10rem;border-radius:.5rem;overflow:hidden;background-color:#212429;position:relative;margin-bottom:.8rem;" wx:for="{{typeList}}" wx:for-item="list" wx:key="index">
+            <image class="shipin-img" src="{{list.picname}}" style="width:100%;height:100%;"></image>
+            <view style="width:100%;position:absolute;bottom:0;left:0;padding:.3rem;background-color:rgba(0,0,0,.3);font-weight:bold;">
+                <view style="color:#fff;">{{list.title}}</view>
+            </view>
+        </view>
+    </view>
+    <view style="width:100%;height:auto;overflow-y:scroll;background-color:#fff;background-repeat:no-repeat;background-size:cover;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;flex-direction:column;-webkit-box-align:center;align-items:center;padding-top:3rem;margin-top:20%;" wx:if="{{typeList.length===0}}">
+        <image src="../../static/images/w.png" style="width:120px;height:120px;"></image>
+        <view style="color:#000;margin-top:20px;">暂无数据 !</view>
+    </view>
+</view>

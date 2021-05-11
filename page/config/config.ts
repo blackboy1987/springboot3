@@ -52,7 +52,6 @@ export default defineConfig({
     basePath: '/',
   },
   history: { type: 'hash' },
-  base:"/page",
   // Fast Refresh 热更新
   fastRefresh: {},
   openAPI: [

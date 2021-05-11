@@ -2,7 +2,67 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="419ea74b-61c1-496f-9beb-dc27804964cc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/zhishifufei/controller/IndexController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/zhishifufei/pojo/All.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/zhishifufei/pojo/GetList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/zhishifufei/pojo/LunBo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/zhishifufei/pojo/Type.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/util/HtmlParseUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__admin__app.1e0097c1.chunk.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__admin__app.283561ed.async.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__admin__order.40d9242d.async.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__password.04e801cc.async.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__user__Login.04bc4346.chunk.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__user__Login.88745464.async.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__admin__app~p__admin__order~p__app__password~p__user__Login.c48ccad5.async.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__admin__app~p__admin__order~p__app__password~p__user__Login~t__plugin-layout__Layout.5041014e.async.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__user__Login.5d285a34.async.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__user__Login.768c8d3b.chunk.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/dianying/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/app/dianying/IndexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/controller/admin/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/controller/admin/AppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/entity/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/java/com/bootx/entity/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/asset-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__404.be0630e6.async.js" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__404.ea69a9ae.async.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__Welcome.72864ae1.chunk.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__Welcome.b0a89848.async.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__admin__app.07ba5d44.async.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__admin__app.ebde59d3.chunk.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__admin__order.56bb96b1.chunk.css" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__admin__order.266946cc.chunk.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__admin__order.8c05f6da.async.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__ad.61ada935.chunk.css" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__password.61ada935.chunk.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__ad.8272c377.async.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__base.6c3d4b8f.async.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__base.84be4c5a.chunk.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__password.0ca6f1f4.chunk.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__app__password.f96f3d02.async.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__user__Login.703ff4b5.chunk.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/p__user__Login.ec47fea6.async.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/t__plugin-layout__Layout.1839d8f5.async.js" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/t__plugin-layout__Layout.361eb2c0.async.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/umi.24da9e45.js" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/umi.ea687f1e.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome.71b8a4f8.chunk.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome.bd3665c2.async.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~p__user__Login.bbdac6c9.async.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~p__user__Login.f25d3dd8.chunk.css" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__admin__app~p__admin__order~p__app__password~p__user__Login.59285d8f.chunk.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~p__user__L~b7b07577.a50a4e44.async.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~p__user__L~b7b07577.b805d970.chunk.css" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__admin__app~p__admin__order~p__app__password~p__user__Login~t__plugin-layout__Layout.b805d970.chunk.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~t__plugin-~76786854.48e86d2d.chunk.css" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__admin__app~p__admin__order~p__app__password~t__plugin-layout__Layout.48e86d2d.chunk.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__Welcome~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~t__plugin-~76786854.bb039afc.async.js" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__admin__app~p__admin__order~p__app__password~t__plugin-layout__Layout.bb039afc.async.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~p__user__Login.4caffa5e.async.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__admin__app~p__admin__order~p__app__ad~p__app__base~p__app__password~p__user__Login.c2afe855.chunk.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__user__Login~t__plugin-layout__Layout.05d18c41.async.js" beforeDir="false" afterPath="$PROJECT_DIR$/../bootx-api/src/main/resources/static/vendors~p__admin__app~p__admin__order~p__user__Login~t__plugin-layout__Layout.2b4f8d7f.async.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/goodsconvert/goodsconvert.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/goodsconvert/goodsconvert.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.private.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.private.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../page/config/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../page/config/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../page/config/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../page/config/routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../page/src/pages/admin/app/baseConfig.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/baseConfig.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../page/src/pages/admin/app/config.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/config.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../page/src/pages/admin/app/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/pages/admin/app/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../page/src/pages/user/Login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/pages/user/Login/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../page/src/services/ant-design-pro/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/services/ant-design-pro/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../page/src/utils/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../page/src/utils/constants.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +134,10 @@
       <workItem from="1620434836145" duration="75000" />
       <workItem from="1620435791315" duration="2474000" />
       <workItem from="1620543911407" duration="8829000" />
+      <workItem from="1620616903896" duration="865000" />
+      <workItem from="1620711215116" duration="1087000" />
+      <workItem from="1620719236899" duration="648000" />
+      <workItem from="1620720794402" duration="635000" />
     </task>
     <servers />
   </component>

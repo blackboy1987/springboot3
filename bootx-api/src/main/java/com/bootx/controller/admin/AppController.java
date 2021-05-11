@@ -93,10 +93,10 @@ public class AppController {
         }
         App app = admin.getApp();
         if(id!=null){
-            if(!admin.getIsAdmin()){
-                return Result.error("非法访问");
-            }
             app = appService.find(id);
+        }
+        if(!admin.getIsAdmin()&& !admin.getApp().getId().equals(app.getId())){
+            return Result.error("非法访问");
         }
         if(app==null){
             return Result.error("非法访问");
@@ -129,10 +129,10 @@ public class AppController {
         }
         App app = admin.getApp();
         if(id!=null){
-            if(!admin.getIsAdmin()){
-                return Result.error("非法访问");
-            }
             app = appService.find(id);
+        }
+        if(!admin.getIsAdmin()&& !admin.getApp().getId().equals(app.getId())){
+            return Result.error("非法访问");
         }
         if(app==null){
             return Result.error("非法访问");
@@ -156,10 +156,10 @@ public class AppController {
         }
         App app = admin.getApp();
         if(id!=null){
-            if(!admin.getIsAdmin()){
-                return Result.error("非法访问");
-            }
             app = appService.find(id);
+        }
+        if(!admin.getIsAdmin()&&admin.getApp().getId()!=app.getId()){
+            return Result.error("非法访问");
         }
         if(app==null){
             return Result.error("非法访问");
@@ -182,14 +182,16 @@ public class AppController {
         app.setStatus(status);
         // app.setAppLogo(appLogo);
         appService.update(app);
-        // 订阅模板的更新
-        SubscriptionTemplate subscriptionTemplate = subscriptionTemplateService.find(1L);
-        if(subscriptionTemplate!=null){
-            SubscriptionTemplate subscriptionTemplate1 = new SubscriptionTemplate();
-            subscriptionTemplate1.setTemplateId(templateId);
-            subscriptionTemplate1.setParam(subscriptionTemplate.getParam());
-            subscriptionTemplate1.setApp(app);
-            subscriptionTemplateService.save(subscriptionTemplate1);
+        if(StringUtils.isNotBlank(templateId)){
+            // 订阅模板的更新
+            SubscriptionTemplate subscriptionTemplate = subscriptionTemplateService.find(1L);
+            if(subscriptionTemplate!=null){
+                SubscriptionTemplate subscriptionTemplate1 = new SubscriptionTemplate();
+                subscriptionTemplate1.setTemplateId(templateId);
+                subscriptionTemplate1.setParam(subscriptionTemplate.getParam());
+                subscriptionTemplate1.setApp(app);
+                subscriptionTemplateService.save(subscriptionTemplate1);
+            }
         }
         // 默认的会员等级问题
         MemberRank defaultMemberRank = memberRankService.findDefault(app);
@@ -217,10 +219,10 @@ public class AppController {
         }
         App app = admin.getApp();
         if(id!=null){
-            if(!admin.getIsAdmin()){
-                return Result.error("非法访问");
-            }
             app = appService.find(id);
+        }
+        if(!admin.getIsAdmin()&& !admin.getApp().getId().equals(app.getId())){
+            return Result.error("非法访问");
         }
         if(app==null){
             return Result.error("非法访问");
@@ -236,10 +238,10 @@ public class AppController {
         }
         App app = admin.getApp();
         if(id!=null){
-            if(!admin.getIsAdmin()){
-                return Result.error("非法访问");
-            }
             app = appService.find(id);
+        }
+        if(!admin.getIsAdmin()&&admin.getApp().getId()!=app.getId()){
+            return Result.error("非法访问");
         }
         if(app==null){
             return Result.error("非法访问");
@@ -332,14 +334,16 @@ public class AppController {
         if(admin==null){
             return Result.error("非法访问");
         }
-        App app = appService.find(id);
+        App app = admin.getApp();
+        if(id!=null){
+            app = appService.find(id);
+        }
+        if(!admin.getIsAdmin()&& !admin.getApp().getId().equals(app.getId())){
+            return Result.error("非法访问");
+        }
         if(app==null){
             return Result.error("非法访问");
         }
-        if(!admin.getIsAdmin()&&app.getAdmin()!=admin){
-            return Result.error("非法访问");
-        }
-
         Map<String,Object> data = new HashMap<>();
         AppConfig appConfig = app.getAppConfig();
         if(appConfig==null){

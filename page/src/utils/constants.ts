@@ -1,4 +1,4 @@
 export const Constants = {
-  baseUrl:"http://localhost:9000/admin/api/",
-  // baseUrl:"/admin/api/",
+  baseUrl:"https://www.igomall.xin/admin/api/",
+  // baseUrl:"http://localhost:9000/admin/api/",
 }

@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "add-tip": "/components/struggler-uniapp-add-tip/struggler-uniapp-add-tip",
+    "van-notice-bar": "@vant/weapp/notice-bar/index"
+  }
+}

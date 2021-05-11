@@ -77,6 +77,12 @@
           "pathName": "pages/order/order",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/goodsconvert/goodsconvert",
+          "pathName": "pages/goodsconvert/goodsconvert",
+          "query": "",
+          "scene": null
         }
       ]
     }

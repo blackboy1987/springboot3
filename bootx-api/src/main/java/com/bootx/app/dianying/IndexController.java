@@ -223,13 +223,13 @@ public class IndexController {
             demo.getData().getIndex().getWxAdId().setCpId(indexAdConfig.getInterstitialAdId());
         }
 
-        AdConfig detailAdConfig = appAd.get("detail");
+        AdConfig detailAdConfig = appAd.get("index");
         if(detailAdConfig!=null){
             demo.getData().getDetail().getWxAdId().setYsId(detailAdConfig.getNativeAdId());
             demo.getData().getDetail().getWxAdId().setCpId(detailAdConfig.getInterstitialAdId());
             demo.getData().getDetail().getWxAdId().setJlspId(detailAdConfig.getRewardedVideoAdId());
         }
-        AdConfig fenLeiAdConfig = appAd.get("fenLei");
+        AdConfig fenLeiAdConfig = appAd.get("index");
         if(fenLeiAdConfig!=null){
             demo.getData().getFeilei().getWxAdId().setYsId(fenLeiAdConfig.getNativeAdId());
             demo.getData().getFeilei().getWxAdId().setCpId(fenLeiAdConfig.getInterstitialAdId());
@@ -241,7 +241,7 @@ public class IndexController {
             demo.getData().getTopic().getWxAdId().setCpId(topicAdConfig.getInterstitialAdId());
         }
         //  demo.getData().getTopic().getWxAdId().setJlspId("adunit-d06d530e38aaba45");
-        AdConfig playAdConfig = appAd.get("play");
+        AdConfig playAdConfig = appAd.get("index");
         if(playAdConfig!=null){
             demo.getData().getPlay().getWxAdId().setYsId(playAdConfig.getNativeAdId());
             demo.getData().getPlay().getWxAdId().setCpId(playAdConfig.getInterstitialAdId());
@@ -261,14 +261,14 @@ public class IndexController {
             demo.getData().getPlay().setDanmuList(danMus);
             app.getAppConfig().getConfig().put("danMu",JsonUtils.toJson(danMus));
         }
-        AdConfig woDeAdConfig = appAd.get("woDe");
+        AdConfig woDeAdConfig = appAd.get("index");
         if(woDeAdConfig!=null){
             demo.getData().getWode().getWxAdId().setYsId(woDeAdConfig.getNativeAdId());
         }
         // demo.getData().getWode().getWxAdId().setCpId("adunit-d73c982ac406d17a");
         // demo.getData().getWode().getWxAdId().setJlspId("adunit-d06d530e38aaba45");
         //demo.getData().getWode().getWxAdId().setSpqtId("adunit-03083c87b390182a");
-        AdConfig otherAdConfig = appAd.get("other");
+        AdConfig otherAdConfig = appAd.get("index");
         if(otherAdConfig!=null){
             demo.getData().getOther().getWxAdId().setYsId(otherAdConfig.getNativeAdId());
             demo.getData().getOther().getWxAdId().setCpId(otherAdConfig.getInterstitialAdId());

@@ -5,8 +5,12 @@ import { Constants } from '@/utils/constants';
 
 /** 获取当前的用户 GET /api/currentUser */
 export async function currentUser(options?: { [key: string]: any }) {
+  console.log("localStorage.getItem(\"token\") || ''",localStorage.getItem("token") || '');
   return request<API.CurrentUser>(Constants.baseUrl+'currentUser', {
     method: 'POST',
+    headers:{
+      "token":localStorage.getItem("token") || '',
+    },
     ...(options || {}),
   });
 }
@@ -26,10 +30,6 @@ export async function login(body: API.LoginParams, options?: { [key: string]: an
     requestType:'form',
     data: body,
     ...(options || {}),
-  }).then(response=>{
-    console.log(response.token||'');
-    localStorage.setItem("token",response.token||'');
-    return response;
   });
 }
 

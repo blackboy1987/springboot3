@@ -70,6 +70,7 @@ public class App extends BaseEntity<Long>{
      * 3：图转文
      * 4：答题
      * 5：打卡小程序
+     * 6：知识付费
      */
     @NotNull
     @Column(nullable = false,updatable = false)

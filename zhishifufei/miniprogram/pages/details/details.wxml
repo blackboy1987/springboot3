@@ -1,0 +1,92 @@
+<view class="scrool-page">
+    <view class="d-flex a-center "></view>
+    <view class="list-cont">
+        <scroll-view class="scrool-more" scrollWithAnimation="true" scrollY="true" style="height:100%;">
+            <view style="{{'width:100%;height:180px;background-repeat:no-repeat;background-position:center center;background-size:100% 100%;'+'background-image:'+'url('+info.picname+')'+';'}}"></view>
+            <view style="width:100%;height:auto;border-top:1px solid #CCCCCC;margin-top:-20%;border-radius:35px 35px 0px 0px;background-color:#fff;min-height:440px;">
+                <view style="padding:10px 20px 0px 25px;font-weight:700;font-size:18px;">{{info.title}}</view>
+                <view style="padding:0px 15px 0px 15px;">
+                    <view style="border-top:1px dashed #000;"></view>
+                    <view class="guanggao" style="width:100%;margin-top:3px;transform:scale(0.999417);height:auto !important;" wx:if="{{detab!=2}}">
+                        <my-ad></my-ad>
+                    </view>
+                </view>
+                <view class="{{['textnei',isFload?'hidea':'showa']}}">
+                    <rich-text nodes="{{info.content}}" selectable="true" type="text"></rich-text>
+                </view>
+                <button bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'openJi',['$0','$1','$2'],['info.id','info.title','info.picname'] ] ] ] ]}}" style="background:#F19E38;align-content:center;width:30%;font-size:13px;color:#fff;margin-top:5px;" type="default" wx:if="{{yue}}">点击阅读全文</button>
+            </view>
+            <view style="width:100%;padding:0 15px;" wx:if="{{detas!=2}}">
+                <my-ad></my-ad>
+            </view>
+            <view class="main">
+                <view class="liebiao">
+                    <view bindtap="__e" class="liebiao-li" data-event-opts="{{[ [ 'tap',[ [ 'openWin',['vip'] ] ] ] ]}}">
+                        <image class="liebiao-img" src="../../static/images/all.png"></image>
+                        <view class="liebiao-i _i">升级会员</view>
+                    </view>
+                    <view bindtap="__e" class="liebiao-li" data-event-opts="{{[ [ 'tap',[ [ 'openWin',['faq'] ] ] ] ]}}">
+                        <image class="liebiao-img" src="../../static/images/zuixin.png"></image>
+                        <view class="liebiao-i _i">使用说明</view>
+                    </view>
+                    <button sessionFrom class="lianv" hoverClass="none" openType="contact">
+                        <image class="liebiao-img" src="../../static/images/remen.png"></image>
+                        <view class="liebiao-i _i">连接失效</view>
+                    </button>
+                    <view bindtap="__e" class="liebiao-li" data-event-opts="{{[ [ 'tap',[ ['previewImg'] ] ] ]}}">
+                        <image class="liebiao-img" src="../../static/images/vip.png"></image>
+                        <view class="liebiao-i _i">赞赏</view>
+                    </view>
+                    <view bindtap="__e" class="liebiao-li" data-event-opts="{{[ [ 'tap',[ [ 'openWin',['about'] ] ] ] ]}}">
+                        <image class="liebiao-img" src="../../static/images/remen.png"></image>
+                        <view class="liebiao-i _i">关于我们</view>
+                    </view>
+                </view>
+            </view>
+            <view style="text-align:center;color:rgba(41, 43, 51, 0.4);font-size:10px;">本站资源均源自网络，如果有问题请联系客服我们将在72小时内删除</view>
+        </scroll-view>
+    </view>
+    <view class="footer">
+        <navigator class="gohome" openType="navigateBack">
+            <image src="../../static/images/sy.png" style="width:20px;height:20px;"></image>
+            <view style="color:rgba(41, 43, 51, 0.4);font-size:10px;line-height:18px;">首页</view>
+        </navigator>
+        <view bindtap="__e" class="gohome" data-event-opts="{{[ [ 'tap',[ [ 'openShou',['$0','$1','$2'],['info.id','info.title','info.picname'] ] ] ] ]}}">
+            <image src="../../static/images/sc.png" style="width:20px;height:20px;"></image>
+            <view style="color:rgba(41, 43, 51, 0.4);font-size:10px;line-height:18px;">收藏</view>
+        </view>
+        <button class="district-fenrid" openType="share">
+            <image src="../../static/images/fx.png" style="width:20px;height:20px;"></image>
+            <view style="color:rgba(41, 43, 51, 0.4);font-size:10px;line-height:18px;">分享</view>
+        </button>
+        <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'openJi',['$0','$1','$2'],['info.id','info.title','info.picname'] ] ] ] ]}}" style="color:#fff;-webkit-box-flex:1;flex:1 100%;background:#fff;" wx:if="{{dibu1}}">
+            <button style="border-radius:80rpx;font-size:35rpx;width:80%;height:40px;background:#F19E38;color:#fff;line-height:40px;" type="default">获取资源</button>
+        </view>
+        <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'openVip',['$0','$1','$2'],['info.id','info.title','info.picname'] ] ] ] ]}}" style="color:#fff;-webkit-box-flex:1;flex:1 100%;background:#fff;" wx:if="{{vipcha}}">
+            <button style="border-radius:80rpx;font-size:35rpx;width:80%;height:40px;background:#F19E38;color:#fff;line-height:40px;" type="default">查看资源</button>
+        </view>
+        <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'openGoods',['$0','$1','$2'],['info.id','info.title','info.picname'] ] ] ] ]}}" style="color:#fff;-webkit-box-flex:1;flex:1 100%;background:#fff;" wx:if="{{goods}}">
+            <button style="border-radius:80rpx;font-size:35rpx;width:80%;height:40px;background:#F19E38;color:#fff;line-height:40px;" type="default">{{info.price+' 积分获取资源'}}</button>
+        </view>
+        <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'showModal',['$event'] ] ] ] ]}}" data-target="DialogModal1" style="color:#fff;-webkit-box-flex:1;flex:1 100%;background:#fff;" wx:if="{{mianfei}}">
+            <button style="border-radius:80rpx;font-size:35rpx;width:80%;height:40px;background:#F19E38;color:#fff;line-height:40px;" type="default">查看资源</button>
+        </view>
+    </view>
+    <view class="cu-modal DialogModal1 show" style="z-index:580;" wx:if="{{modalName}}">
+        <view class="cu-dialog">
+            <view class="cu-bar bg-white justify-end">
+                <view class="content">资源地址</view>
+                <view bindtap="__e" class="action" data-event-opts="{{[ [ 'tap',[ [ 'hideModal',['$event'] ] ] ] ]}}">
+                    <text class="cuIcon-close text-red"></text>
+                </view>
+            </view>
+            <view style="padding:5px;text-align:left;">{{''+info.dizhi+''}}</view>
+            <view class="cu-bar bg-white justify-end">
+                <view class="action">
+                    <button bindtap="__e" class="cu-btn line-green text-green" data-event-opts="{{[ [ 'tap',[ [ 'hideModal',['$event'] ] ] ] ]}}">取消</button>
+                    <button bindtap="__e" class="cu-btn bg-green margin-left" data-event-opts="{{[ [ 'tap',[ [ 'copy',['$0'],['info.dizhi'] ] ] ] ]}}">复制</button>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

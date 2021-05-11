@@ -31,11 +31,9 @@ const LoginMessage: React.FC<{
 /** 此方法会跳转到 redirect 参数所在的位置 */
 const goto = () => {
   if (!history) return;
-  setTimeout(() => {
-    const { query } = history.location;
-    const { redirect } = query as { redirect: string };
-    history.push(redirect || '/');
-  }, 10);
+  const { query } = history.location;
+  const { redirect } = query as { redirect: string };
+  history.push(redirect || '/');
 };
 
 const Login: React.FC = () => {
@@ -59,6 +57,7 @@ const Login: React.FC = () => {
         ...initialState,
         currentUser: userInfo,
       });
+      goto();
     }
   };
 
@@ -68,9 +67,11 @@ const Login: React.FC = () => {
       // 登录
       const msg = await login({ ...values, type });
       if (msg.status === 'ok') {
+        localStorage.setItem("token",msg.token||'');
         message.success('登录成功！');
-        await fetchUserInfo()
-        goto();
+        setTimeout(()=>{
+          fetchUserInfo()
+        },1000);
         return;
       }
       // 如果失败去设置用户错误信息

@@ -1,0 +1,130 @@
+<view>
+    <view class="mine_head" wx:if="{{hasLogin}}">
+        <view class="mine_head_body">
+            <view class="tx">
+                <image mode bindtap="__e" data-event-opts="{{[ [ 'tap',[ ['outLogin'] ] ] ]}}" src="{{userimg}}" style="width:100%;height:100%;"></image>
+            </view>
+            <view class="nickname">{{usernc}}</view>
+            <view class="idno" wx:if="{{tishi}}">{{'VIP将于：'+$root.f0+' 到期'}}</view>
+            <view class="idno" wx:else>您目前还不是会员哦~</view>
+        </view>
+        <image class="gif-wave" mode="scaleToFill" src="../../../static/images/sb.gif"></image>
+    </view>
+    <view bindtap="__e" class="mine_head" data-event-opts="{{[ [ 'tap',[ ['openlogin'] ] ] ]}}" wx:else>
+        <view class="mine_head_body">
+            <view class="tx">
+                <image mode src="../../../static/images/logo-w.png" style="width:100%;height:100%;"></image>
+            </view>
+            <view class="nickname">登录/注册</view>
+        </view>
+        <image class="gif-wave" mode="scaleToFill" src="../../../static/images/sb.gif"></image>
+    </view>
+    <view class="mine_info_grid">
+        <view class="mine_info">
+            <view class="num">{{userjifen}}</view>
+            <view>会员积分</view>
+        </view>
+        <view bindtap="__e" class="mine_info" data-event-opts="{{[ [ 'tap',[ ['openBuy'] ] ] ]}}" style="border-left:1px solid #e4e5ea;-webkit-tap-highlight-color:transparent;">
+            <view class="num">{{goumai}}</view>
+            <view>兑换记录</view>
+        </view>
+        <view bindtap="__e" class="mine_info" data-event-opts="{{[ [ 'tap',[ ['openCollect'] ] ] ]}}" style="border-left:1px solid #e4e5ea;-webkit-tap-highlight-color:transparent;">
+            <view class="num">{{shoucang}}</view>
+            <view>收藏记录</view>
+        </view>
+    </view>
+    <view style="width:100%;height:8px;background-color:#F1F1F5;"></view>
+    <view class="aui-card-white">
+        <view bindtap="__e" class="aui-well-item" data-event-opts="{{[ [ 'tap',[ ['getVideoAd'] ] ] ]}}">
+            <view class="aui-well-item-hd" style="width:16px;height:16px;">
+                <image alt src="../../../static/images/qian.png"></image>
+            </view>
+            <view class="aui-well-item-bd-x">
+                <view class="aui-well-item-bd-x-h">每日签到</view>
+            </view>
+            <view class="aui-well-item-fr-jiao">
+                <view class="tb"></view>
+            </view>
+            <view class="hengx"></view>
+        </view>
+        <view bindtap="__e" class="aui-well-item" data-event-opts="{{[ [ 'tap',[ [ 'openWin',['user','vip'] ] ] ] ]}}" wx:if="{{vipk!=2}}">
+            <view class="aui-well-item-hd" style="width:16px;height:16px;">
+                <image alt src="../../../static/images/shengji.png"></image>
+            </view>
+            <view bindtap="__e" class="aui-well-item-bd-x" data-event-opts="{{[ [ 'tap',[ ['openVip'] ] ] ]}}">
+                <view class="aui-well-item-bd-x-h">积分兑换</view>
+            </view>
+            <view class="aui-well-item-fr-jiao">
+                <view class="tb"></view>
+            </view>
+            <view class="hengx"></view>
+        </view>
+        <view bindtap="__e" class="aui-well-item" data-event-opts="{{[ [ 'tap',[ [ 'openWin',['user','faq'] ] ] ] ]}}">
+            <view class="aui-well-item-hd" style="width:16px;height:16px;">
+                <image alt src="../../../static/images/shiyong.png"></image>
+            </view>
+            <view bindtap="__e" class="aui-well-item-bd-x" data-event-opts="{{[ [ 'tap',[ [ 'openWin',['user','part'] ] ] ] ]}}">
+                <view class="aui-well-item-bd-x-h">使用说明</view>
+            </view>
+            <view class="aui-well-item-fr-jiao">
+                <view class="tb"></view>
+            </view>
+            <view class="hengx"></view>
+        </view>
+        <button sessionFrom hoverClass="none" openType="contact">
+            <view class="aui-well-item">
+                <view class="aui-well-item-hd" style="width:16px;height:16px;">
+                    <image alt src="../../../static/images/lianxi.png"></image>
+                </view>
+                <view class="aui-well-item-bd-x">
+                    <view class="aui-well-item-bd-x-h">联系我们</view>
+                </view>
+                <view class="aui-well-item-fr-jiao">
+                    <view class="tb"></view>
+                </view>
+                <view class="hengx"></view>
+            </view>
+        </button>
+        <view bindtap="__e" class="aui-well-item" data-event-opts="{{[ [ 'tap',[ ['previewImg'] ] ] ]}}">
+            <view class="aui-well-item-hd" style="width:16px;height:16px;">
+                <image alt src="../../../static/images/zan.png"></image>
+            </view>
+            <view class="aui-well-item-bd-x">
+                <view class="aui-well-item-bd-x-h">赞赏支持</view>
+            </view>
+            <view class="aui-well-item-fr-jiao">
+                <view class="tb"></view>
+            </view>
+            <view class="hengx"></view>
+        </view>
+        <view bindtap="__e" class="aui-well-item" data-event-opts="{{[ [ 'tap',[ [ 'openWin',['user','about'] ] ] ] ]}}">
+            <view class="aui-well-item-hd" style="width:16px;height:16px;">
+                <image alt src="../../../static/images/guanyu.png"></image>
+            </view>
+            <view class="aui-well-item-bd-x">
+                <view class="aui-well-item-bd-x-h">关于我们</view>
+            </view>
+            <view class="aui-well-item-fr-jiao">
+                <view class="tb"></view>
+            </view>
+            <view class="hengx"></view>
+        </view>
+        <view bindtap="__e" class="aui-well-item" data-event-opts="{{[ [ 'tap',[ [ 'openWin',['user','gengduo'] ] ] ] ]}}">
+            <view class="aui-well-item-hd" style="width:16px;height:16px;">
+                <image alt src="../../../static/images/4.png"></image>
+            </view>
+            <view class="aui-well-item-bd-x">
+                <view class="aui-well-item-bd-x-h">更多好玩</view>
+            </view>
+            <view class="aui-well-item-fr-jiao">
+                <view class="tb"></view>
+            </view>
+            <view class="hengx"></view>
+        </view>
+    </view>
+    <view style="width:100%;position:relative;overflow:hidden;padding:0 15px;padding-top:10px;" wx:if="{{users!=2}}">
+        <view style="border-radius:12px;padding-bottom:5px;">
+            <ad adTheme="white" adType="video" unitId="{{shipin}}" wx:if="{{shipin!=0}}"></ad>
+        </view>
+    </view>
+</view>

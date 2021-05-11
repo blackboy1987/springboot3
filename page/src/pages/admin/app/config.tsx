@@ -15,15 +15,13 @@ const { TabPane } = Tabs;
 
 type ConfigProps = {
   visible: boolean;
-  values: {
-    [key: string]: any;
-  };
+  values: Record<string, any>;
   onClose: () => void;
 }
 
 const Config: React.FC<ConfigProps>=({visible,onClose,values})=>{
 
-  const [appData,setAppData] = useState<{[key: string]: any}>({});
+  const [appData,setAppData] = useState<Record<string, any>>({});
   const [activeTabKey,setActiveTabKey] = useState<string>('base');
 
   const load=(key: string)=>{
@@ -43,8 +41,20 @@ const Config: React.FC<ConfigProps>=({visible,onClose,values})=>{
   useEffect(()=>{
     load('base');
   },[]);
-  const title = (val: {[key: string]: any}) =>{
-    return val.appName+(val.type===5 ? "(打卡类)" : `${val.type}`);
+  const title = (val: Record<string, any>) =>{
+    if(val.type===5){
+      return `${val.appName}(打卡类)`;
+    }
+    if(val.type===6){
+      return `${val.appName}(知识付费类)`;
+    }
+    if(val.type===1){
+      return `${val.appName}(影视类)`;
+    }
+
+    return `${val.appName}(${val.type})`;
+
+
   }
   return (
     <Drawer visible={visible} onClose={onClose} title={title(values)} width={window.innerWidth-160}>
@@ -55,13 +65,21 @@ const Config: React.FC<ConfigProps>=({visible,onClose,values})=>{
           }}>
             <TabPane tab="基本配置" key="base" />
             <TabPane tab="广告配置" key="ad" />
-            <TabPane tab="分享配置" key="share" />
             <TabPane tab="会员" key="members" />
-            <TabPane tab="商品分类" key="productCategories" />
-            <TabPane tab="商品" key="products" />
-            <TabPane tab="订单" key="orders" />
-            <TabPane tab="其他" key="other" />
-            <TabPane tab="更多小程序" key="moreProgram" />
+
+            {
+              values.type===5 ? (
+                <>
+                  <TabPane tab="分享配置" key="share" />
+                  <TabPane tab="商品分类" key="productCategories" />
+                  <TabPane tab="商品" key="products" />
+                  <TabPane tab="订单" key="orders" />
+                  <TabPane tab="其他" key="other" />
+                  <TabPane tab="更多小程序" key="moreProgram" />
+                </>
+              ) : null
+            }
+
           </Tabs>
         </div>
         <div style={{flex:1}}>

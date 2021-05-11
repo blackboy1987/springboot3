@@ -1,0 +1,48 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/login/login",
+          "pathName": "pages/login/login",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/user/index/index",
+          "pathName": "pages/user/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/type/type",
+          "pathName": "pages/type/type",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/type/list/list",
+          "pathName": "pages/type/list/list",
+          "query": "tid=1",
+          "scene": null
+        },
+        {
+          "name": "pages/details/details",
+          "pathName": "pages/details/details",
+          "query": "tid=13250&title=测试",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

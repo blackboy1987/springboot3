@@ -1,0 +1,73 @@
+<view>
+  <swiper autoplay="{{true}}" class="swiper-box" duration="{{1000}}" indicatorActiveColor="#FFFFFF" indicatorDots="{{true}}" interval="{{3000}}">
+    <swiper-item wx:for="{{lunboList}}" wx:for-item="list" wx:key="index">
+      <view class="swiper-item">
+        <image mode class="lunbo-box" src="{{list.picname}}" style="width:100%;margin-bottom:0px;"></image>
+      </view>
+    </swiper-item>
+  </swiper>
+  <view class="notice-flex">
+    <van-notice-bar style="width:100%" left-icon="volume-o" color="{{color}}" scrollable="{{true}}" speed="{{speed}}" background="#FFF" text="技术是开发它的人的共同灵魂技术是开发它的人的共同灵魂技术是开发它的人的共同灵魂技术是开发它的人的共同灵魂技术是开发它的人的共同灵魂技术是开发它的人的共同灵魂技术是开发它的人的共同灵魂技术是开发它的人的共同灵魂技术是开发它的人的共同灵魂技术是开发它的人的共同灵魂技术是开发它的人的共同灵魂。"/>
+  </view>
+
+  <view class="main">
+    <view class="liebiao">
+      <view class="liebiao-li">
+        <image class="liebiao-img" src="../../static/images/sou.png"></image>
+        <view class="liebiao-i _i">搜索</view>
+      </view>
+      <view class="liebiao-li">
+        <image class="liebiao-img" src="../../static/images/hot.png"></image>
+        <view class="liebiao-i _i">热门</view>
+      </view>
+      <view class="liebiao-li">
+        <image class="liebiao-img" src="../../static/images/xx.png"></image>
+        <view class="liebiao-i _i">星球</view>
+      </view>
+      <view class="liebiao-li">
+        <image class="liebiao-img" src="../../static/images/vip.png"></image>
+        <view class="liebiao-i _i">VIP</view>
+      </view>
+      <view class="liebiao-li" >
+        <image class="liebiao-img" src="../../static/images/all.png"></image>
+        <view class="liebiao-i _i">全部</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="titel-vi">
+    <view class="titel-vi-q">
+      <view class="titel-vi-img">
+        <image class="fengrui-img" src="../../static/images/zuixin.png"></image>
+      </view>
+      <view class="titel-vi-font">最新文章</view>
+    </view>
+    <view class="titel-vi-right">查看更多</view>
+  </view>
+  <view class="postlist-bg">
+    <block wx:for="{{list}}" wx:key="index">
+      <view class="menu-scroll-list">
+        <view class="menu-scroll-list-img">
+          <image class="fengrui-img" src="{{item.picname}}"></image>
+        </view>
+        <view class="menu-scroll-list-right">
+          <view class="menu-scroll-list-h">{{item.title}}</view>
+          <view class="list-li-tag" wx:if="{{item.type===1||item.type===2||item.type===5}}">权限：免费</view>
+          <view class="list-li-tag" wx:if="{{item.type===3}}">权限：VIP专享</view>
+          <view class="list-li-tag" wx:if="{{item.type===4}}">{{'积分：'+item.price+''}}</view>
+          <view class="menu-scroll-list-describe">
+            <view style="font-size:10px;">{{item.addtime}}</view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{indexb!=2}}">
+        <view style="margin:0rpx 20rpx;" wx:if="{{index%8==7}}">
+          <ad class="lunbo-box" unitId="{{banner}}" wx:if="{{banner!=0}}"></ad>
+        </view>
+      </view>
+    </block>
+    <view class="load-more" style="text-align:center;color:rgba(41, 43, 51, 0.4);font-size:10px;">{{''+load+''}}</view>
+  </view>
+
+  <add-tip bind:__l="__l" duration="{{duration}}" tip="{{tip}}" vueId="8dd740cc-2"></add-tip>
+</view>

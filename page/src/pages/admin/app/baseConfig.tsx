@@ -25,6 +25,7 @@ const BaseConfig: React.FC<BaseConfigProps> = ({id}) => {
     try {
       const result = await base({id});
       form.setFieldsValue(result.data);
+      console.log("result.data",result.data);
       setLoading(false);
     } catch (error) {
       message.error('网络错误！');
@@ -46,7 +47,6 @@ const BaseConfig: React.FC<BaseConfigProps> = ({id}) => {
     }
     setLoading(false);
   };
-
   return (
     <Card bordered={false} size='small'>
       <Alert message='appId和appSecret 修改之后，将会同步更新appCode和appToken,请注意修改小程序里的appCode和appToken' type='warning' showIcon style={{marginBottom: 24}}/>

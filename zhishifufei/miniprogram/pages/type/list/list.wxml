@@ -1,0 +1,30 @@
+<view>
+    <view class="postlist-bg">
+        <block wx:for="{{list}}" wx:key="index">
+            <view bind:tap="openWin" class="menu-scroll-list" data-id="{{item.id}}" data-title="{{item.title}}">
+                <view class="menu-scroll-list-img">
+                    <image class="fengrui-img" src="{{item.picname}}"></image>
+                </view>
+                <view class="menu-scroll-list-right">
+                    <view class="menu-scroll-list-h">{{item.title}}</view>
+                    <view class="list-li-tag" wx:if="{{item.type===1||item.type===2||item.type===5}}">权限：免费</view>
+                    <view class="list-li-tag" wx:if="{{item.type===3}}">权限：VIP专享</view>
+                    <view class="list-li-tag" wx:if="{{item.type===4}}">{{'积分：'+item.price+''}}</view>
+                    <view class="menu-scroll-list-describe">
+                        <view style="font-size:10px;">{{item.addtime}}</view>
+                    </view>
+                </view>
+            </view>
+            <view wx:if="{{lists!=2}}">
+                <view style="margin:0rpx 20rpx;" wx:if="{{index%8==7}}">
+                    <my-ad></my-ad>
+                </view>
+            </view>
+        </block>
+        <view class="load-more" style="text-align:center;color:rgba(41, 43, 51, 0.4);font-size:10px;">{{load}}</view>
+    </view>
+    <view style="width:100%;height:auto;overflow-y:scroll;background-repeat:no-repeat;background-size:cover;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;flex-direction:column;-webkit-box-align:center;align-items:center;padding-top:3rem;margin-top:20%;" wx:if="{{list.length===0}}">
+        <image src="../../../static/images/w.png" style="width:120px;height:120px;"></image>
+        <view style="color:#000;margin-top:20px;">暂无数据 !</view>
+    </view>
+</view>

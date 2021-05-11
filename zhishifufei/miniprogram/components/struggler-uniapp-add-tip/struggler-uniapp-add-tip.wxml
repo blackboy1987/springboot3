@@ -1,0 +1,7 @@
+<view class="data-v-73408264">
+    <view class="uni-add-tips-box data-v-73408264" wx:if="{{showTip}}">
+        <view bind:tap="hide" class="uni-add-tips-content">
+            <text class="data-v-73408264">{{tip}}</text>
+        </view>
+    </view>
+</view>
