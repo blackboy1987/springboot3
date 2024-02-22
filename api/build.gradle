@@ -1,28 +1,31 @@
 plugins {
-    id 'org.springframework.boot' version '2.7.18'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'org.springframework.boot' version '3.2.2'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.bootx'
-version = '0.0.1'
-sourceCompatibility = '21'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '21'
+}
 
 repositories {
-    repositories {
-        maven {
-            url 'https://maven.aliyun.com/repository/public/'
-        }
-        maven {
-            url "https://mirrors.huaweicloud.com/repository/maven/huaweicloudsdk/"
-        }
-        mavenLocal()
-        mavenCentral()
-
+    maven {
+        url 'https://maven.aliyun.com/repository/public/'
     }
+    maven {
+        url "https://mirrors.huaweicloud.com/repository/maven/huaweicloudsdk/"
+    }
+    mavenLocal()
+    mavenCentral()
 }
 
 dependencies {
+
+
+
     implementation group: 'org.jsoup', name: 'jsoup', version: '1.17.2'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.14.0'
     implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
@@ -39,7 +42,7 @@ dependencies {
     implementation group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.8'
 
     implementation group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.70.0'
-    implementation('com.huawei.hwclouds.ais:ais-java-client:2.0.1') {
+    implementation('com.huawei.hwclouds.ais:ais-java-client:2.0.0') {
         exclude group: 'org.slf4j'
         exclude group: 'joda-time'
     }
@@ -51,17 +54,16 @@ dependencies {
 
     implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.11.4'
 
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-freemarker'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     runtimeOnly 'com.mysql:mysql-connector-j'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-test {
+tasks.named('test') {
     useJUnitPlatform()
 }
