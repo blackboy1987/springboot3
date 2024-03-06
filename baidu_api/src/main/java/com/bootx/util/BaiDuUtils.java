@@ -32,7 +32,7 @@ public class BaiDuUtils {
     public static String getCode(){
         String url="http://openapi.baidu.com/oauth/2.0/authorize?response_type=code&client_id="+appKey+"&redirect_uri=oob&scope=basic,netdisk&device_id="+appId;
         System.out.println(url);
-        return "6cce64f979df68071b930c2e1d2993d9";
+        return "ec04f93409aa376e6578d5a161ebd47e";
     }
 
 
@@ -42,10 +42,6 @@ public class BaiDuUtils {
         String s = WebUtils.get(url,null);
         System.out.println(s);
         return JsonUtils.toObject(s,new TypeReference<BaiDuAccessToken>(){});
-    }
-
-    public static void main(String[] args) {
-        getToken();
     }
 
     public static BaiDuAccessToken refreshToken(String token) {
@@ -104,8 +100,6 @@ public class BaiDuUtils {
                 response.append(inputLine);
             }
             in.close();
-            System.out.println(response.toString());
-
             return JsonUtils.toObject(response.toString(), new TypeReference<FileListPojo>() {
             });
         }catch (Exception e){
@@ -328,4 +322,8 @@ public class BaiDuUtils {
         }
     }
 
+
+    public static void main(String[] args) {
+        getToken();
+    }
 }
