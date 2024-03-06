@@ -323,7 +323,32 @@ public class BaiDuUtils {
     }
 
 
+    public static FileMetasPojo filemetas(String token,String fsids) {
+        String url = "http://pan.baidu.com/rest/2.0/xpan/multimedia?method=filemetas&fsids="+fsids+"&dlink=1&thumb=1&access_token="+token+"&extra=1&needmedia=1&detail=1";
+        try {
+            URL url1 = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
+            conn.setRequestMethod("GET");
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            System.out.println(response.toString());
+            return JsonUtils.toObject(response.toString(), new TypeReference<FileMetasPojo>() {
+            });
+        }catch (Exception e){
+            FileMetasPojo fileListPojo = new FileMetasPojo();
+            fileListPojo.setErrmsg(e.getMessage());
+            return fileListPojo;
+        }
+    }
+
+
     public static void main(String[] args) {
-        getToken();
+        String accessToken="121.2e7b421ed8e6bb7c77099f5dcc4d252c.YHXdtDdCTgICZA5f98AwZ2fG_TsZ_fXFlpSyzRL.sxWUzw";
+        filemetas(accessToken,"[882820963403436]");
     }
 }
