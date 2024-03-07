@@ -1,5 +1,6 @@
 package com.bootx.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -38,6 +39,7 @@ public class FileList extends OrderedEntity<Long>{
      * 上级分类
      */
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private FileList parent;
 
     /**
@@ -45,6 +47,7 @@ public class FileList extends OrderedEntity<Long>{
      */
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     @OrderBy("order asc")
+    @JsonIgnore
     private Set<FileList> children = new HashSet<>();
 
     /**

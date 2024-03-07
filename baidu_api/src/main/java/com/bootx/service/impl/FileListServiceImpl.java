@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -134,5 +136,24 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
                 saveChildren(child,token);
             }
         }
+    }
+
+    @Override
+    public List<FileList> getChildren(FileList parent) {
+        return fileListDao.findChildren(parent,false,null);
+    }
+
+    @Override
+    public void remove(List<FileList> needDelete) {
+        needDelete.forEach(item->{
+            List<Map<String, Object>> maps = jdbcTemplate.queryForList("select id from filelist where id=? or treePath like '%," + item.getId() + ",%' order by id desc ;", item.getId());
+            if (!maps.isEmpty()) {
+                maps.forEach(i->{
+                    int update = jdbcTemplate.update("delete from filelist where id=?", i.get("id"));
+                    System.out.println("delete====:"+update);
+                });
+            }
+        });
+
     }
 }

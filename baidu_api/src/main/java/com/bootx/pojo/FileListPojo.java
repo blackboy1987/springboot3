@@ -159,6 +159,10 @@ public class FileListPojo extends BaseResponse {
          */
         private Thumb thumbs;
 
+        private String docpreview;
+
+        private String lodocpreview;
+
         public Integer getTkbindId() {
             return tkbindId;
         }
@@ -365,6 +369,22 @@ public class FileListPojo extends BaseResponse {
 
         public void setThumbs(Thumb thumbs) {
             this.thumbs = thumbs;
+        }
+
+        public String getDocpreview() {
+            return docpreview;
+        }
+
+        public void setDocpreview(String docpreview) {
+            this.docpreview = docpreview;
+        }
+
+        public String getLodocpreview() {
+            return lodocpreview;
+        }
+
+        public void setLodocpreview(String lodocpreview) {
+            this.lodocpreview = lodocpreview;
         }
     }
 
