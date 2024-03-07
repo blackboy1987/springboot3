@@ -83,12 +83,15 @@ public class BaiDuUtils {
      * @param token
      * @return
      */
-    public static FileListPojo fileList(String token,String dir) {
+    public static FileListPojo fileList(String token,String dir,Integer folder) {
         if(StringUtils.isBlank(dir)){
             dir = "/短剧";
         }
+        if(folder==null){
+            folder = 0;
+        }
 
-        String url = "https://pan.baidu.com/rest/2.0/xpan/file?method=list&dir="+dir+"&order=time&start=0&limit=1000&web=web&folder=0&access_token="+token+"&desc=1";
+        String url = "https://pan.baidu.com/rest/2.0/xpan/file?method=list&dir="+dir+"&order=time&start=0&limit=1000&web=web&folder=0&access_token="+token+"&desc=1&folder="+folder;
         try {
             URL url1 = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) url1.openConnection();

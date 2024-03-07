@@ -90,7 +90,7 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
 
     @Override
     public void saveChildren(FileList fileList, String token) {
-        FileListPojo fileListPojo = BaiDuUtils.fileList(token, fileList.getPath());
+        FileListPojo fileListPojo = BaiDuUtils.fileList(token, fileList.getPath(),0);
         for (FileListPojo.ListDTO listDTO : fileListPojo.getList()) {
             FileList child = findByFsId(listDTO.getFsId());
             if(child==null){

@@ -39,7 +39,7 @@ public class ListItemJob {
     //@Scheduled(fixedRate = 1000*60*60*24*20)
     public void run(){
         String token = baiDuAccessTokenService.getToken();
-        FileListPojo fileListPojo = BaiDuUtils.fileList(token, "/");
+        FileListPojo fileListPojo = BaiDuUtils.fileList(token, "/",0);
         System.out.println(JsonUtils.toJson(fileListPojo));
         List<FileListPojo.ListDTO> list = fileListPojo.getList();
         for (FileListPojo.ListDTO listDTO : list) {
@@ -52,7 +52,7 @@ public class ListItemJob {
         FileList parent = fileListService.findByFsId(fsId);
         if(parent != null){
             String token = baiDuAccessTokenService.getToken();
-            FileListPojo fileListPojo = BaiDuUtils.fileList(token, parent.getPath());
+            FileListPojo fileListPojo = BaiDuUtils.fileList(token, parent.getPath(),0);
             List<FileListPojo.ListDTO> list = fileListPojo.getList();
             for (FileListPojo.ListDTO listDTO : list) {
                 FileList fileList = fileListService.create(listDTO, parent);
@@ -77,7 +77,7 @@ public class ListItemJob {
         Long serverMTime = byFsId.getServerMTime();
         if(!serverMTime.equals(filemetas.getList().get(0).getServerMtime())){
             // 网盘的。说明里面有文件发生了变化。拉取里面的文件
-            FileListPojo fileListPojo = BaiDuUtils.fileList(token, byFsId.getPath());
+            FileListPojo fileListPojo = BaiDuUtils.fileList(token, byFsId.getPath(),0);
             Set<Long> collect = fileListPojo.getList().stream().map(item -> item.getFsId()).collect(Collectors.toSet());
             // 数据库的
             List<FileList> children = fileListService.getChildren(byFsId);
@@ -110,10 +110,18 @@ public class ListItemJob {
 
 
 
-    @Scheduled(fixedRate = 1000*60*60*24*20)
+    //@Scheduled(fixedRate = 1000*60*60*24*20)
     public void run3(){
         String token = baiDuAccessTokenService.getToken();
         CategoryListPojo categoryListPojo = BaiDuUtils.categoryList(token, "/shortVideo", 6, 1,0,1000);
         System.out.println(categoryListPojo);
+    }
+
+
+    @Scheduled(fixedRate = 1000*60*60*24*20)
+    public void run4(){
+        String token = baiDuAccessTokenService.getToken();
+        FileListPojo fileListPojo = BaiDuUtils.fileList(token, "/shortVideo", 1);
+
     }
 }
