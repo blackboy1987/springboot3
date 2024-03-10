@@ -1,25 +1,20 @@
 package com.bootx.job;
 
 import com.bootx.entity.FileList;
-import com.bootx.pojo.CategoryListPojo;
 import com.bootx.pojo.FileListPojo;
-import com.bootx.pojo.FileMetasPojo;
 import com.bootx.service.BaiDuAccessTokenService;
 import com.bootx.service.FileListService;
+import com.bootx.service.RedisService;
 import com.bootx.util.BaiDuUtils;
-import com.bootx.util.JsonUtils;
+import com.bootx.util.FileUploadUtils;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 /**
  * @author black
@@ -33,95 +28,117 @@ public class ListItemJob {
     @Resource
     private FileListService fileListService;
 
-    @Value("${fsId}")
-    private Long fsId;
+    @Resource
+    private RedisService redisService;
 
-    //@Scheduled(fixedRate = 1000*60*60*24*20)
+    @Resource
+    private JdbcTemplate jdbcTemplate;
+
+    //@Scheduled(cron = "0 0 0 * * ? *")
+    public void run0(){
+        String token = baiDuAccessTokenService.getToken();
+        FileListPojo fileListPojo = BaiDuUtils.fileList(token, "/", null);
+        for (FileListPojo.ListDTO listDTO : fileListPojo.getList()) {
+            fileListService.create(listDTO, null);
+        }
+    }
+
+    private void save(Integer grade){
+        String token = baiDuAccessTokenService.getToken();
+        List<Map<String, Object>> maps = jdbcTemplate.queryForList("select id from fileList where grade=? and needUpdate=true",grade);
+
+        for (Map<String, Object> map : maps) {
+            FileList parent = fileListService.find(Long.valueOf(map.get("id")+""));
+            if(parent!=null){
+                FileListPojo fileListPojo = BaiDuUtils.fileList(token, parent.getPath(), null);
+                for (FileListPojo.ListDTO listDTO : fileListPojo.getList()) {
+                    fileListService.create(listDTO, parent);
+                }
+                try {
+                    jdbcTemplate.update("update filelist set needUpdate=false,lastModifiedDate=NOW(),version=version+1 where id=?;",map.get("id"));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    //@Scheduled(cron = "0 30 0 * * ? *")
     public void run(){
-        String token = baiDuAccessTokenService.getToken();
-        FileListPojo fileListPojo = BaiDuUtils.fileList(token, "/",0);
-        System.out.println(JsonUtils.toJson(fileListPojo));
-        List<FileListPojo.ListDTO> list = fileListPojo.getList();
-        for (FileListPojo.ListDTO listDTO : list) {
-            fileListService.create(listDTO,null);
-        }
+        save(0);
     }
 
-    //@Scheduled(fixedRate = 1000*60*60*24*20)
+    //@Scheduled(cron = "0 30 2 * * ? *")
     public void run1(){
-        FileList parent = fileListService.findByFsId(fsId);
-        if(parent != null){
-            String token = baiDuAccessTokenService.getToken();
-            FileListPojo fileListPojo = BaiDuUtils.fileList(token, parent.getPath(),0);
-            List<FileListPojo.ListDTO> list = fileListPojo.getList();
-            for (FileListPojo.ListDTO listDTO : list) {
-                FileList fileList = fileListService.create(listDTO, parent);
-                if(fileList.getCategory()==6){
-                    fileListService.saveChildren(fileList,token);
-                }
-            }
-        }
+        save(1);
     }
 
-    //@Scheduled(fixedRate = 1000*60*60*24*20)
-    public void check(){
-        Long checkFsId = 882820963403436L;
-        String token = baiDuAccessTokenService.getToken();
-        FileList byFsId = fileListService.findByFsId(checkFsId);
-
-        FileMetasPojo filemetas = BaiDuUtils.filemetas(token, "["+checkFsId + "]");
-        check1(byFsId,filemetas,token);
-    }
-
-    private void check1(FileList byFsId,FileMetasPojo filemetas,String token) {
-        Long serverMTime = byFsId.getServerMTime();
-        if(!serverMTime.equals(filemetas.getList().get(0).getServerMtime())){
-            // 网盘的。说明里面有文件发生了变化。拉取里面的文件
-            FileListPojo fileListPojo = BaiDuUtils.fileList(token, byFsId.getPath(),0);
-            Set<Long> collect = fileListPojo.getList().stream().map(item -> item.getFsId()).collect(Collectors.toSet());
-            // 数据库的
-            List<FileList> children = fileListService.getChildren(byFsId);
-            List<FileList> needDelete = new ArrayList<>();
-            children.forEach(child->{
-                if(!collect.contains(child.getFsId())){
-                    needDelete.add(child);
-                }
-            });
-            // 删除
-            if(!needDelete.isEmpty()){
-                fileListService.remove(needDelete);
-            }
-            for (FileListPojo.ListDTO listDTO : fileListPojo.getList()) {
-                Long fsId1 = listDTO.getFsId();
-                FileList fileList = fileListService.findByFsId(fsId1);
-                if(fileList==null){
-                    FileList fileList1 = fileListService.create(listDTO, byFsId);
-                    // 保存子目录
-                    if(fileList1.getCategory()==6){
-                        fileListService.saveChildren(fileList1,token);
-                    }
-                }else if(!listDTO.getServerMtime().equals(fileList.getServerMTime())){
-                    FileMetasPojo filemetas1 = BaiDuUtils.filemetas(token, "["+fileList.getFsId() + "]");
-                    check1(fileList,filemetas1,token);
-                }
-            }
-        }
-    }
-
-
-
-    //@Scheduled(fixedRate = 1000*60*60*24*20)
-    public void run3(){
-        String token = baiDuAccessTokenService.getToken();
-        CategoryListPojo categoryListPojo = BaiDuUtils.categoryList(token, "/shortVideo", 6, 1,0,1000);
-        System.out.println(categoryListPojo);
-    }
-
-
+    //@Scheduled(cron = "0 30 4 * * ? *")
     @Scheduled(fixedRate = 1000*60*60*24*20)
-    public void run4(){
-        String token = baiDuAccessTokenService.getToken();
-        FileListPojo fileListPojo = BaiDuUtils.fileList(token, "/shortVideo", 1);
+    public void run2(){
+        save(2);
+    }
 
+    //@Scheduled(cron = "0 30 6 * * ? *")
+    public void run3(){
+        save(3);
+    }
+
+    //@Scheduled(cron = "0 30 8 * * ? *")
+    public void run4(){
+        save(4);
+    }
+
+   // @Scheduled(cron = "0 30 10 * * ? *")
+    public void run5(){
+        save(5);
+    }
+
+   // @Scheduled(cron = "0 30 12 * * ? *")
+    public void run6(){
+        save(6);
+    }
+
+   // @Scheduled(cron = "0 30 14 * * ? *")
+    public void run7(){
+        save(7);
+    }
+
+    //@Scheduled(cron = "0 30 16 * * ? *")
+    public void run8(){
+        save(8);
+    }
+
+   // @Scheduled(cron = "0 30 18 * * ? *")
+    public void run9(){
+        save(9);
+    }
+
+    //@Scheduled(cron = "0 30 20 * * ? *")
+    public void run10(){
+        save(10);
+    }
+
+    //@Scheduled(cron = "0 30 21 * * ? *")
+    //@Scheduled(fixedRate = 1000*60*60*24*20)
+    public void run100() throws InterruptedException {
+        String token = baiDuAccessTokenService.getToken();
+        List<Map<String, Object>> maps = jdbcTemplate.queryForList("select id from fileList where category=1 and playUrl is null");
+
+        for (Map<String, Object> map : maps) {
+            FileList fileList = fileListService.findByFsId(Long.valueOf(map.get("id")+""));
+            if(fileList!=null){
+                String streaming = BaiDuUtils.streaming(token, fileList.getPath());
+                while (!StringUtils.contains(streaming,"#EXT-X-ENDLIST")){
+                    Thread.sleep(1000);
+                    streaming = BaiDuUtils.streaming(token, fileList.getPath());
+                }
+
+                String path = fileList.getFsId()+".m3u8";
+                FileUploadUtils.upload(streaming,fileList.getFsId()+".m3u8");
+                String url = "https://bootx-video.oss-cn-hangzhou.aliyuncs.com/"+path;
+                fileList.setPlayUrl(url);
+                fileListService.update(fileList);
+            }
+        }
     }
 }

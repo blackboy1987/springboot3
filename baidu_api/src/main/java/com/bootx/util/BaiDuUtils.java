@@ -5,13 +5,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 public class BaiDuUtils {
 
@@ -40,14 +36,12 @@ public class BaiDuUtils {
         String code = getCode();
         String url="https://openapi.baidu.com/oauth/2.0/token?grant_type=authorization_code&code="+code+"&client_id="+appKey+"&client_secret="+secretKey+"&redirect_uri=oob";
         String s = WebUtils.get(url,null);
-        System.out.println(s);
         return JsonUtils.toObject(s,new TypeReference<BaiDuAccessToken>(){});
     }
 
     public static BaiDuAccessToken refreshToken(String token) {
         String url="https://openapi.baidu.com/oauth/2.0/token?grant_type=refresh_token&refresh_token="+token+"&client_id="+appKey+"&client_secret="+secretKey;
         String s = WebUtils.get(url,null);
-        System.out.println(s);
         return JsonUtils.toObject(s,new TypeReference<BaiDuAccessToken>(){});
     }
 
@@ -60,7 +54,6 @@ public class BaiDuUtils {
     public static UinfoPojo uinfo(String token) {
         String url="https://pan.baidu.com/rest/2.0/xpan/nas?method=uinfo&access_token="+token;
         String s = WebUtils.get(url,null);
-        System.out.println(s);
         return JsonUtils.toObject(s, new TypeReference<UinfoPojo>() {
         });
     }
@@ -73,7 +66,6 @@ public class BaiDuUtils {
     public static QuotaPojo quota(String token) {
         String url="https://pan.baidu.com/api/quota?checkfree=1&checkexpire=1&access_token="+token;
         String s = WebUtils.get(url,null);
-        System.out.println(s);
         return JsonUtils.toObject(s, new TypeReference<QuotaPojo>() {
         });
     }
@@ -85,13 +77,13 @@ public class BaiDuUtils {
      */
     public static FileListPojo fileList(String token,String dir,Integer folder) {
         if(StringUtils.isBlank(dir)){
-            dir = "/短剧";
+            dir = "/shortVideo";
         }
         if(folder==null){
             folder = 0;
         }
 
-        String url = "https://pan.baidu.com/rest/2.0/xpan/file?method=list&dir="+dir+"&order=time&start=0&limit=1000&web=web&folder=0&access_token="+token+"&desc=1&folder="+folder;
+        String url = "https://pan.baidu.com/rest/2.0/xpan/file?method=list&dir="+dir+"&order=time&start=0&limit=1000&web=web&folder=0&access_token="+token+"&desc=1";
         try {
             URL url1 = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
@@ -103,7 +95,6 @@ public class BaiDuUtils {
                 response.append(inputLine);
             }
             in.close();
-            System.out.println(response.toString());
             return JsonUtils.toObject(response.toString(), new TypeReference<FileListPojo>() {
             });
         }catch (Exception e){
@@ -136,7 +127,6 @@ public class BaiDuUtils {
                 response.append(inputLine);
             }
             in.close();
-            System.out.println(response.toString());
 
             return JsonUtils.toObject(response.toString(), new TypeReference<DocListPojo>() {
             });
@@ -170,7 +160,6 @@ public class BaiDuUtils {
                 response.append(inputLine);
             }
             in.close();
-            System.out.println(response.toString());
 
             return JsonUtils.toObject(response.toString(), new TypeReference<ImageListPojo>() {
             });
@@ -203,7 +192,6 @@ public class BaiDuUtils {
                 response.append(inputLine);
             }
             in.close();
-            System.out.println(response.toString());
 
             return JsonUtils.toObject(response.toString(), new TypeReference<FileListPojo>() {
             });
@@ -237,7 +225,6 @@ public class BaiDuUtils {
                 response.append(inputLine);
             }
             in.close();
-            System.out.println(response.toString());
 
             return JsonUtils.toObject(response.toString(), new TypeReference<BtListPojo>() {
             });
@@ -277,7 +264,6 @@ public class BaiDuUtils {
                 response.append(inputLine);
             }
             in.close();
-            System.out.println(response.toString());
 
             return JsonUtils.toObject(response.toString(), new TypeReference<BtListPojo>() {
             });
@@ -304,7 +290,6 @@ public class BaiDuUtils {
             dir = "/";
         }
         String url = "https://pan.baidu.com/rest/2.0/xpan/multimedia?method=categorylist&parent_path="+dir+"&category="+category+"&recursion="+recursion+"&access_token="+token+"&desc=0&start="+start+"&limit="+count;
-        System.out.println(url);
         try {
             URL url1 = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
@@ -316,7 +301,6 @@ public class BaiDuUtils {
                 response.append(inputLine);
             }
             in.close();
-            System.out.println(response.toString());
 
             return JsonUtils.toObject(response.toString(), new TypeReference<CategoryListPojo>() {
             });
@@ -343,7 +327,6 @@ public class BaiDuUtils {
                 response.append(inputLine);
             }
             in.close();
-            System.out.println(response.toString());
             return JsonUtils.toObject(response.toString(), new TypeReference<FileMetasPojo>() {
             });
         }catch (Exception e){
@@ -358,7 +341,6 @@ public class BaiDuUtils {
     public static void main(String[] args) {
         String token = "121.2e7b421ed8e6bb7c77099f5dcc4d252c.YHXdtDdCTgICZA5f98AwZ2fG_TsZ_fXFlpSyzRL.sxWUzw";
         String url1="http://pan.baidu.com/rest/2.0/xpan/multimedia?access_token="+token+"&category=6&recursion=1&method=categorylist&parent_path=/shortVideo&order=time&desc=1";
-        System.out.println(url1);
         try {
             URL url = new URL(url1);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -370,9 +352,27 @@ public class BaiDuUtils {
                 response.append(inputLine);
             }
             in.close();
-            System.out.println(response.toString());
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception ignored) {
         }
     }
+
+    public static String streaming(String token,String path) {
+        String url = "https://pan.baidu.com/rest/2.0/xpan/file?method=streaming&access_token="+token+"&path="+path+"&type=M3U8_FLV_264_480";
+        try {
+            URL url1 = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
+            conn.setRequestMethod("GET");
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine+"\t\n");
+            }
+            in.close();
+            return response.toString();
+        }catch (Exception e){
+            return null;
+        }
+    }
+
 }

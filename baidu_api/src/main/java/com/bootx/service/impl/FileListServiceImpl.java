@@ -6,14 +6,14 @@ import com.bootx.pojo.FileListPojo;
 import com.bootx.service.FileListService;
 import com.bootx.util.BaiDuUtils;
 import jakarta.annotation.Resource;
-import org.springframework.cache.annotation.CacheEvict;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,6 +26,7 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
     @Override
     public FileList save(FileList fileList) {
         setValue(fileList);
+        redisService.set("needSaveOrUpdateFsId:"+fileList.getFsId(),fileList.getPath(),10, TimeUnit.DAYS);
         return super.save(fileList);
     }
 
@@ -81,11 +82,54 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
         fileList.setTreePath(null);
         fileList.setGrade(null);
         fileList.setChildren(new HashSet<>());
+
+        if(fileList.getCategory()!=6){
+            FileListPojo.Thumb thumbs = listDTO.getThumbs();
+            if(thumbs!=null && StringUtils.isNotBlank(thumbs.getIcon())){
+                fileList.setCover(thumbs.getIcon());
+            }
+            if(fileList.getOrder()==null){
+                try {
+                    String order = fileList.getFileName()
+                            .replaceAll(".mp4", "")
+                            .replaceAll("视频", ",")
+                            .replaceAll("-", "")
+                            .replaceAll("完", "")
+                            .replaceAll("第", "")
+                            .replaceAll("52短剧网(52duanju.com)-mp4juepinyishen", "")
+                            .replaceAll("52短剧网(52duanju.com)", "")
+                            .replaceAll("-", "");
+                    Pattern pattern = Pattern.compile("[^0-9]");
+                    Matcher matcher = pattern.matcher(order);
+                    order = matcher.replaceAll("");
+                    fileList.setOrder(Integer.valueOf(order));
+                }catch (Exception ignored){
+                }
+            }
+        }else{
+            addCache(fileList.getFsId());
+        }
         if(fileList.isNew()){
+            fileList.setNeedUpdate(fileList.getCategory() == 6);
             return save(fileList);
         }else{
-            return update(fileList);
+            if(fileList.getServerMTime()!=listDTO.getServerMtime()){
+                fileList.setNeedUpdate(true);
+                return update(fileList);
+            }
+            return null;
         }
+    }
+
+    private void addCache(Long fsId) {
+       /* String s = redisService.get("needSaveOrUpdateFsId");
+        if(StringUtils.isNotBlank(s)){
+            s = "";
+        }
+        String[] split = s.split(",");
+        if(!ArrayUtils.contains(split,fsId+"") && !redisService.hasKey("needSaveOrUpdateFsId:"+fsId)){
+            redisService.set("needSaveOrUpdateFsId",s+","+fsId);
+        }*/
     }
 
     @Override
@@ -122,9 +166,10 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
                     Matcher matcher = pattern.matcher(order);
                     order = matcher.replaceAll("");
                     child.setOrder(Integer.valueOf(order));
-                }catch (Exception e){
-                    System.out.println(child.getId());
+                }catch (Exception ignored){
                 }
+            }else{
+                addCache(fileList.getFsId());
             }
             child.setChildren(new HashSet<>());
             if(child.isNew()){
@@ -154,6 +199,50 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
                 });
             }
         });
+    }
 
+    @Override
+    public FileList create1(FileListPojo.ListDTO listDTO, FileList parent) {
+        FileList fileList = findByFsId(listDTO.getFsId());
+        if(fileList==null){
+            fileList = new FileList();
+            fileList.setParent(parent);
+            fileList.setFsId(listDTO.getFsId());
+            fileList.setFileName(listDTO.getServerFilename());
+            fileList.setCategory(listDTO.getCategory());
+            fileList.setPath(listDTO.getPath());
+            fileList.setLocalMTime(listDTO.getLocalMtime());
+            fileList.setLocalCTime(listDTO.getLocalCtime());
+            fileList.setServerCTime(listDTO.getServerCtime());
+            fileList.setServerMTime(listDTO.getServerMtime());
+            fileList.setTreePath(null);
+            fileList.setGrade(null);
+            fileList.setChildren(new HashSet<>());
+            FileListPojo.Thumb thumbs = listDTO.getThumbs();
+            if(thumbs!=null && StringUtils.isNotBlank(thumbs.getIcon())){
+                fileList.setCover(thumbs.getIcon());
+            }
+            try {
+                String order = fileList.getFileName()
+                        .replaceAll(".mp4", "")
+                        .replaceAll("视频", ",")
+                        .replaceAll("-", "")
+                        .replaceAll("完", "")
+                        .replaceAll("第", "")
+                        .replaceAll("52短剧网(52duanju.com)-mp4juepinyishen", "")
+                        .replaceAll("52短剧网(52duanju.com)", "")
+                        .replaceAll("-", "");
+                Pattern pattern = Pattern.compile("[^0-9]");
+                Matcher matcher = pattern.matcher(order);
+                order = matcher.replaceAll("");
+                fileList.setOrder(Integer.valueOf(order));
+            }catch (Exception ignored){
+            }
+            return save(fileList);
+        }
+        if(StringUtils.isNotBlank(fileList.getPlayUrl())){
+            return null;
+        }
+        return fileList;
     }
 }

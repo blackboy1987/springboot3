@@ -530,10 +530,4 @@ public class DateUtils {
 
         return info;
     }
-
-    public static void main(String[] args) {
-        String dateStr = "2023-11-29 12:25:49";
-        String s = formatDateInfo(DateUtils.formatStringToDate(dateStr, "yyyy-MM-dd HH:mm:ss"));
-        System.out.println(s);
-    }
 }

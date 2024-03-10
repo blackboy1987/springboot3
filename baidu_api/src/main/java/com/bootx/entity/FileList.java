@@ -35,6 +35,8 @@ public class FileList extends OrderedEntity<Long>{
 
     private Long localCTime;
 
+    private Boolean needUpdate;
+
     /**
      * 上级分类
      */
@@ -61,6 +63,18 @@ public class FileList extends OrderedEntity<Long>{
      */
     @Column(nullable = false)
     private Integer grade;
+
+    private String playUrl;
+
+    private String cover;
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
 
     public Long getFsId() {
         return fsId;
@@ -158,6 +172,21 @@ public class FileList extends OrderedEntity<Long>{
         this.grade = grade;
     }
 
+    public String getPlayUrl() {
+        return playUrl;
+    }
+
+    public void setPlayUrl(String playUrl) {
+        this.playUrl = playUrl;
+    }
+
+    public Boolean getNeedUpdate() {
+        return needUpdate;
+    }
+
+    public void setNeedUpdate(Boolean needUpdate) {
+        this.needUpdate = needUpdate;
+    }
 
     /**
      * 获取所有上级分类ID

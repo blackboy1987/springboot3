@@ -1,5 +1,6 @@
 package com.bootx.service;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -18,4 +19,7 @@ public interface RedisService {
     Boolean hasKey(String key);
 
     Long increment(String key);
+
+
+    Set<String> getKeys(String pattern);
 }

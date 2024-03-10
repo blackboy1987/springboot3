@@ -593,8 +593,6 @@ public abstract class BaseDaoImpl<T extends BaseEntity<ID>, ID extends Serializa
 	private Root<T> findRoot(CriteriaQuery<?> criteriaQuery, Class<T> clazz) {
 		Assert.notNull(criteriaQuery, "[Assertion failed] - criteriaQuery is required; it must not be null");
 		Assert.notNull(clazz, "[Assertion failed] - clazz is required; it must not be null");
-		Set<Root<?>> roots = criteriaQuery.getRoots();
-		System.out.println(roots.size());
 		for (Root<?> root : criteriaQuery.getRoots()) {
 			if (clazz.equals(root.getJavaType())) {
 				return (Root<T>) root;

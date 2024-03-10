@@ -2,9 +2,11 @@ package com.bootx.service.impl;
 
 import com.bootx.service.RedisService;
 import jakarta.annotation.Resource;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -24,6 +26,7 @@ public class RedisServiceImpl implements RedisService {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void set(String key, String value, long duration, TimeUnit timeUnit) {
@@ -71,5 +74,10 @@ public class RedisServiceImpl implements RedisService {
             e.printStackTrace();
         }
         return 0L;
+    }
+
+    @Override
+    public Set<String> getKeys(String pattern) {
+        return stringRedisTemplate.keys(pattern);
     }
 }

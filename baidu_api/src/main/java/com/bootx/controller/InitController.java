@@ -61,13 +61,13 @@ public class InitController {
     }
 
 
-    @GetMapping("/file")
+    @GetMapping("/file2")
     public Result file(String dir) {
         String token = baiDuAccessTokenService.getToken();
         FileListPojo fileListPojo = BaiDuUtils.fileList(token, "/shortVideo",0);
         for (FileListPojo.ListDTO listDTO : fileListPojo.getList()) {
+            FileList fileList = fileListService.create(listDTO, fileListService.find(1L));
             if(listDTO.getCategory()==6){
-                FileList fileList = fileListService.create(listDTO, fileListService.find(1L));
                 fileListService.saveChildren(fileList,token);
             }
         }

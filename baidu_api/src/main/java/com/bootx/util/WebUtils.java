@@ -303,7 +303,6 @@ public final class WebUtils {
 				}
 			}
 			HttpGet httpGet = new HttpGet(url + (StringUtils.contains(url, "?") ? "&" : "?") + EntityUtils.toString(new UrlEncodedFormEntity(nameValuePairs)));
-			System.out.println(httpGet.getRequestUri());
 			CloseableHttpResponse httpResponse = HTTP_CLIENT.execute(httpGet);
 			try {
 				HttpEntity httpEntity = httpResponse.getEntity();
@@ -341,6 +340,28 @@ public final class WebUtils {
 					httpGet.setHeader(key,headers.get(key));
 				}
 			}
+			CloseableHttpResponse httpResponse = HTTP_CLIENT.execute(httpGet);
+			try {
+				HttpEntity httpEntity = httpResponse.getEntity();
+				if (httpEntity != null) {
+					result = EntityUtils.toString(httpEntity);
+					EntityUtils.consume(httpEntity);
+				}
+			} finally {
+				IOUtils.closeQuietly(httpResponse);
+			}
+		} catch (ParseException | IOException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		return result;
+	}
+
+	public static String get(String url) {
+		Assert.hasText(url, "[Assertion failed] - url must have text; it must not be null, empty, or blank");
+
+		String result = null;
+		try {
+			HttpGet httpGet = new HttpGet(url);
 			CloseableHttpResponse httpResponse = HTTP_CLIENT.execute(httpGet);
 			try {
 				HttpEntity httpEntity = httpResponse.getEntity();
