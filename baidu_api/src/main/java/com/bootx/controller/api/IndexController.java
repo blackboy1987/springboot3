@@ -135,4 +135,30 @@ public class IndexController extends BaseController {
 		return getPlayUrl(fsId);
 	}
 
+	@PostMapping("/next")
+	public Result next(Long fsId) throws InterruptedException {
+		String token = baiDuAccessTokenService.getToken();
+		FileList current = fileListService.findByFsId(fsId);
+		Map<String,Object> data = new HashMap<>();
+		if(current!=null){
+			FileList next = fileListService.next(current);
+			if(next!=null && next.getCategory()==1){
+				String streaming = BaiDuUtils.streaming(token, next.getPath());
+				while (!StringUtils.contains(streaming,"#EXT-X-ENDLIST")){
+					streaming = BaiDuUtils.streaming(token, next.getPath());
+					Thread.sleep(1000);
+				}
+				String path = next.getFsId()+".m3u8";
+				FileUploadUtils.upload(streaming,next.getFsId()+".m3u8");
+				String url = "https://bootx-video.oss-cn-hangzhou.aliyuncs.com/"+path;
+				next.setPlayUrl(url);
+				fileListService.update(next);
+				data.put("playUrl",url);
+				data.put("fsId",next.getFsId());
+				return Result.success(data);
+			}
+		}
+		return Result.error("没有下一集");
+	}
+
 }

@@ -62,64 +62,62 @@ public class ListItemJob {
             }
         }
     }
-    //@Scheduled(cron = "0 30 0 * * ? *")
+    @Scheduled(fixedRate = 1000*60*60*2)
     public void run(){
         save(0);
     }
 
-    //@Scheduled(cron = "0 30 2 * * ? *")
+    @Scheduled(fixedRate = 1000*60*60*4)
     public void run1(){
         save(1);
     }
 
-    //@Scheduled(cron = "0 30 4 * * ? *")
-    @Scheduled(fixedRate = 1000*60*60*24*20)
+    @Scheduled(fixedRate = 1000*60*60*6)
     public void run2(){
         save(2);
     }
 
-    //@Scheduled(cron = "0 30 6 * * ? *")
+    @Scheduled(fixedRate = 1000*60*60*8)
     public void run3(){
         save(3);
     }
 
-    //@Scheduled(cron = "0 30 8 * * ? *")
+    @Scheduled(fixedRate = 1000*60*60*10)
     public void run4(){
         save(4);
     }
 
-   // @Scheduled(cron = "0 30 10 * * ? *")
+    @Scheduled(fixedRate = 1000*60*60*12)
     public void run5(){
         save(5);
     }
 
-   // @Scheduled(cron = "0 30 12 * * ? *")
+    @Scheduled(fixedRate = 1000*60*60*14)
     public void run6(){
         save(6);
     }
 
-   // @Scheduled(cron = "0 30 14 * * ? *")
+    @Scheduled(fixedRate = 1000*60*60*16)
     public void run7(){
         save(7);
     }
 
-    //@Scheduled(cron = "0 30 16 * * ? *")
+    @Scheduled(fixedRate = 1000*60*60*18)
     public void run8(){
         save(8);
     }
 
-   // @Scheduled(cron = "0 30 18 * * ? *")
+    @Scheduled(fixedRate = 1000*60*60*20)
     public void run9(){
         save(9);
     }
 
-    //@Scheduled(cron = "0 30 20 * * ? *")
+    @Scheduled(fixedRate = 1000*60*60*22)
     public void run10(){
         save(10);
     }
 
-    //@Scheduled(cron = "0 30 21 * * ? *")
-    //@Scheduled(fixedRate = 1000*60*60*24*20)
+    @Scheduled(fixedRate = 1000*60*60*24)
     public void run100() throws InterruptedException {
         String token = baiDuAccessTokenService.getToken();
         List<Map<String, Object>> maps = jdbcTemplate.queryForList("select id from fileList where category=1 and playUrl is null");

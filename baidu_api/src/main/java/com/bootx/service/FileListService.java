@@ -20,4 +20,6 @@ public interface FileListService extends BaseService<FileList,Long>{
     void remove(List<FileList> needDelete);
 
     FileList create1(FileListPojo.ListDTO listDTO, FileList parent);
+
+    FileList next(FileList current);
 }

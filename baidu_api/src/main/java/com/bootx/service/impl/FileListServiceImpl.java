@@ -245,4 +245,15 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
         }
         return fileList;
     }
+
+    @Override
+    public FileList next(FileList current) {
+        String treePath = current.getTreePath();
+        try {
+            Long id = jdbcTemplate.queryForObject("select id from filelist where treePath=? and orders>=? order by orders asc limit 1;", Long.class, treePath, current.getOrder() + 1);
+            return find(id);
+        }catch (Exception e){
+            return null;
+        }
+    }
 }

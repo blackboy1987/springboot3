@@ -66,6 +66,7 @@ public class FileList extends OrderedEntity<Long>{
 
     private String playUrl;
 
+    @Column(length = 2000)
     private String cover;
 
     public String getCover() {
