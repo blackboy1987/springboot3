@@ -20,7 +20,7 @@ public class ListItemJob {
     @Resource
     private FileListService fileListService;
 
-    @Scheduled(fixedRate = 1000*60*60*2)
+    @Scheduled(fixedRate = 1000*60*60*20)
     public void run0(){
         String token = baiDuAccessTokenService.getToken();
         FileListPojo fileListPojo = BaiDuUtils.fileList(token, "/", null);
