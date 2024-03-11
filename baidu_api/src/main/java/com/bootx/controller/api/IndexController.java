@@ -3,8 +3,8 @@ package com.bootx.controller.api;
 
 import com.bootx.common.Result;
 import com.bootx.entity.FileList;
+import com.bootx.entity.OrderedEntity;
 import com.bootx.pojo.FileListPojo;
-import com.bootx.pojo.ModelListPojo;
 import com.bootx.service.BaiDuAccessTokenService;
 import com.bootx.service.FileListService;
 import com.bootx.service.ModelService;
@@ -13,14 +13,11 @@ import com.bootx.util.BaiDuUtils;
 import com.bootx.util.FileUploadUtils;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.concurrent.Computable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -86,6 +83,12 @@ public class IndexController extends BaseController {
 		}).collect(Collectors.toList()));
 	}
 
+	/**
+	 * 获取播放地址
+	 * @param fsId
+	 * @return
+	 * @throws InterruptedException
+	 */
 	@PostMapping("/getPlayUrl")
 	public Result getPlayUrl(Long fsId) throws InterruptedException {
 		String token = baiDuAccessTokenService.getToken();
@@ -161,4 +164,23 @@ public class IndexController extends BaseController {
 		return Result.error("没有下一集");
 	}
 
+	/**
+	 * 获取目录下的全部数据
+	 * @param id
+	 * @return
+	 */
+	@PostMapping("/list")
+	public Result list(Long id) {
+		FileList fileList = fileListService.find(id);
+		if(fileList==null){
+			return Result.success(Collections.emptyList());
+		}
+		return Result.success(fileList.getChildren().stream().sorted(Comparator.comparingInt(OrderedEntity::getOrder)).filter(item->item.getCategory()==1).map(item->{
+			Map<String,Object> map = new HashMap<>();
+			map.put("name",item.getFileName());
+			map.put("id",item.getFsId());
+			map.put("cover",item.getCover());
+			return map;
+		}));
+	}
 }
