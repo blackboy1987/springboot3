@@ -5,14 +5,19 @@ import com.bootx.entity.FileList;
 import com.bootx.pojo.FileListPojo;
 import com.bootx.service.FileListService;
 import com.bootx.util.BaiDuUtils;
+import com.bootx.util.DateUtils;
+import com.bootx.util.JsonUtils;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,7 +31,6 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
     @Override
     public FileList save(FileList fileList) {
         setValue(fileList);
-        redisService.set("needSaveOrUpdateFsId:"+fileList.getFsId(),fileList.getPath(),10, TimeUnit.DAYS);
         return super.save(fileList);
     }
 
@@ -89,47 +93,19 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
                 fileList.setCover(thumbs.getIcon());
             }
             if(fileList.getOrder()==null){
-                try {
-                    String order = fileList.getFileName()
-                            .replaceAll(".mp4", "")
-                            .replaceAll("视频", ",")
-                            .replaceAll("-", "")
-                            .replaceAll("完", "")
-                            .replaceAll("第", "")
-                            .replaceAll("52短剧网(52duanju.com)-mp4juepinyishen", "")
-                            .replaceAll("52短剧网(52duanju.com)", "")
-                            .replaceAll("-", "");
-                    Pattern pattern = Pattern.compile("[^0-9]");
-                    Matcher matcher = pattern.matcher(order);
-                    order = matcher.replaceAll("");
-                    fileList.setOrder(Integer.valueOf(order));
-                }catch (Exception ignored){
-                }
+                fileList.setOrder(getOrder(fileList.getFileName()));
             }
-        }else{
-            addCache(fileList.getFsId());
         }
         if(fileList.isNew()){
             fileList.setNeedUpdate(fileList.getCategory() == 6);
             return save(fileList);
         }else{
-            if(fileList.getServerMTime()!=listDTO.getServerMtime()){
+            if(!fileList.getServerMTime().equals(listDTO.getServerMtime())){
                 fileList.setNeedUpdate(true);
                 return update(fileList);
             }
             return null;
         }
-    }
-
-    private void addCache(Long fsId) {
-       /* String s = redisService.get("needSaveOrUpdateFsId");
-        if(StringUtils.isNotBlank(s)){
-            s = "";
-        }
-        String[] split = s.split(",");
-        if(!ArrayUtils.contains(split,fsId+"") && !redisService.hasKey("needSaveOrUpdateFsId:"+fsId)){
-            redisService.set("needSaveOrUpdateFsId",s+","+fsId);
-        }*/
     }
 
     @Override
@@ -152,24 +128,7 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
             child.setTreePath(null);
             child.setGrade(null);
             if(child.getCategory()!=6){
-                try {
-                    String order = child.getFileName()
-                            .replaceAll(".mp4", "")
-                            .replaceAll("视频", ",")
-                            .replaceAll("-", "")
-                            .replaceAll("完", "")
-                            .replaceAll("第", "")
-                            .replaceAll("52短剧网(52duanju.com)-mp4juepinyishen", "")
-                            .replaceAll("52短剧网(52duanju.com)", "")
-                            .replaceAll("-", "");
-                    Pattern pattern = Pattern.compile("[^0-9]");
-                    Matcher matcher = pattern.matcher(order);
-                    order = matcher.replaceAll("");
-                    child.setOrder(Integer.valueOf(order));
-                }catch (Exception ignored){
-                }
-            }else{
-                addCache(fileList.getFsId());
+               child.setOrder(getOrder(child.getFileName()));
             }
             child.setChildren(new HashSet<>());
             if(child.isNew()){
@@ -222,21 +181,8 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
             if(thumbs!=null && StringUtils.isNotBlank(thumbs.getIcon())){
                 fileList.setCover(thumbs.getIcon());
             }
-            try {
-                String order = fileList.getFileName()
-                        .replaceAll(".mp4", "")
-                        .replaceAll("视频", ",")
-                        .replaceAll("-", "")
-                        .replaceAll("完", "")
-                        .replaceAll("第", "")
-                        .replaceAll("52短剧网(52duanju.com)-mp4juepinyishen", "")
-                        .replaceAll("52短剧网(52duanju.com)", "")
-                        .replaceAll("-", "");
-                Pattern pattern = Pattern.compile("[^0-9]");
-                Matcher matcher = pattern.matcher(order);
-                order = matcher.replaceAll("");
-                fileList.setOrder(Integer.valueOf(order));
-            }catch (Exception ignored){
+            if(fileList.getOrder()==null){
+                fileList.setOrder(getOrder(fileList.getFileName()));
             }
             return save(fileList);
         }
@@ -255,5 +201,83 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
         }catch (Exception e){
             return null;
         }
+    }
+
+    @Override
+    public void batchCreate(FileListPojo fileListPojo, FileList parent) {
+        CompletableFuture.runAsync(()->{
+            List<Object[]> objects = new ArrayList<>();
+            for (FileListPojo.ListDTO listDTO : fileListPojo.getList()) {
+                Object[] obj = new Object[15];
+                // orders
+                obj[0] = listDTO.getCategory()==6?null:getOrder(listDTO.getServerFilename());
+                // category
+                obj[1] = listDTO.getCategory();
+                // cover
+                obj[2] = null;
+                // fileName
+                obj[3] = listDTO.getServerFilename();
+                // fsId
+                obj[4] = listDTO.getFsId();
+                // grade
+                obj[5] = parent==null?0:parent.getGrade()+1;
+                // localCTime
+                obj[6] = listDTO.getLocalCtime();
+                // localMTime
+                obj[7] = listDTO.getLocalMtime();
+                // needUpdate
+                obj[8] = listDTO.getCategory()==6;
+                // path
+                obj[9] = listDTO.getPath();
+                // playUrl
+                obj[10] = null;
+                // serverCTime
+                obj[11] = listDTO.getServerCtime();
+                // serverMTime
+                obj[12] = listDTO.getServerMtime();
+                // treePath
+                obj[13] = parent!=null?parent.getTreePath()+parent.getId()+",":",";
+                // parent_id
+                obj[14] = parent==null?null:parent.getId();
+                objects.add(obj);
+            }
+            jdbcTemplate.batchUpdate("insert into filelist(createdDate, lastModifiedDate, version, orders, category, cover, fileName, fsId, grade, localCTime, localMTime, needUpdate, path, playUrl, serverCTime, serverMTime, treePath, parent_id) value (NOW(),NOW(),0,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE version=version+1,lastModifiedDate=NOW()", objects);
+        });
+    }
+
+    @Override
+    public void batchSaveChildren(FileListPojo.ListDTO list, String token) {
+        FileListPojo fileListPojo = BaiDuUtils.fileList(token, list.getPath(),0);
+        if(!fileListPojo.getList().isEmpty()){
+            batchCreate(fileListPojo,findByFsId(list.getFsId()));
+            fileListPojo.getList().forEach(i->{
+                if(i.getCategory()==6){
+                    batchSaveChildren(i,token);
+                }
+            });
+
+
+        }
+    }
+
+    private Integer getOrder(String fileName){
+        try {
+            String order = fileName
+                    .replaceAll(".mp4", "")
+                    .replaceAll("视频", ",")
+                    .replaceAll("-", "")
+                    .replaceAll("完", "")
+                    .replaceAll("第", "")
+                    .replaceAll("52短剧网(52duanju.com)-mp4juepinyishen", "")
+                    .replaceAll("52短剧网(52duanju.com)", "")
+                    .replaceAll("-", "");
+            Pattern pattern = Pattern.compile("[^0-9]");
+            Matcher matcher = pattern.matcher(order);
+            order = matcher.replaceAll("");
+            return Integer.valueOf(order);
+        }catch (Exception ignored){
+        }
+
+        return null;
     }
 }

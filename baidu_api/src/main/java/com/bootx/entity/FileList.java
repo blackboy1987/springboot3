@@ -19,6 +19,7 @@ public class FileList extends OrderedEntity<Long>{
      */
     public static final String TREE_PATH_SEPARATOR = ",";
 
+    @Column(nullable = false,updatable = false,unique = true)
     private Long fsId;
 
     private Integer category;
