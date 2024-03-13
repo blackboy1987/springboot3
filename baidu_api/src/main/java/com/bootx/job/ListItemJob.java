@@ -33,18 +33,41 @@ public class ListItemJob {
     @Resource
     private JdbcTemplate jdbcTemplate;
 
-    //@Scheduled(fixedRate = 1000*60*60*20)
+    @Scheduled(fixedRate = 1000*60*60*20)
     public void run0(){
         String token = baiDuAccessTokenService.getToken();
-        FileListPojo fileListPojo = BaiDuUtils.fileList(token, "/", null);
-        fileListService.batchCreate(fileListPojo, null);
+        FileListPojo fileListPojo = BaiDuUtils.fileList(token, "/shortVideo/2024/2024三月", null);
+        fileListService.batchCreate(fileListPojo, fileListService.find(28L));
         fileListPojo.getList().forEach(list -> {
             fileListService.batchSaveChildren(list,token);
         });
     }
 
 
-    @Scheduled(fixedRate = 1000*60*30)
+   //@Scheduled(fixedRate = 1000*60*60*20)
+    public void run(){
+        String token = baiDuAccessTokenService.getToken();
+        List<Map<String, Object>> maps = jdbcTemplate.queryForList("select id from filelist where grade=5 and category=6;");
+        for (Map<String, Object> map : maps) {
+            FileList parent = fileListService.find(Long.valueOf(map.get("id").toString()));
+            FileListPojo fileListPojo = BaiDuUtils.fileList(token, parent.getPath(), null);
+            fileListService.batchCreate(fileListPojo, parent);
+        }
+    }
+
+    @Scheduled(fixedRate = 1000*60*60*20)
+    public void update(){
+        String token = baiDuAccessTokenService.getToken();
+        List<Map<String, Object>> maps = jdbcTemplate.queryForList("select id from filelist where grade=5 and category=6;");
+        for (Map<String, Object> map : maps) {
+            FileList parent = fileListService.find(Long.valueOf(map.get("id").toString()));
+            FileListPojo fileListPojo = BaiDuUtils.fileList(token, parent.getPath(), null);
+            fileListService.batchCreate(fileListPojo, parent);
+        }
+    }
+
+
+    //@Scheduled(fixedRate = 1000*60*30)
     public void run1(){
         /*String token = baiDuAccessTokenService.getToken();
         String updateFsId = jdbcTemplate.queryForObject("select updateFsId from config", String.class);
@@ -71,7 +94,7 @@ public class ListItemJob {
         }*/
     }
 
-    @Scheduled(fixedRate = 1000*2)
+    //@Scheduled(fixedRate = 1000*2)
     public void run2() {
         String token = "121.3b6dd2b52b40b5478767a79f9c5facb6.YQbCWdedA74iNzcQIdvSCOn-p5z1rkROrPzSEYS.DITsEg";
         List<Map<String,Object>> fsIds = jdbcTemplate.queryForList("SELECT fsId,path,parent_id FROM filelist WHERE id >= ((SELECT MAX(id) FROM filelist)-(SELECT MIN(id) FROM filelist)) * RAND() + (SELECT MIN(id)  FROM filelist) and category=1 and playUrl is null limit 10;");

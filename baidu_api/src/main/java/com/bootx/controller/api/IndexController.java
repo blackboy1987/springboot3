@@ -13,6 +13,7 @@ import com.bootx.util.BaiDuUtils;
 import com.bootx.util.FileUploadUtils;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,6 +41,9 @@ public class IndexController extends BaseController {
 
 	@Resource
 	private RedisService redisService;
+
+	@Resource
+	private JdbcTemplate jdbcTemplate;
 
 	ExecutorService executor = Executors.newFixedThreadPool(4);
 
@@ -166,21 +170,54 @@ public class IndexController extends BaseController {
 
 	/**
 	 * 获取目录下的全部数据
-	 * @param id
+	 * @param fsId
 	 * @return
 	 */
 	@PostMapping("/list")
-	public Result list(Long id) {
-		FileList fileList = fileListService.find(id);
+	public Result list(Long fsId) {
+		FileList fileList = fileListService.findByFsId(fsId);
 		if(fileList==null){
 			return Result.success(Collections.emptyList());
 		}
-		return Result.success(fileList.getChildren().stream().sorted(Comparator.comparingInt(OrderedEntity::getOrder)).filter(item->item.getCategory()==1).map(item->{
-			Map<String,Object> map = new HashMap<>();
-			map.put("name",item.getFileName());
-			map.put("id",item.getFsId());
-			map.put("cover",item.getCover());
-			return map;
-		}));
+		List<Map<String, Object>> maps = jdbcTemplate.queryForList("select fileName name,fsId from filelist where grade=4 and category=6 and treePath like ? order by serverMTime desc ;", "%," + fileList.getId() + ",%");
+		return Result.success(maps);
+	}
+
+	/**
+	 * 获取集数信息
+	 * @param fsId
+	 * @return
+	 */
+	@PostMapping("/item")
+	public Result item(Long fsId) {
+		String token = baiDuAccessTokenService.getToken();
+		FileList fileList = fileListService.findByFsId(fsId);
+		if(fileList==null){
+			return Result.success(Collections.emptyList());
+		}
+		List<Map<String, Object>> maps = jdbcTemplate.queryForList("select fsId,fileName,playUrl,path from filelist where grade=? and category=1 and parent_id=? order by orders asc",fileList.getGrade()+1,fileList.getId() );
+		new Thread(()->{
+			for (Map<String, Object> map : maps) {
+				if(map.get("playUrl")==null){
+					String streaming = BaiDuUtils.streaming(token, map.get("path")+"");
+					while (!StringUtils.contains(streaming,"#EXT-X-ENDLIST")){
+						streaming = BaiDuUtils.streaming(token, map.get("path")+"");
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+					String path = map.get("fsId")+".m3u8";
+					FileUploadUtils.upload(streaming,path);
+					String url = "https://bootx-video.oss-cn-hangzhou.aliyuncs.com/"+path;
+					jdbcTemplate.update("update filelist set playUrl=?,lastModifiedDate=NOW(),version=version+1 where fsId=?",url);
+					map.remove("path");
+				}
+			}
+		}).start();
+
+
+		return Result.success(maps);
 	}
 }
