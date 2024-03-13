@@ -188,14 +188,14 @@ public class IndexController extends BaseController {
 	 * @param fsId
 	 * @return
 	 */
-	@PostMapping("/item")
-	public Result item(Long fsId) {
+	@PostMapping("/items")
+	public Result items(Long fsId) {
 		String token = baiDuAccessTokenService.getToken();
 		FileList fileList = fileListService.findByFsId(fsId);
 		if(fileList==null){
 			return Result.success(Collections.emptyList());
 		}
-		List<Map<String, Object>> maps = jdbcTemplate.queryForList("select fsId,fileName,playUrl,path from filelist where grade=? and category=1 and parent_id=? order by orders asc",fileList.getGrade()+1,fileList.getId() );
+		List<Map<String, Object>> maps = jdbcTemplate.queryForList("select fsId,playUrl,path from filelist where grade=? and category=1 and parent_id=? order by orders asc",fileList.getGrade()+1,fileList.getId() );
 		new Thread(()->{
 			for (Map<String, Object> map : maps) {
 				if(map.get("playUrl")==null){
