@@ -212,31 +212,43 @@ public class IndexController extends BaseController {
 	@PostMapping("/items")
 	public Result items(Long fsId) {
 		String token = baiDuAccessTokenService.getToken();
-		FileList fileList = fileListService.findByFsId(fsId);
-		if(fileList==null){
+		FileList parent = fileListService.findByFsId(fsId);
+		if(parent==null){
 			return Result.success(Collections.emptyList());
 		}
-		List<Map<String, Object>> maps = jdbcTemplate.queryForList("select fsId,playUrl,path,fileName from filelist where category=1 and treePath like ? order by orders asc",fileList.getTreePath()+fileList.getId()+",%" );
-		new Thread(()->{
-			for (Map<String, Object> map : maps) {
-				if(map.get("playUrl")==null){
-					String streaming = BaiDuUtils.streaming(token, map.get("path")+"");
-					while (!StringUtils.contains(streaming,"#EXT-X-ENDLIST")){
-						streaming = BaiDuUtils.streaming(token, map.get("path")+"");
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-					String path = map.get("fsId")+".m3u8";
-					FileUploadUtils.upload(streaming,path);
-					String url = "https://bootx-video.oss-cn-hangzhou.aliyuncs.com/"+path;
-					jdbcTemplate.update("update filelist set playUrl=?,lastModifiedDate=NOW(),version=version+1 where fsId=?",url);
-					map.remove("path");
-				}
+		System.out.println(parent.getId());
+		List<Map<String, Object>> maps = jdbcTemplate.queryForList("select fsId,playUrl,path,fileName from filelist where category=1 and treePath like ? order by orders asc",parent.getTreePath()+parent.getId()+",%" );
+		if(maps.isEmpty()){
+			FileListPojo fileListPojo = BaiDuUtils.fileList(token, parent.getPath(), 0);
+			for (FileListPojo.ListDTO listDTO : fileListPojo.getList()) {
+				executor.submit(()->{
+					// 保存自己
+					FileList fileList = fileListService.create(listDTO, parent);
+					// 保存下级
+					fileListService.saveChildren(fileList,token);
+				});
 			}
-		}).start();
+		}
+
+
+		for (Map<String, Object> map : maps) {
+			if(map.get("playUrl")==null){
+				String streaming = BaiDuUtils.streaming(token, map.get("path")+"");
+				while (!StringUtils.contains(streaming,"#EXT-X-ENDLIST")){
+					streaming = BaiDuUtils.streaming(token, map.get("path")+"");
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						throw new RuntimeException(e);
+					}
+				}
+				String path = map.get("fsId")+".m3u8";
+				FileUploadUtils.upload(streaming,path);
+				String url = "https://bootx-video.oss-cn-hangzhou.aliyuncs.com/"+path;
+				jdbcTemplate.update("update filelist set playUrl=?,lastModifiedDate=NOW(),version=version+1 where fsId=?",url,map.get("fsId"));
+				map.remove("path");
+			}
+		}
 
 
 		return Result.success(maps);

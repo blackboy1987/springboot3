@@ -20,7 +20,7 @@ import java.util.concurrent.Executors;
 /**
  * @author black
  */
-@Component
+//@Component
 public class ListItemJob {
 
     ExecutorService executor = Executors.newFixedThreadPool(4);

@@ -8,6 +8,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaiDuUtils {
 
@@ -83,7 +87,7 @@ public class BaiDuUtils {
             folder = 0;
         }
 
-        String url = "https://pan.baidu.com/rest/2.0/xpan/file?method=list&dir="+dir+"&order=time&start=0&limit=1000&web=web&folder=0&access_token="+token+"&desc=1";
+        String url = "https://pan.baidu.com/rest/2.0/xpan/file?method=list&dir="+parsePath(dir)+"&order=time&start=0&limit=1000&web=web&folder=0&access_token="+token+"&desc=1";
         try {
             URL url1 = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
@@ -98,6 +102,7 @@ public class BaiDuUtils {
             return JsonUtils.toObject(response.toString(), new TypeReference<FileListPojo>() {
             });
         }catch (Exception e){
+            e.printStackTrace();
             FileListPojo fileListPojo = new FileListPojo();
             fileListPojo.setErrmsg(e.getMessage());
             return fileListPojo;
@@ -115,7 +120,7 @@ public class BaiDuUtils {
             dir = "/短剧";
         }
 
-        String url = "https://pan.baidu.com/rest/2.0/xpan/file?method=doclist&parent_path="+dir+"&order=time&page=1&num=1000&web=1&folder=0&access_token="+token+"&desc=0";
+        String url = "https://pan.baidu.com/rest/2.0/xpan/file?method=doclist&parent_path="+parsePath(dir)+"&order=time&page=1&num=1000&web=1&folder=0&access_token="+token+"&desc=0";
         try {
             URL url1 = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
@@ -148,7 +153,7 @@ public class BaiDuUtils {
             dir = "/短剧";
         }
 
-        String url = "https://pan.baidu.com/rest/2.0/xpan/file?method=imagelist&parent_path="+dir+"&order=time&page=1&num=1000&web=1&folder=0&access_token="+token+"&desc=0";
+        String url = "https://pan.baidu.com/rest/2.0/xpan/file?method=imagelist&parent_path="+parsePath(dir)+"&order=time&page=1&num=1000&web=1&folder=0&access_token="+token+"&desc=0";
         try {
             URL url1 = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
@@ -180,7 +185,7 @@ public class BaiDuUtils {
             dir = "/短剧";
         }
 
-        String url = "https://pan.baidu.com/rest/2.0/xpan/file?method=videolist&parent_path="+dir+"&order=time&page=1&num=1000&web=1&folder=0&access_token="+token+"&desc=0";
+        String url = "https://pan.baidu.com/rest/2.0/xpan/file?method=videolist&parent_path="+parsePath(dir)+"&order=time&page=1&num=1000&web=1&folder=0&access_token="+token+"&desc=0";
         try {
             URL url1 = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
@@ -213,7 +218,7 @@ public class BaiDuUtils {
             dir = "/短剧";
         }
 
-        String url = "https://pan.baidu.com/rest/2.0/xpan/BtListPojo?method=doclist&parent_path="+dir+"&order=time&page=1&num=1000&web=1&folder=0&access_token="+token+"&desc=0";
+        String url = "https://pan.baidu.com/rest/2.0/xpan/BtListPojo?method=doclist&parent_path="+parsePath(dir)+"&order=time&page=1&num=1000&web=1&folder=0&access_token="+token+"&desc=0";
         try {
             URL url1 = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
@@ -252,7 +257,7 @@ public class BaiDuUtils {
             dir = "/短剧";
         }
 
-        String url = "http://pan.baidu.com/api/categoryinfo?parent_path="+dir+"&category="+category+"&recursion="+recursion+"&access_token="+token+"&desc=0";
+        String url = "http://pan.baidu.com/api/categoryinfo?parent_path="+parsePath(dir)+"&category="+category+"&recursion="+recursion+"&access_token="+token+"&desc=0";
         try {
             URL url1 = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
@@ -289,7 +294,7 @@ public class BaiDuUtils {
         if(StringUtils.isBlank(dir)){
             dir = "/";
         }
-        String url = "https://pan.baidu.com/rest/2.0/xpan/multimedia?method=categorylist&parent_path="+dir+"&category="+category+"&recursion="+recursion+"&access_token="+token+"&desc=0&start="+start+"&limit="+count;
+        String url = "https://pan.baidu.com/rest/2.0/xpan/multimedia?method=categorylist&parent_path="+parsePath(dir)+"&category="+category+"&recursion="+recursion+"&access_token="+token+"&desc=0&start="+start+"&limit="+count;
         try {
             URL url1 = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
@@ -339,25 +344,10 @@ public class BaiDuUtils {
 
 
     public static void main(String[] args) {
-        String token = "121.2e7b421ed8e6bb7c77099f5dcc4d252c.YHXdtDdCTgICZA5f98AwZ2fG_TsZ_fXFlpSyzRL.sxWUzw";
-        String url1="http://pan.baidu.com/rest/2.0/xpan/multimedia?access_token="+token+"&category=6&recursion=1&method=categorylist&parent_path=/shortVideo&order=time&desc=1";
-        try {
-            URL url = new URL(url1);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-        } catch (Exception ignored) {
-        }
     }
 
     public static String streaming(String token,String path) {
-        String url = "https://pan.baidu.com/rest/2.0/xpan/file?method=streaming&access_token="+token+"&path="+path+"&type=M3U8_FLV_264_480";
+        String url = "https://pan.baidu.com/rest/2.0/xpan/file?method=streaming&access_token="+token+"&path="+parsePath(path)+"&type=M3U8_FLV_264_480";
         try {
             URL url1 = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
@@ -371,8 +361,13 @@ public class BaiDuUtils {
             in.close();
             return response.toString();
         }catch (Exception e){
+            e.printStackTrace();
             return null;
         }
     }
 
+
+    private static String parsePath(String path){
+        return path.replaceAll(" ","%20");
+    }
 }
