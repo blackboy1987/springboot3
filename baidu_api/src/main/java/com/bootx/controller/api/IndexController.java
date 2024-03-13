@@ -11,6 +11,8 @@ import com.bootx.service.ModelService;
 import com.bootx.service.RedisService;
 import com.bootx.util.BaiDuUtils;
 import com.bootx.util.FileUploadUtils;
+import com.bootx.util.JsonUtils;
+import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.concurrent.Computable;
@@ -18,11 +20,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -59,6 +63,17 @@ public class IndexController extends BaseController {
 
 	@PostMapping("/category")
 	public Result category(Long fsId){
+		List<Map<String, Object>> collect = new ArrayList<>();
+		String s = redisService.get("category:" + fsId);
+		try {
+			collect = JsonUtils.toObject(s, new TypeReference<List<Map<String, Object>>>() {
+			});
+		}catch (Exception e){
+
+		}
+		if(!collect.isEmpty()){
+			return Result.success(collect);
+		}
 		String token = baiDuAccessTokenService.getToken();
 		FileList byFsId = fileListService.findByFsId(fsId);
 		FileListPojo fileListPojo = BaiDuUtils.fileList(token, byFsId!=null?byFsId.getPath():"/shortVideo",0);
@@ -71,19 +86,21 @@ public class IndexController extends BaseController {
 				fileListService.saveChildren(fileList,token);
 			});
 		}
-		return Result.success(list.stream().map(item->{
-			Map<String,Object> map = new HashMap<>();
-			map.put("name",item.getServerFilename());
-			map.put("fsId",item.getFsId()+"");
-			map.put("category",item.getCategory()+"");
-			if (item.getThumbs()!=null && StringUtils.isNotBlank(item.getThumbs().getIcon())){
-				map.put("cover",item.getThumbs().getIcon());
-			}else{
-				map.put("cover","https://bootx-video.oss-cn-hangzhou.aliyuncs.com/folder.png");
+		collect = list.stream().map(item -> {
+			Map<String, Object> map = new HashMap<>();
+			map.put("name", item.getServerFilename());
+			map.put("fsId", item.getFsId() + "");
+			map.put("category", item.getCategory() + "");
+			if (item.getThumbs() != null && StringUtils.isNotBlank(item.getThumbs().getIcon())) {
+				map.put("cover", item.getThumbs().getIcon());
+			} else {
+				map.put("cover", "https://bootx-video.oss-cn-hangzhou.aliyuncs.com/folder.png");
 			}
 
 			return map;
-		}).collect(Collectors.toList()));
+		}).collect(Collectors.toList());
+		redisService.set("category:"+fsId,JsonUtils.toJson(collect),8, TimeUnit.HOURS);
+		return Result.success(collect);
 	}
 
 	@PostMapping("/getPlayUrl")
