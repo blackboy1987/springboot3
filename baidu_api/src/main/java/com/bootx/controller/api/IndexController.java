@@ -3,6 +3,7 @@ package com.bootx.controller.api;
 
 import com.bootx.common.Result;
 import com.bootx.entity.FileList;
+import com.bootx.entity.OrderedEntity;
 import com.bootx.pojo.FileListPojo;
 import com.bootx.pojo.ModelListPojo;
 import com.bootx.service.BaiDuAccessTokenService;
@@ -15,7 +16,7 @@ import com.bootx.util.JsonUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.concurrent.Computable;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -47,6 +49,9 @@ public class IndexController extends BaseController {
 
 	@Resource
 	private RedisService redisService;
+
+	@Resource
+	private JdbcTemplate jdbcTemplate;
 
 	ExecutorService executor = Executors.newFixedThreadPool(4);
 
@@ -103,6 +108,12 @@ public class IndexController extends BaseController {
 		return Result.success(collect);
 	}
 
+	/**
+	 * 获取播放地址
+	 * @param fsId
+	 * @return
+	 * @throws InterruptedException
+	 */
 	@PostMapping("/getPlayUrl")
 	public Result getPlayUrl(Long fsId) throws InterruptedException {
 		String token = baiDuAccessTokenService.getToken();
@@ -178,4 +189,56 @@ public class IndexController extends BaseController {
 		return Result.error("没有下一集");
 	}
 
+	/**
+	 * 获取目录下的全部数据
+	 * @param fsId
+	 * @return
+	 */
+	@PostMapping("/list")
+	public Result list(Long fsId) {
+		FileList fileList = fileListService.findByFsId(fsId);
+		if(fileList==null){
+			return Result.success(Collections.emptyList());
+		}
+		List<Map<String, Object>> maps = jdbcTemplate.queryForList("select fileName name,fsId from filelist where grade=4 and category=6 and treePath like ? order by serverMTime desc ;", "%," + fileList.getId() + ",%");
+		return Result.success(maps);
+	}
+
+	/**
+	 * 获取集数信息
+	 * @param fsId
+	 * @return
+	 */
+	@PostMapping("/items")
+	public Result items(Long fsId) {
+		String token = baiDuAccessTokenService.getToken();
+		FileList fileList = fileListService.findByFsId(fsId);
+		if(fileList==null){
+			return Result.success(Collections.emptyList());
+		}
+		List<Map<String, Object>> maps = jdbcTemplate.queryForList("select fsId,playUrl,path,fileName from filelist where category=1 and treePath like ? order by orders asc",fileList.getTreePath()+fileList.getId()+",%" );
+		new Thread(()->{
+			for (Map<String, Object> map : maps) {
+				if(map.get("playUrl")==null){
+					String streaming = BaiDuUtils.streaming(token, map.get("path")+"");
+					while (!StringUtils.contains(streaming,"#EXT-X-ENDLIST")){
+						streaming = BaiDuUtils.streaming(token, map.get("path")+"");
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+					String path = map.get("fsId")+".m3u8";
+					FileUploadUtils.upload(streaming,path);
+					String url = "https://bootx-video.oss-cn-hangzhou.aliyuncs.com/"+path;
+					jdbcTemplate.update("update filelist set playUrl=?,lastModifiedDate=NOW(),version=version+1 where fsId=?",url);
+					map.remove("path");
+				}
+			}
+		}).start();
+
+
+		return Result.success(maps);
+	}
 }

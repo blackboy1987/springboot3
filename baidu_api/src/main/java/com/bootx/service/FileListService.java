@@ -22,4 +22,8 @@ public interface FileListService extends BaseService<FileList,Long>{
     FileList create1(FileListPojo.ListDTO listDTO, FileList parent);
 
     FileList next(FileList current);
+
+    void batchCreate(FileListPojo fileListPojo, FileList parent);
+
+    void batchSaveChildren(FileListPojo.ListDTO list, String token);
 }
