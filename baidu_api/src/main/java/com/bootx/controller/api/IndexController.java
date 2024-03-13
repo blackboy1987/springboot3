@@ -195,13 +195,9 @@ public class IndexController extends BaseController {
 		if(fileList==null){
 			return Result.success(Collections.emptyList());
 		}
-		List<Map<String, Object>> maps = jdbcTemplate.queryForList("select fsId,playUrl,path from filelist where grade=? and category=1 and parent_id=? order by orders asc",fileList.getGrade()+1,fileList.getId() );
-		if(maps.isEmpty()){
-			maps = jdbcTemplate.queryForList("select fsId,playUrl,path from filelist where grade=? and category=1 and treePath =? order by orders asc",fileList.getGrade()+2,fileList.getTreePath()+fileList.getId()+"," );
-		}
-		List<Map<String, Object>> finalMaps = maps;
+		List<Map<String, Object>> maps = jdbcTemplate.queryForList("select fsId,playUrl,path,fileName from filelist where category=1 and treePath like ? order by orders asc",fileList.getTreePath()+fileList.getId()+",%" );
 		new Thread(()->{
-			for (Map<String, Object> map : finalMaps) {
+			for (Map<String, Object> map : maps) {
 				if(map.get("playUrl")==null){
 					String streaming = BaiDuUtils.streaming(token, map.get("path")+"");
 					while (!StringUtils.contains(streaming,"#EXT-X-ENDLIST")){
