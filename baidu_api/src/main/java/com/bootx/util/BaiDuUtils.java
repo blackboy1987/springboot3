@@ -320,7 +320,7 @@ public class BaiDuUtils {
 
     public static FileMetasPojo filemetas(String token,String fsids) {
 
-        String url = "http://pan.baidu.com/rest/2.0/xpan/multimedia?method=filemetas&fsids="+fsids+"&dlink=1&thumb=1&access_token="+token+"&extra=1&needmedia=1&detail=1";
+        String url = "http://pan.baidu.com/rest/2.0/xpan/multimedia?method=filemetas&fsids=["+fsids+"]&dlink=1&thumb=1&access_token="+token+"&extra=1&needmedia=1&detail=1";
         try {
             URL url1 = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) url1.openConnection();

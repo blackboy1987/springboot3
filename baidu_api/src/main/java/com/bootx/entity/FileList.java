@@ -24,6 +24,7 @@ public class FileList extends OrderedEntity<Long>{
 
     private Integer category;
 
+    @Column(nullable = false,updatable = false,unique = true)
     private String path;
 
     private String fileName;
