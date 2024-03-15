@@ -37,7 +37,7 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
     }
 
     @Override
-    public void create(String path) {
+    public void create(String path,) {
         FileList parent = findByPath(path);
         String token = baiDuAccessTokenService.getToken();
         FileListPojo fileListPojo = BaiDuUtils.list(token, path);

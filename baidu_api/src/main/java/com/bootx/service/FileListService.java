@@ -12,7 +12,7 @@ public interface FileListService extends BaseService<FileList,Long>{
      * 根据目录来获取目录下的文件，并保存到数据库
      * @param path
      */
-    void create(String path);
+    void create(String path,FileList parent);
 
     FileList findByFsId(Long fsId);
 
