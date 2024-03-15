@@ -24,6 +24,7 @@ public class FileList extends OrderedEntity<Long>{
 
     private Integer category;
 
+    @Column(nullable = false,updatable = false,unique = true)
     private String path;
 
     private String fileName;
@@ -36,7 +37,13 @@ public class FileList extends OrderedEntity<Long>{
 
     private Long localCTime;
 
-    private Boolean needUpdate;
+    /**
+     * 0：不需要更新
+     * 1：需要更新
+     * 2：需要删除
+     */
+    @NotNull
+    private Integer status;
 
     /**
      * 上级分类
@@ -182,12 +189,12 @@ public class FileList extends OrderedEntity<Long>{
         this.playUrl = playUrl;
     }
 
-    public Boolean getNeedUpdate() {
-        return needUpdate;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setNeedUpdate(Boolean needUpdate) {
-        this.needUpdate = needUpdate;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     /**

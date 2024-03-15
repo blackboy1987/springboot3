@@ -21,6 +21,7 @@ import org.apache.hc.core5.http.*;
 import org.apache.hc.core5.http.config.RegistryBuilder;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.apache.hc.core5.http.message.BasicHeader;
 import org.apache.hc.core5.http.message.BasicNameValuePair;
 import org.apache.hc.core5.net.URLEncodedUtils;
 import org.apache.hc.core5.util.Timeout;
@@ -30,6 +31,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -378,4 +380,34 @@ public final class WebUtils {
 		return result;
 	}
 
+
+	public static String postBody(String url, Map<String,Object> parameterMap) {
+		try {
+			HttpPost httpPost = new HttpPost(url);
+			httpPost.addHeader("Content-Type", "application/json;charset=utf-8");
+			if(parameterMap!=null&& !parameterMap.isEmpty()){
+				httpPost.setEntity(new StringEntity(JsonUtils.toJson(parameterMap), ContentType.parse("utf-8")));
+			}
+
+			CloseableHttpResponse httpResponse = HTTP_CLIENT.execute(httpPost);
+			HttpEntity httpEntity = null;
+			try {
+				httpEntity = httpResponse.getEntity();
+				if (httpEntity != null) {
+					return EntityUtils.toString(httpEntity, "UTF-8") ;
+				}
+			} catch (ParseException e) {
+                throw new RuntimeException(e);
+            } finally {
+				EntityUtils.consume(httpEntity);
+				IOUtils.closeQuietly(httpResponse);
+			}
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 }

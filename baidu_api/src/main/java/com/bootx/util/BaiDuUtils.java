@@ -1,21 +1,22 @@
 package com.bootx.util;
 
+import com.bootx.common.Pageable;
+import com.bootx.entity.FileList;
 import com.bootx.pojo.*;
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BaiDuUtils {
-
-    public static final String token = "";
 
     private static final String appKey = "I5CqOku7s1jjNpSQ2uMS4Kzzx7Sz6yzv";
 
@@ -27,7 +28,7 @@ public class BaiDuUtils {
 
     private static final String shareSecret = "ShareSecret";
 
-    private static final String shareThirdld = "2080";
+    private static final Integer shareThirdld = 2080;
 
     public static String getCode(){
         String url="http://openapi.baidu.com/oauth/2.0/authorize?response_type=code&client_id="+appKey+"&redirect_uri=oob&scope=basic,netdisk&device_id="+appId;
@@ -320,7 +321,7 @@ public class BaiDuUtils {
 
     public static FileMetasPojo filemetas(String token,String fsids) {
 
-        String url = "http://pan.baidu.com/rest/2.0/xpan/multimedia?method=filemetas&fsids="+fsids+"&dlink=1&thumb=1&access_token="+token+"&extra=1&needmedia=1&detail=1";
+        String url = "http://pan.baidu.com/rest/2.0/xpan/multimedia?method=filemetas&fsids=["+fsids+"]&dlink=1&thumb=1&access_token="+token+"&extra=1&needmedia=1&detail=1";
         try {
             URL url1 = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
@@ -339,11 +340,6 @@ public class BaiDuUtils {
             fileListPojo.setErrmsg(e.getMessage());
             return fileListPojo;
         }
-    }
-
-
-
-    public static void main(String[] args) {
     }
 
     public static String streaming(String token,String path) {
@@ -366,8 +362,99 @@ public class BaiDuUtils {
         }
     }
 
-
     private static String parsePath(String path){
         return path.replaceAll(" ","%20");
+    }
+
+
+    public static String shareSet(String token,List<Long> fsIdList, Integer schannel, Integer period, String description) {
+        Map<String, Object> params = new HashMap(16);
+        params.put("fid_list", JsonUtils.toJson(fsIdList));
+        params.put("period", period);
+        params.put("third_type", shareThirdld);
+        params.put("description", description);
+        params.put("csign", DigestUtils.md5(shareThirdld + JsonUtils.toJson(fsIdList) + schannel + shareSecret));
+        params.put("schannel", schannel);
+        String url="https://pan.baidu.com/rest/2.0/xpan/share/set?access_token=" + token;
+        System.out.println(url);
+        System.out.println(JsonUtils.toJson(params));
+        String s = WebUtils.postBody(url, params);
+        System.out.println(s);
+        return s;
+    }
+
+    /**
+     *  本接口用于获取用户网盘中指定目录下的文件列表。返回的文件列表支持排序、分页等操作。
+     * @param dir
+     *      需要list的目录，以/开头的绝对路径, 默认为/ 路径包含中文时需要UrlEncode编码
+     * @param order
+     *      排序字段：默认为name；
+     *          time表示先按文件类型排序，后按修改时间排序；
+     *          name表示先按文件类型排序，后按文件名称排序；(注意，此处排序是按字符串排序的，如果用户有剧集排序需求，需要自行开发)
+     *          size表示先按文件类型排序，后按文件大小排序。
+     * @param desc
+     *      默认为升序，设置为1实现降序 （注：排序的对象是当前目录下所有文件，不是当前分页下的文件）
+     * @param pageable
+     *      分页属性
+     * @param web
+     *      值为1时，返回dir_empty属性和缩略图数据
+     * @param folder
+     *      是否只返回文件夹，0 返回所有，1 只返回文件夹，且属性只返回path字段
+     * @param showempty
+     *      是否返回dir_empty属性，0 不返回，1 返回
+     *
+     */
+    public static FileListPojo list(String token,String dir, String order, Integer desc, Pageable pageable, Integer web, Integer folder, Integer showempty) {
+        Map<String, Object> params = new HashMap(16);
+        params.put("method", "list");
+        params.put("access_token", token);
+        params.put("dir", dir);
+        params.put("order", order);
+        params.put("desc", desc);
+        params.put("start", (pageable.getPageNumber() - 1) * pageable.getPageSize());
+        params.put("limit", pageable.getPageSize());
+        params.put("web", web);
+        params.put("folder", folder);
+        params.put("showempty", showempty);
+        String s = WebUtils.get("http://pan.baidu.com/rest/2.0/xpan/file", params);
+        System.out.println(s);
+        return JsonUtils.toObject(s, new TypeReference<FileListPojo>() {
+        });
+    }
+
+    public static FileListPojo list(String token,String dir) {
+        Pageable pageable = new Pageable();
+        pageable.setPageSize(1000);
+        return list(token,dir,"name",0,pageable,1,0,1);
+    }
+
+
+    /**
+     * 删除文件
+     * @param token
+     *      token
+     * @param fileList
+     *      要删除的文件路径
+     * @return
+     */
+    public static String delete(String token, List<String> fileList) {
+        Map<String, Object> params = new HashMap(16);
+        params.put("async", 0);
+        params.put("filelist",JsonUtils.toJson(fileList));
+        String url="http://pan.baidu.com/rest/2.0/xpan/file?method=filemanager&access_token="+token+"&opera=delete";
+        System.out.println(url);
+        System.out.println(JsonUtils.toJson(params));
+        String s = WebUtils.postBody(url, params);
+        System.out.println(s);
+        return s;
+    }
+
+    public static void main(String[] args) {
+        String token = "121.3b6dd2b52b40b5478767a79f9c5facb6.YQbCWdedA74iNzcQIdvSCOn-p5z1rkROrPzSEYS.DITsEg";
+        Pageable pageable = new Pageable();
+        pageable.setPageSize(1000);
+        List<Long> fileList = new ArrayList<>();
+        fileList.add(985532360799976L);
+        shareSet(token,fileList,4,1,"");
     }
 }

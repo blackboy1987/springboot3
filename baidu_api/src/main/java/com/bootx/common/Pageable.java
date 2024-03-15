@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * @author black
+ */
 public class Pageable implements Serializable {
-
-	private static final long serialVersionUID = -3930180379790344299L;
 
 	/**
 	 * 默认页码
