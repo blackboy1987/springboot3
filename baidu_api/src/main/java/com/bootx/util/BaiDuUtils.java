@@ -449,12 +449,25 @@ public class BaiDuUtils {
         return s;
     }
 
+    public static String search(String token, String keywords) {
+        Map<String, Object> params = new HashMap(16);
+        params.put("key", keywords);
+        params.put("dir", "/shortVideo");
+        params.put("category", 6);
+        params.put("page", 1);
+        params.put("num", 500);
+        params.put("recursion", true);
+        params.put("web",1);
+        String url="http://pan.baidu.com/rest/2.0/xpan/file?method=search&access_token="+token+"";
+        System.out.println(url);
+        System.out.println(JsonUtils.toJson(params));
+        String s = WebUtils.get(url, params);
+        System.out.println(s);
+        return s;
+    }
+
     public static void main(String[] args) {
         String token = "121.3b6dd2b52b40b5478767a79f9c5facb6.YQbCWdedA74iNzcQIdvSCOn-p5z1rkROrPzSEYS.DITsEg";
-        Pageable pageable = new Pageable();
-        pageable.setPageSize(1000);
-        List<Long> fileList = new ArrayList<>();
-        fileList.add(985532360799976L);
-        shareSet(token,fileList,4,1,"");
+        search(token,"haha");
     }
 }

@@ -11,7 +11,11 @@ import jakarta.transaction.Transactional;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,7 +41,7 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
     }
 
     @Override
-    public void create(String path,) {
+    public void create(String path) {
         FileList parent = findByPath(path);
         String token = baiDuAccessTokenService.getToken();
         FileListPojo fileListPojo = BaiDuUtils.list(token, path);
@@ -105,12 +109,12 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
     }
 
     @Transactional
-    public FileList create(FileListPojo.ListDTO fileList) {
+    public FileList create(FileListPojo.ListDTO fileList,FileList parent) {
         FileList current = findByFsId(fileList.getFsId());
         if(current==null){
             current = new FileList();
         }
-        current.setParent(null);
+        current.setParent(parent);
         current.setFsId(fileList.getFsId());
         current.setFileName(fileList.getServerFilename());
         current.setCategory(fileList.getCategory());
@@ -144,21 +148,47 @@ public class FileListServiceImpl extends BaseServiceImpl<FileList,Long> implemen
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Override
+    public void createBatch(List<FileListPojo.ListDTO> list,FileList parent) {
+        CompletableFuture.runAsync(()->{
+            List<Object[]> objects = new ArrayList<>();
+            for (FileListPojo.ListDTO listDTO : list) {
+                Object[] obj = new Object[15];
+                // orders
+                obj[0] = listDTO.getCategory()==6?null:getOrder(listDTO.getServerFilename());
+                // category
+                obj[1] = listDTO.getCategory();
+                // cover
+                obj[2] = null;
+                // fileName
+                obj[3] = listDTO.getServerFilename();
+                // fsId
+                obj[4] = listDTO.getFsId();
+                // grade
+                obj[5] = parent==null?0:parent.getGrade()+1;
+                // localCTime
+                obj[6] = listDTO.getLocalCtime();
+                // localMTime
+                obj[7] = listDTO.getLocalMtime();
+                // needUpdate
+                obj[8] = listDTO.getCategory()==6?1:0;
+                // path
+                obj[9] = listDTO.getPath();
+                // playUrl
+                obj[10] = null;
+                // serverCTime
+                obj[11] = listDTO.getServerCtime();
+                // serverMTime
+                obj[12] = listDTO.getServerMtime();
+                // treePath
+                obj[13] = parent!=null?parent.getTreePath()+parent.getId()+",":",";
+                // parent_id
+                obj[14] = parent==null?null:parent.getId();
+                objects.add(obj);
+            }
+            jdbcTemplate.batchUpdate("insert into filelist(createdDate, lastModifiedDate, version, orders, category, cover, fileName, fsId, grade, localCTime, localMTime, status, path, playUrl, serverCTime, serverMTime, treePath, parent_id) value (NOW(),NOW(),0,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE version=version+1,lastModifiedDate=NOW()", objects);
+        });
+    }
 
 
     private Integer getOrder(String fileName){
