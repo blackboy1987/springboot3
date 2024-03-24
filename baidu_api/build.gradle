@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
 
+    implementation group: 'org.jsoup', name: 'jsoup', version: '1.16.2'
     implementation group: 'com.aliyun.oss', name: 'aliyun-sdk-oss', version: '3.17.4'
 
 

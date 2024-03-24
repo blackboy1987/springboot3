@@ -363,7 +363,7 @@ public class BaiDuUtils {
     }
 
     private static String parsePath(String path){
-        return path.replaceAll(" ","%20");
+        return path.replaceAll(" ","%20").replaceAll("&","%26");
     }
 
 

@@ -1,16 +1,21 @@
 package com.bootx;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.bootx.util.WebUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.net.URL;
 
 public class Demo {
     public static void main(String[] args) {
-        String phoneString = "非凡特工72.mp4".replaceAll(".mp4","");
-        // 提取数字
-        // 1
-        Pattern pattern = Pattern.compile("[^0-9]");
-        Matcher matcher = pattern.matcher(phoneString);
-        String all = matcher.replaceAll("");
-        System.out.println("phone:" + all);
+        String url = "https://www.duanju5.com.cn/vodsearch/-------------.html?wd=天王殿";
+        try {
+            Document parse = Jsoup.parse(new URL(url).openStream(), "gbk", url);
+            Elements select = parse.select("div.module-search-item");
+            System.out.println(select.first().html());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

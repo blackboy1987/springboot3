@@ -17,7 +17,7 @@ import java.util.Objects;
 /**
  * @author black
  */
-//@Component
+@Component
 public class ListItemJob {
 
     @Resource
@@ -30,7 +30,7 @@ public class ListItemJob {
     private JdbcTemplate jdbcTemplate;
 
 
-    @Scheduled(fixedRate = 1000*60*60*20)
+   // @Scheduled(fixedRate = 1000*60*60*20)
     public void run0() {
         // 从网盘里面拉取文件
         String token = baiDuAccessTokenService.getToken();
@@ -39,6 +39,33 @@ public class ListItemJob {
             for (FileListPojo.ListDTO listDTO : list.getList()) {
                 check(token,listDTO,null);
             }
+        }
+    }
+
+
+    @Scheduled(fixedRate = 1000*60*60*20)
+    public void run1() {
+        jdbcTemplate.update("truncate table filelist");
+        update(null);
+        for (int i = 0; i < 20; i++) {
+            update(i);
+        }
+    }
+
+    public void update(Integer grade){
+        String token = baiDuAccessTokenService.getToken();
+        if(grade==null){
+            FileListPojo list = BaiDuUtils.fileList(token, "/shortVideo",0);
+            fileListService.createBatch(list.getList(),null);
+        }else{
+            List<Map<String, Object>> maps = jdbcTemplate.queryForList("select path,id from filelist where grade=? and category=6", grade);
+            System.out.println(maps.size());
+            for (Map<String, Object> map : maps) {
+                FileListPojo list = BaiDuUtils.fileList(token, map.get("path")+"",0);
+                fileListService.createBatch(list.getList(),fileListService.findByPath(map.get("path")+""));
+            }
+
+
         }
     }
 

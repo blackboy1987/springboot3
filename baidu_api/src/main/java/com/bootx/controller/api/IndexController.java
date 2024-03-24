@@ -38,13 +38,18 @@ public class IndexController extends BaseController {
     }
 
     @PostMapping("/list")
-    public Result list(Long id){
+    public Result list(Long id,String keywords){
         FileList fileList = fileListService.findByFsId(id);
         if(fileList==null || fileList.getChildren().isEmpty() || fileList.getCategory()!=6){
             return Result.success(Collections.emptyList());
         }
-        List<Map<String, Object>> maps = jdbcTemplate.queryForList("select fileName name,fsId id,filelist.category,treePath from filelist where grade=3 and (category=6 or category=1) and treePath like ? order by serverMTime asc ;","%,"+fileList.getId()+",%");
-        return Result.success(maps);
+        if(StringUtils.isBlank(keywords)){
+            List<Map<String, Object>> maps = jdbcTemplate.queryForList("select fileName name,fsId id,filelist.category,treePath from filelist where grade=3 and (category=6 or category=1) and treePath like ? order by serverMTime asc ;","%,"+fileList.getId()+",%");
+            return Result.success(maps);
+        }else{
+            List<Map<String, Object>> maps = jdbcTemplate.queryForList("select fileName name,fsId id,filelist.category,treePath from filelist where grade=3 and (category=6 or category=1) and treePath like ? and fileName like ? order by serverMTime asc ;","%,"+fileList.getId()+",%","%"+keywords+"%");
+            return Result.success(maps);
+        }
     }
     @PostMapping("/items")
     public Result items(Long id){
